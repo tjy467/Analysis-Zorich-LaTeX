@@ -1,0 +1,514 @@
+\mysubsection{一个积分值与定向无关的例子}
+
+在上一节，我们定义了微分形式沿定向曲面的积分，并强调了：为了确切地定义积分值，我们必须为曲面取定一个定向（当然在实际的物理问题中，定向的选取往往是自然而然的）. 另一方面，我们又面对一些实际问题，这些问题应该被表达为某种曲面积分，但从问题的实际意义来看又显然与曲面的定向无关. 我们来看一个典型的例子.
+
+设 $S\subset\RR^n$ 是 $\RR^n$ 中的一个 $k$ 维光滑薄片，其在每点 $x\in S$ 处有密度 $\rho(x)$. 我们假设 $\rho:S\to\RR_+$ 连续. 我们希望求 $S$ 的质量 $m(S)$.
+
+为此，我们将 $S$ 分成有限个小片 $S_1,\cdots,S_m$，使得在每片上 $\rho(x)$ 几乎为常值. 从而
+$$
+m(S_i)\approx\rho(x_i)V_k(S_i)
+$$
+
+其中 $x_i\in S_i,V_k(S_i)$ 为第 $i$ 片 $S_i$ 的 $k$ 维面积. 从而
+$$
+m(S)\approx\sum_{i=1}^m\rho(x_i)V_k(S_i)
+$$
+
+当分划得足够细时
+$$
+\sum_{i=1}^m\rho(x_i)V_k(S_i)\longrightarrow\int_S\rho(x)\dd\sigma(x)
+$$
+
+对右式中 $\dd\sigma(x)$ 的直观理解是“面积微元”. 但 $\rho(x)\dd\sigma(x)$ 到底指的是什么呢？从物理意义上来讲，左式代表质量，从而为正，这说明即使改变 $S$ 的定向，其值也不会改变符号.
+
+由此引出一个问题：我们如何在右式找到一个合适的微分形式来实现这一点. 这就是我们将要讨论的面积元的概念. 以上的讨论至少告诉了我们一点：这个即将定义的面积元 $\dd\sigma$ 应该依赖于 $S$ 定向的选取. 当 $S$ 的定向改变时，$\dd\sigma$ 也必须相应地做出改变，以保证积分值不变.
+
+\mysubsection{曲面的面积作为形式的积分}
+
+设 $S$ 是一个可定向曲面，我们希望找到一个微分形式 $\Omega$ 定义在 $S$ 上，且
+$$
+V_k(S)=\int_S\Omega
+$$
+
+考虑一个简单的情形：设 $S$ 可参数化，$\varphi:D\to S$ 为 $S$ 的参数化，$\varphi$ 诱导了 $S$ 上的定向. 从而根据上一章，我们已有公式
+$$
+V_k(S)=\int_D\sqrt{\det g_{ij}(t)}\dd t=\int_D\sqrt{\det g_{ij}(t)}\dd t_1\wedge\cdots\dd\wedge t_k
+$$
+
+令
+$$
+\omega(t)\triangleq\sqrt{\det g_{ij}(t)}\dd t_1\wedge\cdots\wedge\dd t_k
+$$
+
+则 $\omega$ 是 $D$ 上的 $k$-微分形式且 $\displaystyle V_k(S)=\int_D\omega$. 其中 $D$ 取自然的定向 $(e_1,\cdots,e_k)$.
+
+令 $\psi\triangleq\varphi^{-1}:S\to D$. 则由微分形式的转移，可以定义 $\Omega\triangleq\psi^*\omega$. 更具体地说
+$$
+\begin{aligned}
+    \Omega(x)(\xi_1,\cdots,\xi_k)&\triangleq(\psi^*)(x)(\xi_1,\cdots,\xi_k)\\
+    &=\omega(\psi(x))(\psi'(x)\xi_1,\cdots,\psi'(x)\xi_k)
+\end{aligned}
+$$
+
+\img{0.6}{13.2.1.png}
+
+但在这里，需要对 $\psi'$ 作出一些解释.
+
+已知 $\varphi'(t):T_tD=\RR^k\to T_xS\simeq\RR^k$ 为线性同构，从而 $\varphi'(t)$ 有逆：我们形式地记其逆为 $\psi'(x)$，其中 $x=\varphi(t)$.
+
+此时，形式上我们有
+$$
+V_k(S)=\int_D\omega=\int_{\psi(S)}\omega\xlongequal{?}\int_S\psi^*\omega=\int_S\Omega
+$$
+
+即在 $S$ 上对形式 $\Omega$ 积分可得 $S$ 的面积. 在这个意义下，我们称 $\Omega$ 就是我们所寻找的体积元（或面积元）.
+
+当然，此时一个自然的问题是：若 $\widetilde{\varphi}$ 是 $S$ 的另一个参数化，且给定了 $S$ 上相反的定向，则如何由 $\widetilde{\varphi}$ 来诱导一个面积元？为此，我们来做一些计算：
+
+设 $\widetilde{\varphi}:\widetilde{D}\to S$ 是 $S$ 的另一个参数化. 则一方面，我们有
+$$
+V_k(S)=\int_{\widetilde{D}}\sqrt{\det\widetilde{g}_{ij}(\tau)}\dd\tau_1\wedge\cdots\wedge\dd\tau_k
+$$
+
+另一方面，令 $\widetilde{\psi}=\widetilde{\varphi}^{-1}$ ，则我们也可以定义
+$$
+\widetilde{\omega}(\tau)\triangleq\sqrt{\det\widetilde{g}_{ij}(\tau)}\dd\tau_1\wedge\cdots\wedge\dd\tau_k\qquad\widetilde{\Omega}\triangleq\widetilde{\psi}^*\widetilde{\omega}
+$$
+
+\img{0.8}{13.2.2.png}
+
+我们来比较 $\Omega$ 与 $\widetilde{\Omega}$. 或者等价的，由于此时 $\varphi^*$ 为同构，我们来比较
+$$
+\omega=\varphi^*\Omega\quad\text{与}\quad\varphi^*\widetilde{\Omega}=\varphi^*\circ\widetilde{\psi}^*\widetilde{\omega}=(\widetilde{\psi}\circ\varphi)^*\widetilde{\omega}
+$$
+
+令 $\Phi=\widetilde{\varphi}^{-1}\circ\varphi=\widetilde{\psi}\circ\varphi$. 已知 $\Phi:D\to\widetilde{D}$ 为微分同胚. 我们有
+$$
+\begin{aligned}
+    (\varphi^*\widetilde{\Omega})(t)&=(\Phi^*\widetilde{\omega})(t)\\
+    &=\sqrt{\det\widetilde{g}_{ij}(\Phi(t))}\dd\Phi_1(t)\wedge\cdots\wedge\dd\Phi_k(t)\\
+    &=\sqrt{\det\widetilde{g}_{ij}(\Phi(t))}\det\Phi'(t)\dd t_1\wedge\cdots\wedge\dd t_k
+\end{aligned}
+$$
+
+另一方面，由变量替换公式知
+$$
+\begin{aligned}
+    V_k(S)&=\int_{\widetilde{D}}\widetilde{\omega}=\int_{\Phi(D)}\sqrt{\det\widetilde{g}_{ij}(\tau)}\dd\tau\\
+    &=\int_{D}\sqrt{\det\widetilde{g}_{ij}(\Phi(t))}\abs{\det\Phi'(t)}\dd t_1\wedge\cdots\wedge\dd t_k\\
+    &=\begin{cases}
+        \displaystyle\int_{D}\varphi^*\widetilde{\Omega} & (\widetilde{\varphi}~\text{与}~\varphi~\text{指定了}~S~\text{上相同的定向})\\
+        \displaystyle-\int_{D}\varphi^*\widetilde{\Omega} & (\widetilde{\varphi}~\text{与}~\varphi~\text{指定了}~S~\text{上相反的定向})
+    \end{cases}
+\end{aligned}
+$$
+
+又已知 $V_k(S)=\displaystyle\int_D\omega$，有
+$$
+\int_D\omega=\begin{cases}
+    \displaystyle\int_{D}\varphi^*\widetilde{\Omega} & (\widetilde{\varphi}~\text{与}~\varphi~\text{指定了}~S~\text{上相同的定向})\\
+    \displaystyle-\int_{D}\varphi^*\widetilde{\Omega} & (\widetilde{\varphi}~\text{与}~\varphi~\text{指定了}~S~\text{上相反的定向})
+\end{cases}
+$$
+
+事实上，以上的推理可以适用于任意的 $D_1\subset D$. 由此不难断言
+$$
+\omega=\begin{cases}
+    \displaystyle\varphi^*\widetilde{\Omega} & (\widetilde{\varphi}~\text{与}~\varphi~\text{指定了}~S~\text{上相同的定向})\\
+    \displaystyle-\varphi^*\widetilde{\Omega} & (\widetilde{\varphi}~\text{与}~\varphi~\text{指定了}~S~\text{上相反的定向})
+\end{cases}
+$$
+
+从而最终可知：若 $\widetilde{\varphi}\sim\varphi$，则 $\widetilde{\Omega}=\Omega$. 若 $\widetilde{\varphi}\not\sim\varphi$，则 $\widetilde{\Omega}=-\Omega$.
+
+即当 $\widetilde{\varphi}$ 与 $\varphi$ 指定不同定向时，由 $\widetilde{\Omega}=\widetilde{\psi}^*\widetilde{\omega}$ 定义的微分形式与面积元 $\Omega$ 恰好相差一个符号.
+
+以上的推理可以完全严格化，但以下我们采用一个更容易叙述的方法来构造面积元.
+
+\mysubsection{体积元（面积元）的严格定义}
+
+\mysubsubsection{子空间的面积元}
+
+设 $\RR^n$ 上有标准内积 $\inner{x,y}=\sum\limits_{i=1}^nx_iy_i$. 设 $V\subset\RR^n$ 为 $k$ 维线性子空间. 其上有由 $\RR^n$ 诱导的内积 $\inner{\cdot,\cdot}$. 设 $V$ 取定了定向.
+
+称 $\Omega$ 是 $V$ 上由内积和定向决定的体积元，若 $\Omega$ 是 $V$ 上的一个 $k$ 元交错线性型，且若 $\xi\in\mathscr{F}(V)$ 满足 $\xi$ 为标准正交基且 $\xi$ 给定了 $V$ 的定向，则 $\Omega(\xi)=1$.
+
+首先我们有如下的简单观察：
+
+\begin{property}
+    $V$ 在给定内积与定向下的体积元存在且唯一，且对任意的 $\eta\sim\xi$ 满足 $\eta$ 为标准正交基有 $\Omega(\eta)=1$.
+\end{property}
+\begin{proof}
+    由 $V$ 为 $k$ 维子空间知 $\mathscr{A}^k(V)$ 为 $1$ 维线性空间. 从而为确定其中一个只需指定 $\Omega(\xi)$ 的值. 从而 $\Omega$ 存在且唯一.
+
+    设 $\eta\sim\xi$ 且 $\eta$ 为标准正交基. 设 $\eta=\xi O$ ，则 $O$ 为正交矩阵且 $\det O=1$. 从而
+$$
+\Omega(\eta)=\Omega(\xi O)=\det O\cdot\Omega(\xi)=1
+$$
+\end{proof}
+
+作为特例，$\RR^n$ 在指定标准定向 $(e_1,\cdots,e_n)$ 后其体积元为 $\Omega=\dd x_1\wedge\cdots\wedge\dd x_n$.
+
+\mysubsubsection{$k$ 维光滑定向曲面的体积元}
+
+\begin{definition}
+    设 $S\subset\RR^n$ 为一个 $k$ 维光滑定向曲面. 则其定向图册在每点 $x\in S$ 的切空间 $T_xS$ 上指定了一个定向.
+
+    而 $T_xS$ 也继承了 $\RR^n$ 的内积 $\inner{\cdot,\cdot}$. 从而存在唯一的 $\Omega(x)$ 为 $T_xS$ 上由该内积和定向决定的体积元. 由此得到映射 $\Omega:S\to\mathscr{A}^k(\RR^k)$. 我们称 $\Omega$ 是 $S$ 上的体积元.
+\end{definition}
+
+\begin{hint}
+    可以证明：在 $S$ 有参数化 $\varphi:D\to S$ 时，$\Omega(x)$ 恰为 $(\varphi^{-1})^*\omega$.
+    
+    其中 $\omega(t)=\sqrt{\det g_{ij}(t)}\dd t_1\wedge\cdots\wedge\dd t_k$.
+\end{hint}
+
+有了体积元的定义，我们就可以定义：
+
+\begin{definition}
+    设 $S$ 为 $k$ 维光滑定向曲面，而 $\Omega$ 是 $S$ 上的体积元. 则定义 $S$ 的面积为
+$$
+V_k(S)\triangleq\int_S\Omega
+$$
+\end{definition}
+
+当然，为了说明上面的定义与之前曲面面积的定义吻合，我们需要证明当 $S$ 可参数化时，其值确实等于由 \ref{df:area} 定义的面积.
+
+\begin{proof}
+    设 $\varphi:D\to S$ 为 $S$ 的参数化，且 $\varphi$ 诱导了 $S$ 的定向. 已知
+$$
+V_k(S)=\int_D\sqrt{\det g_{ij}(t)}\dd t_1\wedge\cdots\wedge\dd t_k=\int_D\omega
+$$
+
+    其中 $\omega\triangleq\sqrt{\det g_{ij}(t)}\dd t_1\wedge\cdots\wedge\dd t_k$.
+
+    此时为了证明上面的定义与之前一致，我们只需验证 $\varphi^*\Omega=\omega$.
+
+    任取 $x\in S$. 设 $x=\varphi(t)$. 我们来验证 $(\varphi^*\Omega)(t)=\omega(t)$.
+
+    注意到 $(\varphi^*\Omega)(t)$ 与 $\omega(t)$ 线性相关. 从而仅需验证
+$$
+(\varphi^*\Omega)(t)(e_1,\cdots,e_k)=\omega(t)(e_1,\cdots,e_k)
+$$
+
+    一方面 $\omega(t)(e_1,\cdots,e_k)=\sqrt{\det g_{ij}(t)}$.
+
+    另一方面
+$$
+\begin{aligned}
+    (\varphi^*\Omega)(t)(e_1,\cdots,e_k)&=\Omega(\varphi(t))(\varphi'(t)e_1,\cdots,\varphi'(t)e_k)\\
+    &=\Omega(x)(\xi_1,\cdots,\xi_k)
+\end{aligned}
+$$
+
+    其中 $\xi_i=\varphi'(t)e_1,i=1,\cdots,k$.
+    
+    由于 $\varphi$ 诱导了 $S$ 的定向，从而 $(\xi_1,\cdots,\xi_k)$ 是 $T_xS$ 上指定了定向的标架.
+    
+    故 $\Omega(x)(\xi_1,\cdots,\xi_k)$ 恰为由 $\xi_1,\cdots,\xi_k$ 张成的平行多面体的有向体积，且大于 $0$. 即
+$$
+\Omega(x)(\xi_1,\cdots,\xi_k)=\sqrt{\det(\inner{\xi_i,\xi_j})_{i,j}}=\sqrt{\det g_{ij}(t)}
+$$
+
+    从而 $\varphi^*\Omega=\omega$.
+\end{proof}
+
+\begin{hint}
+    需要说明的是，体积元仅对定向曲面可定义，因为其定义要求我们统一地为每个 $x\in S$ 指定好定向.
+
+    但另一方面，即使曲面不可定向，其也总能分割成可定向的片. 从而，我们总是可以定义曲面的面积.
+\end{hint}
+
+\begin{definition}
+    设 $S\subset\RR^n$ 为 $k$ 维分片光滑曲面（不一定可定向）. 设存在可数个低维光滑曲面 $\set{N_i}$ 以及可数个可定向 $k$ 维光滑曲面 $\set{S_j}$ 使得
+$$
+S=\left(\bigsqcup_iN_i\right)\cup\left(\bigsqcup_jS_j\right)
+$$
+
+    则定义曲面 $S$ 的 $k$ 维面积为
+$$
+V_k(S)=\sum_{j}V_k(S_j)
+$$
+\end{definition}
+
+\begin{hint}
+    我们知道，初等曲面总是可定向的. 由此不难证明定义中提及的 $S$ 的分解方式总是存在. 从而可以定义 $S$ 的面积.
+
+    另一方面，利用重积分的可加性不难验证，面积的定义不依赖于分解方式的选取.
+
+    从而现在我们可以谈论 Möbius 带的面积.
+\end{hint}
+
+\mysubsection{体积元的坐标表达式}
+
+\mysubsubsection{弧长（一维体积元）}
+
+设 $\gamma$ 是一条光滑定向曲线（一维曲面）. 我们来表达其体积元 $\Omega(x)$.
+
+\img{0.5}{13.2.3.png}
+
+设 $e(x)$ 是在 $x$ 处的切线 $T_x\gamma$ 中的单位向量，且方向与 $\gamma$ 的定向相同. 则 $\Omega(x)$ 是 $T_x\gamma$ 上的 $1$-形式，使得 $\Omega(x)(e(x))=1$.
+
+\begin{property}
+$$
+\Omega(x)=e_1(x)\dd x_1+\cdots+e_n(x)\dd x_n
+$$
+\end{property}
+\begin{proof}
+    注意到
+$$
+\Omega(x)(e(x))=e_1(x)^2+\cdots+e_n(x)^2=1
+$$
+
+    由 $\Omega$ 的唯一性即证.
+\end{proof}
+
+故 $\Omega(x)=e_1\dd x_1+\cdots+e_n(x)\dd x_n$ 为此时体积元的坐标形式. 需要特别指出的是，此时 $\Omega(x)$ 是 $V=T_x\gamma$ 上的一个一重线性型，从而一个更为严格的写法是
+$$
+\Omega(x)=(e_1(x)\dd x_1+\cdots+e_n(x)\dd x_n)|_\gamma
+$$
+
+另一方面，注意到对 $\forall\xi\in T_x\gamma$ 满足 $\xi=ce(x)$ 有
+$$
+\dd x_i(\xi)=ce_i(x)=e_i(x)c\Omega(x)(e(x))=e_i(x)\Omega(x)(\xi)
+$$
+
+这说明
+\begin{property}
+    对 $i=1,\cdots,n$ 均有
+$$
+\dd x_i|_\gamma=e_i(x)\Omega(x)
+$$
+\end{property}
+
+直观上来讲，上式表明 $\dd x_i$ 在 $\gamma$ 上的限制等于体积元 $\Omega(x)$ 朝第 $i$ 个方向的“投影”.
+
+以后，我们经常将 $\Omega(x)$ 写成记号 $\dd s$，并称其为 $\gamma$ 上的弧长微元. 从而我们可以将以上的式子写成
+$$
+\begin{cases}
+    \displaystyle\dd s=\sum_{i=1}^ne_i(x)\dd x_i & \text{(1)}\\
+    \displaystyle\dd x_i=\dd x_i|_{\gamma}=e_i(x)\dd s & \text{(2)}
+\end{cases}
+$$
+
+可以看到 (1) 与 (2) 确实是相容的. 因为
+$$
+\dd s=\sum_{i=1}^ne_i(x)\dd x_i=\sum_{i=1}^ne_i(x)^2\dd s=\dd s
+$$
+
+\mysubsubsection{$n-1$ 维体积元}
+
+设 $S\subset\RR^n$ 为 $n-1$ 维定向光滑曲面，且其定向由连续单位法向量场 $\eta:S\to\RR^n$ 给定.
+
+我们来求此时体积元的坐标表达式. 我们有
+
+\begin{property}
+$$
+\Omega(x)=\omega_\eta^{n-1}(x),\forall x\in S
+$$
+
+    从而
+$$
+\Omega(x)=\sum_{j=1}^n(-1)^{j-1}\eta_j(x)\dd x_1\wedge\cdots\widehat{\dd x_j}\wedge\cdots\wedge\dd x_n
+$$
+\end{property}
+\begin{proof}
+    已知 $\mathscr{A}^{n-1}(T_xS)$ 为一维线性空间. 从而只需证：若 $\xi\in T_xS$ 满足 $\xi$ 为标准正交基且 $\xi$ 给出了 $T_xS$ 的定向，则 $\omega_\eta^{n-1}(x)(\xi)=1$.
+
+    设 $\xi=(\xi_1,\cdots,\xi_{n-1})$. 则 $(\eta,\xi_1,\cdots,\xi_{n-1})$ 为 $\RR^n$ 上的标准正交基，且与 $(e_1,\cdots,e_n)$ 等价. 从而
+$$
+\omega_\eta^{n-1}(x)(\xi)=\det(\eta,\xi_1,\cdots,\xi_{n-1})=1
+$$
+
+    即证 $\Omega=\omega_\eta^{n-1}$. 将其展开即得其坐标表达式.
+\end{proof}
+
+\begin{hint}
+    与一维情形类似，此时更为准确的写法是
+$$
+\Omega(x)=\left.\left(\sum_{j=1}^n(-1)^{j-1}\eta_j(x)\dd x_1\wedge\cdots\wedge\widehat{\dd x_j}\wedge\cdots\wedge\dd x_n\right)\right|_S
+$$
+\end{hint}
+
+与一维类似的，我们也有
+
+\begin{inference}
+    对 $1\le j\le n$ 有
+$$
+\eta_j(x)\Omega(x)=(-1)^{j-1}\dd x_1\wedge\cdots\widehat{\dd x_j}\wedge\cdots\dd x_n|_S
+$$
+\end{inference}
+\begin{proof}
+    注意到 $(-1)^{j-1}\dd x_1\wedge\cdots\wedge\widehat{\dd x_j}\wedge\cdots\wedge\dd x_n=\omega_{e_j}^{n-1}$.
+
+    从而我们只需证 $\omega_{e_j}^{n-1}=\eta_j(x)\Omega(x)$.
+
+    注意到 $e_j=\eta_j(x)\eta(x)+v(x)$ ，其中 $v(x)\in T_xS,v(x)\perp\eta(x)$.
+
+    取 $(\xi_1,\cdots,\xi_{n-1})$ 同前，则
+$$
+\eta_j(x)\Omega(x)(\xi_1,\cdots,\xi_{n-1})=\eta_j(x)
+$$
+
+    而
+$$
+\begin{aligned}
+\omega_{e_j}^{n-1}(\xi_1,\cdots,\xi_{n-1})&=\det(e_j,\xi_1,\cdots,\xi_{n-1})\\
+&=\det(\eta_j(x)\eta(x)+v(x),\xi_1,\cdots,\xi_{n-1})\\
+&=\eta_j(x)\det(\eta(x),\xi_1,\cdots,\xi_{n-1})=\eta_j(x)
+\end{aligned}
+$$
+
+    故 $\omega_{e_j}^{n-1}=\eta_j(x)\Omega(x)$.
+\end{proof}
+
+\img{0.5}{13.2.4.png}
+
+特别的，当 $n=3$ 时，若 $S$ 为二维曲面，则我们习惯用 $\dd\sigma$ 来表示体积元 $\Omega(x)$. 此时我们将 $\eta(x)$ 写成
+$$
+\eta(x)=(\cos\alpha_1(x),\cos\alpha_2(x),\cos\alpha_3(x))
+$$
+
+其中 $\cos\alpha_i(x)$ 为 $\eta(x)$ 与 $e_i$ 夹角的余弦值，通常称为方向余弦. 在这样的记号下我们有
+$$
+\begin{cases}
+    \dd\sigma=\cos\alpha_1\dd y\wedge\dd z+\cos\alpha_2\dd z\wedge\dd x+\cos\alpha_3\dd x\wedge\dd y\\
+    \dd y\wedge\dd z|_S=\cos\alpha_1\dd\sigma\\
+    \dd z\wedge\dd x|_S=\cos\alpha_2\dd\sigma\\
+    \dd x\wedge\dd y|_S=\cos\alpha_3\dd\sigma\\
+\end{cases}
+$$
+
+从而 $\dd y\wedge\dd z|_S$ 的几何意义为：$\dd y\wedge\dd z(\xi_1,\xi_2)$ 是将 $T_xS$ 中由 $\xi_1,\xi_2$ 张成的平行四边形投影至 $yz$ 平面的投影面积.
+
+对 $\dd z\wedge\dd x,\dd x\wedge\dd y$ 有类似的解释.
+
+\img{0.5}{13.2.5.png}
+
+\mysubsection{第一型与第二型曲面积分}
+
+现在我们可以对本节开始时讨论的质量问题一个精确的定义了.
+
+\begin{definition}
+    设 $S$ 为 $k$ 维光滑定向曲面. 设 $\rho:S\to\RR$ 连续. 则 $\rho$ 在 $S$ 上的积分定义为 $k$-形式 $p\Omega$ 在 $S$ 上的积分. 即
+$$
+\int_S\rho\Omega
+$$
+
+    其中 $\Omega$ 为 $S$ 上的体积元.
+\end{definition}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 此时积分值确实与定向无关. 因为当我们改变 $S$ 的定向时，相应的体积元 $\Omega$ 也变为了 $-\Omega$.
+        
+        \item 如定义所见，本质上，我们不是在定向曲面 $S$ 上对一个函数做积分，而是对一个 $k$-形式 $\rho\Omega$ 做积分.
+    \end{enumerate}
+\end{hint}
+
+最后，我们可以将定义推广至光滑曲面（不一定可定向）.
+
+\begin{definition}
+    设 $S$ 为 $k$ 维分片光滑曲面（不一定可定向）.
+
+    设 $\rho:S\to\RR$ 连续. 设 $S$ 有分解
+$$
+S=\left(\bigsqcup_iN_i\right)\cup\left(\bigsqcup_jS_j\right)
+$$
+
+    其中 $\set{N_i}$ 为低维光滑曲面，$\set{S_j}$ 为 $k$ 维光滑定向曲面. 定义 $\rho$ 在 $S$ 上的积分为
+$$
+\sum_j\int_{S_j}\rho\Omega_j
+$$
+
+    其中 $\Omega_j$ 为 $S_j$ 的体积元.
+\end{definition}
+
+我们称如上的积分为第一型曲面积分（即积分值不依赖于曲面的定向）. 而作为区别，我们称之前定义的积分 $\displaystyle\int_S\omega$ 为第二型曲面积分.
+
+\begin{hint}
+    需要注意的是，对积分的这种区分实际上是很人为的（来源于对积分认识的历史过程）. 本质上，任何一种积分都可以表达成第一型积分. 我们可以这样来看：
+
+    设 $S$ 为 $k$ 维光滑可定向曲面，且已指定了定向. 设 $\omega$ 为 $S$ 上的 $k$-形式.
+    
+    则由 $k$ 维线性空间 $T_xS$ 上的 $k$-形式为一维线性空间知：存在 $\rho:S\to\RR$ 连续使得
+$$
+\omega(x)=\rho(x)\Omega(x)
+$$
+
+    从而
+$$
+\int_S\omega=\int_S\rho(x)\Omega(x)
+$$
+
+    即第二型曲面积分可以表示成第一型曲面积分.
+
+    另一方面，直接从定义可以看出，每个第一型积分都可以分成可数个第二型积分的和. 从本质上讲，任何曲面积分都是 $k$-形式在 $k$ 维定向曲面上的积分.
+\end{hint}
+
+以下，我们从一些例子来进一步理解这种一、二型积分之间的转化.
+
+\begin{example}[ 力沿路径做的功]
+    设 $D\subset\RR^n$ 为开集，$F:D\to\RR^n$ 光滑. 设 $\gamma\subset D$ 为光滑定向曲线. 则
+$$
+\begin{aligned}
+    \int_\gamma\omega_F^1&=\int_\gamma F_1(x)\dd x_1+\cdots+F_n(x)\dd x_n\\
+    &=\int_\gamma F_1(x)e_1(x)\dd s+\cdots+F_n(x)e_n(x)\dd s\\
+    &=\int_\gamma\inner{F(x),e(x)}\dd s
+\end{aligned}
+$$
+
+    我们进一步引入向量弧长微元
+$$
+\dd\mathbf{s}\triangleq e(x)\dd s=(e_1(x)\dd s,\cdots,e_n(x)\dd s)
+$$
+
+    则上式可以进一步写成
+$$
+\int_\gamma\omega_F^1=\int_\gamma\inner{F,\dd\mathbf{s}}=\int_\gamma F\cdot\dd\mathbf{s}
+$$
+
+    这种记号在物理中十分常见，不光写起来简洁，而且从物理意义上来看也十分有启发性.
+\end{example}
+
+\begin{example}[ 稳定流的流量]
+    设 $D\subset\RR^n$ 为开集，$V:D\to\RR^n$ 光滑. 设 $S\subset D$ 为 $n-1$ 维光滑定向曲面（我们也用 $\dd\sigma$ 表示 $S$ 上的 $n-1$ 维体积元）. 则
+$$
+\begin{aligned}
+\int_S\omega_V^{n-1}&=\int_S\sum_{j=1}^n(-1)^{j-1}V_j(x)\dd x_1\wedge\cdots\wedge\widehat{\dd x_j}\wedge\cdots\wedge\dd x_n\\
+&=\int_S\sum_{j=1}^nV_j(x)n_j(x)\dd\sigma=\int_S\inner{V,n}\dd\sigma
+\end{aligned}
+$$
+
+    其中 $n:S\to\RR^n$ 为给定 $S$ 定向的连续单位法向量场.
+
+    我们进一步引入向量体积元
+$$
+\dd\bm{\sigma}=n(x)\dd\sigma
+$$
+
+    则
+$$
+\int_S\omega_V^{n-1}=\int_S\inner{V,\dd\bm{\sigma}}=\int_S V\cdot\dd\bm{\sigma}
+$$
+\end{example}
+
+\begin{example}[ Faraday 定律]
+$$
+\oint_{\partial S} E\cdot\dd\mathbf{s}=-\int_S\pard{B}{t}\cdot\dd\bm{\sigma}
+$$
+
+    其中 $E$ 为电场强度，$B$ 为磁场强度.
+\end{example}
+
+\begin{example}[ Ampère 定律]
+    在静电场中
+
+$$
+\oint_{\partial S}B\cdot\dd\mathbf{s}=\frac{1}{\eps_0c^2}\int_S j\cdot\dd\bm{\sigma}
+$$
+
+    其中 $B$ 为磁场强度，$j$ 为电流密度.
+\end{example}
+
+\img{0.8}{13.2.6.png}

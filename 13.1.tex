@@ -1,0 +1,417 @@
+\mysubsection{定义的引入}
+
+\mysubsubsection{力沿曲线所做的功}
+
+设 $G\subset\RR^n$ 为开集，$F:G\to\RR^n$ 为 $C^{(1)}$ 光滑力场.
+
+设 $\gamma$ 是 $G$ 中的一条光滑路径（$1$ 维曲面），$\varphi:[a,b]\to\gamma$ 是 $\gamma$ 的参数化. 我们希望知道质点沿路径 $\gamma$ 运动时，力场 $F$ 对其做的功.
+
+为了得到问题的解，我们采取逼近的方法：取时间区间 $[a,b]$ 的分划
+$$
+P:a=t_0<t_1<\cdots<t_m=b
+$$
+
+则在 $[t_{i-1},t_i]$ 的时间区间内
+$$
+\varphi(t_i)-\varphi(t_{i-1})=\varphi'(t_{i-1})(t_i-t_{i-1})+O(t_i-t_{i-1})
+$$
+
+\img{0.6}{13.1.1.png}
+
+从而在这个时间区间内，我们可以用 $\Delta\varphi_i=\varphi'(t_{i-1})(t_i-t_{i-1})$ 来近似替代位移，用 $F(\varphi(t_{i-1}))$ 来近似在这个时间区间内的力. 从而
+$$
+\begin{aligned}
+\Delta W_i\approx&F(\varphi(t_{i-1}))\cdot(\varphi(t_i)-\varphi(t_{i-1}))\\
+\approx&F(\varphi(t_{i-1}))\cdot\varphi'(t_{i-1})(t_i-t_{i-1})\\
+=&\inner{F(\varphi(t_{i-1})),\varphi'(t_{i-1})}\Delta t_i
+\end{aligned}
+$$
+
+所以总的做功
+
+$$
+W=\sum_{i=1}^m\Delta W_i\approx\sum_{i=1}^m\inner{F(\varphi(t_{i-1})),\varphi'(t_{i-1})}\Delta t_i
+$$
+
+当 $\lambda(P)\to 0$ 时，上式右边趋于
+$$
+\int_a^b\inner{F(\varphi(t)),\varphi'(t)}\dd t
+$$
+
+从而我们将此定义为力 $F$ 沿路径 $\gamma$ 做的总功
+$$
+W\triangleq\int_a^b\inner{F(\varphi(t)),\varphi'(t)}\dd t
+$$
+
+上面的定义是一个很好的定义，但从物理意义上来讲，一旦力场 $F$ 和路径 $\gamma$ 给定，所做的功已完全确定，从而我们并不关心 $\gamma$ 的参数化.
+
+为此我们需要找到一种仅依赖于 $F$ 和 $\gamma$ 的定义方式. 形式上，为了达到这个目的，我们可以这样表达：
+
+令 $x_i\triangleq\varphi(t_i)$. 令 $\Delta x_i\triangleq x_i-x_{i-1}=\varphi(t_i)-\varphi(t_{i-1})$. 则
+$$
+\begin{aligned}
+    \Delta W_i\approx F(x_{i-1})\Delta x_i=\sum_{i=1}^nF_j(x_{i-1})(\Delta x_i)_j
+\end{aligned}
+$$
+
+其中 $(\Delta x_i)_j$ 表示 $\Delta x_i$ 的第 $j$ 个分量.
+
+在形式上我们可以看到
+$$
+\Delta W_i\approx\sum_{i=1}^nF_j(x_{i-1})(\Delta x_i)_j\leadsto\sum_{i=1}^nF_j(x)\dd x_j=\omega_F^1
+$$
+
+将所有 $\Delta W_i$ 加起来，将 $\lambda(P)\to 0$ 时的极限记为
+$$
+\int_\gamma\sum_{j=1}^nF_j(x)\dd x_j=\int_\gamma\omega_F^1
+$$
+
+事实上，我们将用右侧的式子来作为 $F$ 沿 $\gamma$ 所做功的定义——一个不依赖于曲线坐标选取的定义.
+
+\begin{hint}
+    \begin{enumerate}
+        \item 关于以上的定义，从物理意义上讲，我们必须首先指名 $\gamma$ 的“方向”，即 $\gamma$ 的定向. 只有明确这一点后，我们才能确定到底是做的“正功”还是“负功”.
+        
+        从这个意义上讲，$\int_\gamma\omega_F^1$ 是 $1$-形式 $\omega_F^1$ 在定向曲线 $\gamma$ 上的积分. 即在对其积分时，首先应该指定 $\gamma$ 的定向.
+
+        \item 为了说明 $\int_\gamma\omega_F^1$ 作为定义的合理性，我们来说明如何对其进行计算.
+        
+        设 $\varphi:[a,b]\to\gamma$ 是 $\gamma$ 的参数化，且以由 $\varphi$ 诱导的定向作为 $\gamma$ 的定向. 则
+$$
+\begin{aligned}
+    \int_\gamma\omega_F^1=&\int_{\varphi([a,b])}\omega_F^1\xlongequal{\text{形式变量替换}}\int_a^b\varphi^*\omega_F^1(t)\\
+    =&\int_a^b\sum_{j=1}^nF_j(\varphi(t))\dd\varphi_j(t)=\int_a^b\sum_{j=1}^nF_j(\varphi(t))\varphi_j'(t)\dd t\\
+    =&\int_a^b\inner{F_j(\varphi(t)),\varphi'(t)}\dd t
+\end{aligned}
+$$
+
+        这正好就是我们推导出的第一个定义.
+    \end{enumerate}
+\end{hint}
+
+我们来讨论两个例子.
+
+\begin{example}
+    定义力场 $F:\RR^2\setminus\set{0}\to\RR^2$ 为
+$$
+F(x,y)=\left(\frac{-y}{x^2+y^2},\frac{x}{x^2+y^2}\right)
+$$
+
+    设
+$$
+\begin{aligned}
+    \gamma_1:[0,2\pi)\to\RR^2,&\gamma_1(t)\triangleq(\cos t,\sin t)\\
+    \gamma_2:[0,2\pi)\to\RR^2,&\gamma_2(t)\triangleq(2+\cos t,\sin t)
+\end{aligned}
+$$
+
+    则
+$$
+\begin{aligned}
+    &\int_{\gamma_1}\omega_F^1=\int_0^{2\pi}\inner{F(\gamma_1(t)),\gamma_1'(t)}\dd t=2\pi\\
+    &\int_{\gamma_2}\omega_F^1=\int_0^{2\pi}\inner{F(\gamma_2(t)),\gamma_2'(t)}\dd t=0
+\end{aligned}
+$$
+
+    \img{0.8}{13.1.2.png}
+\end{example}
+
+\begin{example}
+    设 $F:\RR^3\setminus\set{0}\to\RR^3$ 满足
+$$
+F(r)=f(\abs{r})r
+$$
+
+    其中 $f:(0,\infty)\to\RR$ 光滑.
+
+    我们称这样的力场 $F$ 为中心立场. 设 $\gamma:[0,1]\to\RR^3\setminus\set{0}$ 为一条光滑路径. 我们来求
+$$
+\begin{aligned}
+    &\int_\gamma\omega_F^1=\int_\gamma(F_1(x)\dd x_1+F_2(x)\dd x_2+F_3(x)\dd x_3)\\
+    =&\int_0^1(F_1(\gamma(t))\gamma_1'(t)+F_2(\gamma(t))\gamma_2'(t)+F_3(\gamma(t))\gamma_3'(t))\dd t\\
+    =&\int_0^1\inner{F(\gamma(t)),\gamma'(t)}\dd t=\int_0^1f(\abs{\gamma(t)})\inner{\gamma(t),\gamma'(t)}\dd t\\
+    =&\frac{1}{2}\int_0^1f(\abs{\gamma(t)})\dd\abs{\gamma(t)}^2\\
+    =&\frac{1}{2}\int_{\abs{\gamma(0)}^2}^{\abs{\gamma(1)}^2}f(\sqrt{u})\dd u\\
+    =&\frac{1}{2}\left(G(\abs{\gamma(1)}^2)-G(\abs{\gamma(0)}^2)\right)
+\end{aligned}
+$$
+
+    其中 $G(s)\triangleq\int_1^sf(\sqrt{u})\dd u$.
+
+    这说明：在中心力场下，$F$ 沿 $\gamma$ 做的总功仅与 $\gamma$ 的起点和终点有关.
+    
+    进一步，取
+$$
+F(r)=\frac{r}{\abs{r}^3}
+$$
+
+    则有
+$$
+G(s)=\int_1^su^{-\frac{3}{2}}\dd u=2\left(1-s^{-\frac{1}{2}}\right)
+$$
+
+    从而
+$$
+\int_\gamma\omega_F^1=\frac{1}{\abs{\gamma(0)}}-\frac{1}{\abs{\gamma(1)}}
+$$
+\end{example}
+
+\mysubsubsection{稳定流穿过曲面的流量}
+
+设 $G\subset\RR^3$ 为开集，$V:G\to\RR^3$ 为 $C^{(1)}$ 光滑流速场.
+
+设 $S\subset G$ 是一个指定了法方向 $n$ 的定向曲面，我们希望计算在单位时间内穿过 $S$ 的流量.
+
+为此一个自然的想法是将 $S$ 细分成小片 $S_i$ 的并，并计算穿过每个小片 $S_i$ 的流量，最后求和.
+
+我们希望能分割的足够细，使得每片 $S_i$ 近似是平坦的且 $V$ 在 $S_i$ 上近似取常值，从而可以用 $\inner{V(x_i),\eta_1,\eta_2}$ 来近似地替代穿过 $S_i$ 的流量. 其中 $x_i\in S_i$ ，用 $\eta_1,\eta_2$ 张成的平行四边形来近似替代 $S_i$，且 $\inner{a,b,c}$ 表示 $\det(a,b,c)$.
+
+但如何以一种好的方式来做分割呢？受上一小节的启发，我们来考虑 $S$ 有参数化的情形.
+
+设 $\varphi:D\to S$ 是参数化，且由 $\varphi$ 诱导的定向恰为 $S$ 上由 $n$ 指定的定向. 则此时可以先将 $D$ 细分，再通过 $\varphi$ 送到 $S$ 上，得到 $S$ 的细分.
+
+\img{0.8}{13.1.3.png}
+
+设 $P=\set{I_i|i\in I}$ 是 $D$ 的一个矩形分划. 设 $t_i$ 为 $I_i$ 的左下角端点. 设 $I_i$ 的两个边长向量分别为 $\tau_1,\tau_2$.
+
+则当分划足够细时，可以用由 $\eta_1=\varphi'(t_i)\tau_1,\eta_2=\varphi'(t_i)\tau_2$ 张成的平行四边形近似地代替 $S_i\triangleq\varphi(I_i)$. 从而穿过 $S_i$ 的流量
+$$
+\begin{aligned}
+    \mathscr{F}_i\approx&\inner{V(x_i),\eta_1,\eta_2}\qquad(x_i=\varphi(t_i))\\
+    =&V_1(x_i)\dd y\wedge\dd z(\eta_1,\eta_2)+V_2(x_i)\dd z\wedge\dd x(\eta_1,\eta_2)+V_3(x_i)\dd x\wedge\dd y(\eta_1,\eta_2)\\
+    =&\omega_V^2(\eta_1,\eta_2)
+\end{aligned}
+$$
+
+从而总流量
+$$
+\mathscr{F}=\sum_{i\in I}\mathscr{F}_i\approx\sum_{i\in I}\omega_V^2(\eta_1^{(i)},\eta_2^{(i)})
+$$
+
+当 $\lambda(P)\to 0$ 时，右式的极限记为
+$$
+\int_S\omega_V^2=\int_S(V_1\dd y\wedge\dd z+V_2\dd z\wedge\dd x+V_3\dd x\wedge\dd y)
+$$
+
+即我们定义了 $2$-形式 $\omega_V^2$ 沿定向曲面 $S$ 的积分，其物理意义为稳定流 $V$ 穿过曲面 $S$ 的流量.
+
+另一方面，为了进行实际的计算，我们需计算 $\mathscr{F}_i\approx\omega_V^2(x_i)(\eta_1,\eta_2)$. 我们有
+$$
+\begin{aligned}
+    \omega_V^2(x_i)(\eta_1,\eta_2)=&\begin{vmatrix}
+        V_1(x_1) & V_2(x_i) & V_3(x_i)\\
+        \eta_{11} & \eta_{21} & \eta_{31}\\
+        \eta_{12} & \eta_{22} & \eta_{32}
+    \end{vmatrix}\\
+    =&V_1(x_1)\begin{vmatrix}
+        \eta_{21} & \eta_{31}\\
+        \eta_{22} & \eta_{32}
+    \end{vmatrix}+V_2(x_i)\begin{vmatrix}
+        \eta_{31} & \eta_{11}\\
+        \eta_{32} & \eta_{12}
+    \end{vmatrix}+V_3(x_i)\begin{vmatrix}
+        \eta_{11} & \eta_{21}\\
+        \eta_{12} & \eta_{22}
+    \end{vmatrix}\\
+    =&(\varphi^*\omega_V^2)(t_i)(\tau_1,\tau_2)
+\end{aligned}
+$$
+
+设 $\varphi^*\omega_V^2(t)=g(t)\dd t_1\wedge\dd t_2,\tau_1=\eps_1e_1,\tau_2=\eps_2e_2$. 则
+$$
+\begin{aligned}
+    \omega_V^2(x_i)(\eta_1,\eta_2)=&g(t_i)\dd t_1\wedge\dd t_2(\tau_1,\tau_2)\\
+    =&g(t_i)\eps_1\eps_2=g(t_i)S(I_i)
+\end{aligned}
+$$
+
+从而
+$$
+\begin{aligned}
+    F\approx&\sum_{i\in I}\omega_V^2(x_i)(\eta_1^{(i)},\eta_2^{(i)})=\sum_{i=1}^ng(t_i)S(I_i)\\
+    \xrightarrow{\lambda(P)\to 0}&\int_Dg(t)\dd t=\int_Dg(t_1,t_2)\dd t_1\dd t_2
+\end{aligned}
+$$
+
+我们有理由将上式写成
+$$
+\int_Dg(t_1,t_2)\dd t_1\dd t_2=\int_Dg(t_1,t_2)\dd t_1\wedge\dd t_2=\int_D\varphi^*(\omega_V^2)
+$$
+
+从而我们得到
+$$
+\int_S\omega_V^2\xlongequal{\text{抽象定义角度}}\mathscr{F}\xlongequal{\text{计算角度}}\int_D\varphi^*(\omega_V^2)
+$$
+
+\begin{hint}
+    我们再次强调在如上的抽象定义中，$S$ 是一个指定了定向的曲面. 特别的，若 $\psi:\widetilde{D}\to S$ 是 $S$ 的另一个参数化，使得由 $\psi$ 诱导的定向与在 $S$ 上指定的定向相反，则可以证明：
+$$
+\int_{\widetilde{D}}\psi^*(\omega_V^2)=-\int_D\varphi^*(\omega_V^2)
+$$
+
+    （我们将在下一小节中证明该性质）.
+    从物理意义上来讲，改变定向后，流出变为流入、流入变为流出，从而两者之间相差一个符号.
+\end{hint}
+
+以下我们看两个例子.
+
+\begin{example}
+    设 $V=(1,0,0),S$ 为球面 $\set{(x,y,z)\in\RR^3|x^2+y^2+z^2=R^2},R>0$.
+
+    则有
+$$
+\int_S\omega_V^2=0
+$$
+\end{example}
+
+\begin{example}
+    设 $V(x,y,z)=(x,y,z),S$ 为球面 $\set{(x,y,z)\in\RR^3|x^2+y^2+z^2=R^2},R>0$ ，定向由指向球心的法向量场决定，则
+$$
+\int_S\omega_V^2=-4\pi R^3
+$$
+\end{example}
+
+\mysubsection{微分形式沿定向曲面的积分}
+
+\mysubsubsection{曲面可参数化情形}
+
+设 $G\subset\RR^n$ 为开集，$\omega\in\Omega^k(G),k\le n$. 设 $S\subset G$ 为 $k$ 维可参数化光滑曲面. 设 $\varphi:D\to S$ 为 $S$ 的参数化，$S$ 上的定向由 $\varphi$ 诱导的定向给定.
+
+我们希望来定义 $\displaystyle\int_S\omega$.
+
+设 $P=\set{I_i|i\in I}$ 为 $D$ 的矩形分划. 设 $t_i$ 为 $I_i$ 坐标最小的顶点. 设 $x_i=\varphi(t_i)$. 设 $I_i$ 的各边为 $\tau_1,\cdots,\tau_k$，设 $\tau_i=\eps_ie_i,i=1,\cdots,k$.
+
+定义
+$$
+\int_S\omega\triangleq\lim_{\lambda(P)\to 0}\sum_{i\in I}\omega(x_i)(\eta_1,\cdots,\eta_k)
+$$
+
+其中 $\eta_i=\varphi'(t)\tau_i,i=1,\cdots,k$.
+
+这里的定义是一个抽象的定义，并没有给出具体的计算方法. 接下来，我们看一看如何将上述定义转化成一个可以计算的形式.
+
+设 $\varphi^*\omega(t)=f(t)\dd t_1\wedge\cdots\wedge\dd t_k$. 则
+$$
+\begin{aligned}
+    &\sum_{i\in I}\omega(x_i)(\eta_1,\cdots,\eta_k)\\
+    =&\sum_{i\in I}\omega(\varphi(t_i))(\varphi'(t_i)\tau_1,\cdots,\varphi'(t_i)\tau_k)\\
+    =&\sum_{i\in I}(\varphi^*\omega)(t_i)(\tau_1,\cdots,\tau_k)\\
+    =&\sum_{i\in I}f(t_i)\dd t_1\wedge\cdots\wedge\dd t_k(\tau_1,\cdots,\tau_k)\\
+    =&\sum_{i\in I}f(t_i)\eps_1\cdots\eps_k\dd t_1\wedge\cdots\wedge\dd t_k(e_1,\cdot,e_k)\\
+    =&\sum_{i\in I}f(t_i)\mu(I_i)\\
+    \xrightarrow{\lambda(P)\to 0}&\int_Df(t)\dd t=\int_Df(t)\dd t_1\cdots\dd t_k
+\end{aligned}
+$$
+
+这说明，若 $f\in R(D)$ ，则 $\omega$ 沿 $S$ 的积分存在，且
+$$
+\int_S\omega=\int_Df(t)\dd t_1\cdots\dd t_k
+$$
+
+特别的，考虑特殊情形：$S=D\subset\RR^k$ 为开集，$\varphi=\text{id}_D,\omega=f(t)\dd t_1\wedge\cdots\wedge\dd t_k$ ，且 $f\in R(D)$.
+
+则以上的定义与计算表明：当在 $D$ 上取定标准定向 $(e_1,\cdots,e_n)$ 时
+$$
+\int_Df(t)\dd t_1\wedge\cdots\wedge\dd t_k=\int_Df(t)\dd t_1\cdots\dd t_k=\int_Df(t)\dd t
+$$
+
+从而
+$$
+\int_S\omega=\int_{\varphi(D)}\omega=\int_D\varphi^*(\omega)=\int_Df(t)\dd t_1\wedge\cdots\wedge\dd t_k
+$$
+
+一旦我们建立起以上的观察，我们完全可以反过来作如下的形式定义：
+
+\begin{definition}
+    \begin{enumerate}
+        \item 设 $D\subset\RR^n$ 为开集，$\omega\in\Omega^k(D)$ 且 $\omega(t)=f(t)\dd t_1\wedge\cdots\wedge\dd t_k$. 则定义
+$$
+\int_D\omega\triangleq\int_Df(t)\dd t=\int_Df(t)\dd t_1\cdots\dd t_k\qquad(\text{Riemann 积分})
+$$
+
+        \item\label{df:dfint} 设 $G\subset\RR^n$ 为开集，$\omega\in\Omega^k(G)$. 设 $S\subset G$ 为 $k$ 维光滑定向曲面，且 $S$ 有参数化 $\varphi:D\to S$ 且 $\varphi$ 给定了 $S$ 上的定向. 则定义
+$$
+\int_S\omega\triangleq\int_D\varphi^*(\omega)
+$$
+    \end{enumerate}
+\end{definition}
+
+当然为了说明 \ref{df:dfint} 是良定义的，我们需要证明：若 $S$ 有另一个参数化，则只要其诱导了相同的定向，则其积分值不变. 为此，我们来证明如下的性质：
+
+\begin{property}
+    设 $G\subset\RR^n$ 为开集，$\omega\in\Omega^k(G)$. 设 $S\subset G$ 为 $k$ 维光滑可定向曲面.
+    
+    设 $\varphi_i:D_i\to S,i=1,2$ 为 $S$ 的两个不同的参数化，则
+$$
+\int_{D_2}\varphi_2^*\omega=\pm\int_{D_1}\varphi_1^*\omega
+$$
+
+    其中若 $\varphi_1$ 与 $\varphi_1$ 诱导相同的定向，则取 $+$ ，反之取 $-$.
+\end{property}
+\begin{proof}
+    令 $\Phi=\varphi_2^{-1}\circ\varphi_1$. 则 $\Phi:D_1\to D_2$ 为微分同胚.
+
+    \img{0.6}{13.1.4.png}
+
+    则 $\varphi_1=\varphi_2\circ\Phi$. 从而 $\varphi_1^*\omega=\Phi^*\varphi_2^*\omega$. 设
+$$
+\begin{aligned}
+    (\varphi_1^*\omega)(t)&=f_1(t)\dd t_1\wedge\cdots\wedge\dd t_k\\
+    (\varphi_2^*\omega)(\tau)&=f_2(\tau)\dd\tau_1\wedge\cdots\wedge\dd\tau_k
+\end{aligned}
+$$
+
+    则
+$$
+\begin{aligned}
+    \Phi^*\varphi_2^*\omega(t)&=f_2(\Phi(t))\dd\Phi_1'(t)\wedge\cdots\dd\Phi_k'(t)\\
+    &=f_2(\Phi(t))\det\Phi'(t)\dd t_1\wedge\cdots\wedge\dd t_k
+\end{aligned}
+$$
+
+    从而我们有 $f_1(t)=f_2(\Phi(t))\det\Phi'(t)$. 故
+$$
+\begin{aligned}
+    \int_{D_2}\varphi_2^*\omega&=\int_{D_2}f_2(\tau)\dd\tau_1\wedge\cdots\wedge\dd\tau_k=\int_{\Phi(D_1)}f_2(\tau)\dd\tau\\
+    &=\int_{D_1}f_2(\Phi(t))\abs{\det\Phi'(t)}\dd t\quad(\text{变量替换公式})\\
+    &=\begin{cases}
+        \displaystyle\int_{D_1}f_1(t)\dd t & (\det\Phi'(t)>0)\\
+        \displaystyle-\int_{D_1}f_1(t)\dd t & (\det\Phi'(t)<0)
+    \end{cases}\\
+    &=\begin{cases}\displaystyle
+        \displaystyle\int_{D_1}\varphi_1^*\omega & (\varphi_1~\text{与}~\varphi_2~\text{指定相同的定向})\\
+        \displaystyle-\int_{D_1}\varphi_1^*\omega & (\varphi_1~\text{与}~\varphi_2~\text{指定相反的定向})
+    \end{cases}
+\end{aligned}
+$$
+\end{proof}
+
+根据这个性质，我们可得 \ref{df:dfint} 是良定义的，且当另一个参数化 $\psi$ 诱导 $S$ 上的相反定向时，$\displaystyle\int_{\widetilde{D}}\psi^*\omega$ 与 $\displaystyle\int_S\omega$ 恰好只差一个符号.
+
+\mysubsubsection{一般曲面情形}
+
+有了以上的准备，下面的一般定义就显得很自然了.
+
+\begin{definition}
+    \begin{enumerate}
+        \item 若 $D\subset\RR^k$ 为开集，$\omega\in\Omega^k(D),\omega=f(t)\dd t_1\wedge\cdots\wedge t_k$. 则定义
+$$
+\int_D\omega=\int_Df(t)\dd t
+$$
+
+        \item 若 $G\subset\RR^n$ 为开集，$\omega\in\Omega^k(G),S\subset G$ 为 $k$ 维定向光滑曲面，$\varphi:D\to S$ 为 $S$ 的参数化，则定义
+$$
+\int_S\omega\triangleq\begin{cases}
+    \displaystyle\int_D\varphi^*\omega & (\varphi~\text{诱导了}~S~\text{的定向})\\
+    \displaystyle-\int_D\varphi^*\omega & (\varphi~\text{诱导了}~S~\text{相反的定向})
+\end{cases}
+$$
+
+        \item 若 $S$ 为分片光滑 $k$ 维定向曲面，且 $S$ 在去掉有限个低维光滑曲面后是有限个定向曲面 $S_i$ 的并，$\omega$ 为 $S$ 上的 $k$-形式，则定义
+$$
+\int_S\omega\triangleq\sum_i\int_{S_i}\omega
+$$
+
+        由 Riemann 积分的可加性可知该定义与 $S$ 的分解方式无关.
+    \end{enumerate}
+\end{definition}

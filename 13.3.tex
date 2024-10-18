@@ -1,0 +1,147 @@
+本节，我们证明三个重要的积分公式. 从证明过程可以看出它们都是 Newton-Leibniz 公式的推论.
+
+\mysubsection{Green 公式}
+
+\begin{theorem}[Green 公式]
+    设 $D\subset\RR^2$ 为区域，$\overline{D}$ 紧，$\partial D=\partial\overline{D}$ 为分片光滑曲线.
+
+    设 $P,Q:\overline{D}\to\RR$ 为 $C^{(1)}$ 光滑. 则
+$$
+\int_D\left(\pard{Q}{x}-\pard{P}{y}\right)\dd x\dd y=\int_{\partial D}P\dd x+Q\dd y
+$$
+
+    其中 $D$ 取标准定向 $(e_1,e_2)$，而 $\partial D$ 上取由 $\overline{D}$ 的定向所诱导的定向.
+\end{theorem}
+
+我们仅对一类特殊的区域 $D$ 证明上式. 从实用的角度来说，这一类区域已经够用了. 以下我们给出定义
+
+\begin{definition}
+    称 $D\subset\RR^2$ 是一个 $x$-型区域，若存在 $\varphi_1,\varphi_2:[a,b]\to\RR$ 连续且分段光滑，满足 $\varphi_1(x)\le\varphi_2(x),\forall x\in [a,b]$，使得
+$$
+\overline{D}=\set{(x,y)\in\RR^2|x\in[a,b],\varphi_1(x)\le y\le\varphi_2(x)}
+$$
+\end{definition}
+
+\img{0.8}{13.3.1.png}
+
+类似地可以定义 $y$-型区域. 我们省略其定义.
+
+\begin{lemma}
+    设 $D$ 为 $x$-型区域，且由 $\varphi_1,\varphi_2:[a,b]\to\RR$ 给定. 设 $P\in C^{(1)}(\overline{D})$. 则
+$$
+\int_{\partial D}P\dd x=\int_D-\pard{P}{y}\dd x\dd y
+$$
+\end{lemma}
+\begin{proof}
+    一方面，由 Fubini 定理有
+$$
+\begin{aligned}
+    \int_D-\pard{P}{y}\dd x\dd y&=-\int_a^b\int_{\varphi_1(x)}^{\varphi_2(x)}\pard{P}{y}(x,y)\dd y\dd x\\
+    &\xlongequal{\text{N-L}}-\int_a^b\left(P(x,\varphi_2(x))-P(x,\varphi_1(x))\right)\dd x\\
+    &=\int_a^b P(x,\varphi_1(x))\dd x-\int_a^b P(x,\varphi_2(x))\dd x
+\end{aligned}
+$$
+
+\img{0.5}{13.3.2.png}
+
+    另一方面，$\partial D=\gamma_1\cup\gamma_2\cup\gamma_3\cup\gamma_4$ 如图. 其由 $\overline{D}$ 诱导的定向为逆时针方向. 我们分别给出它们的参数化
+$$
+\begin{aligned}
+    &\gamma_1:\quad\phi_1:[a,b]\to\RR^2,t\mapsto(t,\varphi_1(t))\\
+    &\gamma_2:\quad\phi_2:[\varphi_1(b),\varphi_2(b)]\to\RR^2,t\mapsto(b,t)\\
+    &\gamma_3:\quad\phi_3:[a,b]\to\RR^2,t\mapsto(t,\varphi_2(t))\\
+    &\gamma_4:\quad\phi_4:[\varphi_1(a),\varphi_2(a)]\to\RR^2,t\mapsto(a,t)\\
+\end{aligned}
+$$
+
+    其中 $\phi_1,\phi_2$ 诱导了 $\gamma_1,\gamma_2$ 上的定向，而 $\phi_3,\phi_4$ 诱导了 $\gamma_3,\gamma_4$ 上相反的定向. 从而
+$$
+\begin{aligned}
+    &\int_{\gamma_1}P\dd x=\int_a^bP(t,\varphi_1(t))\dd t\\
+    &\int_{\gamma_2}P\dd x=0\\
+    &\int_{\gamma_3}P\dd x=-\int_a^bP(t,\varphi_2(t))\dd t\\
+    &\int_{\gamma_4}P\dd x=0
+\end{aligned}
+$$
+
+    综上
+$$
+\int_{\partial D}P\dd x=\int_D-\pard{P}{y}\dd x\dd y
+$$
+\end{proof}
+
+\begin{lemma}\label{green:x}
+    设 $D\subset\RR^2$ 为区域，存在有限个不交的 $x$-型区域 $D_1,\cdots,D_k$ 使得 
+$$
+\overline{D}=\overline{D}_1\cup\cdots\cup\overline{D}_k
+$$
+
+    设 $P\in C^{(1)}(\overline{D})$，则
+$$
+\int_{\partial D}P\dd x=\int_D-\pard{P}{y}\dd x\dd y
+$$
+\end{lemma}
+\begin{proof}
+    一方面
+$$
+\begin{aligned}
+    \int_D-\pard{P}{y}\dd x\dd y&=\sum_{i=1}^k-\int_{D_i}\pard{P}{y}\dd x\dd y\\
+    &=\sum_{i=1}^k\int_{\partial D_i}P\dd x
+\end{aligned}
+$$
+
+    另一方面，已知若 $D_i$ 与 $D_j$ 有公共边界，则 $D_i$ 与 $D_j$ 在公共边界上诱导相反的定向. 故
+$$
+\sum_{i=1}^k\int_{\partial D}P\dd x=\int_{\partial D}P\dd x
+$$
+\end{proof}
+
+\img{0.8}{13.3.3.png}
+
+同理可以证明
+
+\begin{lemma}\label{green:y}
+    设 $D\subset\RR^2$ 为区域，存在有限个不交的 $y$-型区域 $G_1,\cdots,G_k$ 使得 
+$$
+\overline{D}=\overline{G}_1\cup\cdots\cup\overline{G}_k
+$$
+
+    设 $Q\in C^{(1)}(\overline{D})$，则
+$$
+\int_{\partial D}Q\dd y=\int_D\pard{Q}{x}\dd x\dd y
+$$
+\end{lemma}
+
+因此我们做出如下的定义
+
+\begin{definition}
+    称 $D$ 是一个初等区域，若存在有限个 $x$-型区域 $D_1,\cdots,D_k$ 满足
+$$
+D_i\cap D_j=\varnothing,\forall i\ne j~\text{且}~\overline{D}=\bigcup_{i=1}^k\overline{D}_i
+$$
+
+    且存在有限个 $y$-型区域 $G_1,\cdots,G_k$ 满足
+$$
+    G_i\cap G_j=\varnothing,\forall i\ne j~\text{且}~\overline{D}=\bigcup_{i=1}^k\overline{G}_i
+$$
+\end{definition}
+
+\img{0.8}{13.3.4.png}
+
+将引理 \ref{green:x} 与引理 \ref{green:y} 相加，我们即对初等区域证明了 Green 公式.
+
+\begin{hint}
+    \begin{enumerate}
+        \item 我们可以这样来看 Green 公式：
+        
+        令 $\omega=P\dd x+Q\dd y$ 为 $\overline{D}$ 上的 $1$-形式. 则
+$$
+\dd\omega=-\pard{P}{y}\dd x\wedge\dd y+\pard{Q}{x}\dd x\wedge\dd y
+$$
+
+        从而 Green 公式变为
+$$
+\int_{\partial D}\omega=\int_D\dd\omega
+$$
+    \end{enumerate}
+\end{hint}

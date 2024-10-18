@@ -1,0 +1,219 @@
+在第八章，我们已经定义了 $\RR^n$ 中的光滑曲面. 本章我们进一步来定义一般的曲面（可能不光滑）.
+
+\begin{definition}\label{df:surface}
+设 $S\subseteq\RR^n$ 非空. 设 $k\le n$.
+
+称 $S$ 是一个 $k$ 维曲面，若 $\forall x\in S$ ，存在 $x$ 在 $S$ 中的邻域 $U$ 以及同胚映射 $\varphi:\RR^k\to U$.
+\end{definition}
+
+\img{0.5}{12.1.1.png}
+
+直观来讲：若 $S$ 的每个局部看起来都像是 $\RR^k$ 的一个“形变”，则 $S$ 是一个 $k$ 维曲面.
+
+\begin{definition}
+上一定义中出现的同胚 $\varphi$ 称为是 $S$ 的一个图或者局部图，其中 $\RR^k$ 称为参数域，而 $U$ 称为是 $\varphi$ 的有效域.
+\end{definition}
+
+设 $S\subset\RR^n$ 是一个 $k$ 维曲面.
+
+则对 $\forall x\in S,\exists U_x$ 以及 $\varphi_x:\RR^k\to U_x$ 使得 $\varphi_x$ 为同胚.
+
+特别地，
+$$
+S=\bigcup_{x\in S}U_x
+$$
+
+事实上，可以证明：
+
+\begin{property}
+设 $S\subset\RR^n$ 为一个 $k$ 维曲面，则存在至多可数的指标集 $I$ 满足 $\forall i\in I,\exists U_i\subset S$ 以及映射 $\varphi_i:\RR^k\to U_i$ 为同胚，且有
+$$
+S=\bigcup_{i\in I}U_i
+$$
+\end{property}
+
+即可以用可数个图的有效域覆盖曲面 $S$.
+
+\begin{definition}
+设 $S$ 是一个 $k$ 维曲面. 设 $I,\varphi_i,U_i$ 满足如上性质.
+
+则称 $\set{\varphi_i:\RR^k\to U_i|i\in I}$ 是曲面 $S$ 的一个图册.
+
+特别地，若可取指标集 $I$ 为单点集，则称 $S$ 是一个初等曲面.
+\end{definition}
+
+以下给出几个注记.
+
+\begin{hint}
+\begin{enumerate}
+    \item 可以将曲面定义中的 $\RR^k$ 替换成任何与 $\RR^k$ 同胚的集合，例如
+$$
+I^k=[-1,1]^k\qquad\text{或}\qquad B^k=\set{x\in\RR^k:\abs{x}<1}
+$$
+    在实际应用中，我们经常取 $I^k$.
+
+    \item 可以认为 $\varphi$ 在 $S$ 的局部引入了一个曲线坐标：对任意的点 $x=\varphi(t)\in U$ 我们给定一个坐标 $t$.
+
+    \item 这里我们对图 $\varphi$ 仅假定连续性，从而实际得到的曲面可能十分奇怪（例如 Alexander 角球面）.
+    
+    另一方面若我们要求所有的图 $\varphi$ 均为光滑且满秩映射，则由此得到的曲面事实上与第八章中定义的曲面相同.
+\end{enumerate}
+\end{hint}
+
+\begin{property}
+若在曲面定义中进一步假设 $\varphi\in C^{(m)}(\RR^k;\RR^n)$ 且 $\forall t\in\RR^k,\mathrm{r}(\varphi'(t))=k$ ，则由此得到的曲面定义与第八章给定的 $m$ 阶光滑曲面的定义等价.
+\end{property}
+\begin{proof}
+设 $S\subset\RR^n$.
+
+先设 $S$ 是第八章中定义的 $m$ 阶光滑曲面.
+
+则 $\forall x\in S,\exists x$ 在 $\RR^n$ 中的邻域 $U(x)$ 以及 $C^{(m)}$ 微分同胚 $\varphi:U(x)\to I^n$ 使得
+$$
+\varphi(S\cap U(x))=\set{t\in I^n|t_{k+1}=\cdots=t_n=0}
+$$
+
+记 $\psi=\varphi^{-1}$. 定义
+$$
+\hat\psi:I^k\to\RR^n,\hat\psi(t)\triangleq\psi(t,0)
+$$
+
+则 $\hat\psi$ 为 $C^{(m)}$ 光滑，且 $\hat\psi:I^k\to\hat\psi(I^k)=S\cap U(x)$ 为同胚. 且 $S\cap U(x)$ 是 $x$ 在 $S$ 中的邻域.
+
+即 $S$ 是新定义下的曲面.
+
+再设 $S$ 是新定义下的曲面，且满足前述的正则性.
+
+任取 $x_0\in S$. 由假设，存在 $C^{(m)}$ 光滑的同胚 $\varphi:\RR^k\to U(x_0)\subset S$ 且满足 $\forall t\in\RR^k,\mathrm{r}(\varphi'(t))=k$.
+
+不妨设 $\varphi(0)=x_0$ 且 $\displaystyle\left(\pard{\varphi_i}{t_j}(0)\right)_{1\le i,j\le k}$ 可逆.
+
+令 $\td\varphi=(\varphi_1,\cdots,\varphi_k)$.
+由反函数定理，存在 $\eps>0$ 使得 $\td\varphi:I_\eps^k\to V\triangleq\td\varphi(I_\eps^k)$ 为 $m$ 阶微分同胚.
+记 $\td\varphi$ 的逆为 $\psi:V\to I_\eps^k$.
+
+\img{0.6}{12.1.2.png}
+
+则可见 $\Gamma(\varphi\circ\psi)\subset S$ 且 $x_0=\varphi\circ\psi(\hat{x}_0)$.
+
+现定义 $\Psi:V\times \RR^{n-k}\to \RR^n$ 为
+$$
+\Psi(x)\triangleq(\psi(\hat{x}),x_{k+1}-\varphi_{k+1}\circ\psi(\hat{x}),\cdots,x_n-\varphi_n\circ\psi(\hat{x}))
+$$
+
+这里 $\hat{x}=(x_1,\cdots,x_k)$.
+
+则 $\Psi(x_0)=0$ 且
+$$
+J_\Psi(x_0)=\begin{bmatrix}
+    J_\psi(\hat{x}_0) & 0 \\
+    \ast & I_{n-k}
+\end{bmatrix}
+$$
+
+可逆.
+
+由反函数定理知存在 $x_0$ 的邻域 $\td U(x_0)$ 使得 $\Psi:\td U(x_0)\to\Psi(\td U(x_0))$ 为 $C^{(m)}$ 微分同胚.
+
+注意到 $\Psi(S\cap\td U(x_0))=\set{t\in\Psi(\td U(x_0))|t_{k+1}=\cdots=t_n=0}$.
+
+这就证明了 $S$ 满足第八章曲面的定义.
+\end{proof}
+
+有了这个性质，我们可以对定义 \ref{df:surface} 作如下的补充：
+
+\begin{definition}
+设 $S\subset\RR^n$ 是由定义 \textup{\ref{df:surface}} 给定的一个 $k$ 维曲面.
+
+称其为 $C^{(m)}$ 光滑 $(m\ge 1)$ ，若在定义中我们进一步要求 $\varphi\in C^{(m)}(\RR^k)$ 且 $\mathrm{r}(\varphi'(t))\equiv k$.
+\end{definition}
+
+\begin{hint}
+\begin{enumerate}
+    \item 由上面的性质可知，如上的 $m$ 阶光滑曲面的定义与第八章中的 $m$ 阶光滑曲面定义是吻合的.
+
+    \item 上面定义中的满秩假设是必须的，否则可以考虑如下的例子：
+    
+设 $\varphi:\RR\to\RR^2$ 为 $\varphi(t)=(t^2,t^3)$.
+
+令 $S=\mathrm{Im}(\varphi)$. 此时尽管有 $\varphi\in C^{\infty}(\RR)$ 且 $\varphi:\RR\to S$ 为同胚，但 $S$ 不为光滑曲线.
+
+\img{0.5}{12.1.3.png}
+
+问题在于 $\mathrm{r}(\varphi'(0))=0<1$.
+
+    \item 既然已经有了第八章关于光滑曲面的定义，为什么在这里我们还要引入一个新的定义呢？
+    新的定义有两个好处. 第一，在实际计算中，我们往往需要将曲面局部参数化，而这正是新定义的目的。
+    第二，新的定义可以在今后更方便地推广到抽象流形地情形.
+\end{enumerate}
+\end{hint}
+
+以下，我们讨论一些例子.
+
+\begin{example}
+设 $F:\RR^n\to\RR^{n-k}$ 为 $C^{(m)}$ 光滑.
+
+设 $S\triangleq\set{x\in\RR^n|F(x)=0}\ne\varnothing$ 且 $\forall x\in S,\mathrm{r}(F'(x))=n-k$.
+
+则 $S$ 为 $m$ 阶光滑曲面.
+\end{example}
+\begin{proof}
+记 $x=(\hat{x},\hat{y}),\hat{x}=(x_1,\cdots,x_k),\hat{y}=(x_{k+1},\cdots,x_n)$.
+
+任取 $x_0\in S$. 我们来构造一个局部图.
+
+记 $x_0=(\hat{x}_0,\hat{y}_0)$. 不妨设 $\pard{F}{\hat{y}}(x_0)$ 可逆.
+
+由隐函数定理，存在 $I_{\hat{x}_0},J_{\hat{y}_0}$ 以及光滑映射 $\psi:I_{\hat{x}_0}\to J_{\hat{y}_0}$ 满足
+$$
+\forall x\in I_{\hat{x}_0}\times J_{\hat{y}_0}\triangleq U(x_0),F(x)=F(\hat{x},\hat{y})=0\iff\hat{y}=\psi(\hat{x})
+$$
+
+定义 $\varphi(\hat{x})\triangleq(\hat{x},\psi(\hat{x}))$. 则 $x\in S\iff x=\varphi(\hat{x})$.
+
+从而对 $x_0$ 的邻域 $U_S(x_0)\triangleq U(x_0)\cap S$ ，存在 $m$ 阶光滑映射 $\varphi:I_{\hat{x}_0}\to U_S(x_0)\subset\RR^n$.
+
+且 $\varphi$ 为同胚且 $\mathrm{r}(\varphi'(\hat{x}))\equiv k$.
+
+从而 $\varphi$ 是一个局部图，由此验证了 $S$ 为 $m$ 阶光滑曲面.
+\end{proof}
+
+\begin{example}
+$\RR^n$ 中的 $n-1$ 维球面
+$$
+S^{n-1}=\set{x\in\RR^n:\abs{x}=1}
+$$
+\end{example}
+
+\begin{example}
+$\RR^n$ 中的柱面，其中 $k<n$
+$$
+\set{x|x_1^2+\cdots+x_k^2=1}
+$$
+\end{example}
+
+\begin{example}
+$\RR^n$ 中的二维环面，其中 $a>b>0$.
+
+\img{0.6}{12.1.4.png}
+
+$$
+\begin{cases}
+x=(a+b\sin\psi)\cos\varphi\\
+y=(a+b\sin\psi)\sin\varphi\\
+z=b\cos\psi
+\end{cases}\qquad,\varphi\in[0,2\pi),\psi\in[0,2\pi]
+$$
+\end{example}
+
+\begin{example}
+Möbius 带
+
+\img{0.5}{12.1.5.png}
+\end{example}
+
+\begin{example}
+Klein 瓶
+
+\img{0.7}{12.1.6.png}
+\end{example}

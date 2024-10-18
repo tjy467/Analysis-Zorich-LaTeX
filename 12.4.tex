@@ -1,0 +1,362 @@
+在学完一元积分理论后，作为应用我们知道了如何求光滑曲线的长度，以及光滑旋转体的体积.
+在学完多元积分理论后，我们知道了如何求 Jordan 可测集的体积.
+但目前为止，我们还不知道如何求曲面的面积. 本节我们来讨论这个问题.
+
+\mysubsection{平行多面体的体积}
+
+设 $\xi_1,\cdots,\xi_k$ 是 $\RR^k$ 中的 $k$ 个向量. 则由线性代数知识可知：
+
+由 $\xi_1,\cdots,\xi_k$ 张成的平行多面体的（有向）体积由行列式
+$$
+\det\xi=\det[\xi_1,\cdots,\xi_k]
+$$
+
+给出.
+
+若 $\det\xi\ne 0$ ，其符号恰好对应于标架 $\xi$ 的两种可能定向.
+
+如果我们只关心体积的大小，则其值由 $\abs{\det\xi}$ 给出.
+
+事实上，有一种更对称的方式来表示这个值. 设方阵 $G\triangleq\xi^T\xi$ ，则
+$$
+\abs{\det\xi}=\sqrt{\det\xi^T\xi}=\sqrt{\det G}
+$$
+
+注意到 $G=[\inner{\xi_i,\xi_j}]_{i,j}$.
+
+更为重要的是，这一结论还可以推广到一般情形：
+
+\begin{property}
+    设 $k\le n,\xi_1,\cdots,\xi_k\in\RR^n$.
+
+    则由 $\xi_1,\cdots,\xi_k$ 张成的平行多面体的体积为
+$$
+V(\xi_1,\cdots,\xi_k)=\sqrt{\det\xi^T\xi}=\sqrt{\det[\inner{\xi_i,\xi_j}]_{i,j}}
+$$
+\end{property}
+
+\mysubsection{光滑参数化曲面面积的定义}
+
+设 $S\subset\RR^n$ 为 $k$ 维光滑曲面，且存在参数化 $\varphi:D\to S$.
+
+其中 $D\subset\RR^k$ 为开集，$\varphi\in C^{(1)}(D)$ 且为同胚.
+
+\img{0.8}{12.4.1.png}
+
+设 $t\in D$. 考虑在 $t$ 处由 $h_1e_1,\cdots,h_ke_k$ 张成的 $k$ 维矩形 $I$. 其在映射 $\varphi$ 下变为 $S$ 内的一个曲边多面体.
+
+由微分的几何意义知：当 $h_i$ 很小时，可以用在 $\varphi(t)$ 处的由切向量 $h_1\varphi'(t)e_1,\cdots,h_k\varphi'(t)e_k$ 张成的平行多面体近似替换该曲边多面体.
+
+从而
+$$
+\begin{aligned}
+    V(\varphi(I))\approx &V(h_1\varphi'(t)e_1,\cdots,h_k\varphi'(t)e_k)\\
+    =&h_1\cdots h_k\det\sqrt{[\inner{\partial_i\varphi(t),\partial_j\varphi(t)}]_{i,j}}\\
+    =&\det\sqrt{G(t)}V(I)
+\end{aligned}
+$$
+
+其中 $G(t)\triangleq\varphi'(t)^T\varphi'(t)=[\inner{\partial_i\varphi(t),\partial_j\varphi(t)}]_{i,j}$.
+
+现在设想我们将 $\RR^k$ 分成很小的矩形 $P=\set{I_\alpha}$ ，并考虑那些完全位于 $D$ 中的矩形 $I_\alpha$.
+
+我们用 $\sqrt{\det G(t_\alpha)}$（其中 $t_\alpha$ 为 $I_\alpha$ 的端点）来近似地逼近 $\varphi(I_\alpha)$ 的体积. 从而
+$$
+V(S)\approx\sum_{I_\alpha\subset D}V(\varphi(I_\alpha))\approx\sum_{I_\alpha\subset D}\sqrt{\det G(t_\alpha)}V(I_\alpha)
+$$
+
+当 $P$ 的步长趋近于 $0$ 时
+$$
+\lim_{\lambda(P)\to 0}\sum_{I_\alpha\subset D}\sqrt{\det G(t_\alpha)}V(I_\alpha)=\int_D\sqrt{\det G(t)}\dd t
+$$
+
+基于以上的先验推理，如下的定义就变得很合理了：
+
+\begin{definition}\label{df:area}
+    设 $S$ 为 $k$ 维光滑曲面，且有参数化 $\varphi:D\to S$. 定义 $S$ 的面积（$k$ 维体积）为
+$$
+V_k(S)\triangleq\int_D\sqrt{\det G(t)}\dd t=\int_D\sqrt{\det[\inner{\partial_i\varphi(t),\partial_j\varphi(t)}]_{i,j}}\dd t
+$$
+
+    若右式的极限存在.
+\end{definition}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 可以认为右边的积分是开集 $D$ 上的广义积分.
+        
+        注意到积分函数 $\sqrt{\det G(t)}$ 连续且非负，从而以上的积分要么为有限非负值，要么为 $+\infty$.
+
+        当极限为 $+\infty$ 时，我们称 $S$ 的面积为无穷大.
+
+        \item 当 $k=1$ 时，$S$ 为一条参数化曲线. 设 $D=[a,b]$ ，则以上定义简化为
+$$
+V_1(S)=\int_a^b\sqrt{\inner{\varphi'(t),\varphi'(t)}}\dd t=\int_a^b\abs{\varphi'(t)}\dd t
+$$
+        
+        这一定义与我们之前通过物理意义给出的定义是相同的. 现在，我们得以从几何的角度再次得到这一定义.
+
+        \item 当 $k=n$ 时
+$$
+V_n(S)=\int_D\sqrt{\det \varphi'(t)^T\varphi'(t)}\dd t=\int_D\abs{\det\varphi'(t)}\dd t\xlongequal{u=\varphi(t)}\int_S1\dd u=\mu(S)
+$$
+
+        从而此时的体积 $V_n(S)$ 即为 $S$ 的 Jordan 测度 $\mu(S)$.
+
+        \item 当 $k=2,n=3$ 时，传统上我们记
+$$
+G(t)=\begin{bmatrix}
+    E & F\\
+    F & G
+\end{bmatrix}\implies
+E=\inner{\partial_1\varphi(t),\partial_1\varphi(t)},
+F=\inner{\partial_1\varphi(t),\partial_2\varphi(t)},
+G=\inner{\partial_2\varphi(t),\partial_2\varphi(t)}
+$$
+
+        此时，三维空间中的二维曲面面积为
+        \begin{property}
+$$
+V_2(S)=\iint_D\sqrt{EG-F^2}\dd t_1\dd t_2
+$$
+        \end{property}
+
+        当 $S$ 是 $f:D\to\RR$ 的图像时有
+$$
+\begin{aligned}
+    \varphi(t_1,t_2)&=(t_1,t_2,f(t_1,t_2))\\
+    \varphi'(t)&=\begin{bmatrix}
+        1 & 0\\
+        0 & 1\\
+        f'_x(t) & f'_y(t)
+    \end{bmatrix}\implies
+    E=1+(f'_x)^2,
+    F=f'_xf'_y,
+    G=1+(f'_y)^2\\
+    EG-F^2&=1+(f'_x)^2+(f'_y)^2
+\end{aligned}
+$$
+
+        从而我们得到
+        \begin{property}
+$$
+V_2(S)=\iint_D\sqrt{1+(f'_x)^2+(f'_y)^2}\dd x\dd y
+$$
+        \end{property}
+
+        \item 注意到我们对曲面面积的定义是在给定的参数化 $\varphi$ 下定义的. 一个自然的问题是：该定义是否不依赖于参数化的选取？答案是肯定的.
+    \end{enumerate}
+\end{hint}
+
+\begin{property}
+    可参数化曲面面积的定义不依赖于参数化的选取.
+\end{property}
+\begin{proof}
+    设 $S\subset\RR^n$ 是一个 $k$ 维可参数化光滑曲面.
+
+    设 $\varphi:D\to S,\psi:\widetilde{D}\to S$ 是 $S$ 的两个参数化. 我们有
+$$
+\begin{aligned}
+    V_k(S)&=\int_D\sqrt{\det{G(t)}}\dd t\\
+    \widetilde{V}_k(S)&=\int_{\widetilde{D}}\sqrt{\det{\widetilde{G}(t)}}\dd t
+\end{aligned}
+$$
+
+    注意到 $\Phi=\psi^{-1}\circ\varphi:D\to\widetilde{D}$ 为微分同胚.
+
+    \img{0.6}{12.4.2.png}
+
+    由 $\varphi=\psi\circ\Phi$ 知 $\varphi'(t)=\psi'(\Phi(t))\Phi'(t)$. 从而
+$$
+\begin{aligned}
+    G(t)&=\varphi'(t)^T\varphi'(t)\\
+    &=\Phi'(t)^T\psi'(\Phi(t))^T\psi'(\Phi(t))\Phi'(t)\\
+    &=\Phi'(t)^T\widetilde{G}(\Phi(t))\Phi'(t)
+\end{aligned}
+$$
+
+从而由变量替换公式可得
+$$
+\begin{aligned}
+\widetilde{V}_k(S)&=\int_{\widetilde{D}}\sqrt{\det\widetilde{G}(t)}\dd t\\
+&=\int_D\sqrt{\det\widetilde{G}(\Phi(t))}\abs{\det\Phi'(t)}\dd t\\
+&=\int_D\sqrt{\det\widetilde{G}(\Phi(t))}\sqrt{\det\Phi'(t)^T\Phi'(t)}\dd t\\
+&=\int_D\sqrt{\det G(t)}\dd t\\
+&=V_k(S)
+\end{aligned}
+$$
+\end{proof}
+
+\mysubsection{光滑曲面面积的定义}
+
+接下来我们讨论如何定义一般光滑曲面的面积.
+受可参数化曲面面积定义的启发，此时最自然的方法是：将 $S$ 分割成一些互不相交的片，使得每个片可参数化，然后再将它们的面积相加.
+但在技术上，这涉及到是否与分割方式有关，是否带边等问题. 所以我们先来做一些准备.
+
+\mysubsubsection{Lebesgue 意义下的零面积集}
+
+\begin{definition}
+    设 $N\subset\RR^n$. 称 $N$ 为 Lebesgue 意义下的 $k$ 维零面积集，若 $\forall\eps>0$ ，存在至多可数个 $k$ 维可参数化光滑曲面 $\set{S_i}$ 使得
+    \begin{enumerate}
+        \item $\displaystyle N\subset\bigcup_i S_i$
+        \item $\displaystyle \sum_{i}V_k(S_i)<\eps$
+    \end{enumerate}
+
+    我们将其简称为 L--零 $k$ 维面积集.
+\end{definition}
+
+直观来说，这样的集合在 $k$ 维面积的意义下是可忽略的.
+
+我们也使用记号 $\text{L--}V_k(N)=0$.
+
+与之前讨论过的 Lebesgue 零测集的性质类似，我们也有
+
+\begin{property}
+    \begin{enumerate}
+        \item 若 $\forall i,\text{L--}V_k(N_i)=0$ ，则 $\displaystyle\text{L--}V_k\left(\bigcup_iN_i\right)=0$.
+        
+        \item 若 $\text{L--}V_k(N)=0$ ，则对 $N'\subset N$ 有 $\text{L--}V_k(N')=0$.
+        
+        \item 若 $N$ 为至多可数个 $\le k-1$ 维光滑曲面的并，则 $\text{L--}V_k(N)=0$,
+    \end{enumerate}
+\end{property}
+
+特别的，对于一个 $k-1$ 维分片光滑曲面 $S$ 有 $\text{L--}V_k(S)=0$.
+
+\mysubsubsection{一般光滑曲面面积的定义}
+
+如下的观察对于定义面积很重要：
+
+\begin{lemma}
+    设 $S$ 为 $k$ 维光滑可参数化曲面，$\varphi:D\to S$ 是一个参数化.
+
+    若 $\widetilde{S}\subset S$ 是一个 $l$ 维分片光滑曲面，$l<k$ ，则 $\varphi^{-1}(\widetilde{S})\subset D$ 是一个 $\RR^k$ 中的 Lebesgue 零测集.
+\end{lemma}
+\begin{proof}
+    首先注意到 $\widetilde{S}=\bigcup_i\widetilde{S}_i$ ，其中每个 $\widetilde{S}_i$ 均为光滑曲面且维数 $l_i\le l$.
+
+    再注意到，对每个 $\widetilde{S}_i$ ，可以将 $\varphi^{-1}(\widetilde{S}_i)$ 表示为一个 $l_i$ 维区间的图像（光滑映射）.
+
+    从而有 $\varphi^{-1}(\widetilde{S}_i)$ 为 Lebesgue 零测集. 具体细节留作习题.
+\end{proof}
+
+\img{0.5}{12.4.3.png}
+
+现在我们可以给出一般曲面面积的定义了.
+
+\begin{definition}
+    设 $S\subset\RR^n$ 为 $k$ 维光滑曲面.
+
+    若在去掉至多可数个 $\le k-1$ 维的光滑曲面 $\set{N_i|i\in I}$ 后有
+    $$
+    S\setminus\bigsqcup_iN_i=\bigsqcup_jS_j
+    $$
+
+    其中 $\set{S_j}$ 为至多可数个 $k$ 维光滑可参数化曲面. 则定义
+    $$
+    V_k(S)\triangleq\sum_jV_k(S_j)
+    $$
+\end{definition}
+\begin{hint}
+    当然，为了使这个定义有意义，我们需要说明：
+\end{hint}
+
+\begin{property}
+    以上定义中的分解 $\set{N_i},\set{S_j}$ 存在.
+\end{property}
+
+另一方面，我们需要验证曲面面积的定义不依赖于以上分解的选取.
+
+为此，我们首先需要说明：将可参数化曲面进一步划分保持总面积不变.
+
+\begin{lemma}
+    设 $S$ 为 $k$ 维可参数化曲面，且存在至多可数个 $\le k-1$ 维光滑曲面 $\set{N_i}$ 使得
+$$
+S\setminus\bigsqcup_i N_i=\bigsqcup_jS_j
+$$
+
+    其中 $\set{S_j}$ 为至多可数个 $k$ 维可参数化光滑曲面. 则有
+$$
+V_k(S)=\sum_jV_k(S_j)
+$$
+\end{lemma}
+\begin{proof}
+    设 $\varphi:D\to S$ 为 $S$ 的参数化.
+
+    记 $D_j=\varphi^{-1}(S_j)$. 则 $\varphi:D_j\to S_j$ 为 $S_j$ 的参数化.
+
+    \img{0.5}{12.4.4.png}
+
+    记 $N=\bigcup\limits_iN_i$. 则我们已经知道
+$$
+\varphi^{-1}(N)=D\setminus\bigsqcup_jD_j
+$$
+
+    为 $\RR^k$ 中的 Lebesgue 零测集. 从而
+
+$$
+\begin{aligned}
+    V_k(S)&=\int_D\sqrt{\det G(t)}\dd t=\int_{D\setminus\varphi^{-1}(N)}\sqrt{\det G(t)}\dd t\\
+    &=\int_{\bigcup\limits_jD_j}\sqrt{\det G(t)}\dd t=\sum_j\int_{D_j}\sqrt{\det G(t)}\dd t\\
+    &=\sum_jV_k(S_j)
+\end{aligned}
+$$
+\end{proof}
+
+现在我们可以验证
+
+\begin{property}
+    $S$ 面积的定义与分解的方式无关.
+\end{property}
+\begin{proof}
+    设 $\set{N_i},\set{S_j}$ 与 $\set{\widetilde{N}_i},\set{\widetilde{S}_j}$ 是 $S$ 的两个分解.
+
+    令 $\widetilde{N}=\bigcup\limits_i\widetilde{N}_i$. 我们有
+$$
+S=\widetilde{N}\sqcup\left(\bigsqcup_{j'}\widetilde{S}_{j'}\right)
+$$
+
+    于是
+$$
+S_j=(S_j\cap\widetilde{N})\sqcup\left(\bigsqcup_{j'}(S_j\cap\widetilde{S}_{j'})\right)
+$$
+
+    应用前面的引理，可以得到
+$$
+V_k(S_j)=\sum_{j'}V_k(S_j\cap\widetilde{S}_{j'})
+$$
+
+    \img{0.8}{12.4.5.png}
+
+    进而有
+$$
+V_k(S)=\sum_jV_k(S_j)=\sum_j\sum_{j'}V_k(S_j\cap\widetilde{S}_{j'})
+$$
+
+    对称地有
+$$
+\widetilde{V}_k(S)=\sum_{j'}V_k(\widetilde{S}_{j'})=\sum_{j'}\sum_jV_k(\widetilde{S}_{j'}\cap S_j)
+$$
+
+    即证 $V_k(S)=\widetilde{V}_k(S)$.
+\end{proof}
+
+至此，我们完成了光滑曲面面积的定义.
+
+\mysubsubsection{分片光滑曲面面积的定义}
+
+\begin{definition}
+    设 $S$ 为 $k$ 维分片光滑曲面. 已知存在至多可数个 $\le k-1$ 维分片光滑曲面 $\set{N_i}$ 使得
+$$
+S\setminus\bigsqcup_iN_i=\bigsqcup_jS_j
+$$
+
+    其中 $\set{S_j}$ 为至多可数个 $k$ 维光滑曲面. 则我们定义 $S$ 的面积为
+$$
+V_k(S)\triangleq\sum_jV_k(S_j)
+$$
+\end{definition}
+
+\begin{property}
+    以上的定义不依赖于分解 $\set{N_i},\set{S_j}$ 的选取.
+\end{property}

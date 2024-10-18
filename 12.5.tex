@@ -1,0 +1,663 @@
+简单来说，微分形式是定义在开集或曲面上，取值为交错线性型的光滑映射.
+本节我们将给出其基本定义以及基本性质. 下一章我们将考虑微分形式在曲面上的积分.
+
+\mysubsection{微分形式的预备定义}
+
+\mysubsubsection{多重线性型及其张量积}
+
+\begin{definition}
+    设 $V$ 为实线性空间，$F:V^p\to\RR,p\in\mathbb{N}$.
+    
+    若 $F$ 满足对每个分量 $v_i$ 均线性，则称 $F$ 是一个 $p$ 重线性型.
+\end{definition}
+
+设 $\set{e_1,\cdots,e_n}$ 是 $V$ 的一个基. 则对任意 $(v_1,\cdots,v_p)\in V$ 有
+$$
+F(v_1,\cdots,v_p)=F\left(\sum_{i=1}^na_{1i}e_i,\cdots,\sum_{i=1}^na_{pi}e_i\right)=\sum_{1\le i_1,\cdots,i_p\le n}a_{1i_1}\cdots a_{pi_p}F(e_{i_1},\cdots,e_{i_p})
+$$
+
+从而 $F$ 由 $\set{F(e_{i_1},\cdots,e_{i_p})}$ 唯一确定.
+
+我们用 $\mathscr{F}^p(V)$ 表示 $V$ 上所有 $p$ 重线性型的全体，则 $\mathscr{F}^p(V)$ 同构于 $\RR^{n^p}$.
+
+\begin{definition}
+    设 $F_1:V^{p_1}\to\RR,F_2:V^{p_2}\to\RR$ 均为线性型.
+
+    定义 $F_1\otimes F_2:V^{p_1+p_2}\to\RR$ 为
+$$
+F_1\otimes F_2(v_1,\cdots,v_{p_1},w_1,\cdots,w_{p_2})=F_1(v_1,\cdots,v_{p_1})F_2(w_1,\cdots,w_{p_2})
+$$
+
+    则显然有 $F_1\otimes F_2$ 为 $V$ 上的 $p_1+p_2$ 重线性型.
+
+    我们称 $F_1\otimes F_2$ 为 $F_1$ 和 $F_2$ 的张量积.
+\end{definition}
+
+\mysubsubsection{交错线性型以及线性型的交错化}
+
+\begin{definition}
+    设 $F:V^p\to\RR$ 是一个 $p$ 重线性型. 若其满足
+$$
+F(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_p)=-F(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_p),\forall i\ne j
+$$
+
+    则称 $F$ 是一个 $p$ 重交错型（反对称型，斜对称型）.
+\end{definition}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 从定义来看，我们至少需要要求 $p\ge 2$. 但按照惯例，我们也称一重线性型（即线性泛函）为一重交错线性型.
+        
+        \item 我们所熟知的一个例子是
+$$
+\begin{aligned}
+    \det:(\RR^n)^n&\to\RR\\
+    (a_1,\cdots,a_n)&\mapsto\det[a_1,\cdots,a_n]=\det A
+\end{aligned}
+$$
+    \end{enumerate}
+\end{hint}
+
+我们用 $\mathscr{A}^p(V)$ 表示 $V$ 上所有 $p$ 重交错线性型的全体. 则显然有 $\mathscr{A}^p(V)\subsetneqq\mathscr{F}^p(V)$.
+
+以上，我们考虑一种将线性型交错化的方法：
+
+\begin{definition}
+   设 $F\in\mathscr{F}^p(V)$. 定义 $A(F):V^p\to\RR$ 为
+$$
+A(F)(v_1,\cdots,v_p)\triangleq\frac{1}{p!}\sum_{\sigma\in S_p}(-1)^{\tau_\sigma}F(v_{\sigma_1},\cdots,v_{\sigma_p})
+$$
+
+    其中 $S_p$ 为 $p$ 阶交换群，$\sigma$ 为 $1,\cdots,p$ 的一个置换，$\tau_\sigma$ 为 $\sigma$ 的逆序数.
+\end{definition}
+
+\begin{property}
+    \begin{enumerate}
+        \item 若 $F\in\mathscr{F}^p(V)$ ，则 $A(F)\in\mathscr{A}^p(V)$.
+        
+        \item 若 $F\in\mathscr{A}^p(V)$ ，则 $A(F)=F$.
+    \end{enumerate}
+\end{property}
+
+从而 $A:\mathscr{F}^p(V)\to\mathscr{A}^p(V)$ 为满射，且 $A|_{\mathscr{A}^p(V)}=\mathrm{id}_{\mathscr{A}^p(V)}$.
+
+\begin{example}
+    在 $\RR^n$ 中，$\dd x_i$ 与 $\dd x_j$ 均为线性泛函（一重线性型），则 $\dd x_i\otimes\dd x_j\in\mathscr{F}^2(\RR^n)$.
+$$
+\dd x_i\otimes\dd x_j(v,w)=\dd x_i(v)\dd x_j(w)=v_iw_j
+$$
+
+    由此进一步计算得到
+$$
+A(\dd x_i\otimes\dd x_j)(v,w)=\frac{1}{2!}\begin{vmatrix}
+    v_i & w_i\\
+    v_j & w_j
+\end{vmatrix}
+$$
+
+    一般的，若 $1\le i_1,\cdots,i_k\le n$ ，则
+$$
+A(\dd x_{i_1}\otimes\cdots\otimes\dd x_{i_k})(v_1,\cdots,v_k)=\frac{1}{k!}\begin{vmatrix}
+    v_{i_1,1} & \cdots & v_{i_1,k}\\
+    \vdots & \ddots & \vdots\\
+    v_{i_k,1} & \cdots & v_{i_k,k}
+\end{vmatrix}
+$$
+
+    其中 $v_i=\begin{pmatrix}v_{1i}\\v_{2i}\\\vdots\\v_{ni}\end{pmatrix},i=1,\cdots,n$. 后同.
+\end{example}
+
+\mysubsubsection{多重线性型的外积}
+
+设 $F\in\mathscr{A}^p(V),G\in\mathscr{A}^q(V)$. 则通常来讲 $F\otimes Q$ 不一定是 $p+q$ 重交错型. 以下介绍一种乘积的方式，使其保持交错性.
+
+\begin{definition}
+    设 $F\in\mathscr{A}^p(V),G\in\mathscr{A}^q(V)$. 定义
+$$
+F\wedge G\triangleq\frac{(p+q)!}{p!q!}A(F\otimes G)\in\mathscr{A}^{p+q}(V)
+$$
+\end{definition}
+
+我们称 $F\wedge G$ 为 $F$ 与 $G$ 的外积. 从而有
+$$
+\wedge:\mathscr{A}^p(V)\times\mathscr{A}^q(V)\to\mathscr{A}^{p+q}(V)
+$$
+
+外积 $\wedge$ 有以下一些性质：
+
+\begin{property}
+    \begin{enumerate}
+        \item 结合律：若 $F_1\in\mathscr{A}^p(V),F_2\in\mathscr{A}^q(V),F_3\in\mathscr{A}^r(V)$ ，则
+$$
+F_1\wedge(F_2\wedge F_3)=(F_1\wedge F_2)\wedge F_3
+$$
+
+        \item 分配律：若 $F_1,F_2\in\mathscr{A}^p(V),F_3\in\mathscr{A}^q(V)$ ，则
+$$
+(F_1+F_2)\wedge F_3=F_1\wedge F_3+F_2\wedge F_3
+$$
+
+        \item 反交换律：若 $F_1\in\mathscr{A}^p(V),F_2\in\mathscr{A}^q(V)$ ，则
+$$
+F_1\wedge F_2=(-1)^{pq}F_2\wedge F_1
+$$
+
+        \item 若 $l_1,\cdots,l_p\in\mathscr{A}^1(V)=\mathscr{F}^1(V)$ ，则
+$$
+l_1\wedge\cdots\wedge l_p(v_1,\cdots,v_p)=\begin{vmatrix}
+    l_1(v_1) & \cdots & l_1(v_p)\\
+    \vdots & \ddots & \vdots\\
+    l_p(v_1) & \cdots & l_p(v_p)
+\end{vmatrix}
+$$
+
+        \item 特别的，对 $V=\RR^n,l_j=\dd x_{i_j}$ 有
+$$
+\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}(v_1,\cdots,v_p)=\begin{vmatrix}
+    v_{i_1,1} & \cdots & v_{i_1,p}\\
+    \vdots & \ddots & \vdots\\
+    v_{i_p,1} & \cdots & v_{i_p,p}
+\end{vmatrix}
+$$
+
+        即将 $v_1,\cdots,v_p$ 的第 $i_1,\cdots,i_p$ 行取出形成的方阵的行列式.
+    \end{enumerate}
+\end{property}
+
+\mysubsubsection{微分形式的预备定义}
+
+有了以上的准备，我们来给出微分形式的第一个定义.
+
+\begin{definition}
+    设 $D\subset\RR^n$ 为开集，设 $\omega:D\to\mathscr{A}^p(\RR^n)$ 是一个映射. 则称 $\omega$ 是 $D$ 上的一个 $p$--微分形式.
+\end{definition}
+
+简而言之：一个 $D$ 上的 $p$ 微分形式，就是在每点 $x\in D$ 处取定一个 $V=\RR^n=T_xD$ 上的 $p$ 重交错型.
+
+\setcounter{example}{0}
+\begin{example}
+    设 $f\in C^{(1)}(D;\RR)$. 则
+$$
+\begin{aligned}
+    \dd f:D&\to\mathscr{A}^1(\RR^n)\\
+    x&\mapsto \dd f(x)=\pard{f}{x_1}\dd x_1+\cdots+\pard{f}{x_n}\dd x_n
+\end{aligned}
+$$
+
+    是一个 $1$--微分形式.
+\end{example}
+
+\begin{example}
+    设 $\varphi:D\to\RR$ 连续. 定义 $\omega:D\to\mathscr{A}^n(\RR^n)$ 为
+$$
+\omega(x)(\xi_1,\cdots,\xi_n)\triangleq\varphi(x)\det[\xi_1,\cdots,\xi_n]
+$$
+
+    即 $\omega(x)=\varphi(x)\dd x_1\wedge\cdots\wedge\dd x_n$.
+
+    则 $\omega$ 是 $D$ 上的 $n$--微分形式.
+\end{example}
+
+\begin{example}
+    设 $F:D\to\RR^n$ 连续，则可以定义
+$$
+\omega_F^1:D\to\mathscr{A}^1(\RR^n),\omega_F^1(\xi)\triangleq\inner{F(x),\xi}
+$$
+
+    若将 $F$ 解释为 $D$ 上的力场，则 $1$--微分形式 $\omega_F^1$ 刻画了沿 $\xi$ 方向做的功. 因此我们称 $\omega_F^1$ 是由力场决定的功形式.
+\end{example}
+
+\img{0.6}{12.4.6.png}
+
+\begin{example}
+    设 $V:D\to\RR^n$ 连续，则可以定义 $\omega_V^{n-1}:D\to\mathscr{A}^{n-1}(\RR^n)$ 为
+$$
+\omega_V^{n-1}(x)(\xi_2,\cdots,\xi_n)\triangleq\det[V(x),\xi_2,\cdots,\xi_n]
+$$
+
+    若将 $V$ 解释成一个稳定流，而 $V(x)$ 表示了在点 $x$ 处的流速，则 $\omega_V^{n-1}(\xi_2,\cdots,\xi_n)$ 的物理意义为：
+    通过由 $\xi_2,\cdots,\xi_n$ 张成的 $n-1$ 维平行多面体的流量.
+    从而此时我们也称 $\omega_V^{n-1}$ 是由流速场 $V$ 所决定的流形式.
+\end{example}
+
+\begin{example}
+    设 $D\subset\RR^n$ 为开集，设 $1\le p\le n$ ，则
+$$
+\omega(x)\triangleq\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1\cdots i_p}(x)\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}
+$$
+
+    是 $D$ 上的一个 $p$--微分形式. 其中 $a_{i_1\cdots i_p}$ 为 $D$ 上的连续函数.
+
+    事实上，我们很快就将看到，所有的 $p$--微分形式都具有如上的形式.
+\end{example}
+
+\mysubsection{微分形式的坐标表达式}
+
+\mysubsubsection{多重交错线性型的坐标形式}
+
+设 $V$ 为 $n$ 维实线性空间. 设 $\set{e_1,\cdots,e_n}$ 是 $V$ 的一个基.
+
+则 $\set{e^1=e_1^*,\cdots,e^n=e_n^*}$ 是 $V^*$ 的一组基.（即对任意 $i,j$ 有 $e^i(e_j)=\delta_{ij}$.）
+
+\begin{property}
+    \begin{enumerate}
+        \item 若 $1\le p\le n$ ，则 $\set{e^{i_1}\wedge\cdots\wedge e^{i_p}|1\le i_1<\cdots<i_p\le n}$ 是 $\mathscr{A}^p(V)$ 的一组基. 从而 $\forall\omega\in\mathscr{A}^p(V)$ 有
+$$
+\omega=\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1\cdots i_p}e^{i_1}\wedge\cdots\wedge e^{i_p}
+$$
+
+        \item 若 $p>n$ ，则 $\mathscr{A}^p(V)=\set{0}$.
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    设 $\omega\in\mathscr{A}^p(V)$. 则有
+$$
+\omega(v_1,\cdots,v_p)=\omega\left(\sum_{j=1}^nv_{j1}e_j,\cdots,\sum_{j=1}^nv_{jp}e_j\right)=\sum_{1\le j_1,\cdots,j_p\le n}v_{j_1,1}\cdots v_{j_p,p}\omega(e_{j_1},\cdots,e_{j_p})
+$$
+
+    故当 $p>n$ 时有 $\omega=0$.
+    
+    设 $1\le p\le n$. 由 $\omega\in\mathscr{A}^p(V)$ 可得
+$$
+\begin{aligned}
+\omega(v_1,\cdots,v_p)&=\sum_{1\le j_1<\cdots<j_p\le n}\sum_{\sigma\in S_p}v_{j_{\sigma_1},1}\cdots v_{j_{\sigma_p},p}(-1)^{\tau_\sigma}\omega(e_{j_1},\cdots,e_{j_p})\\
+&=\sum_{1\le j_1<\cdots<j_p\le n}\omega(e_{j_1},\cdots,e_{j_p})\begin{vmatrix}
+    v_{j_1,1} & \cdots & v_{j_1,p}\\
+    \vdots & \ddots & \vdots\\
+    v_{j_p,1} & \cdots & v_{j_p,p}
+\end{vmatrix}\\
+&=\sum_{1\le j_1<\cdots<j_p\le n}a_{j_1\cdots j_p}e^{j_1}\wedge\cdots\wedge e^{j_p}(v_1,\cdots,v_p)
+\end{aligned}
+$$
+
+    其中 $a_{j_1\cdots j_p}=\omega(e_{j_1},\cdots,e_{j_p})$. 这说明
+$$
+\omega=\sum_{1\le j_1<\cdots<j_p\le n}a_{j_1\cdots j_p}e^{j_1}\wedge\cdots\wedge e^{j_p}
+$$
+
+    又 $e^{j_1}\wedge\cdots\wedge e^{j_p}(e_{i_1},\cdots,e_{i_p})=\delta_{IJ}$ ，其中 $i_1\le\cdots\le i_p,I=(i_1,\cdots,i_p),J=(j_1,\cdots,j_p)$.
+
+    故 $\set{e^{j_1}\wedge\cdots\wedge e^{j_p}|1\le j_1<\cdots<j_p\le n}$ 线性无关.
+
+    综上，$\set{e^{j_1}\wedge\cdots\wedge e^{j_p}|1\le j_1<\cdots<j_p\le n}$ 是 $\mathscr{A}^p(V)$ 的一个基.
+\end{proof}
+
+作为推论，取 $V=\RR^n$ 以及 $V$ 的标准基 $\set{e_1,\cdots,e_n}$ ，有
+
+\begin{inference}
+    \begin{enumerate}
+        \item 若 $1\le p\le n$ ，则 $\set{\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}|1\le i_1<\cdots<i_p\le n}$ 是 $\mathscr{A}^p(\RR^n)$ 的一个基. 从而 $\forall\omega\in\mathscr{A}^p(\RR^n)$ 有
+$$
+\omega=\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1\cdots i_p}\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}
+$$
+
+        \item 若 $p>n$ ，则 $\mathscr{A}^p(V)=\set{0}$.
+    \end{enumerate}
+\end{inference}
+
+\mysubsubsection{$p$--微分形式的坐标表达式}
+
+根据刚才证明的结论可知：设 $1\le p\le n$ ，若 $\omega:D\to\mathscr{A}^p(\RR^n)$ 是一个 $D$ 上的 $p$--微分形式，则对每个 $1\le i_1<\cdots<i_p\le n$ 存在函数 $a_{i_1\cdots i_p}:D\to\RR$ 使得
+$$
+\omega=\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1\cdots i_p}(x)\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}
+$$
+
+我们称上式为 $\omega$ 的坐标形式.
+
+作为例子，我们分别来看看之前几个例子的坐标形式.
+
+\begin{example}[']
+    设 $f\in C^{(1)}(D;\RR)$. 则
+$$
+\dd f(x)=\sum_{i=1}^n\pard{f}{x_i}\dd x_i
+$$
+\end{example}
+
+\begin{example}[']
+    设 $\varphi:D\to\RR$ 连续. 则由 $\varphi$ 定义的 $n$--形式
+$$
+\omega(x)=\varphi(x)\dd x_1\wedge\cdots\wedge\dd x_n
+$$
+\end{example}
+
+\begin{example}[']
+    设 $F:D\to\RR^n$ 为连续力场. 则
+$$
+\omega_F^1(x)=\sum_{i=1}^nF_i(x)\dd x_i
+$$
+\end{example}
+
+\begin{example}[']
+    设 $V:D\to\RR^n$ 为连续流速场，则
+$$
+\omega_V^{n-1}(x)=\sum_{i=1}^nV_i(x)(-1)^{i+1}\dd x_1\wedge\cdots\wedge\widehat{\dd x_i}\wedge\cdots\wedge\dd x_n
+$$
+
+    其中，微分上的记号 $\widehat{\quad}$ 表示在这一项把该微分舍去.
+\end{example}
+
+\mysubsection{微分形式的正式定义及其外微分}
+
+根据前两小节的讨论，一个定义在 $D\subset\RR^n$ 上的微分形式形如
+$$
+w(x)=\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1\cdots i_p}(x)\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}
+$$
+
+其中 $a_{i_1\cdots i_p}:D\to\RR$ 是一个函数. 但在分析中，有意义的微分形式必须是光滑的，从而我们做出如下的定义：
+
+\begin{definition}
+    称如上定义的 $\omega$ 是一个 $m$ 阶光滑的 $p$--形式，若 $\forall 1\le i_1<\cdots<i_p\le n$ 有 $a_{i_1\cdots i_p}\in C^{(m)}(D;\RR)$.
+
+    我们用 $\Omega^{p,m}(D)$ 表示 $D$ 上所有 $m$ 阶光滑的 $p$--形式全体.
+
+    特别的，我们用 $\Omega^p(D)$ 表示 $\Omega^{p,\infty}(D)$.
+\end{definition}
+
+我们也采纳如下的定义：
+
+\begin{definition}
+    若 $f\in C^{(m)}(D;\RR)$ ，则称 $f$ 是一个 $m$ 阶光滑的 $0$--形式.
+
+    我们用 $\Omega^{0,m}(D)$ 表示 $D$ 上所有 $m$ 阶光滑的 $0$--形式全体. 记 $\Omega^0(D)=\Omega^{0,m}(D)$.
+\end{definition}
+
+\begin{hint}
+    当然我们已经知道，若 $p>n$ ，则 $\Omega^p(D)=\set{0}$.
+\end{hint}
+
+有了如上分析中微分形式的定义，我们就可以来定义微分形式的外微分了.
+
+\begin{definition}
+    设 $\omega\in\Omega^{p,m}(D),m\ge 1$.
+$$
+\omega(x)=\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1\cdots i_p}(x)\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}
+$$
+
+    我们定义 $\omega$ 的外微分 $\dd\omega$ 为
+$$
+\begin{aligned}
+    \dd\omega(x)&\triangleq\sum_{1\le i_1<\cdots<i_p\le n}\dd a_{i_1\cdots i_p}(x)\wedge\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}\\
+    &=\sum_{1\le i_1<\cdots<i_p\le n}\sum_{j=1}^n\pard{a_{i_1\cdots i_p}(x)}{x_j}\dd x_j\wedge\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}
+\end{aligned}
+$$
+\end{definition}
+
+由定义可见：外微分运算 $\dd$ 是从 $\Omega^{p,m}(D)$ 到 $\Omega^{p+1,m-1}(D)$ 的映射.
+
+特别的，$\dd:\Omega^p(D)\to\Omega^{p+1}(D)$.
+
+以下我们来计算几个以前的例子.
+
+\begin{example}
+    若 $f\in\Omega^0(D)$ ，则
+$$
+\dd f(x)=\sum_{j=1}^n\pard{f}{x_j}(x)\dd x_j\in\Omega^1(D)
+$$
+\end{example}
+
+\begin{example}
+    设 $D\subset\RR^3$ 为开集，$\omega\in\Omega^1(D)$.
+
+    设 $\omega(x,y,z)=P(x,y,z)\dd x+Q(x,y,z)\dd y+R(x,y,z)\dd z$. 则
+$$
+\begin{aligned}
+\dd\omega&=\left(\pard{P}{y}\dd y+\pard{P}{z}\dd z\right)\wedge\dd x+\left(\pard{Q}{x}\dd x+\pard{Q}{z}\dd z\right)\wedge\dd y+\left(\pard{R}{x}\dd x+\pard{R}{y}\dd y\right)\wedge\dd z\\
+&=\left(\pard{R}{y}-\pard{Q}{z}\right)\dd y\wedge\dd z+\left(\pard{P}{z}-\pard{R}{x}\right)\dd z\wedge\dd x+\left(\pard{Q}{x}-\pard{P}{y}\right)\dd x\wedge\dd y
+\end{aligned}
+$$
+\end{example}
+
+\begin{example}
+    设 $D\subset\RR^3$ 为开集，$\omega\in\Omega^2(D)$.
+
+    设 $\omega(x,y,z)=P(x,y,z)\dd y\wedge\dd z+Q(x,y,z)\dd z\wedge\dd x+R(x,y,z)\dd x\wedge\dd y$. 则
+$$
+\dd\omega=\left(\pard{P}{x}+\pard{Q}{y}+\pard{R}{z}\right)\dd x\wedge\dd y\wedge\dd z
+$$
+\end{example}
+
+以下我们将解释外微分如何与物理中常见的几个运算自然地联系起来.
+
+\setcounter{example}{0}
+\begin{example}[ 梯度]
+    若 $D\subset\RR^3$ 为开集，$f:D\to\RR$ 光滑，则
+$$
+\nabla f\triangleq\left(\pard{f}{x},\pard{f}{y},\pard{f}{z}\right)
+$$
+
+    从而
+$$
+\dd f=\pard{f}{x}\dd x+\pard{f}{y}\dd y+\pard{f}{z}\dd z=\omega_{\nabla F}^1
+$$
+
+    即 $0$-形式的外微分是由其梯度决定的 $1$-形式.
+\end{example}
+
+\begin{example}[ 旋度]
+    若 $D\subset\RR^3$ 为开集，$F:D\to\RR^3$ 光滑，$F=(P,Q,R)$ ，则
+$$
+\begin{aligned}
+\curl F&=\begin{vmatrix}
+    \hat{i} & \hat{j} & \hat{k}\\
+    \pard{}{x} & \pard{}{y} & \pard{}{z}\\
+    P & Q & R
+\end{vmatrix}\\
+&=\left(\pard{R}{y}-\pard{Q}{z},\pard{P}{z}-\pard{R}{x},\pard{Q}{x}-\pard{P}{y}\right)
+\end{aligned}
+$$
+
+    形式上我们引入记号 $\nabla=\left(\pard{}{x},\pard{}{y},\pard{}{z}\right)$. 则有
+$$
+\curl F=\nabla\times F
+$$
+
+    我们有
+$$
+\begin{aligned}
+\omega_F^1&=P\dd x+Q\dd y+R\dd z\\
+\dd\omega_F^1&=\left(\pard{P}{x}+\pard{Q}{y}+\pard{R}{z}\right)\dd x\wedge\dd y\wedge\dd z\\
+&=\omega_{\curl F}^2
+\end{aligned}
+$$
+
+    即 $1$-形式的外微分是由其旋度决定的 $2$-形式.
+\end{example}
+
+\begin{example}[ 散度]
+    设 $D\subset\RR^3$ 为开集，$F:D\to\RR^3$ 光滑，$F=(P,Q,R)$，则
+$$
+\ddiv F=\pard{P}{x}+\pard{Q}{y}+\pard{Q}{z}=\nabla\dot F
+$$
+
+    从而
+$$
+\begin{aligned}
+    \omega_{F}^2&=P\dd y\wedge\dd z+Q\dd z\wedge\dd x+R\dd x\wedge\dd y\\
+    \dd\omega_F^2&=\left(\pard{P}{x}+\pard{Q}{y}+\pard{R}{z}\right)\dd x\wedge\dd y\wedge\dd z\\
+    &=\omega_{\ddiv F}^3
+\end{aligned}
+$$
+
+    即 $2$-形式的外微分是由其散度决定的 $3$-形式.
+\end{example}
+
+\mysubsection{向量与形式在映射下的转移}
+
+在下一章的计算中，我们需要经常将一个在开集上定义的微分形式通过一个映射转移成另一个开集上的微分形式. 本节我们来详细讨论如何做这种转移.
+
+设 $\varphi:D\to G$ 是从开集 $D\subset\RR^m$ 到开集 $G\subset\RR^n$ 的 $C^{(\infty)}$ 光滑映射.
+
+设 $f\in\Omega^0(G)$ ，则我们可以用 $\varphi$ 诱导一个 $D$ 上的光滑映射 $\varphi^*f$ ，其定义为
+$$
+\varphi^*f\triangleq f\circ\varphi
+$$
+
+\img{0.5}{12.5.1.png}
+
+即我们定义了：
+$$
+\varphi^*:\Omega^0(G)\to\Omega^0(D),f\mapsto\varphi^*f
+$$
+
+下面我们来说明：这种简单的作用可以被自然地推广到微分形式.
+
+设 $\varphi:D\to G$ 同上. 设 $\omega\in\Omega^p(G)$.
+
+我们希望使用 $\varphi$ 将 $\omega$ 转移到 $D$ 上成为 $U$ 上的一个微分形式.
+
+为此我们来逐点地定义该微分形式 $\varphi^*\omega$ 如下
+$$
+(\varphi^*\omega)(t)(\xi_1,\cdots,\xi_p)\triangleq\omega(\varphi(t))(\varphi'(t)\xi_1,\cdots,\varphi'(t)\xi_p),\forall t\in D
+$$
+
+\img{0.5}{12.5.2.png}
+
+由 $\varphi'(t)$ 为线性映射且 $\omega$ 为交错型知确实有 $(\varphi^*\omega)(t)\in\mathscr{A}^p(\RR^m)$.
+
+从而 $\varphi^*\omega$ 是在预备定义下的微分形式. 接下来我们证明 $\varphi^*\omega$ 确实是一个微分形式，并给出其表达式.
+
+\begin{property}
+    设 $\varphi:D\to G$ 为 $C^{(\infty)}$ 光滑，$\omega\in\Omega^p(G)$ ，定义 $\varphi^*\omega$ 如上.
+
+    则 $\varphi^*\omega\in\Omega^p(D)$ 且若
+$$
+\omega(x)=\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(x)\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}
+$$
+
+    则
+$$
+\begin{aligned}
+(\varphi^*\omega)(t)&=\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\dd\varphi_{i_1}(t)\wedge\cdots\wedge\dd\varphi_{i_p}(t)\\
+&=\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\sum_{1\le j_1<\cdots<j_p\le n}\left\lvert\left(\pard{\varphi_{i_l}}{t_{j_s}}\right)_{l,s}\right\rvert\dd t_{j_1}\wedge\cdots\wedge\dd t_{j_p}
+\end{aligned}
+$$
+\end{property}
+
+\begin{hint}
+    从计算上讲，为得到 $\varphi^*$ 的表达式，只需将 $\omega$ 表达式中所有 $x,\dd x_i$ 替换成 $\varphi,\dd\varphi_i$ 并展开即可.
+\end{hint}
+
+\begin{proof}
+    只需对任意 $t\in D$ 证明以上公式成立.
+    
+    因为只要该公式成立，则由 $\omega\in\Omega^p(G),\varphi\in C^{(\infty)}$ 即知 $\varphi^*\omega$ 的所有系数均光滑，从而 $\varphi^*\omega\in\Omega^p(D)$.
+
+    计算过程如下：
+$$
+\begin{aligned}
+&(\varphi^*\omega)(t)(\xi_1,\cdots,\xi_p)\\
+=&\omega(\varphi(t))(\varphi'(t)\xi_1,\cdots,\varphi'(t)\xi_p)\\
+=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}(\varphi'(t)\xi_1,\cdots,\varphi'(t)\xi_p)\\
+=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\left\lvert\left(\varphi_{i_l}'(t)\xi_s\right)_{l,s}\right\rvert\\
+=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\left\lvert\begin{pmatrix}\pard{\varphi_{i_1}}{t_1}(t) & \cdots & \pard{\varphi_{i_1}}{t_n}(t)\\\vdots & \ddots & \vdots\\\pard{\varphi_{i_p}}{t_1}(t) & \cdots & \pard{\varphi_{i_p}}{t_n}(t)\end{pmatrix}(\xi_1,\cdots,\xi_p)\right\rvert\\
+=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\sum_{1\le j_1<\cdots<j_p\le n}\begin{vmatrix}\pard{\varphi_{i_1}}{t_{j_1}}(t) & \cdots & \pard{\varphi_{i_1}}{t_{j_p}}(t)\\\vdots & \ddots & \vdots\\\pard{\varphi_{i_p}}{t_{j_1}}(t) & \cdots & \pard{\varphi_{i_p}}{t_{j_p}}(t)\end{vmatrix}\begin{vmatrix}\xi_{j_11} & \cdots & \xi_{j_1p}\\\vdots & \ddots & \vdots\\\xi_{j_p1} & \cdots & \xi_{j_pp}\end{vmatrix}\\
+=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\sum_{1\le j_1<\cdots<j_p\le n}\left\lvert\left(\pard{\varphi_{i_l}}{t_{j_s}}\right)_{l,s}\right\rvert\dd t_{j_1}\wedge\cdots\wedge\dd t_{j_p}(\xi_1,\cdots,\xi_p)\\
+\end{aligned}
+$$
+
+    倒数第二个等号应用了 Cauchy-Binet 公式.
+\end{proof}
+
+形式的转移还有如下一些易于验证的性质：
+
+\begin{property}
+    设 $\varphi:U\to V,\psi:V\to W$ 光滑.
+
+    \begin{enumerate}
+        \item $\varphi^*:\Omega^p(V)\to\Omega^p(U)$ 为线性映射，即
+$$
+\varphi^*(\lambda_1\omega_1+\lambda_2\omega_2)=\lambda_1\varphi^*\omega_1+\lambda_2\varphi^*\omega_2
+$$
+
+        \item $(\psi\circ\varphi)^*=\varphi^*\circ\psi^*$
+        
+        \item 若 $U,V\subset\RR^n$ 为开集，$\varphi:U\to V$ 为微分同胚.
+        
+        则 $(\varphi^{-1})^*\circ\varphi^*=\mathrm{id}_{\Omega^p(V)},\varphi^*\circ(\varphi^{-1})^*=\mathrm{id}_{\Omega^p(U)}$.
+
+        特别的，$\varphi^*:\Omega^p(U)\to\Omega^p(V)$ 为线性同构.
+
+        \item $\varphi^*(\dd\omega)=\dd\varphi^*\omega$
+
+        \item $\dd^2\omega=\dd(\dd\omega)=0$
+    \end{enumerate}
+\end{property}
+
+\begin{example}
+    设 $U,V\subset\RR^n$ 为开集，$\varphi:U\to V$ 光滑.
+
+    设 $\omega\in\Omega^n(V)$ ，则 $\omega=f(x)\dd x_1\wedge\cdots\wedge\dd x_n$ ，其中 $f:V\to\RR$ 光滑. 此时
+$$
+\begin{aligned}
+(\varphi^*\omega)(t)&=f(\varphi(t))\dd\varphi_1(t)\wedge\cdots\wedge\varphi_n(t)\\
+&=f(\varphi(t))\left\lvert\left(\pard{\varphi_i}{t_j}\right)_{i,j}\right\rvert\dd t_1\wedge\cdots\wedge\dd t_n\\
+&=f(\varphi(t))\det(J_\varphi(t))\dd t_1\wedge\cdots\wedge\dd t_n
+\end{aligned}
+$$
+
+    若我们定义
+$$
+\int_V\omega=\int_Vf(x)\dd x_1\wedge\cdots\wedge\dd x_n\triangleq\int_Vf(x)\dd x
+$$
+
+    则形式上
+$$
+\begin{aligned}
+\int_Vf(x)\dd x&=\int_Vf(x)\dd x_1\wedge\cdots\wedge\dd x_n=\int_V\omega=\int_{\varphi(U)}\omega\\
+&=\int_U\varphi^*\omega=\int_Uf(\varphi(t))\det J_\varphi(t)\dd t_1\wedge\cdots\wedge\dd t_n=\int_Uf(\varphi(t))\det J_\varphi(t)\dd t
+\end{aligned}
+$$
+
+    当 $\det J_\varphi(t)>0$ 时，上式即为已经证明的变量替换公式.
+
+    在第 13 章我们将详细地探讨上面的公式
+$$
+\int_V\omega=\int_{\varphi(U)}\omega=\int_U\varphi^*\omega
+$$
+\end{example}
+
+\mysubsection{曲面上的微分形式}
+
+\begin{definition}
+    设 $S\subset\RR^n$ 为 $k$ 维光滑曲面.
+
+    若在每点 $x$ 处指定一个 $\omega(x)$ 满足 $\omega(x)\in\mathscr{A}^p(T_xS)$ ，则称 $\omega$ 是 $S$ 上的一个微分形式.
+\end{definition}
+
+\begin{hint}
+    以上的定义比较松散，例如我们没有对 $x$ 变动时 $\omega(x)$ 如何变动作任何要求. 但我们有一种典型的构造曲面上微分形式的方式.
+\end{hint}
+
+\begin{example}
+    设 $S$ 为光滑曲面，$S\subset D$，其中 $D\subset\RR^n$ 为开集.
+
+    设 $\omega\in\Omega^p(D)$. 则由于在任意的 $x\in S$ 处有 $T_xS\subset T_xD=\RR^n$，我们可以将 $\omega$ 限制在 $T_xS$ 上. 从而我们得到一个 $S$ 上的微分形式
+$$
+\omega|_S(x)\triangleq\omega(x)|_{T_xS}
+$$
+
+    由此得到的微分形式称为 $\omega$ 在 $S$ 上的限制.
+\end{example}
+
+下设 $S$ 是一个可参数化 $k$ 维曲面. 设 $\varphi:U\to S$ 是一个参数化.
+
+设 $S\subset D$，其中 $D\subset\RR^n$ 为开集. 设 $\omega\in\Omega^p(D)$ ，则 $\omega|_S$ 是 $S$ 上的一个微分形式.
+
+接下来我们解释：就像曲面可以参数化一样，在这种情形下，我们也可以将 $\omega|_S$ “参数化”，使其成为 $U$ 上的微分形式.
+
+\begin{property}
+    \begin{enumerate}
+        \item $\varphi^*\omega=\varphi^*(\omega|_S)$
+        
+        \item $\varphi'(t):T_tU\to T_{\varphi(t)}S$ 为线性同构.
+    \end{enumerate}
+\end{property}
+
+此时，由于
+$$
+(\varphi^*\omega)(t)(\eta_1,\cdots,\eta_n)=\omega(\varphi(t))(\varphi'(t)\eta_1,\cdots,\varphi'(t)\eta_n)=\omega(\varphi(t))(\xi_1,\cdots,\xi_n)
+$$
+
+从而我们可以将 $\varphi^*\omega(t)$ 看成 $\omega(x)$ 的局部坐标化表示.
+
+\img{0.8}{12.5.3.png}

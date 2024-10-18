@@ -1,0 +1,304 @@
+在实际应用中，我们经常面对有边界的曲面. 本节我们来讨论它们的严格定义以及定向.
+
+\img{0.6}{12.3.1.png}
+
+\mysubsection{带边曲面的定义}
+
+正如 $\RR^k$ 是 $k$ 维曲面的标准局部模型，带边曲面也有一个标准的局部模型. 令
+$$
+H^k=\set{t\in\RR^k|t_1\le 0}
+$$
+
+\img{0.4}{12.3.2.png}
+
+则
+$$
+\begin{aligned}
+\partial H^k&=\set{t\in\RR^k|t_1=0}\simeq\RR^{k-1}\\
+\mathring{H^k}&=\set{t\in\RR^k|t_1<0}\simeq\RR^k
+\end{aligned}
+$$
+
+从这种角度理解，$H$ 是由 $k$ 维曲面 $\mathring{H^k}$ “粘上”一个 $k-1$ 维曲面 $\partial H^k$ 得到的.
+
+\begin{definition}
+设 $S\subset\RR^n$ ，称 $S$ 是一个带边 $k$ 维曲面，若 $\forall x\in S$ 存在 $x$ 的邻域 $U(x)\subset S$ 使得：
+
+$U(x)$ 要么与 $\RR^k$ 同胚，要么与 $H^k$ 同胚.
+\end{definition}
+
+直观的说：$S$ 的每个小局部看起来要么像 $\RR^k$ ，要么像 $H^k$.
+
+\begin{definition}
+设 $S\subset\RR^n$ 为 $k$ 维带边曲面.
+
+若对 $x\in S$ 存在 $x$ 的邻域 $U(x)\subset S$ 以及 $\varphi:H^k\to U(x)$ 为同胚，且满足 $x\in\varphi(\partial H^k)$ ，则称 $x$ 是 $S$ 的边界点.
+
+用 $\partial S$ 记 $S$ 所有边界点的集合.
+\end{definition}
+
+\begin{hint}
+\begin{enumerate}
+    \item 我们用局部图来定义边界点，从而 $\partial S$ 的定义有可能依赖于局部图的选取. 但事实上我们有：
+    
+    \begin{property}
+        $\partial S$ 不依赖于局部图的选取.
+    \end{property}
+    \begin{proof}
+        利用以下定理：
+    \end{proof}
+
+    \begin{theorem}[Brouwer 定理]
+        设 $A,B\subset\RR^k,\varphi:A\to B$ 为同胚，则 $\varphi(\partial A)=\partial B,\varphi(\mathring{A})=\mathring{B}$.
+    \end{theorem}
+
+    \item 在我们的定义中包含了 $\partial S=\varnothing$ 的情形，从而包含了之前曲面的定义. 以后提到带边曲面 $S$ 时，总假设 $\partial S\ne\varnothing$.
+    
+    \item 当 $k=1$ 时，注意到 $H^1=\set{t\in\RR|t\le 0}\implies \partial H^1=\set{0}$ 为单点集. 今后我们使用记号 $\RR^0$ 来表示单点集，并约定 $\partial\RR^0=\varnothing$.
+\end{enumerate}
+\end{hint}
+
+类似于曲面情形，我们对带边曲面也可以定义其局部图与图册.
+
+且可以证明：只需至多可数个图的有效域即可覆盖 $S$.
+
+\begin{definition}
+设 $\set{\varphi_i:\RR^k\to U_i}\cup\set{\psi_j:H^k\to V_j}$ 是带边曲面 $S$ 的一个图册.
+
+若 $\forall i,j$ 均有 $\varphi_i\in C^{(m)}(\RR^k),\psi_j\in C^{(m)}(H^k)$ 且 $\mathrm{r}(\varphi_i')\equiv k\equiv\mathrm{r}(\psi_j')$ ，则称 $S$ 为 $m$ 阶光滑曲面.
+\end{definition}
+
+\begin{property}
+若 $S$ 为 $k$ 维带边曲面，$\set{\varphi_i:\RR^k\to U_i}\cup\set{\psi_j:H^k\to V_j}$ 是 $S$ 的一个图册.
+
+则 $\partial S$ 是 $k-1$ 维曲面，且 $\set{\psi_j|_{\partial H^k}}$ 是 $\partial S$ 的一个图册.
+
+若 $S$ 为 $m$ 阶光滑，则 $\partial S$ 也为 $m$ 阶光滑.
+\end{property}
+\begin{proof}
+    由定义.
+\end{proof}
+
+\begin{example}
+    $\overline{B}^n=\set{x\in\RR^n:\abs{x}\le 1}$ 为 $C^{\infty}$ 光滑 $n$ 维带边曲面，其边界为 $\partial\overline{B}^n=S^{n-1}$.
+\end{example}
+
+\begin{example}
+    $\overline{I}^2=\set{(x,y)\in\RR^2:\abs{x},\abs{y}\le 1}$ 是 $2$ 维带边曲面.
+    
+    其边界为 $\partial\overline{I}^2=\set{(x,y)\in\RR^2:\max\set{\abs{x},\abs{y}}=1}$.
+
+    但 $\overline{I}^2$ 不是光滑带边曲面.
+
+    \img{0.4}{12.3.3.png}
+
+    而 $\overline{I}^2\setminus\set{a,b,c,d}$ 为 $2$ 维光滑带边曲面.
+
+    其边界 $(a,b)\cup(b,c)\cup(c,d)\cup(d,a)$ 为四段开区间的并，也是光滑 $1$ 维曲面，但不连通.
+\end{example}
+
+\begin{example}
+    将闭长方体以如下方式粘连得到光滑柱面 $C$.
+
+    \img{0.6}{12.3.4.png}
+
+    其边界为 $S_1\cup S_2$ ，为 $1$ 维光滑曲线. 注意到 $C$ 与如图的 $S$ 同胚.
+\end{example}
+
+\begin{example}
+    将闭长方体以如下方式粘连得到 Möbius 带.
+
+    \img{0.5}{12.3.5.png}
+
+    只要粘连方式足够规则，则 $M$ 是一个光滑 $2$ 维带边曲面.
+    
+    其边界是一条封闭的空间曲线，而非两条分离的圆周.
+\end{example}
+
+\mysubsection{带边曲面及其边界的定向}
+
+设 $S\subset\RR^n$ 是一个 $k$ 维光滑带边曲面，我们可以用与无边曲面相同的方式对其定义可定向性，即要求 $S$ 有一个定向图册.
+
+\begin{property}
+    若 $S$ 为 $k$ 维光滑带边曲面，且可定向.
+
+    设 $\mathscr{A}=\set{\varphi_i:\RR^k\to U_i}\cup\set{\psi_j:H^k\to V_j}$ 是 $S$ 的一个定向图册.
+
+    则 $k-1$ 维光滑曲面 $\partial S$ 也可定向，且 $\set{\psi_j|_{\partial H^k}}$ 是 $S$ 的一个定向图册.
+\end{property}
+\begin{proof}
+    令 $\widetilde\psi_j=\psi_j|_{\partial H^k},\widetilde{V}_j=V_j\cap\partial S$.
+
+    我们只需证明 $\widetilde\psi_i$ 与 $\widetilde\psi_j$ 相容，为此设 $\widetilde{V}_i\cap\widetilde{V}_j\ne\varnothing$.
+
+    \img{0.8}{12.3.6.png}
+
+    任取 $x\in\widetilde{V}_i\cap\widetilde{V}_j$. 通过适当的平移，不妨设 $\psi_i(0)=\psi_j(0)=x$.
+
+    令 $\Psi=\psi_j^{-1}\circ\psi_i$. 则由 $\psi_i$ 与 $\psi_j$ 相容知 $\det J_\Psi(0)>0$.
+
+    令 $\widetilde\Psi=\widetilde\psi_j^{-1}\circ\widetilde\psi_i$. 更确切的，$\widetilde\Psi(t_2,\cdots,t_k)\triangleq\widetilde\psi_j^{-1}\circ\widetilde\psi_i(0,t_2,\cdots,t_k)=\Psi(0,t_2,\cdots,t_k)$.
+
+    则我们只需证 $\det J_{\widetilde\Psi}(0)>0$.
+
+    由 $\Psi$ 的定义知 $\Psi(0,t_2,\cdots,t_k)\subset\partial H^k$.
+
+    从而 $\Psi_1(0,t_2,\cdots,t_k)\equiv 0$. 则有
+$$
+J_\Psi(0)=\left[\begin{array}{c|ccc}
+    \partial_1\Psi(0) & 0 & \cdots & 0\\
+    \hline
+    * & \partial_2\widetilde\Psi_2(0) & \cdots & \partial_k\widetilde\Psi_2(0)\\
+    \vdots & \vdots & \ddots & \vdots\\
+    * & \partial_2\widetilde\Psi_k(0) & \cdots & \partial_k\widetilde\Psi_k(0)
+\end{array}\right]=\begin{bmatrix}
+    \partial_1\Psi(0) & 0\\
+    * & J_{\widetilde\Psi}(0)
+\end{bmatrix}
+$$
+
+    故 $\det J_\Psi(0)=\partial_1\Psi(0)\cdot\det J_{\widetilde\Psi}(0)>0$.
+
+    由定义知当 $t_1<0$ 时 $\Psi_1(t_1,0,\cdots,0)<0$ ，从而 $\partial_1\Psi(0)>0$.
+
+    从而 $\det J_{\widetilde\Psi}(0)>0$.
+\end{proof}
+
+我们来解释一下其中的直观. 首先我们取定 $\RR^k$ 的标准定向 $(e_1,\cdots,e_k)$ ，并取 $(e_2,\cdots,e_k)$ 为 $\partial H^k$ 的定向.
+
+\img{0.4}{12.3.7.png}
+
+直观来说，第一个向量 $e_1$ 指向 $H^k$ 的外部，此时我们称 $(e_2,\cdots,e_k)$ 是 $\partial H^k$ 上的与 $H^k$ 上的定向 $(e_1,\cdots,e_n)$ 相容的定向.
+
+当 $k=1$ 时，$\partial H^1$ 为单点集. 我们规定 $\partial H^1$ 的定向为 $+$ ，并称其是与 $\mathring{H}^1$ 上的定向 $(e_1)$ 相容的定向.
+
+\img{0.6}{12.3.8.png}
+
+现在我们回到直观的理解.
+
+\img{0.8}{12.3.9.png}
+
+由 $\psi_i,\psi_j$ 的定义知 $\psi'_i(0)$ 与 $\psi'_j(0)$ 将 $e_1$ 映射到 $T_xS$ ，且指向曲面外（$T_xS$ 的同侧）.
+
+而 $\psi'_i(0)$ 与 $\psi'_j(0)$ 同时将 $(e_1,\cdots,e_k)$ 映射为 $T_xS$ 中的标架，且相容，从而限制在 $T_x\partial S$ 上也相容.
+
+由此性质可知：
+
+\begin{definition}
+    设 $S$ 为 $k$ 维带边光滑曲面，且可定向.
+
+    设 $\mathscr{A}(S)=\set{\varphi_i:\RR^k\to U_i}\cup\set{\psi_j:H^k\to V_j}$ 是 $S$ 的一个定向图册.
+
+    则 $\mathscr{A}(\partial S)=\set{\psi_j|_{\partial H^k}}$ 是 $\partial S$ 的一个定向图册.
+
+    此时我们称由 $\mathscr{A}(\partial S)$ 指定的 $\partial S$ 的定向与由 $\mathscr{A}(S)$ 指定的 $S$ 的定向相容.
+\end{definition}
+
+\begin{hint}
+\begin{enumerate}
+    \item 在实际应用中，为了确定在 $S$ 和 $\partial S$ 上的相容定向，我们可以采取如下的方式：
+    
+    任取 $x_0\in\partial S$ ，先取 $\xi_1\in T_{x_0}S$ 使得 $\xi_1\perp T_{x_0}\partial S$ 且指向曲面的外部.
+
+    再将 $\xi_1$ 扩充成 $T_{x_0}S$ 上的标架，使得 $\xi_2,\cdots,\xi_k\in T_{x_0}\partial S$.
+
+    则此时 $(\xi_1,\cdots,\xi_k)$ 在 $S$ 上指定的定向与 $(\xi_2,\cdots,\xi_k)$ 在 $\partial S$ 上指定的定向相容.
+
+    \img{0.4}{12.3.10.png}
+
+    \item 我们来考虑一个很有启发性的例子.
+    
+    令 $H^k_-\triangleq H^k$ ，与 $H^k_+\triangleq\set{t\in\RR^k|t_1\ge 0}$ 均为 $k$ 维带边曲面，且设它们都继承了 $\RR^k$ 的标准定向 $(e_1,\cdots,e_k)$.
+
+    \img{0.4}{12.3.11.png}
+
+    则它们在公共边界 $\Gamma=\set{t\in\RR^k|t_1=0}$ 上诱导的相容定向方向恰好相反（不同）.
+
+    更一般的，若一个 $k$ 维可定向的曲面被一个 $k-1$ 维光滑曲面割开，则在边界上两个部分也会诱导相反的定向.
+
+    \img{0.5}{12.3.12.png}
+\end{enumerate}
+\end{hint}
+
+以上的观察可以让我们将光滑（可定向）曲面的定义推广到分片光滑（可定向）曲面，在实际应用中会很方便.
+
+\begin{definition}
+    我们递归地定义分片光滑曲面如下：
+
+    \begin{itemize}
+        \item 单点集 $\set{x}\subset\RR^n$ 是 $0$ 维分片光滑曲面，且任意阶光滑.
+        
+        \item 设 $S$ 为 $k$ 维曲面（不一定光滑）.
+        
+        称 $S$ 为 $k$ 维分片光滑曲面，若在去掉至多可数个 $\le k-1$ 维分片光滑曲面后，$S$ 是若干个 $k$ 维光滑曲面的（不交）并 $\bigcup_i S_i$.
+    \end{itemize}
+\end{definition}
+
+\begin{hint}
+    递归地分解一个 $k$ 维分片光滑曲面，可以得到：
+    
+    若 $S$ 为 $k$ 维分片光滑曲面，则
+$$
+S=\bigsqcup_iS_i
+$$
+
+    其中每个 $S_i$ 均为 $k_i$ 维光滑曲面，其中 $k_i\le k$.
+\end{hint}
+
+\begin{example}
+    $\overline{I}^2$ 本身不是光滑曲面，但 $\overline{I}^2$ 去掉边界后是 $2$ 维光滑曲面.
+
+    从而 $\overline{I}^2$ 是 $2$ 维分片光滑曲面.
+\end{example}
+
+接下来我们讨论分片光滑曲面的定向. 我们从 $0$ 维开始.
+
+我们在 $\RR^0$ 上指定两种定向 $(\RR^0,+)$ 和 $(\RR^0,-)$.
+
+下设 $[a,b]$ 是一个区间. 则我们可以用以下两种方式指定相容的定向：
+
+\img{0.6}{12.3.13.png}
+
+设 $S$ 为 $k$ 维分片光滑曲面. 设 $\set{N_i}$ 为至多可数个低维光滑曲面，且 $S$ 在去掉这些低维曲面后可以写成若干个 $k$ 维光滑曲面的不交并：
+$$
+S\setminus\set{N_i}=\bigsqcup_jS_j
+$$
+
+设 $\set{S_j}$ 均可定向且都已经指定了一个定向.
+
+取定 $S_i$ 与 $S_j$. 设
+$$
+\overline{S}_i\cap\overline{S}_j=\bigsqcup_r\Gamma_r
+$$
+
+其中 $\Gamma_r$ 要么是 $k-1$ 维光滑曲面，要么是 $\le k-2$ 维的曲面.
+
+若 $S_i$ 与 $S_j$ 在每个 $k-1$ 维 $\Gamma_r$ 上诱导相反的定向，则称 $S_i$ 与 $S_j$ 的定向相容.
+
+\begin{definition}
+    设 $S$ 为 $k$ 维分片光滑曲面.
+
+    称 $S$ 可定向，若在去掉至多可数个低维曲面之后，$S$ 是若干个 $k$ 维光滑曲面 $S_i$ 的并，且 $\forall i\ne j$ 有 $S_i$ 与 $S_j$ 的定向相容.
+
+    此时我们称 $\set{S_i|i\in I}$ 的定向决定了一个 $S$ 的定向.
+\end{definition}
+
+\img{0.6}{12.3.14.png}
+
+\begin{hint}
+    在分片光滑曲面的定义中，卓里奇《数学分析》并没有明确说明“若干”究竟指的是有限还是可数.
+
+    但是，如果我们采取“可数”作为定义，曲面可定向性的一致性将会被破坏（即习题 12.3.4），也就是：存在光滑曲面 $S$ 不可定向，但 $S$ 在分片光滑曲面的意义下可定向.
+
+    反例如下：考虑一条 Möbius 带
+
+    \img{0.6}{12.3.15.png}
+
+    在其上取一条分界线 $\Gamma$. 在 $\Gamma$ 两侧分别可以取越来越细的可数个曲面 $S_1,S_2,\cdots$ 与 $\widetilde{S}_1,\widetilde{S}_2,\cdots$. 在分界线两侧，取相反的定向.
+
+    则对任意 $i,j$ 有 $\overline{S_i}\cap\overline{\widetilde{S}_j}=\varnothing$. 从而 $S_i$ 与 $\widetilde{S}_j$ 的定向相容.
+
+    故在分片光滑曲面的意义下，Möbius 带是可定向的.
+
+    从这一理由出发，采取“有限”作为定义或许是更加合理的选择.
+\end{hint}

@@ -1,0 +1,347 @@
+定向的概念我们并不陌生. 在高中物理学习中经常出现顺时针、逆时针、左手系和右手系等概念. 这些都是有关定向的概念. 本节我们详细地讨论定向这个概念以及如何对曲面定向的概念.
+
+\mysubsection{$\RR^n$ 及其子空间的定向}
+
+\begin{definition}
+称 $\xi=(\xi_1,\cdots,\xi_n)\in(\RR^n)^n$ 是 $\RR^n$ 的一个标架，若 $\xi$ 是 $\RR^n$ 的一个基.
+\end{definition}
+
+等价地，$\xi$ 是一个标架当且仅当 $\xi$ 是一个有序基底.
+
+我们用 $\mathscr{F}(\RR^n)$ 表示 $\RR^n$ 所有标架的全体.
+
+\begin{hint}
+若将 $\xi\in\mathscr{F}(\RR^n)$ 等同于一个矩阵，则 $\mathscr{F}(\RR^n)=\mathrm{GL}(n;\RR)$ 为所有可逆矩阵的全体.
+\end{hint}
+
+在 $\mathscr{F}(\RR^n)$ 上可以定义一个等价关系
+$$
+\xi\sim\xi'\iff\det\xi~\text{与}~\det\xi'~\text{同号}
+$$
+
+易见 $(\mathscr{F}(\RR^n),\sim)$ 仅有两个等价类. 我们称每个等价类是 $\RR^n$ 的一个定向. 称取定了 $\RR^n$ 的一个定向，若我们固定了其中的某个等价类.
+
+\begin{hint}
+在实际应用中，我们通常取定等价类中的某个特殊标架来确定相应的定向.
+
+例如，在 $\RR^2$ 中，我们有 $(e_1,e_2)$ 和 $(e_2,e_1)$ 两个定向.
+\end{hint}
+
+设 $V$ 是 $\RR^n$ 的 $k(k<n)$ 维线性子空间. 仿照 $n$ 维情形，我们也用标架来定义.
+
+\begin{definition}
+$V$ 的标架定义为 $V$ 的一个有序基底，将 $V$ 所有标架的全体记为 $\mathscr{F}(V)$.
+\end{definition}
+
+注意到此时我们不再能用行列式来定义等价类. 为此我们先回到 $n$ 维情形，寻找可能的等价刻画.
+
+\begin{property}
+设 $\xi,\xi'\in\mathscr{F}(\RR^n)$ ，且 $A$ 满足 $\xi'=\xi\cdot A$.
+
+则 $\xi\sim\xi'\iff\det A>0$.
+\end{property}
+
+\begin{definition}
+设 $\xi,\xi'\in\mathscr{F}(V)$ ，且 $A\in M_k(\RR)$ 满足 $\xi'=\xi\cdot A$.
+
+定义 $\xi\sim\xi'\iff\det A>0$.
+\end{definition}
+
+\begin{property}
+\begin{enumerate}
+    \item $\sim$ 是 $\mathscr{F}(V)$ 上的等价关系.
+    
+    \item $(\mathscr{F}(V),\sim)$ 恰有两个等价类，每个等价类称为 $V$ 的一个定向.
+\end{enumerate}
+\end{property}
+
+\mysubsection{$\RR^n$ 中开集的定向}
+
+设 $S$ 是 $\RR^n$ 中的一个光滑 $k(k<n)$ 维曲面. 则在每一点 $x_0\in S$ 处有切空间 $T_{x_0}S$ ，我们可以在其上指定一个定向.
+
+当 $x_0$ 在 $S$ 上移动时，一般来说 $T_{x_0}S$ 也不再是一个固定的子空间，从而相应的定向也随之变化. 我们的目标是以一种“好的”、“一致的”对所有的切空间 $T_{x_0}S$ 统一地指定一个定向.
+
+为了明确什么是“好的”、“一致的”定向，我们再次回到 $n$ 维情形.
+
+\img{0.5}{12.2.1.png}
+
+\begin{definition}
+设区域 $D\subset\RR^n$ ，则在每点 $x\in D$ 出的切空间均为 $T_xD=\RR^n$.
+
+称在 $D$ 上制定了一个定向，若在每个点 $x$ 处均指定了一个标架 $\xi(x)$ ，满足 $\forall x,y\in D,\xi(x)\sim\xi(y)$.
+\end{definition}
+
+\img{0.4}{12.2.2.png}
+
+\begin{hint}
+\begin{enumerate}
+    \item 在此情形下，我们可以令 $\xi(x)\equiv\xi$ （任何一个固定的标架），从而在 $D$ 上确实可以指定一个定向，且易见此时 $D$ 上只有两种本质不同的定向.
+    
+    \item 这种定向的方法显然无法推广到曲面的情形，为此我们需要寻找一些等价的指定定向的方法.
+\end{enumerate}
+\end{hint}
+
+\begin{definition}
+设 $F:D\to\mathscr{F}(D)$ 是一个（连续映射），则称 $F$ 是一个（连续）标架场.
+\end{definition}
+
+\begin{property}
+设区域 $D\subset\RR^n,F:D\to\mathscr{F}(D)$ 是一个连续标架场. 则 $F$ 在 $D$ 上指定了一个定向.
+\end{property}
+\begin{proof}
+定义 $d:D\to\RR$ 为 $d(x)\triangleq\det F(x)$.
+
+则 $d$ 为联通集 $D$ 上的连续函数，且 $d(x)\ne 0,\forall x\in D$.
+
+从而 $\forall x\in D,d(x)>0$ 或 $\forall x\in D,d(x)<0$.
+
+这就说明 $F(x)\sim F(y),\forall x,y\in D$. 从而 $F$ 在 $D$ 上指定了一个定向.
+\end{proof}
+
+根据这个性质，为了在 $D$ 上指定一个定向，只需在其上定义一个连续的标架场. 受此启发，我们可以以一种典型的方式来构造这样的标架场.
+
+\begin{definition}
+设开集 $D\subset\RR^n,\varphi:\widetilde{D}\to D$ 为微分同胚，则称 $(\varphi,\widetilde{D})$ 是 $D$ 的一个光滑曲面坐标系.
+\end{definition}
+
+\begin{property}
+设区域 $D\subset\RR^n$.
+
+\begin{enumerate}
+    \item 若 $\varphi:\widetilde{D}\to D$ 是一个光滑曲面坐标系，则 $(\varphi'(x)e_1,\cdots,\varphi'(x)e_n)$ 指定了 $D$ 上的一个定向.
+
+    \item 若 $\varphi_1:\widetilde{D}_1\to D$ 与 $\varphi_2:\widetilde{D}_2\to D$ 是两个光滑曲面坐标系，则
+$$
+\begin{aligned}
+&\varphi_1'(x)\eps~与~\varphi_2'(x)\eps~指定相同的定向\\
+\iff&\det(\varphi_2^{-1}\circ\varphi_1)'(t)>0,\forall t\in\widetilde{D}_1\\
+\iff&\det(\varphi_2^{-1}\circ\varphi_1)'(t)>0,\exists t\in\widetilde{D}_1\\
+\end{aligned}
+$$
+
+    其中 $\eps=(e_1,\cdots,e_n)$.
+\end{enumerate}
+\end{property}
+
+\img{0.8}{12.2.3.png}
+
+以上我们讨论了如何在区域（联通开集）$D$ 上指定一个定向. 接下来设 $D\subset\RR^n$ 是一个开集. 若 $D=D_1\cup\cdots\cup D_n$ ，其中每个 $D_i$ 均为联通开集且互不相交，则为指定 $D$ 上的定向我们只需对每个 $D_i$ 指定定向. 从而 $D$ 上本质不同的定向个数为 $2^n$.
+
+\mysubsection{曲面的定向}
+
+\mysubsubsection{初等曲面的定向}
+
+有了以上的预备讨论，我们现在可以来讨论曲面的定向了. 我们从初等曲面开始.
+
+设 $S$ 为 $k$ 维初等光滑曲面. 设 $\varphi:\RR^k\to S$ 满足 $\varphi\in C^{(m)}$.
+
+\begin{definition}
+设 $S$ 是 $\RR^n$ 中的一个 $k$ 维初等光滑曲面.
+
+若 $F$ 是 $S$ 上的一个连续标架场，则称 $F$ 在 $S$ 上指定了一个定向.
+
+其中 $F:S\to(\RR^n)^k$ 满足 $\forall x\in S,F(x)\in\mathscr{F}(T_xS)$.
+\end{definition}
+
+我们来证明初等光滑曲面可定向.
+
+\begin{property}
+设 $F(x)\triangleq\varphi'(t)\eps=\varphi'(\varphi^{-1}(x))\eps$ ，其中 $\eps=(e_1,\cdots,e_n)$. 则 $F$ 是 $S$ 上的一个定向.
+\end{property}
+\begin{proof}
+由 $\varphi$ 为光滑同胚知 $F$ 连续.
+
+由 $\varphi$ 满秩知 $\varphi'(t)\eps\in T_xS,\forall x\in S$.
+
+从而 $F$ 是 $S$ 上的连续标架场.
+\end{proof}
+
+\begin{definition}
+设 $S$ 为初等光滑曲面，$F$ 与 $G$ 均为 $S$ 上的连续标架场.
+
+称 $F\sim G$ ，若 $F(x)\sim G(x),\forall x\in S$. 此时称 $F$ 和 $G$ 在 $S$ 上指定了相同的定向.
+\end{definition}
+
+\begin{property}
+设 $S$ 为初等光滑曲面，则
+
+\begin{enumerate}
+    \item 如上定义的 $\sim$ 是 $S$ 上连续标架场集合上的等价关系，且其有 $2$ 个等价类.
+    
+    \item 若 $\varphi_1:D_1\to S,\varphi_2:D_2\to S$ 是 $S$ 的两个不同的图，则 $\varphi_2^{-1}\circ\varphi_1:D_1\to D_2$ 是微分同胚，且其光滑程度与 $\varphi_1,\varphi_2$ 相同.
+    
+    且有 $F_{\varphi_1}\sim F_{\varphi_2}\iff\det(\varphi_2^{-1}\circ\varphi_1)'(t)>0$.
+
+    其中 $F_{\varphi_1}$ 与 $F_{\varphi_2}$ 为由 $\varphi_1$ 和 $\varphi_2$ 给出的定向.
+
+    特别的，不同的图所指定的定向本质上只有两个.
+\end{enumerate}
+\end{property}
+\begin{proof}
+\begin{enumerate}
+    \item 留作习题.
+    
+    \item 由 $\varphi_1,\varphi_2$ 为同胚知 $\varphi_2^{-1}\circ\varphi:D_1\to D_2$ 为同胚.
+    
+    下证其光滑. 设 $\varphi_1,\cdots,\varphi_2\in C^{(m)}$. 我们已经证明了如下的结论：
+
+    对任意 $x\in S$ 存在 $\eps>0$ 以及
+$$
+\begin{aligned}
+\phi_1:I_\eps^n(t_1,0)\to U(x)\\
+\phi_2:I_\eps^n(t_2,0)\to U(x)
+\end{aligned}
+$$
+
+    为 $C^{(m)}$ 光滑微分同胚，满足 $\phi_1|_{I_\eps^k(t_1)}=\varphi_1,\phi_2|_{I_\eps^k(t_2)}=\varphi_2$.
+
+    其中 $t_1=\varphi_1^{-1}(x),t_2=\varphi_2^{-1}(x),U(x)\subset\RR^n$ 为 $x$ 的邻域.
+
+    从而 $\varphi_2^{-1}\circ\varphi_1=(\phi_2^{-1}\circ\phi_1)|_{I_\eps^k(t_1)}\in C^{(m)}$.
+
+    即证 $\varphi_2^{-1}\circ\varphi_1$ 为 $C^{(m)}$ 微分同胚.
+    
+    \img{0.8}{12.2.4.png}
+
+    剩下的结论留作习题.
+\end{enumerate}
+\end{proof}
+
+\mysubsubsection{一般曲面的定向}
+
+受上一小节的启发，我们希望：称一个一般的曲面可定向，若可以在其上定义一个连续的标架场. 但不幸的是，这会排除掉很多我们希望可以定向的曲面，例如 $2$ 维球面 $S^2$.
+
+\begin{theorem}[毛球定理，发球定理，Hair Ball Theorem]
+在 $S^2$ 上不存在处处非零的连续切向量场.
+
+等价的，不存在 $F:S^2\to\RR^3$ 连续且满足 $\forall x\in S^2,F(x)\ne 0$ 且 $F(x)\in T_xS^2$.
+\end{theorem}
+
+根据以上定理，球面上不存在连续的标架场.
+
+因此，我们必须减弱这个条件. 以下我们来定义一般曲面的定向.
+
+\begin{definition}
+设 $S$ 为 $k$ 维光滑曲面，
+$$
+\begin{aligned}
+\varphi_1:D_1\to U_1\subset S\\
+\varphi_2:D_2\to U_2\subset S
+\end{aligned}
+$$
+
+是 $S$ 的两个图. 称它们相容，要么 $U_1\cap U_2=\varnothing$ ，要么
+$$
+U_1\cap U_2\ne\varnothing~\text{且}~\det(\varphi_2^{-1}\circ\varphi_1)'(t)>0,\forall t\in\varphi_1^{-1}(U_1\cap U_2).
+$$
+\end{definition}
+
+\img{0.8}{12.2.5.png}
+
+\begin{hint}
+这个定义的直观理解是：$\varphi_1$ 和 $\varphi_2$ 在它们有效域的交集上指定了相同的定向.
+\end{hint}
+
+\begin{definition}
+设 $S$ 为 $k$ 维曲面，$\mathscr{A}=\set{\varphi_i|i\in I}$ 是 $S$ 的一个可数图册.
+
+若 $\forall i\ne j$ 都有 $\varphi_i$ 与 $\varphi_j$ 相容，则称 $\mathscr{A}$ 是 $S$ 的一个定向图册.
+\end{definition}
+
+\begin{definition}
+称 $S$ 是一个可定向曲面，若 $S$ 存在一个定向图册.
+\end{definition}
+
+\begin{definition}
+设 $\mathscr{A}_1,\mathscr{A}_2$ 均为 $S$ 的定向图册，定义 $\mathscr{A}_1\sim\mathscr{A}_2\iff \mathscr{A}_1\cup\mathscr{A}_2$ 是 $S$ 的定向图册.
+\end{definition}
+
+\begin{property}
+\begin{enumerate}
+    \item $\sim$ 是 $S$ 的所有定向图册 $\set{\mathscr{A}_i|i\in I}$ 上的等价关系.
+    
+    \item 若 $S$ 联通，则 $\sim$ 恰有两个等价类.
+\end{enumerate}
+\end{property}
+
+\begin{definition}
+设 $S$ 为可定向曲面，则 $S$ 所有定向图册集合的每个等价类称为 $S$ 的一个定向.
+
+称取定了 $S$ 的一个定向，若我们固定了其中的某个等价类.
+\end{definition}
+
+\mysubsection{曲面可定向的判定}
+
+综合以前的讨论，我们已知：初等光滑曲面必可定向，且其图诱导了其上的一个定向. 另一方面，如下的充分条件成立：
+
+\begin{property}
+若 $S$ 为光滑曲面，且其上可以定义一个连续标架场，则 $S$ 可定向.
+\end{property}
+
+除此之外，目前为止，我们并没有其它的方法来判断曲面能否定向. 以下我们描述一种方法，其对于 $n$ 维空间中 $n-1$ 维曲面可定向的判定十分有效.
+
+\begin{definition}
+设 $S$ 为 $n-1$ 维光滑曲面，称 $N:S\to\RR^n$ 是 $S$ 上的（连续）单位法向量场，若 $N$ 为（连续）映射且
+$$
+N(x)\perp T_xS,\abs{N(x)}=1,\forall x\in S
+$$
+\end{definition}
+
+\begin{property}
+设 $S$ 为 $n-1$ 维光滑曲面，则 $S$ 可定向 $\iff S$ 上存在一个连续单位法向量场.
+\end{property}
+\begin{proof}
+$\implies$ ：设 $\set{\varphi_i:D_i\to U_i}$ 是 $S$ 的一个定向图册. 我们先在每个 $U_i$ 上定义一个法向量场.
+
+已知此时 $(\varphi_i'(t)e_1,\cdots,\varphi_i'(t)e_{n-1})$ 是 $U_i$ 上的一个连续标架场，其中 $t=\varphi_i^{-1}(x)$.
+
+定义 $n_i:U_i\to\RR^n$ 满足
+$$
+\begin{cases}
+n_i(x)\perp T_xS,\abs{n_i(x)}=1\\
+(n_i(x),\varphi_i'(\varphi_i^{-1}(x))e_1,\cdots,\varphi_i'(\varphi_i^{-1}(x))e_{n-1})\sim(e_1,\cdots,e_n)
+\end{cases}
+$$
+
+不难验证，$n_i$ 是 $U_i$ 上的连续单位法向量场.
+
+由 $\varphi_i$ 与 $\varphi_j$ 相容，易证 $n_i|_{U_i\cap U_j}=n_j|_{U_i\cap U_j}$.
+
+于是定义 $N:S\to\RR^n$ 为：$\forall x\in S,\exists U_i,x\in U_i$ ，定义 $N(x)\triangleq n_i(x)$.
+
+则 $N$ 为 $S$ 上的连续单位法向量场.
+
+$\impliedby$ ：下设 $N:S\to\RR^n$ 是连续单位法向量场. 设 $\set{\varphi_i:D_i\to U_i}$ 是 $S$ 的图册.
+
+对任意 $i$ ，定义 $\widetilde\varphi_i$ 如下：
+
+任取 $x\in U_i$ ，设 $t\in D_i$ 满足 $\varphi_i(t)=x$.
+
+若 $(N(x),\varphi_i'(t)e_1,\cdots,\varphi_i'(t)e_{n-1})\sim(e_1,\cdots,e_n)$ ，则令 $\widetilde\varphi_i=\varphi_i$.
+
+若 $(N(x),\varphi_i'(t)e_1,\cdots,\varphi_i'(t)e_{n-1})\not\sim(e_1,\cdots,e_n)$ ，则令
+$$
+\widetilde\varphi_i(t_1,\cdots,t_{n-1})=\varphi_i(t_2,t_1,t_3,\cdots,t_{n-1})
+$$
+
+相应地定义 $\widetilde{D}_i$ ，则可以验证 $\set{\widetilde\varphi_i:\widetilde{D}_i\to U_i}$ 是 $S$ 的定向图册，从而 $S$ 可定向.
+\end{proof}
+
+若 $S$ 是一个 $n-1$ 维可定向的联通曲面，则其上可以定义一个连续单位法向量场 $N:S\to\RR^n$. 其给定了曲面的一个定向.
+注意到 $-N$ 也是一个连续单位法向量场，且显然 $N$ 与 $-N$ 给出了不同的定向.
+由于 $S$ 联通，$S$ 上仅有两个定向. 由此可知，$N$ 与 $-N$ 决定了所有的定向.
+
+正是在这个意义下，我们称 $S$ 是一个双面曲面.
+\mysubsection{一些例子}
+
+利用法向量的准则，我们可以得到二维球面 $S^2$ 与二维环面 $\Pi^2$ 可定向.
+
+一般的，$n$ 维球面 $S^n$ 与 $n$ 维环面 $\Pi^n$ 可定向.
+
+\begin{example}
+Möbius 带不可定向，因为其上不存在连续单位法向量场.
+\end{example}
+
+\begin{example}
+Klein 瓶不可定向，因为 Klein 瓶中包含了 Möbius 带.
+\end{example}

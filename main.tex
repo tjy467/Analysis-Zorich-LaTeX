@@ -1,0 +1,133 @@
+\documentclass{ctexrep}
+\usepackage[colorlinks=true,linkcolor=mydarkblue]{hyperref}
+\usepackage[top=1in,bottom=1in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{extarrows}
+\usepackage{arydshln}
+\usepackage{graphicx}
+\usepackage{varwidth}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{bm}
+\tcbuselibrary{breakable}
+\tcbuselibrary{skins}
+
+\title{数学分析(3)}
+
+\graphicspath{{./image/}}
+\newcommand{\img}[2]{\begin{center}\includegraphics[width=#1\textwidth]{#2}\end{center}}
+
+\newcommand{\makecolorbox}[3]{
+    \newcounter{#1}
+    \numberwithin{#1}{section}
+    \NewTColorBox{#1box}{o m +o}{
+    enhanced,colframe=#2!5!white,interior empty,
+    coltitle=white,fonttitle=\bfseries,colbacktitle=#2,
+    extras broken={frame empty,interior empty},
+    borderline={0.5mm}{0mm}{#2},
+    breakable=true,
+    top=4mm,
+    before skip=3.5mm,
+    attach boxed title to top left={yshift=-3mm,xshift=5mm},
+    boxed title style={boxrule=0pt,sharp corners=all},varwidth boxed title,
+    IfNoValueTF={##1}{title=##2~\csname the#1\endcsname}{title=##2~\csname the#1\endcsname~(##1)},
+    IfNoValueTF={##3}{}{##3}
+    }
+    \NewDocumentEnvironment{#1}{o +d""}{
+    \refstepcounter{#1}
+    \begin{#1box}[##1]{#3}[##2]
+    }{\end{#1box}}
+}
+
+\definecolor{mygreen}{HTML}{00A652}
+\definecolor{myorange}{HTML}{FF8618}
+\definecolor{myblue}{HTML}{00AEF7}
+\makecolorbox{definition}{mygreen}{定义}
+\makecolorbox{property}{myblue}{性质}
+\makecolorbox{theorem}{myorange}{定理}
+\makecolorbox{lemma}{myorange}{引理}
+\makecolorbox{inference}{myorange}{推论}
+
+\newtheoremstyle{examplestyle}
+  {}{}{}{}{\bfseries}{.}{0.5em}
+  {\color{mygreen}\thmname{#1}\thmnumber{#2}\thmnote{#3}}
+\theoremstyle{examplestyle}
+\newtheorem{example}{例}
+\counterwithin*{example}{subsection}
+
+\newtheoremstyle{hintstyle}
+  {}{}{}{}{\bfseries}{.}{0.5em}
+  {\color{myorange}\thmname{#1}\thmnumber{#2}\thmnote{#3}}
+\theoremstyle{hintstyle}
+\newtheorem{hint}{注}
+\counterwithin*{hint}{subsection}
+
+\renewcommand{\proofname}{\color{myorange}\textrm{证明}}
+
+\definecolor{mydarkblue}{HTML}{3C71B7}
+\newcommand{\mychapter}[1]{{\color{mydarkblue}\chapter{#1}}}
+\newcommand{\mysection}[1]{{\color{mydarkblue}\section{#1}}}
+\newcommand{\mysubsection}[1]{{\color{mydarkblue}\subsection{#1}}}
+\newcommand{\mysubsubsection}[1]{{\color{mydarkblue}\subsubsection{#1}}}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\abs}[1]{\lvert{#1}\rvert}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\td}{\widetilde}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\pard}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\inner}[1]{\left\langle{#1}\right\rangle}
+\newcommand{\curl}{\mathrm{curl}\;}
+\newcommand{\ddiv}{\mathrm{div}\;}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\setcounter{chapter}{11}
+\mychapter{$n$ 维空间中的曲面和微分形式}
+
+本章进一步研究曲面的概念，并为下一章曲线曲面积分作必要的准备。为此我们将讲述曲面的其它定义；曲面的定向；带边曲面及其定向；曲面的面积以及微分形式这些内容.
+
+\mysection{$\RR^n$ 中的曲面}
+
+\input{12.1}
+
+\mysection{曲面的定向}
+
+\input{12.2}
+
+\mysection{带边曲面及其定向}
+
+\input{12.3}
+
+\mysection{曲面的面积}
+
+\input{12.4}
+
+\mysection{微分形式}
+
+\input{12.5}
+
+\mychapter{曲线积分与曲面积分}
+
+本章我们讨论如何在定向曲面上对一个微分形式作积分，以及与之相关的几个重要定理.
+
+\mysection{微分形式的积分}
+
+\input{13.1}
+
+\mysection{体积元，第一型与第二型曲面积分}
+
+\input{13.2}
+
+\mysection{三大积分公式}
+
+\input{13.3}
+
+\end{document}
