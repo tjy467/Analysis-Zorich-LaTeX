@@ -143,5 +143,179 @@ $$
 $$
 \int_{\partial D}\omega=\int_D\dd\omega
 $$
+
+        \item 这种观察还可以启发我们以另一种方式来证明 Green 公式：设 $I$ 为矩形区域，则其既是 $x$-型区域也是 $y$-型区域. 从而我们有
+$$
+\int_I\dd\omega=\int_{\partial I}\omega
+$$
+
+        其中 $\omega=P\dd x+Q\dd y$.
+
+        若区域 $\overline{D}$ 有参数化 $\varphi:\overline{I}\to\overline{D},\omega=P\dd x+Q\dd y$ 为 $\overline{D}$ 上的 $1$-形式，则
+$$
+\int_{\overline{D}}\dd\omega=\int_{I}\varphi^*(\dd\omega)=\int_I\dd\varphi^*(\omega)\xlongequal{\text{Green 公式}}\int_{\partial I}\varphi^*\omega=\int_{\partial D}\omega
+$$
+
+        即通过以矩形上的 Green 公式为桥梁，我们证明了 $\overline{D}$ 上的 Green 公式.
+
+        若进一步 $\overline{D}$ 可以分割成有限个如上类型区域的并 $\overline{D}=\overline{D}_1\cup\cdots\cup\overline{D}_k$，则
+$$
+\int_{\overline{D}}\dd\omega=\sum_{i=1}^k\int_{\overline{D}_i}\dd\omega=\sum_{i=1}^k\int_{\partial D_i}\omega=\int_{\partial D}\omega
+$$
+
+        最后一步再次使用了观察：若 $\overline{D}_i\cap\overline{D}_j\ne\varnothing$，则 $D_i$ 与 $D_j$ 在公共边界上诱导了相反的定向.
     \end{enumerate}
 \end{hint}
+
+以下来看几个应用实例.
+
+\begin{example}
+    设 $D$ 为初等区域. 取 $P=-y,Q=x$，则有
+$$
+\begin{aligned}
+    &\int_{\partial D}-y\dd x=\int_D1\dd x\dd y=S(D)\\
+    &\int_{\partial D}x\dd y=\int_D1\dd x\dd y=S(D)
+\end{aligned}
+$$
+\end{example}
+
+\begin{example}[ 椭圆的面积]
+\end{example}
+
+\begin{example}[ Brouwer 不动点定理]
+    若 $D$ 为单位圆盘 $\set{(x,y)\in\RR^2|x^2+y^2<1}$，而 $f:\overline{D}\to\overline{D}$ 为 $C^{(1)}$ 光滑映射，则 $f$ 必有不动点.
+\end{example}
+\begin{proof}
+    反证. 设 $f(x)\ne x,\forall x\in\overline{D}$.
+
+    设 $\varphi:\overline{D}\to\partial{D},\varphi(x)$ 为从 $f(x)$ 指向 $x$ 的射线与 $\partial D$ 的交点.
+    
+    任取 $\omega\in\Omega^1(\partial D)$. 则 $\varphi^*\omega\in\Omega^1(\overline{D})$. 从而
+$$
+\int_{\partial D}\varphi^*\omega=\int_{\overline{D}}\dd\varphi^*\omega=\int_{\overline{D}}\varphi^*\dd\omega=0
+$$
+
+    另一方面由 $\varphi|_{\partial D}=\mathrm{id}_{\partial D}$ 知
+$$
+\int_{\partial D}\varphi^*\omega=\int_{\partial D}\omega\ne 0
+$$
+
+    矛盾，故 $f$ 必有不动点.
+\end{proof}
+
+\begin{hint}
+    事实上，仅需 $f$ 连续即可证明不动点存在.
+\end{hint}
+
+\mysubsection{Gauss-Ostrogradskii 公式}
+
+\begin{theorem}[Gauss-Ostrogradskii 公式]
+    设 $D\subset\RR^3$ 为开区域，$\overline{D}$ 紧，$\partial D$ 为分片光滑曲面.
+
+    在 $D$ 上取标准定向 $(e_1,e_2,e_3)$，在 $\partial D$ 上取由 $D$ 的定向诱导的定向. 设 $P,Q,R\in C^{(1)}(\overline{D})$，则
+$$
+\int_{\partial D}P\dd y\wedge\dd z+Q\dd z\wedge\dd x+R\dd x\wedge\dd y=\int_{\overline{D}}\left(\pard{P}{x}+\pard{Q}{y}+\pard{R}{z}\right)\dd x\dd y\dd z
+$$
+\end{theorem}
+
+与 Green 公式的证明类似，我们仅对一类特殊的区域来证明：
+
+\begin{definition}
+    称 $D$ 是一个 $z$-型区域，若存在区域 $G\subset\RR^2$ 满足 $\overline{G}$ 紧，以及连续且分片光滑函数 $\varphi_1,\varphi_2:\overline{G}\to\RR$，满足 $\varphi_1(p)\le\varphi_2(p),\forall p\in G$，且
+$$
+\overline{D}=\set{(x,y,z)\in\RR^3|(x,y)\in\overline{G},\varphi_1(x,y)\le z\le\varphi_2(x,y)}
+$$
+\end{definition}
+
+类似可定义 $x$-型与 $y$-型区域.
+
+\begin{definition}
+    设 $D$ 为初等区域，若 $\overline{D}$ 可以分解成有限个 $x$-型（$y$-型，$z$-型）区域的并，且内部不交.
+\end{definition}
+
+\begin{lemma}
+    设 $D$ 为如上定义的 $z$-型区域，且 $R\in C^{(1)}(\overline{D})$. 则有
+$$
+\int_{\partial D}R\dd x\wedge\dd y=\int_D\pard{R}{z}\dd x\dd y\dd z
+$$
+\end{lemma}
+\begin{proof}
+    一方面，由 Fubini 定理知
+$$
+\begin{aligned}
+    &\int_D\pard{R}{z}\dd x\dd y\dd z\\
+    =&\int_G\int_{\varphi_1(x,y)}^{\varphi_2(x,y)}\pard{R}{z}(x,y,z)\dd z\dd x\dd y\\
+    =&\int_G(R(x,y,\varphi_2(x,y))-R(x,y,\varphi_1(x,y)))\dd x\dd y
+\end{aligned}
+$$
+
+    另一方面，$\partial D$ 由 $S_1,S_2$ 与 $S$ 三部分组成. 其定向如图所示（由法向量给定）.
+
+    \img{0.6}{13.3.5.png}
+
+    $S_1$ 与 $S_2$ 有参数化
+$$
+S_1:(x,y)\mapsto(x,y,\varphi_1(x,y))
+S_2:(x,y)\mapsto(x,y,\varphi_2(x,y))
+$$
+
+    其中 $S_1$ 的参数化诱导了与 $S_1$ 相反的定向，$S_2$ 的参数化诱导了与 $S_2$ 相反的定向.
+
+    设 $\gamma:[a,b]\to\RR^2$ 为 $\partial G$ 的参数化.
+
+    则 $S$ 有参数化
+$$
+\psi:\widetilde{D}\to\RR^3,(t,z)\mapsto(\gamma_1(t),\gamma_2(t),z)
+$$
+
+    其中 $\widetilde{D}=\set{(t,z)\in\RR^2|t\in[a,b],\varphi_1(\gamma(t))\le z\le\varphi_2(\gamma(t))}$. 则有
+$$
+\begin{aligned}
+    &\int_{S_1}R\dd x\wedge\dd y=-\int_GR(x,y,\varphi_1(x,y))\dd x\dd y\\
+    &\int_{S_2}R\dd x\wedge\dd y=\int_GR(x,y,\varphi_2(x,y))\dd x\dd y\\
+    &\int_{S_3}R\dd x\wedge\dd y=\int_{\widetilde{D}}R(\psi(t,z))\dd\gamma_1(t)\wedge\dd\gamma_2(t)=0
+\end{aligned}
+$$
+
+    综上
+$$
+\int_D\pard{R}{z}\dd x\dd y\dd z=\int_{\partial D}R\dd x\wedge\dd y
+$$
+\end{proof}
+
+设 $D$ 为初等区域. 与 Green 公式的证明类似，由 $D$ 可以分解成有限个 $z$-型区域的并，可得
+$$
+\int_D\pard{R}{z}\dd x\dd y\dd z=\int_{\partial D}R\dd x\wedge\dd y
+$$
+
+类似的
+$$
+\begin{aligned}
+    \int_D\pard{P}{x}\dd x\dd y\dd z=\int_{\partial D}P\dd y\wedge\dd z\\
+    \int_D\pard{Q}{y}\dd x\dd y\dd z=\int_{\partial D}Q\dd z\wedge\dd x
+\end{aligned}
+$$
+
+三式相加，即对初等区域 $D$ 证明了 G-O 公式.
+
+\begin{hint}
+    令 $\omega=P\dd y\wedge\dd z+Q\dd z\wedge\dd x+R\dd x\wedge\dd y$. 则
+$$
+\dd\omega=\left(\pard{P}{x}+\pard{Q}{y}+\pard{R}{z}\right)\dd x\wedge\dd y\wedge\dd z
+$$
+
+    从而 G-O 公式可以写成如下的抽象形式
+$$
+\int_{\partial D}\omega=\int_{\overline{D}}\dd\omega
+$$
+\end{hint}
+
+\begin{example}
+    取 $P=x,Q=y,R=z$ 可知
+$$
+V(D)=\int_{\partial D}x\dd y\wedge\dd z=\int_{\partial D}y\dd z\wedge\dd x=\int_{\partial D}z\dd x\wedge\dd y
+$$
+\end{example}
+
+\begin{example}[ 椭球的体积]
+\end{example}
