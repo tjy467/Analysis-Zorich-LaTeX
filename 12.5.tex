@@ -466,7 +466,7 @@ $$
 \begin{example}[ 散度]
     设 $D\subset\RR^3$ 为开集，$F:D\to\RR^3$ 光滑，$F=(P,Q,R)$，则
 $$
-\ddiv F=\pard{P}{x}+\pard{Q}{y}+\pard{Q}{z}=\nabla\dot F
+\ddiv F=\pard{P}{x}+\pard{Q}{y}+\pard{Q}{z}=\nabla\cdot F
 $$
 
     从而
@@ -550,8 +550,8 @@ $$
 =&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\dd x_{i_1}\wedge\cdots\wedge\dd x_{i_p}(\varphi'(t)\xi_1,\cdots,\varphi'(t)\xi_p)\\
 =&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\left\lvert\left(\varphi_{i_l}'(t)\xi_s\right)_{l,s}\right\rvert\\
 =&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\left\lvert\begin{pmatrix}\pard{\varphi_{i_1}}{t_1}(t) & \cdots & \pard{\varphi_{i_1}}{t_n}(t)\\\vdots & \ddots & \vdots\\\pard{\varphi_{i_p}}{t_1}(t) & \cdots & \pard{\varphi_{i_p}}{t_n}(t)\end{pmatrix}(\xi_1,\cdots,\xi_p)\right\rvert\\
-=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\sum_{1\le j_1<\cdots<j_p\le n}\begin{vmatrix}\pard{\varphi_{i_1}}{t_{j_1}}(t) & \cdots & \pard{\varphi_{i_1}}{t_{j_p}}(t)\\\vdots & \ddots & \vdots\\\pard{\varphi_{i_p}}{t_{j_1}}(t) & \cdots & \pard{\varphi_{i_p}}{t_{j_p}}(t)\end{vmatrix}\begin{vmatrix}\xi_{j_11} & \cdots & \xi_{j_1p}\\\vdots & \ddots & \vdots\\\xi_{j_p1} & \cdots & \xi_{j_pp}\end{vmatrix}\\
-=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\sum_{1\le j_1<\cdots<j_p\le n}\left\lvert\left(\pard{\varphi_{i_l}}{t_{j_s}}\right)_{l,s}\right\rvert\dd t_{j_1}\wedge\cdots\wedge\dd t_{j_p}(\xi_1,\cdots,\xi_p)\\
+=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\sum_{1\le j_1<\cdots<j_p\le m}\begin{vmatrix}\pard{\varphi_{i_1}}{t_{j_1}}(t) & \cdots & \pard{\varphi_{i_1}}{t_{j_p}}(t)\\\vdots & \ddots & \vdots\\\pard{\varphi_{i_p}}{t_{j_1}}(t) & \cdots & \pard{\varphi_{i_p}}{t_{j_p}}(t)\end{vmatrix}\begin{vmatrix}\xi_{j_11} & \cdots & \xi_{j_1p}\\\vdots & \ddots & \vdots\\\xi_{j_p1} & \cdots & \xi_{j_pp}\end{vmatrix}\\
+=&\sum_{1\le i_1<\cdots<i_p\le n}a_{i_1,\cdots,i_p}(\varphi(t))\sum_{1\le j_1<\cdots<j_p\le m}\left\lvert\left(\pard{\varphi_{i_l}}{t_{j_s}}\right)_{l,s}\right\rvert\dd t_{j_1}\wedge\cdots\wedge\dd t_{j_p}(\xi_1,\cdots,\xi_p)\\
 \end{aligned}
 $$
 
