@@ -1,0 +1,35 @@
+\mysubsection{标量场与向量场}
+
+场的概念十分简单但又十分重要.
+
+\begin{definition}
+    设 $U\subset\RR^n$ 为开集，$V$ 为 Banach 空间.
+
+    设映射 $F:U\to V$，则称 $F$ 是定义在 $D$ 上的场.
+
+    若 $F$ 连续，则称 $F$ 为连续场. 若 $F$ 光滑，则称 $F$ 为光滑场.
+
+    \begin{enumerate}
+        \item $V=\RR$. 则称 $F$ 为标量场.
+        
+        \item $V=\RR^n$. 则称 $F$ 为向量场.
+        
+        \item $V=\mathscr{A}^p(\RR^n)$. 则称 $F$ 为形式场.
+    \end{enumerate}
+\end{definition}
+
+\mysubsection{$\RR^3$ 中的标量场，向量场与形式场}
+
+当空间的维数为 $3$ 时，向量场与形式场会呈现某种奇妙的关系. 下面我们来解释这种关系.
+
+\mysubsubsection{代数层面的对应}
+
+\begin{property}
+    在 $\RR^3$ 中取定标准内积与标准定向.
+
+    \begin{enumerate}
+        \item 对任意 $\omega\in\mathscr{A}^1(\RR^3)$，存在唯一的 $A\in\RR^3$ 使得 $\omega(\xi)=\inner{A,\xi},\forall\xi\in\RR^3$.
+        
+        \item 对任意 $\omega\in\mathscr{A}^2(\RR^3)$，存在唯一的 $B\in\RR^3$ 使得 $\omega(\xi_1,\xi_2)=\det(B,\xi_1,\xi_2),\forall\xi_1,\xi_2\in\RR^3$.
+    \end{enumerate}
+\end{property}

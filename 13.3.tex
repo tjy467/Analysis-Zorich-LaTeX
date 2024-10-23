@@ -319,3 +319,232 @@ $$
 
 \begin{example}[ 椭球的体积]
 \end{example}
+
+\begin{example}[ 浮力定律(Archimedes)]
+    设水面为平面 $z=0$. 设物体 $D$ 浸入水中，其表面 $S$ 会受到水的压力.
+
+    \img{0.5}{13.3.6.png}
+
+    在水深为 $z$ 处的一个小片上水的压强为 $\rho g(-z)$，其方向为 $-\mathbf{n}$，其中 $\mathbf{n}$ 为 $S$ 的外法向. 从而小片受到的压力为
+$$
+\rho g(-z)(-\mathbf{n})\dd\bm{\sigma}=\rho gz\mathbf{n}\dd\bm{\sigma}
+$$
+
+    已知 $\mathbf{n}\dd\sigma=(\dd y\wedge\dd z,\dd z\wedge\dd x,\dd x\wedge\dd y)$.
+
+    从而物体所受的压力为
+$$
+\begin{aligned}
+    F&=\int_S\rho g z\mathbf{n}\dd\bm{\sigma}\\
+    &=\left(\int_S\rho g z\dd y\wedge\dd z,\int_S\rho g z\dd z\wedge\dd x,\int_S\rho g z\dd x\wedge\dd y\right)\\
+    &=\left(0,0,\int_D\rho g\dd x\wedge\dd y\wedge\dd z\right)\\
+    &=(0,0,\rho g V)
+\end{aligned}
+$$
+
+    即物体收到竖直向上的浮力，其大小等于物体所排开水的重力.
+\end{example}
+
+\mysubsection{Stokes 公式}
+
+\begin{theorem}[Stokes 公式]
+    设 $G\subset\RR^3$ 为开集，$P,Q,R\in C^{(1)}(G)$.
+    
+    设 $S\subset G$ 为紧 $2$ 维分片光滑可定向带边曲面，则如下公式成立
+$$
+\begin{aligned}
+    \int_SP\dd x+Q\dd y+R\dd z=\int_S&\left(\pard{R}{y}-\pard{Q}{z}\right)\dd y\wedge\dd z\\
+    &+\left(\pard{P}{z}-\pard{R}{x}\right)\dd z\wedge\dd x\\
+    &+\left(\pard{Q}{x}-\pard{P}{y}\right)\dd x\wedge\dd y
+\end{aligned}
+$$
+\end{theorem}
+
+我们仅对一类特殊的带边曲面证明 Stokes 公式.
+
+\begin{definition}
+    称 $S$ 为 $z$-型曲面，若存在开集 $D\subset\RR^2,\overline{D}$ 紧，$\partial D$ 为分片光滑曲线以及 $\varphi:\overline{D}\to\RR$ 连续且分片光滑使得
+$$
+S=\Gamma(\varphi)=\set{(x,y,\varphi(x,y))|(x,y)\in\overline{D}}
+$$
+\end{definition}
+
+\img{0.5}{13.3.7.png}
+
+类似地可以定义 $x$-型与 $y$-型曲面.
+
+\begin{lemma}
+    若 $S$ 为 $z$-型曲面，则 Stokes 公式成立.
+\end{lemma}
+\begin{proof}
+    记 $\omega=P\dd x+Q\dd y+R\dd z$. 则
+$$
+\dd\omega=\left(\pard{R}{y}-\pard{Q}{z}\right)\dd y\wedge\dd z+\left(\pard{P}{z}-\pard{R}{x}\right)\dd z\wedge\dd x+\left(\pard{Q}{x}-\pard{P}{y}\right)\dd x\wedge\dd y
+$$
+
+    Stokes 公式即为 $\displaystyle\int_S\dd\omega=\int_{\partial S}\omega$. 以下我们将其转化为平面上的 Green 公式.
+    
+    由 $S$ 为 $\varphi$ 的图象知
+$$
+\Gamma:\overline{D}\to S,(x,y)\mapsto(x,y,\varphi(x,y))
+$$
+
+    为 $S$ 的参数化. 从而
+$$
+\int_S\dd\omega=\int_{\overline{D}}\Gamma^*(\dd\omega)=\int_{\overline{D}}\dd(\Gamma^*\omega)
+$$
+
+    不妨设 $\partial D$ 可以参数化（否则可以考虑每个段）. 设 $\gamma:[a,b]\to\partial D$ 为 $\partial D$ 的参数化.
+
+    从而 $\Gamma\circ\gamma:[a,b]\to\partial S$ 为 $\partial S$ 的参数化. 于是有
+$$
+\int_{\partial S}\omega=\int_{[a,b]}(\Gamma\circ\gamma)^*\omega=\int_{[a,b]}\gamma^*\Gamma^*\omega=\int_{\partial D}\Gamma^*\omega
+$$
+
+    此时对 $\Gamma^*\omega$ 应用 Green 公式即得
+$$
+\int_{\partial S}\omega=\int_{\partial D}\Gamma^*\omega=\int_D\dd\Gamma^*\omega=\int_S\omega
+$$
+\end{proof}
+
+\begin{definition}
+    称 $S$ 为简单曲面，若 $S$ 可以分割为有限个 $z$-型（或 $x$-型，或 $y$-型）曲面的并，且只在边界相交.
+\end{definition}
+
+从而我们即对简单曲面证明了 Stokes 公式.
+
+\begin{property}
+    设 $G\subset\RR^3$ 为开集，$P,Q,R\in C^{(1)}(G),S\subset G$ 紧，$\partial S$ 分段光滑，且 $S$ 为简单曲面，则
+$$
+\int_{\partial S}\omega=\int_S\dd\omega
+$$
+
+    其中 $\omega=P\dd x+Q\dd y+R\dd z$.
+\end{property}
+
+\mysubsection{一般形式的 Stokes 公式}
+
+\mysubsubsection{区间上的 Stokes 公式}
+
+\begin{lemma}
+    设 $I=[0,1]^k$ 为 $k$ 维闭区间. 设 $G\subset\RR^k$ 为开集，$I\subset G$. 设 $\omega\in\Omega^{k-1}(G)$，则
+$$
+\int_{\partial I}\omega=\int_I\dd\omega
+$$
+
+    其中 $I$ 取标准定向 $(e_1,\cdots,e_k)$，而 $\partial I$ 取由 $I$ 的定向诱导的定向.
+\end{lemma}
+\begin{proof}
+    设
+$$
+\omega(x)=\sum_{j=1}^k(-1)^{j-1}a_j(x)\dd x_1\wedge\cdots\wedge\widehat{\dd x_j}\wedge\cdots\wedge\dd x_k=\sum_{j=1}^k\omega_j
+$$
+
+    其中 $\omega_j(x)=(-1)^{j-1}a_j(x)\dd x_1\wedge\cdots\wedge\widehat{\dd x_j}\wedge\cdots\wedge\dd x_k$. 则
+$$
+\dd\omega=\left(\sum_{j=1}^k\pard{a_j}{x_j}\right)\dd x_1\wedge\cdots\wedge\dd x_k
+$$
+
+    从而我们只需证：$\displaystyle\int_{\partial I}\omega_j=\int_I\dd\omega_j,j=1,\cdots,k$.
+
+    记 $\hat{I}=[0,1]^{k-1},I_0^l=\set{x\in I|x_l=0},I_1^l=\set{x\in I|x_l=1}$. 则由 Fubini 定理知
+$$
+\begin{aligned}
+    \int_I\dd\omega_j=&\int_{\hat{I}}\left(\int_0^1\pard{a_j}{x_j}(x)\dd x_j\right)\dd x_1\cdots\dd x_{j-1}\dd x_{j+1}\cdots\dd x_k\\
+    =&\int_{\hat{I}}a_j(x_1,\cdots,x_{j-1},1,x_{j+1},\cdots,x_k)\dd x_1\cdots\dd x_{j-1}\dd x_{j+1}\cdots\dd x_k\\
+    &-\int_{\hat{I}}a_j(x_1,\cdots,x_{j-1},0,x_{j+1},\cdots,x_k)\dd x_1\cdots\dd x_{j-1}\dd x_{j+1}\cdots\dd x_k
+\end{aligned}
+$$
+
+    接下来我们计算 $\displaystyle\int_{\partial I}\omega$. 已知 $I_0^l,I_1^l$ 均为 $\partial I$ 的一部分，且其定向为
+
+    \img{0.6}{13.3.8.png}
+
+    它们有参数化
+$$
+\begin{aligned}
+    \varphi_0^l:\hat{I}\to I_0^l,(t_1,\cdots,t_{k-1})\mapsto(t_1,\cdots,t_{l-1},0,t_l,\cdots,t_{k-1})\\
+    \varphi_1^l:\hat{I}\to I_1^l,(t_1,\cdots,t_{k-1})\mapsto(t_1,\cdots,t_{l-1},1,t_l,\cdots,t_{k-1})
+\end{aligned}
+$$
+
+    特别的，对 $s=0,1$ 有 $\varphi^l_{s}$ 在 $I_s^l$ 上诱导的定向均为 $(e_1,\cdots,\widehat{e_l},\cdots,e_k)$. 从而
+$$
+\begin{aligned}
+    \int_{I_1^j}\omega_j&=(-1)^{j-1}\int_{\hat{I}}(\varphi_1^j)^*\omega_j\\
+    &=(-1)^{j-1}\int_{\hat{I}}(-1)^{j-1}a(t_1,\cdots,t_{j-1},1,t_j,\cdots,t_{k-1})\dd t_1\cdots\dd t_{k-1}\\
+    &=\int_{\hat{I}}a(x_1,\cdots,x_{j-1},1,x_{j+1},\cdots,x_k)\dd x_1\cdots\dd x_{j-1}\dd x_{j+1}\cdots\dd x_{k}
+\end{aligned}
+$$
+
+    同理
+$$
+\int_{I_0^j}\omega_j=-\int_{\hat{I}}a(x_1,\cdots,x_{j-1},0,x_{j+1},\cdots,x_k)\dd x_1\cdots\dd x_{j-1}\dd x_{j+1}\cdots\dd x_{k}
+$$
+
+    而当 $l\ne j$ 时
+$$
+\int_{I_s^l}\omega_j=0
+$$
+
+    综上有
+$$
+\int_{\partial I}\omega_j=\int_I\dd\omega_j
+$$
+\end{proof}
+
+\mysubsubsection{一般的 Stokes 公式}
+
+\begin{theorem}
+    设 $G\subset\RR^n$ 为开集，$\omega\in\Omega^{k-1}(G)$.
+
+    设 $S\subset G$ 是一个 $k$ 维分片光滑定向曲面，$\overline{S}$ 紧，则
+$$
+\int_{\partial S}\omega=\int_S\dd\omega
+$$
+\end{theorem}
+
+我们仅对一类特殊的曲面来证明该定理.
+
+\begin{definition}
+    设 $S$ 为 $k$ 维光滑曲面. 称 $S$ 为正则曲面，若其存在参数化 $\varphi:I\to S$，其中 $I=[0,1]^k$.
+\end{definition}
+
+\begin{lemma}
+    设 $G\subset\RR^n$ 为开集，$\omega\in\Omega^{k-1}(G)$. 设 $S\subset G$ 为正则曲面，$\varphi:I\to S$ 为参数化. 则
+$$
+\int_{\partial S}\omega=\int_S\dd\omega
+$$
+\end{lemma}
+\begin{proof}
+    由 $\varphi:I\to S$ 为参数化知 $\varphi|_{\partial I}:\partial I\to\partial S$ 为 $\partial S$ 的参数化（更严格的说是有限个参数化的并）. 从而
+
+$$
+\int_{\partial S}\omega=\int_{\partial I}\varphi^*\omega=\int_I\dd\varphi^*\omega=\int_I\varphi^*\dd\omega=\int_S\dd\omega
+$$
+\end{proof}
+
+\begin{definition}
+    称 $S\subset\RR^m$ 为简单 $k$ 维曲面，若存在 $k$ 维正则曲面 $S_1,\cdots,S_l$ 使得
+$$
+S=\bigcup_{i}S_i,\qquad S_i\cap S_j\subset\partial S_i\cup\partial S_j,\forall i\ne j
+$$
+\end{definition}
+
+从而我们即对简单曲面证明了 Stokes 公式.
+
+\begin{example}[ $n$ 维 Brouwer 不动点定理]
+    设 $f:\overline{B(0,1)}\to\overline{B(0,1)}\subset\RR^n$ 满足 $f\in C^{(1)}$. 则 $f$ 有不动点.
+\end{example}
+
+\begin{hint}
+    Newton-Leibniz 公式也可以解释为 Stokes 公式在 $k=1$ 时的情形.
+$$
+\begin{aligned}
+    f(b)-f(a)&=\int_a^bf'(x)\dd x\\
+    \int_{\partial[a,b]}f&=\int_{[a,b]}\dd f
+\end{aligned}
+$$
+
+    其中 $f\in\Omega^0([a,b])$.
+\end{hint}
