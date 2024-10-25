@@ -33,3 +33,342 @@
         \item 对任意 $\omega\in\mathscr{A}^2(\RR^3)$，存在唯一的 $B\in\RR^3$ 使得 $\omega(\xi_1,\xi_2)=\det(B,\xi_1,\xi_2),\forall\xi_1,\xi_2\in\RR^3$.
     \end{enumerate}
 \end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item 存在唯一的 $a_1,a_2,a_3$ 使得 $\omega=a_1\dd x+a_2\dd y+a_3\dd z$.
+        
+        令 $A=(a_1,a_2,a_3)^T$，则 $\omega(\xi)=\inner{A,\xi}$.
+        
+        \item 存在唯一的 $b_1,b_2,b_3$ 使得 $\omega=b_1\dd y\wedge\dd z+b_2\dd z\wedge\dd x+b_3\dd x\wedge\dd y$.
+        
+        令 $B=(b_1,b_2,b_3)^T$，则 $\omega(\xi_1,\xi_2)=\det(B,\xi_1,\xi_2)$.
+    \end{enumerate}
+\end{proof}
+
+上述性质表明：每个一重交错线性型与每个向量一一对应，每个二重交错线性型与每个向量一一对应.
+
+若定义映射
+$$
+\begin{aligned}
+    &\Phi_1:\RR^3\to\mathscr{A}^1(\RR^3),(a_1,a_2,a_3)\mapsto a_1\dd x+a_2\dd y+a_3\dd z\\
+    &\Phi_2:\RR^3\to\mathscr{A}^2(\RR^3),(b_1,b_2,b_3)\mapsto b_1\dd y\wedge\dd z+b_2\dd z\wedge\dd x+b_3\dd x\wedge\dd y
+\end{aligned}
+$$
+
+则 $\Phi_1,\Phi_2$ 均为线性同构.
+
+\mysubsubsection{分析层面的对应}
+
+有了以上的分析，我们可以回到分析层面.
+
+\begin{property}
+    设 $D\subset\RR^3$ 为开集，则
+
+    \begin{enumerate}
+        \item 对任意 $\omega\in\Omega^1(D)$，存在唯一的光滑向量场 $A:D\to\RR^3$ 使得
+$$
+\omega=\omega_A^1\triangleq A_1\dd x+A_2\dd y+A_3\dd z
+$$
+        
+        \item 对任意 $\omega\in\Omega^2(D)$，存在唯一的光滑向量场 $B:D\to\RR^3$ 使得
+$$
+\omega=\omega_B^2\triangleq B_1\dd y\wedge\dd z+B_2\dd z\wedge\dd x+B_3\dd x\wedge\dd y
+$$
+    \end{enumerate}
+\end{property}
+
+以上展示了向量场与 $1$-形式、$2$-形式之间的一一对应关系.
+
+另一方面我们也有如下平凡但重要的结论：标量场与 $0$-形式、$3$-形式之间一一对应.
+
+\begin{property}
+    设 $D\subset\RR^3$ 为开集，$f\in C^\infty(D;\RR)$. 定义
+$$
+\begin{aligned}
+    &\Phi_0:C^\infty(D;\RR)\to\Omega^0(D),f\mapsto f=\omega_f^0\\
+    &\Phi_3:C^\infty(D;\RR)\to\Omega^3(D),f\mapsto f\dd x\wedge\dd y\wedge\dd z=f\dd V=\omega_f^3
+\end{aligned}
+$$
+
+    则 $\Phi_0,\Phi_3$ 均为线性同构.
+\end{property}
+
+综上，我们定义了如下四个映射
+
+$$
+\begin{aligned}
+    &\omega_\cdot^0:C^\infty(D;\RR)\to\Omega^0(D)\\
+    &\omega_\cdot^1:C^\infty(D;\RR^3)\to\Omega^1(D)\\
+    &\omega_\cdot^2:C^\infty(D;\RR^3)\to\Omega^2(D)\\
+    &\omega_\cdot^3:C^\infty(D;\RR)\to\Omega^3(D)\\
+\end{aligned}
+$$
+
+\begin{property}
+    $\omega_\cdot^0,\omega_\cdot^1,\omega_\cdot^2,\omega_\cdot^3$ 均为线性同构.
+\end{property}
+
+\begin{property}
+    设 $D\subset\RR^3$ 为开集，$A,B\in C^\infty(D;\RR^3)$. 则
+
+    \begin{enumerate}
+        \item $\omega_A^1\wedge\omega_B^1=\omega_{A\times B}^2$
+        
+        \item $\omega_A^1\wedge\omega_B^2=\omega_{A\cdot B}^3=\omega_B^2\wedge\omega_A^1$
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item
+$$
+\begin{aligned}
+    &(A_1\dd x+A_2\dd y+A_3\dd z)\wedge(B_1\dd x+B_2\dd y+B_3\dd z)\\
+    =&(A_2B_3-A_3B_2)\dd y\wedge\dd z+(A_3B_1-B_1A_3)\dd z\wedge\dd x+(A_1B_2-A_2B_1)\dd x\wedge\dd y\\
+    =&\omega_{A\times B}^2
+\end{aligned}
+$$
+
+        \item
+$$
+\begin{aligned}
+    &(A_1\dd x+A_2\dd y+A_3\dd z)\wedge(B_1\dd y\wedge\dd z+B_2\dd z\wedge\dd x+B_3\dd x\wedge\dd y)\\
+    =&(A_1B_1+A_2B_2+A_3B_3)\dd x\wedge\dd y\wedge\dd z\\
+    =&\omega_{A\cdot B}^3
+\end{aligned}
+$$
+    \end{enumerate}
+\end{proof}
+
+\mysubsection{向量的微分：梯度，散度与旋度}
+
+借助于第二节的对应，我们现在可以更为自然地引入几个重要的微分算子：
+
+\begin{definition}
+    设 $D\subset\RR^3$ 为开集.
+    
+    设标量场 $f\in C^\infty(D;\RR)$. 定义 $f$ 的梯度 $\grad f$ 为
+$$
+\omega_{\grad f}^1\triangleq\dd\omega_f^0
+$$
+
+    设向量场 $A\in C^\infty(D;\RR^3)$. 定义 $A$ 的旋度 $\curl A$ 为
+$$
+\omega_{\curl A}^2\triangleq\dd\omega_A^1
+$$
+
+    设向量场 $B\in C^\infty(D;\RR^3)$. 定义 $B$ 的散度 $\ddiv B$ 为
+$$
+\omega_{\ddiv B}^3\triangleq\dd\omega_B^2
+$$
+\end{definition}
+
+在直角坐标系下直接计算可知
+$$
+\begin{aligned}
+    \grad f&=\left(\pard{f}{x},\pard{f}{y},\pard{f}{z}\right)\\
+    \curl A&=\begin{vmatrix}
+        \hat{\imath} & \hat{\jmath} & \hat{k}\\
+        \pard{}{x} & \pard{}{y} & \pard{}{z}\\
+        A_1 & A_2 & A_3
+    \end{vmatrix}\\
+    &=\left(\pard{A_3}{y}-\pard{A_2}{z},\pard{A_1}{z}-\pard{A_3}{x},\pard{A_2}{x}-\pard{A_1}{y}\right)\\
+    \ddiv B&=\pard{B_1}{x}+\pard{B_2}{y}+\pard{B_3}{z}
+\end{aligned}
+$$
+
+Hamilton 首先研究了向量的分析学，并引入了如下神奇的算符
+$$
+\nabla=\left(\pard{}{x},\pard{}{y},\pard{}{z}\right)
+$$
+
+进而可将以上的三种微分运算写成
+$$
+\begin{aligned}
+    \grad f&=\nabla f\\
+    \curl A&=\nabla\times A\\
+    \ddiv B&=\nabla\cdot B
+\end{aligned}
+$$
+
+在引入所有这些记号之后，Maxwell 方程组可以写成
+$$
+\begin{cases}
+    \displaystyle\nabla\cdot E=\frac{\rho}{\eps_0}\\
+    \displaystyle\nabla\times E=-\pard{B}{t}\\
+    \displaystyle\nabla\cdot B=0\\
+    \displaystyle\nabla\times B=\frac{j}{\eps_0c^2}+\frac{1}{c^2}\pard{E}{t}
+\end{cases}
+$$
+
+其中 $E,B$ 分别为电场强度与磁场强度，$\rho$ 为电荷密度，$\eps_0$ 为真空介电常数，$c$ 为光速，$j$ 为电流密度.
+
+\mysubsection{向量分析的微分公式}
+
+以下我们来列举一些公式. 先从一阶求导开始：
+
+\begin{property}
+    \begin{enumerate}
+        \item $\nabla\cdot(fA)=f\nabla\cdot A+\nabla f\cdot A$
+        
+        \item $\nabla\times(fA)=f\nabla\times A+\nabla f\times A$
+        
+        \item $\nabla\cdot(A\times B)=(\nabla\times A)\cdot B-A\cdot(\nabla\times B)$
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item 
+$$
+\begin{aligned}
+    \nabla\cdot(fA)&=\pard{}{x}(fA_1)+\pard{}{y}(fA_2)+\pard{}{z}(fA_3)\\
+    &=f\pard{A_1}{x}+f\pard{A_2}{y}+f\pard{A_3}{z}+\pard{f}{x}A_1+\pard{f}{y}A_2+\pard{f}{z}{A_3}\\
+    &=f\nabla\cdot A+\nabla f\cdot A
+\end{aligned}
+$$
+
+        \item 
+$$
+\begin{aligned}
+    \nabla\times(fA)&=\begin{vmatrix}
+        \hat{\imath} & \hat{\jmath} & \hat{k}\\
+        \pard{}{x} & \pard{}{y} & \pard{}{z}\\
+        fA_1 & fA_2 & fA_3
+    \end{vmatrix}\\
+    &=f\begin{vmatrix}
+        \hat{\imath} & \hat{\jmath} & \hat{k}\\
+        \pard{}{x} & \pard{}{y} & \pard{}{z}\\
+        A_1 & A_2 & A_3
+    \end{vmatrix}+\begin{vmatrix}
+        \hat{\imath} & \hat{\jmath} & \hat{k}\\
+        \pard{f}{x} & \pard{f}{y} & \pard{f}{z}\\
+        A_1 & A_2 & A_3
+    \end{vmatrix}\\
+    &=f\nabla\times A+\nabla f\times A
+\end{aligned}
+$$
+
+        \item
+$$
+\begin{aligned}
+    \omega_{\nabla\cdot(A\times B)}^3&=\dd\omega_{A\times B}^2=\dd(\omega_A^1\wedge\omega_B^1)\\
+    &=\dd\omega_A^1\wedge\omega_B^1-\omega_A^1\wedge\dd\omega_B^1\\
+    &=\omega_{\nabla\times A}^2\wedge\omega_B^1-\omega_A^1\wedge\omega_{\nabla\times B}^2\\
+    &=\omega_{(\nabla\times A)\cdot B-A\cdot(\nabla\times B)}^3
+\end{aligned}
+$$
+
+        即证 $\nabla\cdot(A\times B)=(\nabla\times A)\cdot B-A\cdot(\nabla\times B)$.
+    \end{enumerate}
+\end{proof}
+
+接下来我们讨论二阶导，即以各种可能的方式使用 $\nabla$ 两次. 我们首先来看有哪些可能性.
+
+从标量场 $f$ 出发，有
+$$
+\begin{tikzpicture}
+    \node[] (a) at (0,0)  {$f$};
+    \node[] (b) at (3,0)  {$\nabla f$};
+    \node[] (c) at (6,1)  {$\nabla\times(\nabla f)$};
+    \node[] (d) at (6,-1) {$\nabla\cdot(\nabla f)$};
+    \node[] ()  at (8,1)  {(1)};
+    \node[] ()  at (8,-1) {(2)};
+
+    \path[->] (a) edge node {} (b)
+              (b) edge node {} (c)
+                  edge node {} (d);
+\end{tikzpicture}
+$$
+
+从向量场 $A$ 出发，有
+$$
+\begin{tikzpicture}
+    \node[] (a) at (0,0)  {$A$};
+    \node[] (b) at (3,1)  {$\nabla\times A$};
+    \node[] (c) at (3,-1) {$\nabla\cdot A$};
+    \node[] (d) at (6,2)  {$\nabla\times(\nabla\times A)$};
+    \node[] (e) at (6,0)  {$\nabla\cdot(\nabla\times A)$};
+    \node[] (f) at (6,-2) {$\nabla(\nabla\cdot A)$};
+    \node[] ()  at (8,2)  {(3)};
+    \node[] ()  at (8,0)  {(4)};
+    \node[] ()  at (8,-2) {(5)};
+    
+    \path[->] (a) edge node {} (b)
+                  edge node {} (c)
+              (b) edge node {} (d)
+                  edge node {} (e)
+              (c) edge node {} (f);
+\end{tikzpicture}
+$$
+
+以下我们逐个分析以上五个式子 (1)~(5).
+
+\begin{property}[式 (1)]
+$$
+\nabla\times(\nabla f)=0
+$$
+\end{property}
+\begin{proof}
+$$
+\omega_{\nabla\times(\nabla f)}^2=\dd\omega_{\nabla f}^1=\dd(\dd\omega_f^0)=\dd^2\omega_f^0=0
+$$
+\end{proof}
+
+\begin{property}[式 (4)]
+$$
+\nabla\cdot(\nabla\times A)=0
+$$
+\end{property}
+\begin{proof}
+$$
+\omega_{\nabla\cdot(\nabla\times A)}^3=\dd\omega_{\nabla\times A}^2=\dd(\dd\omega_A^1)=\dd^2\omega_A^1=0
+$$
+\end{proof}
+
+\begin{property}[式 (2)]
+$$
+\nabla\cdot(\nabla f)=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}+\frac{\partial^2f}{\partial z^2}=\Delta f
+$$
+\end{property}
+\begin{proof}
+    直接计算立得.
+\end{proof}
+
+这里我们引入另一个分析中的重要记号
+$$
+\Delta f\triangleq\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}+\frac{\partial^2f}{\partial z^2}
+$$
+
+我们称
+$$
+\Delta\triangleq\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial z^2}
+$$
+
+为 Laplace 算子. 其可以形式地写成 $\Delta=\nabla\cdot\nabla=\nabla^2$.
+
+由定义知 $\Delta$ 作用于标量场，但我们可以按如下的方式定义，使其作用到向量场 $A$ 上：
+$$
+\Delta A\triangleq(\Delta A_1,\Delta A_2,\Delta A_3)
+$$
+
+接下来，我们会经常发现 $\Delta A$ 自然地出现.
+
+\begin{property}[式 (3)]
+$$
+\nabla\times(\nabla\times A)=\nabla(\nabla\cdot A)-\Delta A
+$$
+\end{property}
+\begin{proof}
+    直接计算.
+\end{proof}
+
+为了记住该性质，可以借助向量版本的公式
+$$
+A\times(B\times C)=B(A\cdot C)-(A\cdot B)C
+$$
+
+则在形式上有
+$$
+\nabla\times(\nabla\times A)=\nabla(\nabla\cdot A)-(\nabla\cdot\nabla)A=\nabla(\nabla\cdot A)-\Delta A
+$$
+
+最后的式 (4)：$\nabla(\nabla\cdot A)$ 并没有特别的性质.
