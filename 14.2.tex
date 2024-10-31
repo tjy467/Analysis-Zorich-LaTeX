@@ -1,0 +1,229 @@
+本节我们讨论几个经典的积分公式在场论语言下的具体形式，以及由此可以得到的物理结论.
+
+\mysubsection{向量形式的积分公式}
+
+\mysubsubsection{几个常用记号的回顾}
+
+\begin{itemize}
+    \item 设 $D\subset\RR^n$ 为开集，$A:D\to\RR^n$ 为向量场. 设 $\gamma$ 为 $D$ 中的一条光滑定向曲线，其在每点 $x$ 处的单位切向量为 $e(x)$. 设 $\dd s$ 为 $\gamma$ 上的长度元，则有
+$$
+\begin{aligned}
+    \omega_A^1&=\sum_{i=1}^nA_i\dd x_i\\
+    \implies\omega_A^1|_\gamma&=\sum_{i=1}^nA_ie_i(x)\dd s=\inner{A,e}\dd s\\
+    &=\inner{A,\dd\mathbf{s}}=A\cdot\dd\mathbf{s}
+\end{aligned}
+$$
+    
+    其中 $\dd\mathbf{s}\triangleq e\dd s$ 为向量长度元.
+
+    \item 设 $D\subset\RR^3$ 为开集，$B:D\to\RR^3$ 为向量场.
+    
+    设 $S\subset D$ 为二维光滑定向曲面. 其定向由单位法向量场 $n(x)$ 指定. 设 $\dd\sigma$ 为 $S$ 上的面积元，则
+$$
+\begin{aligned}
+    \omega_B^2&=B_1\dd y\wedge\dd z+B_2\dd z\wedge\dd x+B_3\dd x\wedge\dd y\\
+    \implies\omega_B^2|_S&=B_1n_1(x)\dd\sigma+B_2n_2(x)\dd\sigma+B_3n_3\dd\sigma\\
+    &=\inner{B,\dd\bm{\sigma}}=A\cdot\dd\bm{\sigma}
+\end{aligned}
+$$
+
+    其中 $\dd\bm{\sigma}\triangleq n\dd\sigma$ 为向量面积元.
+\end{itemize}
+
+\mysubsubsection{Newton-Leibniz 公式}
+
+\begin{theorem}  
+    设 $D\subset\RR^n$ 为开集，$f\in C^{(1)}(D)$. 设 $\gamma\in D$ 为光滑曲线且有参数化 $\varphi:[a,b]\to\gamma$. 则
+$$
+\int_\gamma\nabla f\cdot\dd\mathbf{s}=f(\varphi(b))-f(\varphi(a))=f|_{\partial\gamma}
+$$
+\end{theorem}
+\begin{proof}
+$$
+\begin{aligned}
+    &\int_\gamma\nabla f\cdot\dd\mathbf{s}=\int_\gamma\sum_{i=1}^n\pard{f}{x_i}(x)\dd x_i\\
+    =&\int_a^b\sum_{i=1}^n\pard{f}{x_i}(\varphi(t))\varphi_i'(t)\dd t=\int_a^b(f\circ\varphi(t))'\dd t\\
+    =&f\circ\varphi(b)-f\circ\varphi(a)
+\end{aligned}
+$$
+\end{proof}
+
+\textcolor{mydarkblue}{物理意义} $f$ 的梯度沿 $\gamma$ 所做的功仅与 $f$ 在起点与终点的值有关. 进一步，仅与两个水平集的水平值有关.
+
+\img{0.7}{14.2.1.png}
+
+如图所示，则有 $\displaystyle\int_{\gamma_1}\nabla f\cdot\dd\mathbf{s}=\int_{\gamma_2}\nabla f\cdot\dd\mathbf{s}$.
+
+\begin{example}
+    我们之前讨论过场 $F(r)=f(\abs{r})\cdot r$.
+
+    此时，$F$ 可以写成某个函数 $G$ 的梯度.
+\end{example}
+
+\mysubsubsection{经典 Stokes 公式}
+
+\begin{theorem}
+    设 $D\subset\RR^3$ 为开集，$A:D\to\RR^3$ 光滑. 设 $S\subset D$ 为二维光滑带边定向曲面，$\overline{S}$ 紧.
+    
+    则 Stokes 公式为
+$$
+\int_{\partial S}\omega_A^1=\int_S\dd\omega_A^1=\int_S\omega_{\nabla\times A}^2
+$$
+
+    进而可以写成
+$$
+\oint_{\partial S}A\cdot\dd\mathbf{s}=\int_S\nabla\times A\cdot\dd\bm{\sigma}
+$$
+\end{theorem}
+
+\textcolor{mydarkblue}{物理意义：}向量场 $A$ 沿曲线 $\partial S$ 的环量 $=$ 其旋度 $\nabla\times A$ 穿过曲面 $S$ 的通量.
+
+\img{0.5}{14.2.2.png}
+
+\begin{example}
+    Faraday 定律
+$$
+\oint_{\partial S} E\cdot\dd\mathbf{s}=-\int_S\pard{B}{t}\cdot\dd\bm{\sigma}
+$$
+
+    对应于 Maxwell 方程组中的 $\displaystyle\nabla\times E=-\pard{B}{t}$.
+\end{example}
+
+\begin{example}
+    Ampère 定律
+$$
+\oint_{\partial S}B\cdot\dd\mathbf{s}=\frac{1}{\eps_0c^2}\int_S j\cdot\dd\bm{\sigma}
+$$
+
+    对应于 Maxwell 方程组中的 $\displaystyle\nabla\times B=\frac{j}{\eps_0c^2}+\frac{1}{c^2}\pard{E}{t}$.
+
+    因为在静电场中有 $\displaystyle\pard{E}{t}=0$.
+\end{example}
+
+\mysubsubsection{Gauss-Ostrogradskii 公式}
+
+\begin{theorem}
+    设 $D\subset\RR^3$ 为开集，$A:D\to\RR^3$ 光滑. 设 $G\subset D$ 为区域，$\overline G$ 紧，$\partial G$ 分片光滑.
+
+    则 G-O 公式为
+$$
+\int_{\partial G}\omega_A^2=\int_G\dd\omega_A^2=\int_G\omega_{\nabla\cdot A}^3
+$$
+
+    进而可以写成
+$$
+\int_{\partial G}A\cdot\dd\bm{\sigma}=\int_G\nabla\cdot A\dd V
+$$
+
+    其中 $\dd V=\dd x\wedge\dd y\wedge\dd z$ 为体积元.
+\end{theorem}
+
+\textcolor{mydarkblue}{物理意义：}$A$ 穿过区域 $G$ 边界 $\partial G$ 的通量 $=$ 其散度 $\nabla\cdot A$ 在区域 $G$ 上的积分.
+
+\mysubsection{梯度、散度、旋度的物理意义}
+
+\mysubsubsection{梯度}
+
+设 $D\subset\RR^3$ 为开集，$f:D\to\RR$ 光滑.
+
+则 $\nabla f(p)$ 代表了在 $p$ 处 $f$ 增长最快的方向.
+
+记 $c=f(p)$. 设 $S_c=\set{p'\in D|f(p')=c}$. 则 $\nabla f(p)\perp T_pS_c$.
+
+\img{0.6}{14.2.3.png}
+
+设 $\xi\in\RR^3$，则 $f$ 沿 $\xi$ 的方向导数为
+$$
+D_\xi f(p)=\nabla f(p)\cdot\xi=\inner{D f(p),\xi}
+$$
+
+\mysubsubsection{散度}
+
+设 $A$ 是一个向量场. 在实际应用中，$A$ 通常是由一些源产生的. 例如，电荷可以产生电场，热源可以产生热流，水源可以产生水流，等等. 我们来看 G-O 公式能告诉我们什么.
+
+设 $x\in D$. 取 $r>0$ 使得 $B(x,r)\subset D$. 我们将 G-O 公式应用于 $B(x,r)$，得到
+$$
+\int_{B(x,r)}\nabla\cdot A\dd V=\int_{\partial B(x,r)}A\cdot\dd\bm{\sigma}
+$$
+
+应用积分中值定理可得
+$$
+\exists \widetilde{x}\in B(x,r),\nabla\cdot A(\widetilde{x})V(B(x,r))=\int_{B(x,r)}\nabla\cdot A\dd V=\int_{\partial B(x,r)}A\cdot\dd\bm{\sigma}
+$$
+
+若将 $A$ 解释为流速，则右边为单位时间内穿过 $\partial B(x,r)$ 的流量，或者等价地说，流出 $B(x,r)$ 的体积. 从而
+$$
+\nabla\cdot A(\widetilde{x})=\frac{1}{V(B(x,r))}\int_{\partial B(x,r)}A\cdot\dd\bm{\sigma}
+$$
+
+为单位体积内流出体积的强度.
+
+令 $r\to 0$. 由 $A$ 光滑可得
+$$
+\nabla\cdot A(x)=\lim_{r\to 0}\frac{1}{V(B(x,r))}\int_{\partial B(x,r)}A\cdot\dd\bm{\sigma}
+$$
+
+从而 $\nabla\cdot A(x)$ 测量了 $x$ 处流的源的分布密度.
+
+\begin{example}
+    若 $\nabla\cdot A=0$，则说明 $A$ 是一个无源场.
+
+    从而对任意的封闭曲面 $S\subset D$ 总有 $\displaystyle\int_SA\cdot\dd\bm{\sigma}=0$.
+\end{example}
+
+\begin{example}[ Gauss 定律]
+    由 Maxwell 方程组以及 G-O 公式有：设 $G\subset\RR^3$ 为区域，则
+$$
+\int_{\partial G}E\cdot\dd\bm{\sigma}=\int_G\nabla\cdot E\dd V=\int_G\frac{\rho}{\eps_0}\dd V=\frac{q}{\eps_0}
+$$
+
+    其中 $q$ 为区域 $G$ 内的总电荷. 上式即为 Gauss 定律.
+\end{example}
+
+\begin{example}[ Coulomb 定律]
+    我们利用 Gauss 定律来推导 Coulomb 定律.
+
+    在原点 $O$ 处放一个点电荷 $q$. 首先由对称性，空间电场是球对称的，故 $r\in\RR^3$ 处的电场应有方向 $r$，且在半径为 $\abs{r}$ 的球面上大小相同. 设其为 $E$. 则由 Gauss 定律有
+$$
+\frac{q}{\eps_0}=\int_{\partial B(0,\abs{r})}E\cdot\dd\bm{\sigma}=4\pi|r|^2|E|
+$$
+
+    由此得到
+$$
+E(r)=\frac{q}{4\pi\eps_0}\frac{1}{\abs{r}^2}\frac{r}{|r|}
+$$
+
+    我们再对此结论进行进一步的观察：
+
+    直接计算可以得到 $\nabla\times E(r)=0,\forall r\ne 0$.
+
+    这与 $\nabla\times E$ 的物理意义是吻合的. 因为在 $r\ne 0$ 处以及周围没有电荷，从而电荷密度为 $0$.
+
+    另一方面，我们来计算 $\nabla\cdot E$ 在 $0$ 处的取值. 由 Gauss 定律有
+$$
+\nabla\cdot E(0)=\lim_{r\to 0}\frac{1}{V(B(0,r))}\int_{B(0,r)}E\cdot\dd\bm{\sigma}=\lim_{r\to 0}\frac{3q}{4\eps_0\pi r^3}=+\infty
+$$
+
+    即在 $0$ 处的电荷密度为无穷大. 综上
+$$
+\nabla\cdot E(r)=\begin{cases}
+    0 & (r\ne 0)\\
+    +\infty & (r=0)
+\end{cases}
+$$
+
+    二者从物理意义上讲都十分的清楚，但在数学上却造成了一定的麻烦. 因为我们有一个在除了 $0$ 点外均为 $0$ 的函数，但在 $0$ 点处的值为 $+\infty$，且其在 $\RR^3$ 上的积分为一个常值 $\dfrac{q}{\eps_0}$.
+
+    在后续的课程中会对这样的函数做出严格的定义，其被称为 Dirac 函数 $\delta$. 其物理意义即为质点的密度函数.（在测度论中，其为 Dirac 测度）在分布理论中，其被认为是一个广义函数.
+\end{example}
+
+\begin{example}
+    Maxwell 方程组断言 $\nabla\times B=0$.
+
+    这表明磁场 $B$ 是一个无源场. 这与不存在“磁单极子”的事实是吻合的.
+\end{example}
+
+\mysubsubsection{旋度}
+
+旋度的物理意义相对来说没有那么直观. 我们首先来看一个例子，其表明旋度的确与旋转密切相关.
+
