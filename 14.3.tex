@@ -1,0 +1,201 @@
+\mysubsection{具有标量势的场}
+
+\begin{definition}
+    设 $D\subset\RR^n$ 为开集，$A:D\to\RR^n$ 为 $C^{(1)}$ 光滑.
+    
+    称 $U:D\to\RR$ 是 $A$ 的势，若 $\nabla U=A$.
+
+    此时称 $A$ 是一个势场.
+\end{definition}
+
+\begin{property}
+    若 $D$ 为区域，$A:D\to\RR^n$ 为势场，$U$ 与 $U'$ 均为 $A$ 的势，则 $\exists C\in\RR,U'=U+C$.
+\end{property}
+
+\begin{example}[ 万有引力场]
+    定义 $F:\RR^3\setminus\set{0}\to\RR^3$ 为
+$$
+F(r)=-\frac{GM}{\abs{r}^2}\frac{r}{\abs{r}}=-\frac{GMr}{\abs{r}^3}
+$$
+
+    $F$ 的一个势为
+$$
+U(r)=\frac{GM}{\abs{r}}
+$$
+\end{example}
+
+\begin{example}[ 点电荷的静电场]
+    定义 $E:\RR^3\setminus\set{0}\to\RR^3$ 为
+$$
+F(r)=\frac{q}{4\pi\eps_0}\frac{r}{\abs{r}^3}
+$$
+
+    $F$ 的一个势为
+$$
+U(r)=-\frac{q}{4\pi\eps_0\abs{r}}
+$$
+\end{example}
+
+\begin{property}
+    设 $D\subset\RR^n$ 为开集，$A:D\to\RR^n$ 为势场，$U:D\to\RR$ 为 $A$ 的势.
+    
+    任给 $\gamma\subset D$ 为光滑曲线，有
+$$
+\int_\gamma A\cdot\dd\mathbf{s}=U\biggr |_{\partial\gamma}=U(q)-U(p)
+$$
+
+    其中 $p,q$ 分别为 $\gamma$ 的起点与终点.
+\end{property}
+
+\mysubsection{存在标量势的必要条件}
+
+\begin{property}
+    设 $D\subset\RR^n$ 为开集. 则若 $A:D\to\RR^n$ 为势场，必有
+$$
+\dd\omega_A^1=0
+$$
+
+    特别的，若 $n=3$，则 $A$ 为势场 $\implies\nabla\times A$=0.
+\end{property}
+\begin{proof}
+    设 $U:D\to\RR$ 为 $A$ 的势. 即 $A=\nabla U$. 从而
+$$
+\dd\omega_A^1=\dd\dd\omega_U^0=\dd^2\omega_U^0=0
+$$
+
+    当 $n=3$ 时，$\dd\omega_A^1=\omega_{\nabla\times A}^2=0\implies\nabla\times A=0$.
+\end{proof}
+
+\begin{hint}
+    一般来讲，$\dd\omega_A^1=0$ 仅为必要条件，不一定充分.
+\end{hint}
+
+\begin{example}
+    定义 $A:\RR^2\setminus\set{0}\to\RR^2$ 为
+$$
+A(x,y)=\left(\frac{-y}{x^2+y^2},\frac{x}{x^2+y^2}\right)
+$$
+    
+    则直接计算可得 $\dd\omega_A^1=0$.
+
+    但我们断言：$A$ 不是势场. 反证，设 $A$ 为势场.
+
+    取 $\gamma$ 为单位圆周，由 $A$ 为势场可得
+$$
+\int_\gamma\omega_A^1=0
+$$
+
+    但另一方面，我们已经计算过
+$$
+\int_\gamma\omega_A^1=2\pi
+$$
+
+    矛盾. 故 $A$ 不是势场.
+\end{example}
+
+\mysubsection{存在标量势的充要条件}
+
+以下我们给出一个重要的判定准则来判定向量场何时具有标量势. 为此我们首先给出一个定义.
+
+\begin{definition}
+    设 $D\subset\RR^n$ 为开集，$\omega\in\Omega^1(D)$.
+
+    设 $\gamma:[a,b]\to D$ 是一条分段光滑路径，我们定义 $\omega$ 沿 $\gamma$ 的积分为
+$$
+\int_\gamma\omega\triangleq\int_a^b\gamma^*\omega
+$$
+\end{definition}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 当 $\gamma([a,b])$ 为光滑曲线且 $\gamma$ 为其参数化时，上面的定义即为通常的曲线积分的定义.
+        
+        \item 但以上的定义更广泛，例如我们可以取一些光滑路径，使得其像并非光滑曲线，但此时我们依然可以谈论 $\omega$ 沿 $\gamma$ 的积分.
+    \end{enumerate}
+\end{hint}
+
+\img{0.8}{14.3.1.png}
+
+现在我们可以来谈论这个充要条件了.
+
+\begin{property}
+    设 $D\subset\RR^n$ 为开集，$A:D\to\RR^n$ 为 $C^{(1)}$ 光滑.
+
+    则 $A$ 为势场 $\iff$ 对任意 $D$ 中的分段光滑闭路径 $\gamma$ 有
+$$
+\oint_\gamma A\cdot\dd\mathbf{s}\triangleq\int_\gamma\omega_A^1=0
+$$
+\end{property}
+\begin{proof}
+    $\implies$：设 $U\to\RR$ 满足 $A=\nabla U$.
+    
+    设闭路径 $\gamma:[a,b]\to D$. 则 $\gamma(a)=\gamma(b)$. 从而
+$$
+\begin{aligned}
+    \int_\gamma\omega_A^1&=\int_\gamma\omega_{\nabla U}^1=\int_\gamma\sum_{i=1}^n\pard{U}{x_i}(x)\dd x_i\\
+    &=\int_a^b(U(\gamma(t)))'\dd t=U(\gamma(t))\biggr |_a^b=0
+\end{aligned}
+$$
+
+    $\impliedby$：不妨设 $D$ 为区域（即联通开集）.
+
+    取定 $x_0\in D$. 我们首先断言：任取 $x\in D$，设 $\gamma_1$ 与 $\gamma_2$ 是连接 $x_0$ 与 $x$ 的两个分段光滑路径，则
+$$
+\int_{\gamma_1}\omega_A^1=\int_{\gamma_2}\omega_A^1
+$$
+
+    证明：设 $\gamma_1:[0,1]\to D,\gamma_2:[0,1]\to D$ 为两条分段光滑路径，$\gamma_1(0)=\gamma_2(0)=x_0$ 且 $\gamma_1(1)=\gamma_2(1)=x$.
+
+    定义 $\gamma:[0,2]\to D$ 为
+$$
+\gamma(t)=\begin{cases}
+    \gamma_1(t) & t\in[0,1]\\
+    \gamma_2(2-t) & t\in(1,2]
+\end{cases}
+$$
+
+    \img{0.7}{14.3.2.png}
+
+    则 $\gamma$ 为分段光滑闭路径. 从而
+$$
+\int_\gamma\omega_A^1=\int_{\gamma_1}\omega_A^1-\int_{\gamma_2}\omega_A^2=0
+$$
+
+    \qed
+
+    由此，我们可以定义 $U:D\to\RR$ 为
+$$
+U(x)\triangleq\int_\gamma\omega_A^1
+$$
+
+    其中 $\gamma$ 为连接 $x_0$ 与 $x$ 的任意一条分段光滑路径.
+
+    下证：$U$ 即为 $A$ 的势.
+
+    取定 $x\in D$. 设 $r>0$ 使得 $B(x,r)\subset D$.
+
+    对任意 $0<\eps<r,1\le i\le n$ 定义 $\gamma_\eps:[0,\eps]\to D$ 为 $\gamma_\eps(t)\triangleq x+te_i$. 则有
+$$
+\begin{aligned}
+    U(x+\eps e_i)-U(x)&=\int_{\gamma_\eps}\omega_A^1\\
+    &=\int_{\gamma_\eps}\sum_{j=1}^nA_j(x)\dd x_j\\
+    &=\int_0^\eps A_i(x+te_i)\dd t\\
+    &=\eps A_i(x+\eta e_i)
+\end{aligned}
+$$
+
+    其中 $\eta\in[0,\eps]$.
+
+    \img{0.3}{14.3.3.png}
+
+    由 $A$ 为 $C^{(1)}$ 光滑可得
+$$
+\lim_{\eps\to 0}\frac{U(x+\eps e_i)-U(x)}{\eps}=A_i(x)
+$$
+
+    故 $\nabla U=A$. 故 $U$ 即为所求.
+\end{proof}
+
+\begin{hint}
+    从证明的过程来看，我们完全可以考虑一类更小更简单的闭路径，即那些由有限条与坐标轴平行的线段构成的折线构成的路径类. 这个观察可以简化下一个性质的证明.
+\end{hint}

@@ -23,7 +23,7 @@ $$
 \begin{aligned}
     \omega_B^2&=B_1\dd y\wedge\dd z+B_2\dd z\wedge\dd x+B_3\dd x\wedge\dd y\\
     \implies\omega_B^2|_S&=B_1n_1(x)\dd\sigma+B_2n_2(x)\dd\sigma+B_3n_3\dd\sigma\\
-    &=\inner{B,\dd\bm{\sigma}}=A\cdot\dd\bm{\sigma}
+    &=\inner{B,\dd\bm{\sigma}}=B\cdot\dd\bm{\sigma}
 \end{aligned}
 $$
 
@@ -35,7 +35,7 @@ $$
 \begin{theorem}  
     设 $D\subset\RR^n$ 为开集，$f\in C^{(1)}(D)$. 设 $\gamma\in D$ 为光滑曲线且有参数化 $\varphi:[a,b]\to\gamma$. 则
 $$
-\int_\gamma\nabla f\cdot\dd\mathbf{s}=f(\varphi(b))-f(\varphi(a))=f|_{\partial\gamma}
+\int_\gamma\nabla f\cdot\dd\mathbf{s}=f(\varphi(b))-f(\varphi(a))=f\biggr |_{\partial\gamma}
 $$
 \end{theorem}
 \begin{proof}
@@ -48,7 +48,7 @@ $$
 $$
 \end{proof}
 
-\textcolor{mydarkblue}{物理意义} $f$ 的梯度沿 $\gamma$ 所做的功仅与 $f$ 在起点与终点的值有关. 进一步，仅与两个水平集的水平值有关.
+\textcolor{mydarkblue}{物理意义：}$f$ 的梯度沿 $\gamma$ 所做的功仅与 $f$ 在起点与终点的值有关. 进一步，仅与两个水平集的水平值有关.
 
 \img{0.7}{14.2.1.png}
 
@@ -134,7 +134,7 @@ $$
 
 设 $\xi\in\RR^3$，则 $f$ 沿 $\xi$ 的方向导数为
 $$
-D_\xi f(p)=\nabla f(p)\cdot\xi=\inner{D f(p),\xi}
+D_\xi f(p)=\nabla f(p)\cdot\xi=\inner{\nabla f(p),\xi}
 $$
 
 \mysubsubsection{散度}
@@ -218,7 +218,7 @@ $$
 \end{example}
 
 \begin{example}
-    Maxwell 方程组断言 $\nabla\times B=0$.
+    Maxwell 方程组断言 $\nabla\cdot B=0$.
 
     这表明磁场 $B$ 是一个无源场. 这与不存在“磁单极子”的事实是吻合的.
 \end{example}
@@ -227,3 +227,148 @@ $$
 
 旋度的物理意义相对来说没有那么直观. 我们首先来看一个例子，其表明旋度的确与旋转密切相关.
 
+\begin{example}
+    考虑空间中绕 $z$ 轴的匀速转动. 设角速度大小为 $\omega$. 用向量场来刻画，即为速度场
+$$
+V:\RR^3\to\RR^3,(x,y,z)\mapsto(-\omega y,\omega x,0)
+$$
+
+    \img{0.4}{14.2.4.png}
+
+    此时我们有
+$$
+\nabla\times V(x,y,z)=\begin{vmatrix}
+    \hat{\imath} & \hat{\jmath} & \hat{k}\\
+    \pard{}{x} & \pard{}{y} & \pard{}{z}\\
+    -\omega y & \omega x & 0    
+\end{vmatrix}=(0,0,2\omega)
+$$
+
+    即速度场 $V$ 的旋度给出了旋转轴及其方向（向上）以及角速度大小（两倍于角速度）.
+\end{example}
+
+接下来我们讨论旋度更为深刻一些的物理意义. 其仅在借助于 Stokes 公式之后才逐渐变得清晰.
+
+设 $D\subset\RR^3$ 为开区域. 其上定义了某个流的速度场 $V:D\to\RR^3$ 光滑. 取定 $p\in D$.
+
+取定一个单位向量 $n$. 以及与 $n$ 垂直的一个以 $p$ 为圆心，以 $r$ 为半径的小圆盘 $S(r,n)$.
+
+\img{0.2}{14.2.5.png}
+
+由 Stokes 公式有
+$$
+\int_{\partial S}V\cdot\dd\mathbf{s}=\int_{S(r,n)}\nabla\times V\cdot\dd\bm{\sigma}
+$$
+
+即 $V$ 沿圆盘边界的环量 $=$ 其旋度 $\nabla\times V$ 穿过圆盘的通量. 由介值定理有
+$$
+\begin{aligned}
+    \exists p'\in S(r,n),\nabla\times V(p')\cdot n\cdot\pi r^2&=\int_{S(r,n)}(\nabla\times V\cdot n)\dd\sigma\\
+    &=\int_{S(r,n)}\nabla\times V\cdot\dd\bm{\sigma}\\
+    &=\int_{\partial S(r,n)}V\cdot\dd\mathbf{s}    
+\end{aligned}
+$$
+
+从而
+$$
+\nabla\times V(p)\cdot n=\lim_{r\to 0}\frac{1}{\pi r^2}\int_{\partial S(r,n)}V\cdot\dd\mathbf{s}
+$$
+
+我们暂且将右边的量称为 $V$ 沿 $n$ 方向的环量密度.
+
+从而上式告诉我们：当 $n$ 沿着 $\nabla\times V(p)$ 的方向时，其密度达到最大值，且其密度的最大值恰为 $\abs{\nabla\times V(p)}$.
+
+另一方面，设由 $V$ 导致的运动在 $p$ 点的旋转部分的旋转轴为 $\bm{\omega}$，大小为 $\abs{\bm{\omega}}$.
+
+则由环量的几何意义知：当 $n$ 与 $\bm{\omega}$ 同向时，得到的环量密度达到最大.
+
+\img{0.4}{14.2.6.png}
+
+从而有 $\nabla\times V(p)=\bm{\omega}$.
+
+\mysubsection{其它的积分公式}
+
+以下我们给出一些进一步的积分公式. 它们均可以从经典的积分公式中得到，但在不同的场合有不同的用处.
+
+\mysubsubsection{向量版本的 G-O 公式}
+
+\begin{property}
+    \begin{enumerate}
+        \item\label{G-O1}
+$$
+\int_{\partial D}\dd\bm{\sigma}\cdot B=\int_D\nabla\cdot B\dd V
+$$
+
+        \item\label{G-O2}
+$$
+\int_{\partial D}\dd\bm{\sigma}\times B=\int_D\nabla\times B\dd V
+$$
+
+        \item\label{G-O3}
+$$
+\int_{\partial D}\dd\sigma f=\int_D\nabla f\dd V
+$$
+    \end{enumerate}
+\end{property}
+
+其中 \ref{G-O1} 为经典的 G-O 公式，\ref{G-O2} 与 $\ref{G-O3}$ 可由将 \ref{G-O1} 应用到每个分量得到.
+
+有了这个公式，我们可以统一地将散度、旋度与梯度表达为某种形式的密度.
+$$
+\begin{aligned}
+    \nabla\cdot B(x)&=\lim_{r\to 0}\frac{1}{V(B(x,r))}\int_{\partial B(x,r)}\dd\bm{\sigma}\cdot B\\
+    \nabla\times B(x)&=\lim_{r\to 0}\frac{1}{V(B(x,r))}\int_{\partial B(x,r)}\dd\bm{\sigma}\times B\\
+    \nabla f(x)&=\lim_{r\to 0}\frac{1}{V(B(x,r))}\int_{\partial B(x,r)}\dd\sigma\cdot f\\
+\end{aligned}
+$$
+
+\mysubsubsection{向量版本的 Stokes 公式}
+
+\begin{property}
+    \begin{enumerate}
+        \item 
+$$
+\int_{\partial S}\dd\bm{s}\cdot A=\int_S\dd\bm{\sigma}\cdot(\nabla\times A)
+$$
+
+        \item 
+$$
+\int_{\partial S}\dd\bm{s}\times A=\int_S(\dd\bm{\sigma}\times \nabla)\times A
+$$
+
+        \item 
+$$
+\int_{\partial S}\dd\bm{s}\cdot f=\int_S\dd\bm{\sigma}\times\nabla f
+$$
+    \end{enumerate}
+\end{property}
+
+\mysubsubsection{Green 公式}
+
+\begin{property}
+    \begin{enumerate}
+        \item 
+$$
+\int_{\partial D}(g\nabla f)\cdot\dd\bm{\sigma}=\int_D(\nabla g\cdot\nabla f+g\Delta f)\dd V
+$$
+
+        \item 
+$$
+\int_{\partial D}(g\nabla f-f\nabla g)\cdot\bm{\sigma}=\int_D(g\Delta f-f\Delta g)\dd V
+$$
+    \end{enumerate}
+\end{property}
+
+\begin{inference}
+    \begin{enumerate}
+        \item 
+$$
+\int_{\partial D}f\nabla f\cdot\dd\bm{\sigma}=\int_D((\nabla f)^2+f\Delta f)\dd V
+$$
+
+        \item 
+$$
+\int_{\partial D}\nabla f\cdot\dd\bm{\sigma}=\int_D\Delta f\dd V
+$$
+    \end{enumerate}
+\end{inference}
