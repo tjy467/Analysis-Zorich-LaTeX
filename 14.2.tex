@@ -23,7 +23,7 @@ $$
 \begin{aligned}
     \omega_B^2&=B_1\dd y\wedge\dd z+B_2\dd z\wedge\dd x+B_3\dd x\wedge\dd y\\
     \implies\omega_B^2|_S&=B_1n_1(x)\dd\sigma+B_2n_2(x)\dd\sigma+B_3n_3\dd\sigma\\
-    &=\inner{B,\dd\bm{\sigma}}=A\cdot\dd\bm{\sigma}
+    &=\inner{B,\dd\bm{\sigma}}=B\cdot\dd\bm{\sigma}
 \end{aligned}
 $$
 
@@ -134,7 +134,7 @@ $$
 
 设 $\xi\in\RR^3$，则 $f$ 沿 $\xi$ 的方向导数为
 $$
-D_\xi f(p)=\nabla f(p)\cdot\xi=\inner{D f(p),\xi}
+D_\xi f(p)=\nabla f(p)\cdot\xi=\inner{\nabla f(p),\xi}
 $$
 
 \mysubsubsection{散度}
@@ -218,7 +218,7 @@ $$
 \end{example}
 
 \begin{example}
-    Maxwell 方程组断言 $\nabla\times B=0$.
+    Maxwell 方程组断言 $\nabla\cdot B=0$.
 
     这表明磁场 $B$ 是一个无源场. 这与不存在“磁单极子”的事实是吻合的.
 \end{example}
