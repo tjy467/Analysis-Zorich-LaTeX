@@ -199,3 +199,267 @@ $$
 \begin{hint}
     从证明的过程来看，我们完全可以考虑一类更小更简单的闭路径，即那些由有限条与坐标轴平行的线段构成的折线构成的路径类. 这个观察可以简化下一个性质的证明.
 \end{hint}
+
+现在，我们再次来看上一节的例子，即
+$$
+A(x,y)=\left(\frac{-y}{x^2+y^2},\frac{x}{x^2+y^2}\right)
+$$
+
+由于
+$$
+\oint_{\partial B(0,1)}\omega_A^1=2\pi
+$$
+
+我们再次断言 $A$ 在 $\RR^2\setminus\set{0}$ 没有势.
+
+但另一方面，考虑函数 $U(x,y)\triangleq\arctan\dfrac{y}{x}$.
+
+直接计算可知：$\nabla U(x,y)=A(x,y)$. 这说明 $U$ 是 $A$ 的势. 这当中存在矛盾吗？
+
+当然，这里是没有矛盾的.
+
+原因在于：以上的函数 $U(x,y)$ 的定义域为右半平面 $H^2_+=\set{(x,y)|x>0}$，而不是 $\RR^2\setminus\set{0}$.
+
+\img{0.8}{14.3.4.png}
+
+我们也许会说，这个定义域是可以延拓的. 例如，定义
+$$
+U(x,y)\triangleq\begin{cases}
+    \arctan\dfrac{y}{x} & x>0\\
+    \dfrac{\pi}{2}-\arctan\dfrac{x}{y} & y>0\\
+    \arctan\dfrac{y}{x}+\pi & x<0
+\end{cases}
+$$
+
+则由三角函数的知识可知，以上的函数是良定义的.
+
+从而我们在除了负 $y$ 轴之外的地方处处定义好了 $U(x,y)$.
+
+即定义域可以变为 $\widetilde{D}\triangleq\RR^2\setminus\set{(0,y)|y\le 0}$. 此时在 $\widetilde{D}$ 上仍然有 $\nabla U=A$.
+
+但当我们希望再次扩充定义域，将负 $y$ 轴也加进来时，就会遇到麻烦. 我们试图按下式来扩充定义 $U$.
+$$
+U(x,y)\triangleq\dfrac{3\pi}{2}-\arctan\frac{x}{y}\qquad y<0
+$$
+
+此时 $U(x,y)$ 在第三象限的确可以吻合得很好，但是在第四象限，上式所定义的 $U(x,y)$ 比原始的 $U(x,y)$ 大了 $2\pi$.
+
+因此，不可能将 $U(x,y)$ 连续地延拓到 $\RR^2\setminus\set{0}$ 上. 事实上，这是一个本质的困难. 因为 $\widetilde{D}$ 单连通，但 $\RR^2\setminus\set{0}$ 不再单连通，这导致不可能存在这样的延拓.
+
+另一方面，由我们的论证知：若定义域设为 $\widetilde{D}$，则 $A$ 在其上确有势 $U$. 事实上我们很快将证明：若定义域是单连通的，则其上满足 $\dd\omega_A^1=0$ 的场 $A$ 必有标量势. 我们先证明如下的特例：
+
+\begin{property}
+    设 $D=B(x,r)\subset\RR^n$. 设 $A:D\to\RR^n$ 为 $C^{(1)}$ 光滑且 $\dd\omega_A^1=0$.
+
+    则 $A$ 为 $D$ 上的势场.
+\end{property}
+\begin{proof}
+    设 $I\subset D$ 是一个边与坐标轴平行的闭长方形. 由 Stokes 公式有
+$$
+\int_{\partial I}\omega_A^1=\int_I\dd\omega_A^1=0
+$$
+
+    为了证明该性质，我们仅需对每个封闭折线路径（其边与坐标轴平行）$\gamma:[a,b]\to D$ 验证
+$$
+\int_\gamma\omega_A^1=0
+$$
+
+    若 $n=2$，则可以将 $\gamma$ 分解成有限个简单的封闭折线的并. 在每个路径上作用 Green 公式即得结论.
+
+    \img{0.3}{14.3.5.png}
+
+    若 $n\ge 3$，则我们可以向封闭路径添加一些边，使得路径的边均为某个长方形的边，且添加的边必为两个长方形的公共边界. 由此再利用断言即得结论.
+\end{proof}
+
+\begin{hint}
+    以上的结论可以解释为：若 $\dd\omega_A^1=0$，则 $A$ 在每个点的局部均为势场.
+\end{hint}
+
+\mysubsection{单连通区域与势}
+
+本节我们将要证明：若区域单连通，且场满足存在势的必要条件，则其势必存在. 即该必要条件也充分.
+
+为此，我们首先定义单连通区域. 直观的说，单连通区域是“没有洞”的区域. 或者说，其中的一条闭路径可以在不离开区域的条件下“连续地缩成一个点”.
+
+\img{0.8}{14.3.6.png}
+
+例如，$D_1$ 单连通，而 $D_2$ 不单连通，其为 $2$ 联通.
+
+下面我们来讨论其严格的定义. 我们首先将连续形变的概念严格化.
+
+\begin{definition}
+    设 $D\subset\RR^n$ 为区域. 设 $\gamma_i:[0,1]\to D,i=0,1$ 为 $D$ 中的两条闭路径.
+
+    称 $\Gamma:[0,1]^2\to D$ 是从 $\gamma_0$ 到 $\gamma_1$ 的一个同伦映射，若
+
+    \begin{enumerate}
+        \item $\Gamma$ 连续.
+
+        \item $\Gamma(t,0)=\gamma_0(t),\Gamma(t,1)=\gamma_1(t),\forall t\in[0,1]$
+        
+        \item $\Gamma(0,\tau)=\Gamma(1,\tau),\forall\tau\in[0,1]$
+    \end{enumerate}
+\end{definition}
+
+\img{1}{14.3.7.png}
+
+我们来解释一下其几何意义：
+
+\begin{enumerate}
+    \item $\Gamma$ 将正方形的的\textcolor{Cyan}{\textbf{底边}}映成了 $\gamma_0$ 的像.
+    
+    \item $\Gamma$ 将正方形的的\textcolor{red}{\textbf{顶边}}映成了 $\gamma_1$ 的像.
+    
+    \item $\Gamma$ 将正方形\textcolor{Purple}{\textbf{左右两条边}}映成了 $D$ 中一条从 $A$ 到 $B$ 的路径.
+    
+    \item $\Gamma$ 将正方形任何一条\textcolor{LimeGreen}{\textbf{水平高度为 $\tau$ 的边}}映成了一条闭路径.
+    
+    \item 随着 $\tau$ 从 $0$ 到 $1$ 移动，我们得到了从 $\gamma_0$ 到 $\gamma_1$ 的一个连续形变.
+\end{enumerate}
+
+\begin{definition}
+    设 $\gamma_0,\gamma_1$ 是 $D$ 中的两条闭路径. 称 $\gamma_0$ 与 $\gamma_1$ 在 $D$ 中同伦，若存在如上定义的 $\Gamma$.
+\end{definition}
+
+我们首先有如下重要观察：
+
+\begin{property}
+    设 $D\subset\RR^n$ 为区域. 设 $\omega\in\Omega^1(D)$ 且 $\dd\omega=0$.
+
+    设 $\gamma_0,\gamma_1$ 为 $D$ 中的两条同伦的分段光滑闭路径，则
+$$
+\int_{\gamma_0}\omega=\int_{\gamma_1}\omega
+$$
+\end{property}
+\begin{proof}
+    在习题中我们会看到：为证明此性质，只需对光滑闭路径以及它们之间存在光滑同伦的情形证明即可.
+    
+    以下我们将作这一假设，即：$\gamma_0,\gamma_1$ 为光滑路径，且存在光滑同伦 $\Gamma:[0,1]^2\to D$ 满足 $\Gamma(t,0)=\gamma_0(t),\Gamma(t,1)=\gamma_1(t),\forall t\in[0,1]$.
+
+    由 Green 公式，我们有
+$$
+\int_{\partial[0,1]^2}\Gamma^*\omega=\int_{[0,1]^2}\dd\Gamma^*\omega=\int_{[0,1]^2}\Gamma^*\dd\omega=0
+$$
+
+    \img{0.3}{14.3.8.png}
+
+    如图记 $\partial[0,1]^2=\eta_1\cup\eta_2\cup\eta_3\cup\eta_4$. 则由定义可知
+$$
+\begin{aligned}
+    &\int_{\eta_1}\Gamma^*\omega=\int_{\gamma_0}\omega\\
+    &\int_{\eta_3}\Gamma^*\omega=-\int_{\gamma_1}\omega\\
+    &\int_{\eta_2}\Gamma^*\omega=-\int_{\eta_4}\Gamma^*\omega
+\end{aligned}
+$$
+
+    从而即有
+$$
+\int_{\gamma_0}\omega=\int_{\gamma_1}\omega
+$$
+\end{proof}
+
+\begin{definition}
+    设 $D\subset\RR^n$ 为区域. 称 $D$ 为单连通区域，若 $D$ 中的每条闭路径与一个常值路径同伦.
+\end{definition}
+
+\begin{theorem}
+    设 $D\subset\RR^n$ 为单连通区域. 设 $A:D\to\RR^n$ 为 $C^{(1)}$ 光滑且 $\dd\omega_A^1=0$.
+    
+    则 $A$ 为势场.
+\end{theorem}
+\begin{proof}
+    我们仅需验证 $A$ 为势场的判定准则. 任取 $\gamma$ 为 $D$ 中的分段光滑闭路径.
+
+    由 $D$ 单连通知，存在常值路径 $\eta:[0,1]\to D,\eta(t)\equiv x_0$ 使得 $\gamma$ 与 $\eta$ 在 $D$ 中同伦. 从而由上面的性质知
+$$
+\int_\gamma\omega_A^1=\int_\eta\omega_A^1=\int_0^1\eta^*\omega_A^1=0
+$$
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 易证 $B(x,r)$ 必为单连通区域，从而之前的性质（势局部存在）是这个定理的特例.
+        
+        \item 另一方面，之前性质的证明很几何化，而且是构造性的，且不需要光滑性的论证.
+    \end{enumerate}
+\end{hint}
+
+\begin{example}
+    \begin{itemize}
+        \item $\RR^2\setminus\set{(0,y)|y\le 0}$ 单连通.
+        
+        \item $\RR^2\setminus\set{0}$ 不单连通.
+        
+        \item $\RR^3\setminus\set{0}$ 单连通.
+    \end{itemize}
+\end{example}
+
+\mysubsection{向量势，闭形式与恰当形式}
+
+之前我们讨论了向量场的标量势. 在物理中也会有关于向量势的问题：
+
+\begin{definition}
+    设 $D\subset\RR^3$ 为区域，向量场 $B:D\to\RR^3$ 光滑.
+
+    若存在向量场 $A:D\to\RR^3$ 光滑使得 $B=\nabla\times A$，则称 $A$ 是 $B$ 的一个向量势.
+\end{definition}
+
+与标量势的讨论类似，我们有
+
+\begin{property}
+    设 $D\subset\RR^3$ 为区域，向量场 $B:D\to\RR^3$ 光滑.
+
+    若 $B$ 存在向量势，则必有 $\nabla\cdot B=0$.
+\end{property}
+\begin{proof}
+    设 $A$ 为 $B$ 的向量势，即 $B=\nabla\times A$. 则
+$$
+\begin{aligned}
+    &\omega_B^2=\omega_{\nabla\times A}^2=\dd\omega_A^1\\
+    \implies&\omega_{\nabla\cdot B}^3=\dd\omega_B^2=\dd^2\omega_A^1=0\\
+    \implies&\nabla\cdot B=0
+\end{aligned}
+$$
+\end{proof}
+
+将以上的讨论推广到一般情形，我们给出如下的定义：
+
+\begin{definition}
+    设 $D\subset\RR^n$ 为区域. 设 $\omega\in\Omega^p(D)$.
+
+    称 $\omega$ 是一个闭形式，若 $\dd\omega=0$.
+
+    称 $\omega$ 是一个恰当形式，若 $\exists\widetilde{\omega}\in\Omega^{p-1}(D),\dd\widetilde{\omega}=\omega$.
+\end{definition}
+
+在这个语言下：
+
+\begin{itemize}
+    \item $A$ 有标量势 $\iff\omega_A^1$ 为恰当 $1$-形式.
+    
+    \item $\nabla\times A=0\iff\omega_A^1$ 为闭 $1$-形式.
+    
+    \item $B$ 有向量势 $\iff\omega_B^2$ 为恰当 $2$-形式.
+    
+    \item $\nabla\cdot B=0\iff\omega_B^2$ 为闭 $2$-形式.
+\end{itemize}
+
+一个重要的问题是：当 $\omega$ 为 $p$-闭形式时，在什么条件下其可以成为一个恰当 $p$-形式.
+
+这个问题有如下的局部化答案：
+
+\begin{theorem}[Poincaré]
+    设 $D=B(x,r)\subset\RR^n$.
+
+    若 $\omega\in\Omega^p(D)$ 为闭形式，则 $\omega$ 也是恰当形式.
+\end{theorem}
+
+即局部的，每个闭形式也是恰当形式.
+
+\begin{hint}
+    事实上，Poincaré 证明了只要 $D$ 是“可缩的”，即 $D$ 可以在不离开 $D$ 的情形下连续地“缩到一个点”，则有 $D$ 上的闭形式均为恰当形式.
+
+    例如：$D=\RR^n$ 或 $D$ 为星形区域均为可缩区域.
+
+    \img{0.4}{14.3.9.png}
+\end{hint}
