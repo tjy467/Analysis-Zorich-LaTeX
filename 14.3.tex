@@ -463,3 +463,91 @@ $$
 
     \img{0.4}{14.3.9.png}
 \end{hint}
+
+以下我们再举几个例子，以解释形式的闭性、恰当性及其定义域的拓扑性的一些联系.
+
+\begin{example}
+    令 $D=\RR^2\setminus\set{0}$. 设 $\omega$ 为 $D$ 上的闭 $1$-形式.
+
+    设 $\gamma_1$ 是以 $0$ 为圆心，$1$ 为半径的圆周. 即
+$$
+\gamma_1:[0,2\pi]\to D,\theta\mapsto(\cos\theta,\sin\theta)
+$$
+
+    \img{0.5}{14.3.10.png}
+
+    令 $\displaystyle T\triangleq\int_{\gamma_1}\omega$.
+
+    我们称 $T$ 是 $\omega$ 沿 $\gamma_1$ 的周期. 直观来讲，设 $\gamma\subset D$ 是任何一个闭路径. 则若 $\gamma$ 逆时针绕 $0$ 转了 $k$ 圈，则有
+$$
+\int_\gamma\omega=kT
+$$
+
+    这是因为若 $\gamma$ 逆时针绕 $0$ 转了 $k$ 圈，则我们可以构造从 $k\gamma_1$ 到 $\gamma$ 的同伦. 从而二者积分相同. 其中
+$$
+k\gamma_1:[0,2k\pi]\to D,\theta\mapsto(\cos\theta,\sin\theta)
+$$
+
+    即绕以 $0$ 为圆心，$1$ 为半径的圆转 $k$ 圈.
+
+    由此我们可以得到 $\omega$ 为恰当形式的充要条件. 即
+$$
+\omega\text{ 为恰当形式}\iff T=0
+$$
+\end{example}
+
+\begin{example}
+    令 $D=\RR^2\setminus\set{(1,0),(-1,0)},\omega$ 为 $D$ 上的闭 $1$-形式.
+
+    \img{0.8}{14.3.11.png}
+
+    设
+$$
+\begin{aligned}
+    &\gamma_+:[0,2\pi]\to D,\theta\mapsto(1,0)+r(\cos\theta,\sin\theta),0<r<1\\
+    &\gamma_-:[0,2\pi]\to D,\theta\mapsto(-1,0)+r(\cos\theta,\sin\theta),0<r<1
+\end{aligned}
+$$
+
+    令 $\displaystyle T_+\triangleq\int_{\gamma_+}\omega,T_-=\int_{\gamma_-}\omega$
+
+    与上一例类似，任取 $D$ 上的一个闭路径 $\gamma$. 设 $\gamma$ 绕 $(1,0)$ 逆时针转了 $n_+$ 圈，绕 $(-1,0)$ 逆时针旋转了 $n_-$ 圈，则有
+$$
+\int_\gamma\omega=n_+T_++n_-T_-
+$$
+
+    从而我们得到 $\omega$ 为恰当形式的充要条件
+$$
+\omega\text{ 为恰当形式}\iff T_+=T_-=0
+$$
+\end{example}
+
+\begin{hint}
+    以上的想法可以推广到任何区域 $D$，也可以推广到对 $p$-恰当形式的刻画.
+
+    我们已知区域的单连通性对保证闭 $1$-形式成为恰当形式至关重要. 以下我们简要讨论区域什么样的性质与闭 $p$-形式成为恰当形式相关.
+\end{hint}
+
+\begin{definition}
+    设 $D\subset\RR^n$ 为区域. 设 $S^k$ 为 $k$ 维球面.
+
+    若每个连续映射 $\pi:S^k\to D$ 均可在 $D$ 中同伦于常值映射，则称 $D$ 有平凡的 $k$ 维同伦群. 记为 $\pi_k(D)=\set{0}$.
+\end{definition}
+
+则当 $k=1$ 时，$\pi_1(D)=\set{0}\iff D$ 单连通.
+
+\begin{example}
+    $\pi_1(\RR^2\setminus\set{0})\ne\set{0}$.
+
+    $\pi_1(\RR^3\setminus\set{0})=\set{0},\pi_2(\RR^3\setminus\set{0})\ne\set{0}$.
+
+    设 $D$ 为实心轮胎，$D\subset\RR^3$.
+
+    则有 $\pi_1(D)\ne\set{0},\pi_2(D)=\set{0}$
+\end{example}
+
+\begin{property}
+    设 $\pi_p(D)=\set{0},\omega$ 为 $D$ 上的 $p$-形式.
+
+    若 $\omega$ 为闭形式，则 $\omega$ 也是恰当形式.
+\end{property}

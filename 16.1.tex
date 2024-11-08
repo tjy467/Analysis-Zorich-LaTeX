@@ -1,0 +1,233 @@
+\mysubsection{逐点收敛的定义与例子}
+
+\begin{definition}
+    设 $X$ 为非空集合. $f_n:X\to\RR$ 是一列函数.
+
+    设 $x\in X$. 称 $f_n$ 在 $x$ 处收敛，若极限
+$$
+\lim_{n\to\infty}f_n(x)
+$$
+
+    存在.
+\end{definition}
+
+\begin{definition}
+    令 $E\triangleq\set{x\in X|\lim_{n\to\infty}f_n(x)\text{ 存在}}$.
+
+    称 $E$ 为函数列 $\set{f_n}$ 的收敛集（收敛域）.
+\end{definition}
+
+\begin{definition}
+    设 $E$ 为 $\set{f_n}$ 的收敛集. 定义 $f:E\to\RR$ 为
+$$
+f(x)\triangleq\lim\limits_{n\to\infty}f_n(x)
+$$
+
+    称 $f$ 为 $\set{f_n}$ 在收敛集 $E$ 上的极限.
+\end{definition}
+
+\begin{definition}
+    设 $f_n,f$ 均为 $X$ 上的实值函数.
+
+    若 $\forall x\in X,f_n(x)\to f(x)$，则称 $f_n$ 逐点收敛到 $f$. 记为 $f_n\to f$.
+\end{definition}
+
+\begin{example}
+    $f_n(x)=x^n$
+
+    则 $\set{f_n}$ 的收敛集为 $E=(-1,1]$，且其极限函数为
+$$
+f(x)=\begin{cases}
+    0 & x\in(-1,1)\\
+    1 & x=1
+\end{cases}
+$$
+\end{example}
+
+\begin{example}
+    $f_n(x)=\dfrac{\sin n^2x}{n}$
+\end{example}
+
+\begin{example}
+    $f_n(x)=\dfrac{\sin nx}{n^2}$
+\end{example}
+
+\begin{example}
+    $f_n(x)=2(n+1)x(1-x^2)^n,X=[0,1]$
+\end{example}
+
+\begin{example}
+    $f_n(x)=\lim_{m\to\infty}\cos(n!\pi x)^{2m}$
+
+    \vspace{0.2em}
+
+    可见 $f_n(x)\to D(x)$，其中 $D(x)$ 为 Dirichlet 函数.
+\end{example}
+
+\mysubsection{序列收敛的基本问题}
+
+在分析中，我们经常取极限. 而我们经常关心的问题是：序列的性质在取完极限后是否得到保持？
+
+例如有函数列 $f_n:\RR\to\RR$ 以及 $f:\RR\to\RR$ 满足 $f_n\to f$.
+
+则有以下几个基本问题：
+
+\begin{enumerate}
+    \item 若 $f_n$ 均连续，则是否有 $f$ 连续？
+    
+    \item 若 $f_n$ 均可到，则是否有 $f$ 可导？进一步是否有 $f_n'\to f'$？
+    
+    \item 若 $f_n\in\mathcal{R}[a,b]$，则是否有 $f\in\mathcal{R}[a,b]$？进一步是否有 $\displaystyle\int_a^bf_n(x)\dd x\to\int_a^bf(x)\dd x$？
+\end{enumerate}
+
+以下，我们用第 $1$ 节的例子来证明：在没有进一步假设的情况下，以上问题的答案均可能为否定.
+
+\begin{example}
+    $f_n(x)=x^n$ 均在 $[0,1]$ 上连续，但其极限 $f(x)=\begin{cases}
+        0 & x\in[0,1)\\
+        1 & x=1
+    \end{cases}$ 不连续.
+\end{example}
+
+\begin{example}
+    $f_n(x)=\dfrac{\sin n^2x}{n}\to f(x)=0$.
+
+    \vspace{0.2em}
+
+    但 $f'_n(x)=n\cos n^2x\not\to f'(x)=0$
+\end{example}
+
+\begin{example}
+    $f_n(x)=\dfrac{\sin nx}{n^2}\to f(x)=0$
+
+    \vspace{0.2em}
+
+    且 $f'_n(x)=\dfrac{\cos nx}{n}\to f'(x)=0$
+\end{example}
+
+\begin{example}
+    $f_n(x)=2(n+1)x(1-x^2)^n\to f(x)=0,\forall x\in X=[0,1]$.
+
+    \vspace{0.2em}
+
+    但 $\displaystyle\int_0^1f_n(x)\dd x=1\not\to\int_0^1f(x)\dd x=0$
+\end{example}
+
+\begin{example}
+    $f_n(x)=\lim\limits_{m\to\infty}(\cos n!\pi x)^{2m},x\in[0,1]$ 仅在有限个点上非零，从而 $f_n\in\mathcal{R}[0,1]$.
+
+    \vspace{0.2em}
+
+    但 $f_n(x)\to D(x)$，而 $D(x)\notin\mathcal{R}[0,1]$.
+\end{example}
+
+\begin{example}
+    在分析中一个十分重要的特例如下：
+
+    设 $I=[a,b]$. 设 $f_n:I\to\RR$ 为 $C^{(1)}$ 光滑.
+
+    则有以下问题：
+
+    \begin{enumerate}
+        \item 形式函数项级数 $\sum\limits_{n=1}^\infty f_n(x)$ 在哪些点收敛？
+        
+        \item 若其在 $[a,b]$ 上收敛，其极限 $S(x)$ 是否为 $C^{(1)}$ 光滑？
+        
+        \item 若 $S(x)\in C^{(1)}(I)$，是否有
+$$
+S'(x)=\left(\sum_{n=1}^\infty f_n(x)\right)'=\sum_{n=1}^\infty f_n'(x)
+$$
+    \end{enumerate}
+
+    用刚才的术语来描述这个问题，可以这样来表达：令
+$$
+S_n(x)\triangleq\sum_{j=1}^nf_j(x)
+$$
+
+    则 $S_n(x)\in C^{(1)}(I)$. 上面三个问题变为：
+
+    \begin{enumerate}
+        \item $S_n(x)$ 是否在 $[a,b]$ 上逐点收敛？
+        
+        \item 若 $S_n(x)\to S(x)$，是否有 $S\in C^{(1)}(I)$？
+        
+        \item 若 $S\in C^{(1)}(I)$，是否有 $S_n'(x)\to S'(x)$？
+    \end{enumerate}
+
+    基于我们之前的讨论，我们知道：如上问题的答案均可能为否定！
+\end{example}
+
+\begin{example}
+    以上的问题有一个正面的结论：
+
+    设 $\sum\limits_{n=0}^\infty a_nx^n$ 为形式幂级数. 设其收敛半径
+$$
+R=\frac{1}{\displaystyle\overline{\lim\limits_{n\to\infty}}\sqrt[n]{\abs{a_n}}}>0
+$$
+
+    则 $\sum\limits_{n=0}^\infty a_nx^n$ 在 $(-R,R)$ 上绝对收敛，$C^{(\infty)}$ 光滑且
+$$
+\left(\sum_{n=0}^\infty a_nx^n\right)'=\sum_{n=1}^\infty na_nx^{n-1}
+$$
+
+    本章，我们还会就幂级数展开做更深入的讨论.
+\end{example}
+
+\mysubsection{函数族的收敛与一致收敛}
+
+本节我们定义函数列的一致收敛. 且为了更广泛的应用，我们讨论一族函数的一致收敛性.
+
+\begin{definition}
+    设 $X,T$ 为非空集合，函数 $F:X\times T\to\RR$. 在固定 $t\in T$ 时，我们使用记号
+$$
+f_t:X\to\RR,f_t(x)\triangleq F(x,t)
+$$
+
+    由此我们得到一族 $X$ 上的函数 $\set{f_t|t\in T}$.
+
+    我们称 $T$ 为参数集（参数域）.
+\end{definition}
+
+在本课程中，$T$ 绝大多数时候取为 $\mathbb{N},\RR,\mathbb{C}$. 但从定义的角度，其可以是任何非空集合.
+
+在这个更广泛的框架下，首先我们可以重复之前逐点收敛的定义.
+
+\begin{definition}
+    设 $\set{f_t:X\to\RR|t\in T}$ 是一族函数. 设 $\mathcal{B}$ 是 $T$ 的一个基.
+
+    设 $x\in X$. 若 $\lim\limits_\mathcal{B}f_t(x)$ 存在，则称 $\set{f_t}$ 在 $x$ 处收敛. 定义
+$$
+E\triangleq\set{x\in X|\lim\limits_\mathcal{B}f_t(x)\text{ 存在}}
+$$
+
+    称 $E$ 为函数族 $\set{f_t|t\in T}$ 的收敛集（收敛域）.
+
+    定义 $f:E\to\RR$ 为
+$$
+f(x)\triangleq\lim\limits_\mathcal{B}f_t(x)
+$$
+
+    称 $f$ 为 $\set{f_t}$ 在 $E$ 上的极限函数.
+\end{definition}
+
+\begin{definition}
+    设 $\set{f_t|t\in T}$ 是 $X$ 上的一族函数. 设 $\mathcal{B}$ 是 $T$ 的一个基.
+
+    设 $E\subset X$，函数 $f:E\to\RR$. 称 $\set{f_t}$ 在 $E$ 上逐点收敛到 $f$，若
+$$
+\lim_\mathcal{B}f_t(x)=f(x),\forall x\in E
+$$
+
+    记为（在 $E$ 上）$f_t\xrightarrow[\mathcal{B}]{}f$.
+\end{definition}
+
+\begin{definition}
+    设 $\set{f_t:X\to\RR,t\in T}$ 是一族函数. 设 $\mathcal{B}$ 是 $T$ 的一个基.
+
+    设 $E\subset X$，函数 $f:E\to\RR$. 称 $f_t$ 在 $E$ 上一致收敛到 $f$，若
+$$
+\forall\eps>0,\exists B\in\mathcal{B},\forall t\in B,\forall x\in E,\abs{f_t(x)-f(x)}<\eps
+$$
+
+    记为（在 $E$ 上）$f_t\underset{\mathcal{B}}{\rightrightarrows}f$.
+\end{definition}
