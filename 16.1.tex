@@ -221,6 +221,18 @@ $$
     记为（在 $E$ 上）$f_t\xrightarrow[\mathcal{B}]{}f$.
 \end{definition}
 
+\begin{example}
+    设 $T=\RR\setminus\set{0},f_t(x)=e^{-(x/t)^2}$，基 $\mathcal{B}$ 为 $t\to 0$.
+
+    \vspace{0.2em}
+
+    则 $\displaystyle\lim_{t\to 0}f_t(x)=\begin{cases}
+        1 & x=0\\0 & x\ne 0
+    \end{cases}$
+\end{example}
+
+最后，我们来给出一致收敛的定义.
+
 \begin{definition}
     设 $\set{f_t:X\to\RR,t\in T}$ 是一族函数. 设 $\mathcal{B}$ 是 $T$ 的一个基.
 
@@ -231,3 +243,92 @@ $$
 
     记为（在 $E$ 上）$f_t\underset{\mathcal{B}}{\rightrightarrows}f$.
 \end{definition}
+
+作为对照，我们可以导出逐点收敛与一致收敛的形式定义：
+
+$$
+\begin{aligned}
+    &f_t\xrightarrow[\mathcal{B}]{}f\iff\forall\eps>0,\forall x\in E,\exists B\in\mathcal{B},\forall t\in B,\abs{f_t(x)-f(x)}<\eps\\
+    &f_t\underset{\mathcal{B}}{\rightrightarrows}f\iff\forall\eps>0,\exists B\in\mathcal{B},\forall x\in E,\forall t\in B,\abs{f_t(x)-f(x)}<\eps\\
+\end{aligned}
+$$
+
+\begin{hint}
+    可以将定义与函数的连续性及一致收敛性相对照.
+\end{hint}
+
+二者定义的另一个直观等价定义如下：
+
+令 $\Delta_t(x)\triangleq\abs{f_t(x)-f(x)},\Delta_t\triangleq\sup\limits_{x\in E}\Delta_t(x)$. 则
+$$
+\begin{aligned}
+    &f_t\xrightarrow[\mathcal{B}]{}f\iff\forall x\in E,\Delta_t(x)\xrightarrow[\mathcal{B}]{}0\\
+    &f_t\underset{\mathcal{B}}{\rightrightarrows}f\iff\Delta_t\xrightarrow[\mathcal{B}]{}0
+\end{aligned}
+$$
+
+特别的，如上的等价定义清晰地表明
+$$
+f_t\underset{\mathcal{B}}{\rightrightarrows}f\implies f_t\xrightarrow[\mathcal{B}]{}f
+$$
+
+\begin{example}
+    定义 $f_t:[0,1]\to\RR$ 如下
+
+    \begin{center}
+        \begin{tikzpicture}[scale=4]
+            \draw[->] (-0.2,0)--(1.2,0) node[right] {$x$};
+            \draw[->] (0,-0.2)--(0,1.2) node[right] {$y$};
+            \node at (0,0) [below left] {$O$};
+            \node at (0.2,0) [below] {$t$};
+            \node at (0.4,0) [below] {$2t$};
+            \node at (1,0) [below] {$1$};            
+            \node at (0,1) [left] {$1$};
+            \draw[-,thick] (0,0)--(0.2,1);
+            \draw[-,thick] (0.2,1)--(0.4,0);
+            \draw[-,thick] (0.4,0)--(1,0);
+            \draw[-,dashed] (0,1)--(0.2,1);
+            \draw[-,dashed] (0.2,0)--(0.2,1);
+        \end{tikzpicture}
+    \end{center}
+\end{example}
+
+\begin{example}
+    $f_n(x)=x^n,x\in[0,1]$.
+\end{example}
+
+\begin{example}
+    $f_n(x)=\dfrac{\sin n^2x}{n}$
+\end{example}
+
+\begin{example}
+    $f_n(x)=x^n-x^{2n},x\in[0,1]$
+\end{example}
+
+\mysubsection{一致收敛的 Cauchy 准则}
+
+\begin{example}
+    设 $f_t:X\to\RR,t\in T$ 为一族函数，$\mathcal{B}$ 为 $T$ 的一个基.
+
+    设 $E\subset X$. 称 $f_t$ 在 $E$ 上一致收敛，如果存在 $f:E\to\RR$ 满足 $f_t\underset{\mathcal{B}}{\rightrightarrows}f$.
+\end{example}
+
+\begin{theorem}
+    设 $f_t:X\to\RR,t\in T$ 为一族函数，$\mathcal{B}$ 为 $T$ 的一个基.
+
+    设 $E\subset X$. 则 $f_t$ 在 $E$ 上一致收敛当且仅当
+$$
+\forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in E,\abs{f_{t_1}(x)-f_{t_2}(x)}<\eps
+$$
+\end{theorem}
+\begin{proof}
+    见教材.
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 从证明的过程可知，可以将到达域 $\RR$ 换成任何一个完备度量空间 $(y,\rho)$，如 $\RR^n,\mathbb{C}$ 等.
+        
+        \item “$\implies$”方向的证明甚至不需要 $y$ 完备.
+    \end{enumerate}
+\end{hint}

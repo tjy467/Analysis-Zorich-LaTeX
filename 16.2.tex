@@ -1,0 +1,180 @@
+上一节我们讨论了函数列的逐点收敛与一致收敛. 本节我们讨论一个非常重要的特殊情形，即函数项级数的一致收敛性.
+
+\mysubsection{基本定义以及基本判定准则}
+
+\begin{definition}
+    设 $X$ 为集合，$f_n:X\to\RR$ 为一列函数. 称
+$$
+\sum_{n=1}^\infty f_n(x)
+$$
+
+    为（形式）函数项级数. 记 $S_n:X\to\RR$ 为
+$$
+S_n\triangleq\sum_{j=1}^nf_j(x)
+$$
+
+    称 $S_n(x)$ 是级数 $\sum\limits_{n=1}^\infty f_n(x)$ 的部分和.
+\end{definition}
+
+\begin{definition}
+    设 $E\subset X$. 称形式级数 $\sum\limits_{n=1}^\infty f_n(x)$ 在 $E$ 上收敛，若 $\set{S_n(x)}$ 在 $E$ 上逐点收敛.
+
+    称 $\sum\limits_{n=1}^\infty f_n(x)$ 在 $E$ 上一致收敛，若 $\set{S_n(x)}$ 在 $E$ 上一致收敛.
+
+    当 $\sum\limits_{n=1}^\infty f_n(x)$ 在 $E$ 上收敛时，我们记
+$$
+\sum_{n=1}^\infty f_n(x)\triangleq\lim_{n\to\infty}S_n(x)
+$$
+\end{definition}
+
+\begin{example}
+    $e^z\triangleq\sum\limits_{n=0}^\infty\dfrac{z^n}{n!},z\in\mathbb{C}$
+\end{example}
+
+\begin{hint}
+    在学习数项级数时，如我们曾经提到序列的极限与级数的极限是可以互相转换的. 在函数项级数的情形下，这个注记仍然适用. 只要注意到
+$$
+a_n\to a\xrightleftharpoons[\qquad a_n=\sum\limits_{j=1}^nb_j\qquad]{b_n=a_n-a_{n-1}}\sum_{n=1}^\infty b_n=a
+$$
+
+    由此，我们可以将所有关于函数序列收敛的性质翻译成函数项技术收敛的性质. 作为最重要的例子，我们有
+\end{hint}
+
+\begin{property}
+    设 $f_n:X\to\RR$ 为一列函数. 设 $E\subset X$.
+
+    则 $\sum\limits_{n=1}^\infty f_n(x)$ 在 $E$ 上一致收敛当且仅当
+$$
+\forall\eps>0,\exists N\in\mathbb{N},\forall m\ge n\ge N,\abs{\sum_{j=n}^mf_j(x)}<\eps
+$$
+\end{property}
+
+\begin{hint}
+    我们再次指出：到达域可以换成任何 Banach 空间.
+\end{hint}
+
+\begin{inference}
+    若 $\sum\limits_{n=1}^\infty f_n(x)$ 在 $E$ 上一致收敛，则必有 $f_n\rightrightarrows 0$.
+\end{inference}
+
+\begin{example}
+    $e^z=\sum\limits_{n=0}^\infty\dfrac{z^n}{n!}$ 在 $\mathbb{C}$ 上不一致收敛. 但在任何紧集 $K\subset\mathbb{C}$ 上一致收敛.
+\end{example}
+
+\begin{example}
+    $\sum\limits_{n=1}^\infty\dfrac{z^n}{n}$ 在 $D=B(0,1)$ 上收敛，但不一致收敛.
+\end{example}
+
+\mysubsection{Weierstrass 判别法}
+
+\begin{definition}
+    称 $f_n:X\to\RR$ 在 $E$ 上绝对收敛，若极限 $\sum\limits_{n=1}^\infty\abs{f_n(x)}$ 在 $E$ 上收敛.
+\end{definition}
+
+\begin{property}
+    设 $\set{f_n},\set{g_n}$ 是两列定义在 $X$ 上的函数. 若
+
+    \begin{enumerate}
+        \item $g_n(x)\ge 0,\forall x\in E$ 且 $\sum\limits_{n=1}^\infty g_n(x)$ 在 $E$ 上一致收敛.
+        
+        \item $\exists N\in\mathbb{N},\forall n\ge N,\forall x\in E,\abs{f_n(x)}\le g_n(x)$.
+    \end{enumerate}
+
+    则 $\sum\limits_{n=1}^\infty f_n(x)$ 在 $E$ 上绝对收敛且一致收敛.
+\end{property}
+\begin{proof}
+    对任意 $n\le m,x\in E$ 有
+$$
+\abs{\sum_{j=n}^mf_j(x)}\le\sum_{j=n}^m\abs{f_j(x)}\le\sum_{j=n}^mg_j(x)
+$$
+
+    结合 $\sum\limits_{n=1}^\infty g_n(x)$ 一致收敛以及 Cauchy 准则即证.
+\end{proof}
+
+\begin{inference}
+    设 $f_n:X\to\RR$ 是一列函数. 若存在正项级数 $\sum\limits_{n=1}^\infty M_n<+\infty$ 且满足
+$$
+\exists N\in\mathbb{N},\forall n\ge N,\forall x\in E,\abs{f_n(x)}\le M_n
+$$
+
+    则 $\sum\limits_{n=1}^\infty f_n(x)$ 在 $E$ 上绝对收敛且一致收敛.
+\end{inference}
+
+作为应用，我们有
+
+\begin{property}
+    设幂级数 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 在 $z=\xi\ne z_0$ 处收敛. 则
+
+    \begin{enumerate}
+        \item $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 在 $z_0+D_r$ 上绝对收敛.
+        
+        \item 对任意 $0<s<r$ 有 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 在 $z_0+D_s$ 上绝对收敛且一致收敛.
+    \end{enumerate}
+
+    其中 $r=\abs{\xi-z_0},D_r=\set{z\in\mathbb{C}:\abs{z}<r}$.
+\end{property}
+\begin{proof}
+    不妨设 $z_0=0$. 任取 $0<s<r$.
+
+    由 $\sum\limits_{n=0}^\infty a_n\xi^n$ 收敛知 $\abs{a_n\xi^n}=\abs{a_n}r^n\to 0$.
+
+    从而 $\abs{a_n}r^n$ 有界. 设 $\forall n\in\mathbb{N},\abs{a_n}r^n\le M$. 则有
+$$
+\sum_{n=0}^\infty\abs{a_n}s^n=\sum_{n=0}^\infty\abs{a_n}r^n\left(\frac{s}{r}\right)^n\le M\sum_{n=0}^\infty\left(\frac{s}{r}\right)^n<+\infty
+$$
+
+    任取 $z\in D_s$ 有 $\abs{a_nz^n}=\abs{a_n}\abs{z}^n\le\abs{a_n}s^n$.
+
+    从而由 Weierstrass 判别法知 $\sum\limits_{n=0}^\infty a_nz^n$ 在 $D_s$ 上绝对收敛且一致收敛.
+
+    由 $0<s<r$ 的任意性知 $\sum\limits_{n=0}^\infty a_nz^n$ 在 $D_r$ 上绝对收敛.
+\end{proof}
+
+结合收敛半径的性质，我们有
+
+\begin{theorem}[Cauchy-Hadamard]
+    设级数 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 的收敛半径为 $R$. 则
+
+    \begin{enumerate}
+        \item 当 $\abs{z-z_0}>R$ 时 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 发散.
+        
+        \item 对 $0<r<R$ 有 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 在 $z_0+D_r$ 上绝对收敛且一致收敛.
+        
+        \item $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 在 $z_0+D_R$ 上绝对收敛.
+    \end{enumerate}
+\end{theorem}
+
+\begin{hint}
+    在 $z_0+\partial D_r$ 上我们已经知道，收敛性没有绝对的判定.
+\end{hint}
+
+\begin{example}
+    $\sum\limits_{n=1}^\infty z^n,\sum\limits_{n=1}^\infty\dfrac{z^n}{n},\sum\limits_{n=1}^\infty\dfrac{z^n}{n^2}$
+\end{example}
+
+\mysubsection{Abel-Dirichlet 判别法}
+
+以上的判别法都能同时判定函数项级数绝对收敛与一致收敛. 以下介绍一种特殊的判别法，其可以在某些非绝对收敛的场景判定一致收敛. 这种判别法则是 Abel-Dirichlet 判别法. 我们在研究第二积分中值定理以及广义积分的收敛性时曾经见过.
+
+我们先来简单回顾 Abel 求和的方法.
+
+设序列 $\set{a_n},\set{b_n}$. 定义 $A_0\triangleq 0,A_n\triangleq\sum\limits_{j=1}^na_j,n\ge 1$.
+
+则对任意 $0<m\le n$ 有
+$$
+\begin{aligned}
+    \sum_{j=m}^na_jb_j&=\sum_{j=m}^n(A_j-A_{j-1})b_j=\sum_{j=m}^nA_jb_j-\sum_{j=m}^nA_{j-1}b_j\\
+    &=\sum_{j=m}^nA_jb_j-\sum_{j=m-1}^{n-1}A_jb_{j+1}=A_nb_n-A_{m-1}b_m+\sum_{j=m}^{n-1}A_j(b_j-b_{j+1})
+\end{aligned}
+$$
+
+若进一步假设 $\set{b_n}$ 为实数列且单调，则有
+$$
+\begin{aligned}
+    \abs{\sum_{j=m}^na_jb_j}&\le\abs{A_n}\abs{b_n}+\abs{A_{m-1}}\abs{b_m}+\sum_{j=m}^{n-1}\abs{A_j}\abs{b_j-b_{j+1}}\\
+    &\le\abs{A}_\textrm{max}\left(\abs{b_n}+\abs{b_m}+\abs{\sum_{j=m}^{n-1}(b_j-b_{j+1})}\right)\\
+    &\le 4\abs{A}_\textrm{max}\abs{b}_\textrm{max}
+\end{aligned}
+$$
+
+其中 $\abs{A}_\textrm{max}\triangleq\max\set{\abs{A_{m-1}},\cdots,\abs{A_n}},\abs{b}_\textrm{max}\triangleq\max\set{\abs{b_m},\cdots,\abs{b_n}}$.
