@@ -1,0 +1,182 @@
+\mysubsection{典型问题的描述}
+
+之前已经提过，本章的核心问题是讨论函数列（族）的特定性质在取定极限之后是否能得到保持. 例如，一个重要的例子为：
+
+\begin{itemize}
+    \item 设 $f_n:\RR\to\RR$ 均连续，且 $f_n\to f:R\to\RR$. 问：$f$ 是否在 $\RR$ 上也连续？
+\end{itemize}
+
+其形式化的表述为
+
+\begin{center}
+    \begin{tikzcd}
+        \lim\limits_{x\to x_0}f(x) \dar[equal,"?"] \rar[equal] & \lim\limits_{x\to x_0}\lim\limits_{n\to\infty}f_n(x) \drar[equal,"?",red] \\
+        f(x_0) \rar[equal] & \lim\limits_{n\to\infty}f_n(x_0) \rar[equal] & \lim\limits_{n\to\infty}\lim\limits_{x\to x_0}f_n(x)
+    \end{tikzcd}
+\end{center}
+
+从而 $f$ 是否连续的问题形式上表述为两个极限运算是否可以交换次序.
+
+事实上，我们发现其它类似的问题最终也可以转化为这样一个抽象的交换极限次序的问题. 为此，我们首先来研究这个抽象的问题.
+
+\mysubsection{两个极限可交换的充分条件}
+
+\begin{theorem}
+    设 $X,T$ 是两个集合. $\mathcal{B}_X,\mathcal{B}_T$ 分别是 $X,Y$ 的一个基.
+
+    设 $\set{f_t:X\to\RR|t\in T}$ 是一族函数. 若
+
+    \begin{enumerate}
+        \item\label{slcon1} $f_t\underset{\mathcal{B}_T}{\rightrightarrows}f:X\to\RR$.
+        
+        \item\label{slcon2} $\forall t\in T,\lim\limits_{\mathcal{B}_X}f_t(x)=A_t$
+    \end{enumerate}
+
+    则极限 $\lim\limits_{\mathcal{B}_T}A_t$ 与 $\lim\limits_{\mathcal{B}_X}f(x)$ 均存在且
+$$
+\lim_{\mathcal{B}_T}\lim_{\mathcal{B}_X}f_t(x)=\lim_{\mathcal{B}_T}A_t=\lim_{\mathcal{B}_X}f(x)=\lim_{\mathcal{B}_X}\lim_{\mathcal{B}_T}f_t(x)
+$$
+\end{theorem}
+
+在证明这一结论之前，我们首先来理解一下定理的内容：
+
+考虑以下的图表
+
+\begin{center}
+    \begin{adjustbox}{scale=1.5}
+        \begin{tikzcd}[column sep={3cm,between origins},row sep={3cm,between origins}]
+            f_t(x) \dar["\mathcal{B}_X"] \rar["\mathcal{B}_T",transform canvas={yshift=0.45ex}] \rar[transform canvas={yshift=-0.45ex}] & f(x) \dar["\mathcal{B}_X"]\\
+            A_t \rar["\mathcal{B}_T"] & A
+        \end{tikzcd}
+    \end{adjustbox}
+\end{center}
+
+条件 \ref{slcon1} 对应上面的行，条件 \ref{slcon2} 对应左边的列.
+
+定理假设左上半三角形之后得到的结论是：
+
+下面的行成立，右面的列成立，且二者相等. 特别的，两条路线（右-下，下-右）得到同样的结论. 即上面的图表交换. 而这恰好说明两个极限可交换.
+
+\begin{proof}
+    \begin{enumerate}
+        \item $\lim\limits_{\mathcal{B}_T}A_t$ 存在
+        
+        任取 $\eps>0$，由 $f_t\underset{\mathcal{B}_T}{\rightrightarrows}f$ 知
+$$
+\exists B_t\in\mathcal{B}_T,\forall t\in B_T,\forall x\in X,\abs{f_t(x)-f(x)}<\eps
+$$
+
+        任取 $t,t'\in B_T$. 由 $\lim\limits_{\mathcal{B_X}}f_t(x)=A_t,\lim\limits_{\mathcal{B_X}}f_{t'}(x)=A_{t'}$ 知
+$$
+\begin{aligned}
+    &\exists B_X^1\in\mathcal{B}_X,\forall x\in B_X^1,\abs{f_t(x)-A_t}<\eps\\
+    &\exists B_X^2\in\mathcal{B}_X,\forall x\in B_X^2,\abs{f_{t'}(x)-A_{t'}}<\eps
+\end{aligned}
+$$
+
+        设 $B_X\in\mathcal{B}_X$ 满足 $B_X\subset B_X^1\cap B_X^2$. 从而对 $\forall x\in\mathcal{B}_X$ 有
+$$
+\abs{A_t-A_{t'}}\le\abs{A_t-f_t(x)}+\abs{f_t(x)-f(x)}+\abs{f(x)-f_{t'}(x)}+\abs{f_{t'}(x)-A_{t'}}<4\eps
+$$
+
+        从而 $\set{A_t}$ 确为 Cauchy 列.
+
+        故存在唯一的 $A\in\RR$ 使得 $\lim\limits_{\mathcal{B}_T}A_t=A$.
+
+        \item $\lim\limits_{\mathcal{B}_X}f(x)=A$
+        
+        任取 $\eps>0$. 设 $B_T$ 同前. 由 $\lim_{\mathcal{B}_T}A_t=A$ 知
+$$
+\exists B_T'\in\mathcal{B}_T,\forall t\in B_T',\abs{A_t-A}<\eps
+$$
+
+        任取 $t\in B_t\cap B_T'$. 则由 $\lim\limits_{\mathcal{B}_X}f_t(x)=A_t$ 知
+$$
+\exists B_X'\in\mathcal{B}_X,\forall x\in B_X',\abs{f_t(x)-A_t}<\eps
+$$
+
+        从而对 $\forall x\in B_X'$ 有
+$$
+\abs{f(x)-A}\le\abs{f(x)-f_t(x)}+\abs{f_t(x)-A_t}+\abs{A_t-A}<3\eps
+$$
+
+        即证 $\lim\limits_{\mathcal{B}_X}f(x)=A$.
+    \end{enumerate}
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 从证明的过程可知，我们可以将到达域换成任何完备度量空间 $(y,\rho)$.
+        
+        \item 若我们实现假设了 $\lim\limits_{\mathcal{B}_T}A_t$ 的存在性，则我们甚至不需要 $y$ 完备.
+    \end{enumerate}
+\end{hint}
+
+\mysubsection{连续性与极限运算}
+
+作为第一个应用，我们来讨论极限函数的连续性.
+
+\begin{theorem}
+    设 $X$ 为度量空间，$f_t:X\to\RR,t\in T$ 是一族函数. 设 $\mathcal{B}$ 是 $T$ 的一个基.
+
+    若以下两个条件成立：
+
+    \begin{enumerate}
+        \item $f_t\underset{\mathcal{B}}{\rightrightarrows}{f}$
+        
+        \item 对任意 $t\in T$ 均有 $f_t$ 在 $x_0\in X$ 处连续.
+    \end{enumerate}
+
+    则 $f$ 也在 $x_0$ 处连续.
+\end{theorem}
+\begin{proof}
+    对 $X$ 的基 $x\to x_0$ 应用上一节的定理即得.
+\end{proof}
+
+\begin{inference}
+    设 $X$ 为度量空间，$f_n:X\to\RR$ 均在 $X$ 上连续.
+
+    若 $f_n\rightrightarrows f$，则 $f$ 也在 $X$ 上连续.
+\end{inference}
+
+\begin{inference}
+    设 $X$ 为度量空间，$f_n:X\to\RR$ 均在 $X$ 上连续.
+
+    若 $\sum\limits_{n=1}^\infty f_n(x)$ 在 $X$ 上一致收敛，则 $\sum\limits_{n=1}^\infty f_n(x)$ 也在 $X$ 上连续.
+\end{inference}
+
+现在我们可以强化第二节的一个性质：
+
+\begin{property}[Abel]
+    设幂级数 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 在 $z=\xi\ne z_0$ 处收敛.
+    
+    则 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 在区间 $[z_0,\xi]$ 上一致收敛，且该极限函数在 $[z_0,\xi]$ 上连续.
+\end{property}
+\begin{proof}
+    我们已知级数在 $[z_0,\xi]$ 上一致收敛.
+
+    又 $f_n(z)\triangleq a_n(z-z_0)^n$ 在 $[z_0,\xi]$ 上连续，则由上一推论知该级数在 $[z_0,\xi]$ 上也连续.
+\end{proof}
+
+\begin{example}[ Abel 求和]
+    在历史上，人们经常需要考虑如何定义 $\sum\limits_{n=0}^\infty c_n$ 的值，以及如何求其具体值.
+
+    情形 1：若已知 $\sum\limits_{n=0}^\infty c_n$ 收敛，则上述性质告诉我们：
+
+    若定义 $\varphi(z)\triangleq\sum\limits_{n=0}^\infty c_nz^n$，则 $\varphi$ 在 $[0,1]$ 上连续. 从而
+$$
+\sum_{n=0}^\infty a_n=\lim_{z\to 1-}\varphi(z)=\varphi(1)
+$$
+
+    情形 2：有时甚至在 $\sum\limits_{n=0}^\infty c_n$ 不收敛的情形，如上定义的函数 $\varphi$ 仍在 $1$ 处有极限. 如
+$$
+\begin{aligned}
+    \sum_{n=0}^\infty (-1)^n\longrightarrow \varphi(z)&=\sum_{n=0}^\infty (-1)^nz^n,\abs{z}<1\\
+    &=\frac{1}{1+z}
+\end{aligned}
+$$
+
+    从而 $\varphi(1)=\lim\limits_{z\to 1-}\varphi(z)=\dfrac{1}{2}$.
+
+    故我们可以定义 $\sum\limits_{n=0}^\infty(-1)^n\triangleq\dfrac{1}{2}$.
+\end{example}
