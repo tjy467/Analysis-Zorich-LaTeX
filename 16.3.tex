@@ -66,7 +66,7 @@ $$
 \exists B_t\in\mathcal{B}_T,\forall t\in B_T,\forall x\in X,\abs{f_t(x)-f(x)}<\eps
 $$
 
-        任取 $t,t'\in B_T$. 由 $\lim\limits_{\mathcal{B_X}}f_t(x)=A_t,\lim\limits_{\mathcal{B_X}}f_{t'}(x)=A_{t'}$ 知
+        任取 $t,t'\in B_T$. 由 $\lim\limits_{\mathcal{B}_X}f_t(x)=A_t,\lim\limits_{\mathcal{B}_X}f_{t'}(x)=A_{t'}$ 知
 $$
 \begin{aligned}
     &\exists B_X^1\in\mathcal{B}_X,\forall x\in B_X^1,\abs{f_t(x)-A_t}<\eps\\
@@ -90,7 +90,7 @@ $$
 \exists B_T'\in\mathcal{B}_T,\forall t\in B_T',\abs{A_t-A}<\eps
 $$
 
-        任取 $t\in B_t\cap B_T'$. 则由 $\lim\limits_{\mathcal{B}_X}f_t(x)=A_t$ 知
+        任取 $t\in B_T\cap B_T'$. 则由 $\lim\limits_{\mathcal{B}_X}f_t(x)=A_t$ 知
 $$
 \exists B_X'\in\mathcal{B}_X,\forall x\in B_X',\abs{f_t(x)-A_t}<\eps
 $$
@@ -439,7 +439,7 @@ $$
 
     从而对 $\forall x\in X$ 有
 $$
-\abs{f_{t_1}(x)-f_{t_2}(x)}<\eps+\eps d(x_0,x)
+\abs{f_{t_1}(x)-f_{t_2}(x)}<\eps+\eps d(X)
 $$
 
     由 Cauchy 准则知 $\set{f_t}$ 在 $\mathcal{B}$ 下一致收敛.
