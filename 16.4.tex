@@ -1,0 +1,182 @@
+本节，我们证明两个十分重要的定理. 它们分别刻画了紧空间上的连续函数空间的紧子集与稠密子集.
+
+\mysubsection{Arzelà-Ascoli 定理}
+
+\begin{definition}
+    设 $X$ 为集合，$(Y,\rho)$ 为度量空间. 设 $\mathscr{F}=\set{f:X\to Y}$ 为一族函数.
+
+    称 $\mathscr{F}$ 一致有界，若所有 $f\in\mathscr{F}$ 的值域之并在 $Y$ 中有界. 即
+$$
+V\triangleq\set{f(x)|x\in X,f\in\mathscr{F}}
+$$
+
+    在 $Y$ 中有界.
+
+    称 $\mathscr{F}$ 完全有界，若 $V$ 是 $Y$ 中的完全有界集.
+\end{definition}
+
+\begin{hint}
+    若 $Y=\RR^n$ 或 $\mathbb{C}^n$，则 $A\subset Y$ 有界 $\iff A$ 完全有界.
+
+    从而在此时函数族 $\mathscr{F}$ 一致有界与完全有界等价.
+
+    但若 $Y$ 为无穷维赋范线性空间，则完全有界的概念严格强于有界. 例如 $Y=C[a,b]$.
+\end{hint}
+
+\begin{definition}
+    设 $(X,d),(Y,\rho)$ 均为度量空间，$\mathscr{F}=\set{f:X\to Y}$ 为一族函数.
+
+    称 $\mathscr{F}$ 等度连续，若
+$$
+\forall\eps>0,\exists\delta>0,\forall x_1,x_2\in X,d(x_1,x_2)<\delta\implies\forall f\in\mathscr{F},\rho(f(x_1),f(x_2))<\eps
+$$
+\end{definition}
+
+\begin{example}
+    $\mathscr{F}=\set{x^n|n\ge 1},X=[0,1]$.
+
+    则 $\mathscr{F}$ 一致有界，但不等度连续.
+\end{example}
+
+\begin{example}
+    $\mathscr{F}=\set{\sin nx|n\in\mathbb{N}}$ 在任何区间 $[a,b]$ 上均不等度连续.
+\end{example}
+
+\begin{example}
+    若 $\mathscr{F}$ 是一族从 $\RR$ 到 $\RR$ 的映射，且
+$$
+\exists L>0,\forall f\in\mathscr{F},\forall x,y\in\RR,\abs{f(x)-f(y)}\le L\abs{x-y}
+$$
+
+    则 $\mathscr{F}$ 等度连续.
+\end{example}
+
+如上的概念与一致收敛性有密切的连续：
+
+\begin{lemma}
+    设 $K$ 为紧度量空间，$Y$ 为完备度量空间.
+
+    设 $f_n\in C(K;Y)$. 若 $\set{f_n}$ 在 $K$ 上一致收敛，则 $\set{f_n}$ 在 $K$ 上完全有界且等度连续.
+\end{lemma}
+\begin{proof}
+    设 $f_n\rightrightarrows f:K\to Y$. 则 $f$ 也连续.
+
+    \begin{itemize}
+        \item 完全有界：
+        
+        由 $f_n,f$ 连续且 $K$ 紧知 $f_n(K),f(K)$ 均为 $Y$ 中的紧集. 从而完全有界. 由 $f(K)$ 完全有界知
+$$
+\forall\eps>0,\exists x_1,\cdots,x_k\in K,f(K)\subset\bigcup_{j=1}^kB\left(f(x_j),\frac{\eps}{2}\right)
+$$
+
+        由 $f_n\rightrightarrows f$ 知
+$$
+\begin{aligned}
+    \exists N\in\mathbb{N},\forall n\ge N,&\forall x\in K,\abs{f_n(x)-f(x)}<\frac{\eps}{2}\\
+    \implies&f_n(K)\subset\bigcup_{j=1}^kB(f(x_j),\eps)
+\end{aligned}
+$$
+
+        故 $\bigcup\limits_{n\ge N}f_n(K)$ 完全有界.
+
+        由 $f_1(K)\cup\cdots\cup f_N(K)$ 是有限个完全有界集之并，知其完全有界. 故
+$$
+V\triangleq\bigcup_{n=1}^\infty f_n(K)=\bigcup_{n=1}^Nf_n(K)\cup\bigcup_{n\ge N}f_n(K)
+$$
+
+        完全有界. 即 $\set{f_n}$ 完全有界.
+        
+        \item 等度连续：
+        
+        任取 $\eps>0$. 由 $f_n\rightrightarrows f$ 知
+$$
+\exists N\in\mathbb{N},\forall n\ge N,\forall x\in K,\abs{f_n(x)-f(x)}<\frac{\eps}{3}
+$$
+
+        由 $f_1,\cdots,f_N,f$ 在紧集 $K$ 上连续知它们一致连续. 从而
+$$
+\begin{aligned}
+    \exists\delta>0,\forall x,x'\in K,d(x,x')<\delta\implies&\rho(f_j(x),f_j(x'))<\frac{\eps}{3},1\le j\le N\\
+    &\rho(f(x),f(x'))<\frac{\eps}{3}
+\end{aligned}
+$$
+
+        则对 $n\ge N$ 有
+$$
+\begin{aligned}
+    \forall x,x'\in K,d(x,x')<\delta\implies&\rho(f_n(x),f_n(x'))\\
+    \le&\rho(f_n(x),f(x))+\rho(f(x),f(x'))+\rho(f(x'),f_n(x'))\\
+    <&\frac{\eps}{3}+\frac{\eps}{3}+\frac{\eps}{3}=\eps
+\end{aligned}
+$$
+
+        即 $\set{f_n}$ 等度连续.
+    \end{itemize}
+\end{proof}
+
+现在我们可以陈述 Arzelà-Ascoli 定理.
+
+\begin{theorem}[Arzelà-Ascoli]
+    设 $\mathscr{F}$ 是一族从紧度量空间 $K$ 到完备度量空间 $Y$ 的函数. 则
+
+    $\forall\set{f_n}\subset\mathscr{F}$，存在子列 $n_k$ 使得 $\set{f_{n_k}}$ 一致收敛 $\iff\mathscr{F}$ 完全有界且等度连续.
+\end{theorem}
+\begin{proof}
+    $\implies$：反证，设 $\mathscr{F}$ 不完全有界，即 $V=\set{f(x)|x\in K,f\in\mathscr{F}}$ 不完全有界.
+    
+    即存在 $\eps_0>0$ 使得 $V$ 不存在有限 $\eps_0$-网.
+
+    则可以构造 $f_n\in\mathscr{F},x_n\in K$ 满足
+$$
+\rho(f_n(x_n),f_m(x_m))\ge\eps_0,\forall n\ne m
+$$
+
+    这说明 $\set{f_n}\subset\mathscr{F}$ 不完全有界，且 $\set{f_n}$ 的任何子列也不完全有界. 从而由引理知其不可能一致收敛.
+
+    反证，设 $\mathscr{F}$ 不等度连续.
+
+    则存在 $\eps_0>0$ 以及 $f_n\in\mathscr{F},x_n,x_n'\in K$ 满足
+$$
+\begin{cases}
+    d(x_n,x_n')<\dfrac{1}{n}\\
+    \rho(f_n(x_n),f_n(x_n'))\ge\eps_0
+\end{cases},\forall n\in\mathbb{N}
+$$
+
+    则 $\set{f_n}$ 的任何子列都不等度连续. 从而不可能一致收敛.
+
+    $\impliedby$：下设 $\mathscr{F}$ 完全有界且等度连续.
+
+    设 $\set{f_n}\subset\mathscr{F}$. 由 $K$ 紧知：存在可数集 $D\subset K$ 使得 $\overline{D}=K$.
+
+    可以这样构造：$\forall n\in\mathbb{N}$ 存在 $K$ 的有限 $\dfrac{1}{n}$-网 $D_n$. 令 $D=\bigcup\limits_{n\in\mathbb{N}}D_n$ 即可.
+
+    现在对 $\set{f_n}$ 利用 Cantor 对角线法，可以选出子列 $\set{f_{n_k}}$ 使得 $\forall x\in D$ 有 $f_{n_k}(x)\to f_\infty(x),k\to\infty$.
+
+    这里能选出子列的原因是 $\forall x\in D,\set{f_n(x)}$ 完全有界且 $Y$ 完备.
+
+    下证：$\set{f_{n_k}}$ 一致收敛.
+
+    任取 $\eps>0$. 由 $\mathscr{F}$ 等度连续知
+$$
+\exists\delta>0,\forall f\in\mathscr{F},\forall x,x'\in K,d(x,x')<\delta\implies\rho(f(x),f(x'))<\frac{\eps}{4}
+$$
+
+    由 $D\subset K$ 知 $D$ 完全有界. 从而其存在有限 $\dfrac{\delta}{2}$-网，记为 $\set{x_1,\cdots,x_m}\subset D$.
+
+    由 $f_{n_k}(x_i)\to f_\infty(x_i),i=1,\cdots,m$ 知
+$$
+\exists K\in\mathbb{N},\forall k\ge K,\forall 1\le i\le m,\rho(f_{n_k}(x_i),f_\infty(x_i))<\frac{\eps}{4}
+$$
+
+    现任取 $k,l\ge K$. 则对 $\forall x\in K$ 可以选出 $x_i$ 使得 $d(x,x_i)<\delta$. 从而
+$$
+\begin{aligned}
+    \rho(f_{n_k}(x),f_{n_l}(x))\le&\rho(f_{n_k}(x),f_{n_k}(x_i))+\rho(f_{n_k}(x_i),f_\infty(x_i))\\
+    &+\rho(f_\infty(x_i),f_{n_l}(x_i))+\rho(f_{n_l}(x_i),f_{n_l}(x))\\
+    <&\frac{\eps}{4}+\frac{\eps}{4}+\frac{\eps}{4}+\frac{\eps}{4}=\eps
+\end{aligned}
+$$
+
+    即 $\set{f_{n_k}}$ 满足 Cauchy 准则，从而一致收敛.
+\end{proof}

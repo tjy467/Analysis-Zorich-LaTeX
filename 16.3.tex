@@ -502,3 +502,68 @@ $$
 \left(\sum\limits_{n=1}^\infty f_n(x)\right)'=\sum\limits_{n=1}^\infty f_n'(x)
 $$
 \end{inference}
+
+作为应用，我们来讨论幂级数的逐项求导与逐项积分.
+
+\begin{property}
+    设幂级数 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 的收敛半径 $R>0$. 则
+
+    \begin{enumerate}
+        \item 该幂级数在 $z_0+D_R$ 上 $C^{(1)}$ 光滑，且极限函数 $S$ 可微，有
+$$
+S'(x)=\sum_{n=1}^\infty na_n(z-z_0)^{n-1}
+$$
+
+        \item 对任意光滑路径 $\gamma:[0,1]\to z_0+D_r$ 满足 $\gamma(0)=z_0,\gamma(1)=z$ 有
+$$
+\int_\gamma S(z)\dd z=\sum_{n=0}^\infty\frac{a_n}{n+1}(z-z_0)^{n+1}
+$$
+    \end{enumerate}
+\end{property}
+
+\img{0.4}{16.3.1.png}
+
+\begin{proof}
+    \begin{enumerate}
+        \item 在第一学期我们就证明过这个结论. 但在这里，我们用新的知识来重新证明一遍.
+        
+        令 $f_n(z)=a_n(z-z_0)^n$. 则 $f_n$ 可微且 $f_n'(z)=na_n(z-z_0)^{n-1}$.
+
+        由 $\overline{\lim\limits_{n\to\infty}}\sqrt[n]{n\abs{a_n}}=\dfrac{1}{R}$ 知 $\sum\limits_{n=0}^\infty f_n'(z)$ 在 $z_0+D_r$ 上一致收敛，$\forall 0<r<R$.
+
+        且 $\sum\limits_{n=0}^\infty f_n(z_0)$ 显然收敛. 从而由上一推论可知：$\sum\limits_{n=0}^\infty f_n(z)$ 也一致收敛且可微，且有
+$$
+\left(\sum_{n=0}^\infty a_n(z-z_0)^n\right)'=\sum_{n=1}^\infty na_n(z-z_0)^{n-1}
+$$
+
+        \item 取 $0<r<R$ 使得 $\gamma([0,1])\subset z_0+\overline{D_r}$.
+        
+        则由 $\sum\limits_{n=0}^\infty a_n(z-z_0)^n$ 在 $z_0+\overline{D_r}$ 上一致收敛知
+$$
+\sum\limits_{n=0}^\infty a_n(\gamma(t)-z_0)^n\gamma'(t)
+$$
+
+        在 $[0,1]$ 上一致收敛. 从而由积分与求和可交换次序知
+$$
+\begin{aligned}
+    &\int_\gamma\sum\limits_{n=0}^\infty a_n(z-z_0)^n\dd z=\int_0^1\sum\limits_{n=0}^\infty a_n(\gamma(t)-z_0)^n\gamma'(t)\dd t\\
+    =&\sum\limits_{n=0}^\infty a_n\int_0^1(\gamma(t)-z_0)^n\gamma'(t)\dd t=\sum_{n=0}^\infty a_n\int_0^1\frac{\dd(\gamma(t)-z_0)^{n+1}}{n+1}\\
+    =&\sum\limits_{n=0}^\infty \frac{a_n}{n+1}(z-z_0)^{n+1}
+\end{aligned}
+$$
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    Bessel 函数 $J_n(x)$ 为如下微分方程的解：
+$$
+x^2y''+xy'+(x^2-n^2)y=0
+$$
+
+    我们可以使用幂级数法来求解该方程.
+
+    例如在 $n=0$ 时
+$$
+J_0(x)=1+\sum\limits_{k=1}^\infty(-1)^k\frac{x^{2k}}{(k!)^22^{2k}}
+$$
+\end{example}
