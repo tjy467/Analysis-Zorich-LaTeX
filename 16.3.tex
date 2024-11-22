@@ -300,7 +300,7 @@ $$
 
     当 $x\ne 1$ 时，考虑函数 $\varphi(t)=x^t$. 则 $\varphi$ 为凸函数. 而
 $$
-f_n(x)=\frac{\varphi(0)-\varphi(\frac{1}{n})}{\frac{1}{n}}=-\frac{f(\frac{1}{n})-f(0)}{\frac{1}{n}-0}
+f_n(x)=\frac{\varphi(0)-\varphi(\frac{1}{n})}{\frac{1}{n}}=-\frac{\varphi(\frac{1}{n})-\varphi(0)}{\frac{1}{n}-0}
 $$
 
     为割线斜率的相反数.
@@ -434,7 +434,7 @@ $$
 
     由 $f_t'\underset{\mathcal{B}}{\rightrightarrows}\varphi$ 以及 $\lim\limits_{\mathcal{B}}f_t(x_0)$ 存在知
 $$
-\forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in K,\abs{f_{t_1}'(x)-f_{t_2}'(x)}<\eps,\abs{f_{t_1}(x)-f_{t_2}(x)}<\eps
+\forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in K,\abs{f_{t_1}'(x)-f_{t_2}'(x)}<\eps,\abs{f_{t_1}(x_0)-f_{t_2}(x_0)}<\eps
 $$
 
     从而对 $\forall x\in X$ 有
