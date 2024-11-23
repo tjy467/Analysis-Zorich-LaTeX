@@ -360,12 +360,12 @@ $$
 
     断言存在 $\set{Q_n}\subset\mathscr{P}$ 使得在 $[-M,M]$ 上
 $$
-Q_n\rightrightarrows\abs{\cdot}
+Q_n\rightrightarrows\abs{\;\cdot\;}
 $$
 
     \textbf{证明：}当 $M=1$ 时，我们已经证明存在 $\set{\widetilde{Q}_n}\subset\mathscr{P}$ 使得在 $[-1,1]$ 上
 $$
-\widetilde{Q}_n\rightrightarrows\abs{\cdot}
+\widetilde{Q}_n\rightrightarrows\abs{\;\cdot\;}
 $$
 
     令 $Q_n(y)\triangleq M\widetilde{Q}_n\left(\dfrac{y}{M}\right)$. 则 $Q_n$ 满足条件.
@@ -485,16 +485,89 @@ $$
 
     任取 $f\in C(K;\RR)$. 由 $K$ 紧知 $\norm{f}_\infty\le M$. 从而利用上一定理的证明可得：
 $$
-f\in\mathscr{A}\implies\abs{f}\in\overline{\mathscr{A}}
+f\in\overline{\mathscr{A}}\implies\abs{f}\in\overline{\mathscr{A}}
 $$
 
-    进而有：若 $f,g\in\mathscr{A}$，则
+    进而有：若 $f,g\in\overline{\mathscr{A}}$，则
 $$
 f\wedge g=\frac{f+g+\abs{f-g}}{2}\in\overline{\mathscr{A}}\qquad f\vee g=\frac{f+g-\abs{f-g}}{2}\in\overline{\mathscr{A}}
 $$
 
     归纳的有
 $$
-f_1,\cdots,f_n\in\mathscr{A}\implies f_1\wedge\cdots\wedge f_n,f_1\vee\cdots\vee f_n\in\overline{\mathscr{A}}
+f_1,\cdots,f_n\in\overline{\mathscr{A}}\implies f_1\wedge\cdots\wedge f_n,f_1\vee\cdots\vee f_n\in\overline{\mathscr{A}}
 $$
+
+    现固定 $f\in C(K),\eps>0$.
+
+    断言 1：对 $\forall x\in K,\exists\varphi_x\in\overline{\mathscr{A}}$ 使得
+$$
+\varphi_x(x)=f(x)\qquad\varphi_x(y)\ge f(y)-\eps,\forall y\in K
+$$
+
+    \textbf{证明：}任取 $y\in K,y\ne x$. 由引理知，存在 $\eta_y\in\mathscr{A}$ 使得
+$$
+\eta_y(x)=f(x),\eta_y(y)=f(y)
+$$
+
+    由 $\eta_y,f$ 在 $y$ 处连续知：存在 $y$ 的邻域 $U_y$ 使得
+$$
+\forall z\in U_y,\eta_y(z)\ge f(z)-\eps
+$$
+
+    固定某点 $y_0\ne x$. 由 $\eta_{y_0},f$ 在 $x$ 处连续知：存在 $x$ 的邻域 $V_x$ 使得
+$$
+\forall z\in V_x,\eta_{y_0}(z)\ge f(z)-\eps
+$$
+
+    由 $K$ 紧以及 $\set{U_y|y\ne x}\cup\set{V_x}$ 为 $K$ 的开覆盖，存在有限子覆盖 $\set{U_{y_1},\cdots,U_{y_k},V_x}$.
+
+    令 $\varphi_x\triangleq\eta_{y_1}\wedge\cdots\wedge\eta_{y_k}\wedge\eta_{y_0}\in\overline{\mathscr{A}}$.
+
+    则 $\forall z\in K,\exists 1\le i\le k,z\in U_{y_i}$ 或 $z\in V_x$. 从而
+$$
+\begin{aligned}
+    &\varphi_x(z)\ge\eta_{y_i}(z)\ge f(z)-\eps\\
+    \text{或 }&\varphi_x(z)\ge\eta_{y_0}(z)\ge f(z)-\eps
+\end{aligned}
+$$
+
+    \qed
+
+    断言 2：存在 $\varphi\in\overline{\mathscr{A}}$ 使得
+$$
+\forall z\in K,f(z)+\eps\ge\varphi(z)\ge f(z)-\eps
+$$
+
+    \textbf{证明：}任取 $x\in K$，由断言 1 取 $\varphi_x\in\overline{\mathscr{A}}$.
+
+    则由 $\varphi_x,x$ 在 $x$ 处连续知：存在 $x$ 的邻域 $V_x$ 使得
+$$
+\forall z\in V_x,\varphi_x(z)\le f(z)+\eps
+$$
+
+    由 $K$ 紧以及 $\set{V_x|x\in K}$ 为 $K$ 的开覆盖知存在有限开覆盖 $\set{V_{x_1},\cdots,V_{x_m}}$.
+
+    令 $\varphi\triangleq\varphi_{x_1}\vee\varphi_{x_2}\vee\cdots\vee\varphi_{x_m}$.
+
+    则一方面同断言 1 可得
+$$
+\forall z\in K,\varphi(z)\le f(z)+\eps
+$$
+
+    另一方面，由断言 1 有
+$$
+\begin{aligned}
+    &\forall 1\le i\le m,\forall z\in K,\varphi_{x_i}(z)\ge f(z)-\eps\\
+    \implies&\forall z\in K,\varphi(z)\ge f(z)-\eps
+\end{aligned}
+$$
+
+    \qed
+
+    断言 2 说明 $\norm{f-\varphi}_\infty<\eps$ 且 $\varphi\in\overline{\mathscr{A}}$.
+
+    由 $\eps$ 的任意性以及 $\overline{\mathscr{A}}$ 闭知 $f\in\overline{\mathscr{A}}$.
+
+    由 $f\in C[a,b]$ 的任意性知 $\overline{\mathscr{A}}=C[a,b]$.
 \end{proof}

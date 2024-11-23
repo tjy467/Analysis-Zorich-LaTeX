@@ -1,0 +1,234 @@
+\mysubsection{基本框架}
+
+如下形式的积分称为含参积分：
+$$
+F(t)=\int_{E_t}f(x,t)\dd x\qquad t\in T
+$$
+
+这里 $t$ 为参数，而 $E_t$ 是随 $t$ 变化的积分区域，$f(x,t)$ 是以 $t$ 为参数的一族函数.
+
+\begin{itemize}
+    \item 若对 $\forall t\in T$，积分 $\displaystyle\int_{E_t}f(x,t)\dd x$ 均为正常积分，则称 $F(t)$ 为含参变量的正常积分.
+    
+    \item 若 $\exists t\in T$ 使得积分 $\displaystyle\int_{E_t}f(x,t)\dd x$ 为广义积分，则称 $F(t)$ 为含参变量的广义积分.
+\end{itemize}
+
+本节，我们研究最简单的情形.
+
+\mysubsection{含参积分的连续性}
+
+\begin{property}
+    设 $R\triangleq[a,b]\times[c,d]\subset\RR^2$ 为紧二维区间. 设 $f\in C(R)$，则
+$$
+F(y)\triangleq\int_a^bf(x,y)\dd x
+$$
+
+    在 $[c,d]$ 上连续.
+\end{property}
+\begin{proof}
+    固定 $y_0\in[c,d]$. 下证 $F$ 在 $y_0$ 处连续.
+
+    由 $f$ 在 $R$ 上一致连续知 $f_y\rightrightarrows f_{y_0},y\to y_0$.
+
+    其中 $f_y(x)\triangleq f(x,y)$. 由 $f_y$ 连续知其 Riemann 可积.
+
+    从而由定理 \ref{ucint} 知
+$$
+F(y)=\int_a^bf_y(x)\to\int_a^bf_{y_0}(x)\dd x=F(y_0)
+$$
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 从证明过程来看，我们可以将 $[c,d]$ 换成任意一个紧集 $K\subset\RR$，结论依然成立.
+        
+        \item 有了这一观察，我们可以进一步将 $[c,d]$ 换成开集 $D\subset\RR^n$.
+        
+        若 $f\in C([a,b]\times D)$，则结论依然成立.
+
+        \item 当然这里也可以由定义来直接证明，只需用到 $f$ 的一致连续性.
+        
+        作为一个应用，我们可以证明以前的一个性质.
+    \end{enumerate}
+\end{hint}
+
+\begin{property}
+    设 $U\subset\RR^n$ 为开集. 设 $f\in C^{(1)}(U;\RR),x_0\in U$.
+
+    则存在 $x_0$ 的邻域 $U(x_0)$ 以及连续映射 $\varphi:U(x_0)\to\RR^n$ 使得
+$$
+f(x)=f(x_0)+\varphi(x)(x-x_0)\text{ 且 }\varphi(x_0)=f'(x_0)
+$$
+\end{property}
+\begin{proof}
+    取 $r>0$ 使得 $B(x_0,r)\subset U$.
+
+    任取 $x\in B(x_0,r)$，对 $F(t)\triangleq f(x_0+t(x-x_0))$ 应用 N-L 公式得
+$$
+\begin{aligned}
+    f(x)-f(x_0)&=F(1)-F(0)=\int_0^1F'(t)\dd t\\
+    &=\int_0^1f'(x_0+t(x_0-x))(x-x_0)\dd t\\
+    &=\int_0^1f'(x_0+t(x_0-x))\dd t\cdot(x-x_0)
+\end{aligned}
+$$
+
+    令 $\varphi_i(x)\triangleq\displaystyle\int_0^1f_i'(x_0+t(x-x_0))\dd t,1\le i\le n$.
+
+    由以上的注记知 $\varphi_i$ 在 $B(x_0,r)$ 上连续. 从而 $\varphi=(\varphi_1,\cdots,\varphi_n)$ 也连续.
+
+    且 $f(x)=f(x_0)+\varphi(x)(x-x_0),\varphi(x_0)=f'(x_0)$ 满足条件.
+\end{proof}
+
+\mysubsection{含参积分关于参数的微分}
+
+\begin{property}
+    设 $X\subset\RR^d$ 为紧凸集. 设 $f\in C([a,b]\times X;\RR)$.
+
+    设 $f(t,x)$ 关于 $x$ 分量的微分存在且连续. 即 $\dfrac{\partial f}{\partial x}\in C([a,b]\times X)$. 则
+$$
+F(x)\triangleq\int_a^bf(t,x)\dd x\in C^{(1)}(X)
+$$
+
+    且
+$$
+F'(x)=\int_a^b\pard{f}{x}(t,x)\dd t
+$$
+\end{property}
+\begin{proof}
+    由有限增量定理，$\forall x\in X,x+h\in X$ 有
+$$
+\begin{aligned}
+    &\abs{f(t,x+h)-f(t,x)-\pard{f}{x}(t,x)h}\\
+    \le&\sup_{\xi\in[x,x+h]}\norm{\pard{f}{x}(t,\xi)-\pard{f}{x}(t,x)}\cdot\abs{h}\\
+    \le&\eta(\abs{h})\abs{h}
+\end{aligned}
+$$
+
+    其中 $\eta(\eps)$ 为 $\dfrac{\partial f}{\partial x}$ 在 $[a,b]\times X$ 上的连续模
+$$
+\eta(\eps)\triangleq\sup\Set{\norm{\pard{f}{x}(p)-\pard{f}{x}(q)}:\abs{p-q}<\eps}
+$$
+
+    记 $f(t,x+h)-f(t,x)-\dfrac{\partial f}{\partial x}(t,x)h=\Delta(t,x,h)$.
+
+    则两边积分可得
+$$
+F(x+h)=F(x)+\int_a^b\pard{f}{x}(t,x)\dd t\cdot h+\int_a^b\Delta(t,x,h)\dd t
+$$
+
+    其中
+$$
+\abs{\int_a^b\Delta(t,x,h)\dd t}\le\int_a^b\abs{\Delta(t,x,h)}\dd t\le(b-a)\eta(\abs{h})\abs{h}=o(\abs{h})
+$$
+
+    由此可得，$F$ 在 $x$ 处可导，且
+$$
+F'(x)=\int_a^b\pard{f}{x}(t,x)\dd t
+$$
+
+    再由上一性质可知 $F'(x)$ 在 $X$ 上连续.
+\end{proof}
+
+\begin{inference}
+    若 $f\in C([a,b]\times[c,d];\RR)$ 且 $\dfrac{\partial f}{\partial y}(x,y)\in C([a,b]\times[c,d];\RR)$.
+
+    则 $F'(y)=\displaystyle\int_a^b\pard{f}{y}(x,y)\dd x$.
+\end{inference}
+
+\begin{example}
+    验证 $u(x)\triangleq\displaystyle\int_0^\pi\cos(n\varphi-x\sin\varphi)\dd\varphi$ 是 Bessel 方程 $x^2u''+xu'+(x^2-n^2)u=0$ 的解.
+\end{example}
+
+\begin{example}
+    设 $0<k<1$. 定义
+$$
+E(k)=\int_0^\frac{\pi}{2}\sqrt{1-k^2\sin^2\varphi}\dd\varphi\qquad K(k)=\int_0^\frac{\pi}{2}\frac{\dd\varphi}{\sqrt{1-k^2\sin^2\varphi}}
+$$
+
+    则
+$$
+\frac{\dd E}{\dd k}=\frac{E-k}{k}\qquad\frac{\dd K}{\dd k}=\frac{E}{k(1-k^2)}-\frac{K}{k}
+$$
+\end{example}
+
+以下一个性质在实际计算中经常用到.
+
+\begin{property}
+    设 $R=[a,b]\times[c,d]$. 设 $f\in C(R)$ 且 $\dfrac{\partial f}{\partial y}\in C(R)$.
+
+    设 $\alpha,\beta:[c,d]\to[a,b]$ 且 $\alpha,\beta\in C^{(1)}[c,d]$. 则
+$$
+F(y)\triangleq\int_{\alpha(y)}^{\beta(y)}f(x,y)\dd x\in C^{(1)}[c,d]
+$$
+
+    且
+$$
+F'(y)=f(\beta(y),y)\beta'(y)-f(\alpha(y),y)\alpha'(y)+\int_{\alpha(y)}^{\beta(y)}\pard{f}{y}(x,y)\dd x
+$$
+\end{property}
+\begin{proof}
+    记 $D=[c,d]\times[a,b]\times[a,b]$. 定义 $G:D\to\RR$ 为
+$$
+G(y,s,t)\triangleq\int_s^tf(x,y)\dd x
+$$
+
+    则由前一性质知 $\displaystyle\pard{G}{y},\pard{G}{s},\pard{G}{t}$ 均存在，且
+$$
+\begin{aligned}
+    &\pard{G}{y}(y,s,t)=\int_s^t\pard{f}{y}(x,y)\dd x\in C(D)\\
+    &\pard{G}{s}(y,s,t)=-f(s,y)\in C(D)\\
+    &\pard{G}{t}(y,s,t)=f(t,y)\in C(D)
+\end{aligned}
+$$
+
+    易见 $F(y)=G(y,\alpha(y),\beta(y))$.
+
+    从而由复合函数的微分性质知 $F\in C^{(1)}[c,d]$ 且
+$$
+F'(y)=\pard{G}{y}(y,\alpha(y),\beta(y))+\pard{G}{s}(y,\alpha(y),\beta(y))\alpha'(y)+\pard{G}{t}(y,\alpha(y),\beta(y))\beta'(y)
+$$
+
+    代入即得结论.
+\end{proof}
+
+\begin{example}
+    定义 $F_n(x)\triangleq\displaystyle\frac{1}{(n-1)!}\int_0^x(x-t)^{n-1}f(t)\dd t,n\ge 1$.
+
+    其中 $f:\RR\to\RR$ 连续. 则 $F_n^{(n)}(x)=f(x)$.
+\end{example}
+
+\mysubsection{含参积分关于参数的积分}
+
+\begin{property}
+    设 $f:[a,b]\times[c,d]\to\RR$ 连续. 则
+$$
+\int_a^b\left(\int_c^d f(x,y)\dd y\right)\dd x=\int_c^d\left(\int_a^b f(x,y)\dd x\right)\dd y
+$$
+\end{property}
+
+\begin{hint}
+    当然上式是 Fubini 定理的特例. 但这里我们以另一种方式来证明.
+\end{hint}
+
+\begin{proof}
+    令
+$$
+\begin{aligned}
+    \varphi(u)&\triangleq\int_a^u\left(\int_c^d f(x,y)\dd y\right)\dd x\\
+    \psi(u)&\triangleq\int_c^d\left(\int_a^uf(x,y)\dd x\right)\dd y
+\end{aligned}
+$$
+
+    由 $F(x)\triangleq\displaystyle\int_c^df(x,y)\dd y$ 连续知 $\varphi\in C^{(1)}$.
+
+    且 $\varphi'(u)=F(u)=\displaystyle\int_c^d f(u,y)\dd y$.
+
+    由 $f(x,y)$ 连续知 $\xi(u,y)\triangleq\displaystyle\int_a^uf(x,y)\dd x$ 连续，且 $\dfrac{\partial \xi}{\partial u}(u,y)=f(u,y)$. 从而
+$$
+\psi'(u)=\int_c^d\pard{\xi}{u}(u,y)\dd y=\int_c^df(u,y)\dd y
+$$
+
+    故 $\varphi'(u)=\psi'(u)$. 又 $\varphi(a)=\psi(a)=0$，可得 $\varphi(u)=\psi(u),\forall u\in[a,b]$.
+
+    则 $\varphi(b)=\psi(b)$ 即为所求.
+\end{proof}
