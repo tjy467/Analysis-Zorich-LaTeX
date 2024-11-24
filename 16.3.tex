@@ -429,12 +429,12 @@ $$
 
     任取 $x\in X,t_1,t_2\in T$. 由有限增量定理
 $$
-\abs{f_{t_1}(x)-f_{t_2}(x)-(f_{t_1}(x_0)-f_{t_2}(x_0))}\le\sup_{\xi\in[x_0,x]}\abs{f_{t_1}'(\xi)-f_{t_2}'(\xi)}\abs{x-x_0}
+\abs{f_{t_1}(x)-f_{t_2}(x)-(f_{t_1}(x_0)-f_{t_2}(x_0))}\le\sup_{\xi\in[x_0,x]}\norm{f_{t_1}'(\xi)-f_{t_2}'(\xi)}\abs{x-x_0}
 $$
 
     由 $f_t'\underset{\mathcal{B}}{\rightrightarrows}\varphi$ 以及 $\lim\limits_{\mathcal{B}}f_t(x_0)$ 存在知
 $$
-\forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in K,\abs{f_{t_1}'(x)-f_{t_2}'(x)}<\eps,\abs{f_{t_1}(x_0)-f_{t_2}(x_0)}<\eps
+\forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in K,\norm{f_{t_1}'(x)-f_{t_2}'(x)}<\eps,\abs{f_{t_1}(x_0)-f_{t_2}(x_0)}<\eps
 $$
 
     从而对 $\forall x\in X$ 有
@@ -471,13 +471,13 @@ $$
 $$
 \begin{aligned}
     &\abs{(f_{t_1}(x+h)-f_{t_1}(x)-f_{t_1}'(x)h)-(f_{t_2}(x+h)-f_{t_2}(x)-f_{t_2}'(x)h)}\\
-    \le&\sup_{\xi\in[x,x+h]}\abs{(f_{t_1}'(\xi)-f_{t_2}'(\xi))-(f_{t_1}'(x)-f_{t_2}'(x))}\abs{h}
+    \le&\sup_{\xi\in[x,x+h]}\norm{(f_{t_1}'(\xi)-f_{t_2}'(\xi))-(f_{t_1}'(x)-f_{t_2}'(x))}\abs{h}
 \end{aligned}
 $$
 
     由 $f_t'\underset{\mathcal{B}}{\rightrightarrows}\varphi$ 知
 $$
-\forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in X,\abs{f_{t_1}'(x)-f_{t_2}'(x)}<\eps
+\forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in X,\norm{f_{t_1}'(x)-f_{t_2}'(x)}<\eps
 $$
 
     从而对 $\forall h\ne 0$ 有
