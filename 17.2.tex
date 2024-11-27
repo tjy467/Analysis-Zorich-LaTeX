@@ -1,0 +1,277 @@
+本节我们讨论含参广义积分的各种性质.
+
+含参广义积分的形式如下：
+$$
+F(y)=\int_a^\omega f(x,y)\dd x
+$$
+
+其中 $y\in Y$ 为参数.
+
+在本节，我们应做一个如下的类比：
+$$
+S(y)=\sum_{n=1}^\infty f(n,y)=\sum_{n=1}^\infty f_n(y)
+$$
+
+即将关于 $x$ 的积分和关于 $n$ 的求和相类比.
+
+这样一来，本节的所有结论在以前都会有一个类似的结论！
+
+\mysubsection{含参广义积分关于参数的一致收敛}
+
+\mysubsubsection{基本定义与例子}
+
+设 $Y$ 是一个集合，$f:[a,\omega)\times Y\to\RR$ 满足对 $\forall y\in Y$，广义积分
+$$
+F(y)\triangleq\int_a^\omega f(x,y)\dd x
+$$
+
+收敛. 这里要么 $\omega=+\infty$，要么 $\omega$ 有限且 $f_y$ 在 $\omega$ 的某个邻域上无界.
+
+\begin{definition}
+    称广义积分 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $E\subset Y$ 上一致收敛，若
+$$
+\forall\eps>0,\exists B>a,\forall b>B,\forall y\in E,\abs{\int_a^\omega f(x,y)\dd x}<\eps
+$$
+\end{definition}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 应用最开始的类比：在级数情形下，上面的条件相当于
+$$
+\forall\eps>0,\exists N\in\mathbb{N},\forall m\ge N,\forall y\in E,\abs{\sum_{n=m}^\infty f_n(y)}<\eps
+$$
+
+        从而其等价于 $S_n(y)\triangleq\displaystyle\sum_{j=1}^nf_j(y)\rightrightarrows S(y)\quad(y\in E)$.
+
+        \item 受上面的类比启发，对 $\forall b\in[a,\omega)$ 定义
+$$
+F_b(y)\triangleq\int_a^bf(x,y)\dd x
+$$
+
+        则 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $E$ 上一致收敛当且仅当
+$$
+F_b(y)\underset{b\to\omega-}{\rightrightarrows}F(y)
+$$
+
+        当且仅当
+$$
+\forall\eps>0,\exists B\in[a,\omega),\forall b\ge B,\forall y\in E,\abs{F_b(y)-F(y)}<\eps
+$$
+
+        接下来，我们会发现以上的两个等价定义在实际运用中非常有用.
+    \end{enumerate}
+\end{hint}
+
+\begin{example}
+    $F(y)=\displaystyle\int_1^\infty\frac{\dd x}{x^2+y^2}$ 在 $\RR$ 上一致收敛.
+\end{example}
+
+\begin{example}
+    $F(y)=\displaystyle\int_0^\infty e^{-xy}\dd x$ 在 $y>0$ 时收敛.
+
+    其在 $y\ge a>0$ 上一致收敛，但在 $y>0$ 上非一致收敛.
+\end{example}
+
+\begin{example}
+    设 $\alpha,\beta>0$.
+$$
+\Phi(x)\triangleq\int_0^\infty x^\alpha y^{\alpha+\beta+1}e^{-(1+x)y}\dd y
+$$
+
+    在 $x\ge 0$ 上一致收敛.
+$$
+F(y)\triangleq\int_0^\infty x^\alpha y^{\alpha+\beta+1}e^{-(1+x)y}\dd x
+$$
+
+    在 $y\ge 0$ 上一致收敛.
+\end{example}
+
+\mysubsubsection{一致收敛的 Cauchy 准则}
+
+\begin{property}
+    定义 $f$ 同前. 则 $F(y)$ 在 $E\subset Y$ 上一致收敛当且仅当
+$$
+\forall\eps>0,\exists B\in [a,\omega),\forall b,b'\in[B,\omega),\forall y\in E,\abs{\int_b^{b'}f(x,y)\dd x}<\eps
+$$
+\end{property}
+\begin{proof}
+    由前面的注记以及 Cauchy 准则即得.
+\end{proof}
+
+\begin{inference}
+    设 $f:[a,\omega)\times[c,d]\to\RR$ 连续，对 $\forall y\in(c,d)$ 有 $F(y)=\displaystyle\int_a^\omega f(x,y)\dd x$ 收敛.
+
+    若 $y=c$ 或 $d$ 有 $\int_a^\omega f(x,y)\dd x$ 发散，则 $F(y)$ 在 $(c,d)$ 上非一致收敛.
+\end{inference}
+\begin{proof}
+    我们证明其逆否命题：设 $F(y)$ 在 $(c,d)$ 上一致收敛. 则
+$$
+\forall\eps>0,\exists B\in[a,\omega),\forall b,b'\in[B,\omega),\forall y\in(c,d),\abs{\int_b^{b'}f(x,y)\dd x}<\eps
+$$
+
+    由 $f$ 在 $[b,b']\times [c,d]$ 连续知
+$$
+\abs{\int_b^{b'}f(x,c)\dd x}=\abs{\lim_{y\to c}\int_b^{b'}f(x,y)\dd x}\le\eps
+$$
+
+    由 Cauchy 准则知 $\displaystyle\int_a^\omega f(x,c)\dd x$ 收敛.
+
+    同理 $\displaystyle\int_a^\omega f(x,d)\dd x$ 收敛.
+\end{proof}
+
+\begin{example}
+    $F(t)=\displaystyle\int_0^\infty e^{-tx^2}$ 在 $t>0$ 时收敛.
+    
+    但其在 $t=0$ 时发散，从而其在 $(0,\infty)$ 上不一致收敛.
+\end{example}
+
+\mysubsubsection{一致收敛的充分条件}
+
+\begin{property}[Weierstrass 判别法]
+    设 $f,g:[a,\omega)\times Y\to\RR$ 满足任意固定 $y\in Y,f,g$ 在任意 $[a,b]\subset[a,\omega)$ 上可积. 若
+
+    \begin{enumerate}
+        \item $\abs{f(x,y)}\le g(x,y),\forall (x,y)\in [a,\omega)\times Y$
+        
+        \item $\displaystyle\int_a^\omega g(x,y)\dd x$ 在 $Y$ 上一致收敛.
+    \end{enumerate}
+
+    则 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛且绝对收敛.
+\end{property}
+\begin{proof}
+    由 Cauchy 准则以及
+$$
+\abs{\int_b^{b'}f(x,y)\dd x}\le\int_b^{b'}\abs{f(x,y)}\dd x\le\int_b^{b'}g(x,y)\dd x
+$$
+
+    即证.
+\end{proof}
+
+
+特别的，若以上的 $g$ 不依赖于 $y$，即 $g(x,y)\equiv g(x)$ 且
+$$
+\int_a^\omega g(x)\dd x
+$$
+
+收敛，则 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛且绝对收敛.
+
+\begin{example}
+    $\displaystyle\int_0^\infty\frac{\cos\alpha x}{1+x^2}$ 对 $\alpha\in\RR$ 一致收敛.
+\end{example}
+
+\begin{example}
+    $\displaystyle\int_0^\infty\sin xe^{-tx^2}$ 在 $t\ge t_0>0$ 上一致收敛，但在 $t>0$ 上不一致收敛.
+\end{example}
+
+\begin{property}[Abel-Dirichlet 判别法]
+    设 $f,g:[a,\omega)\times Y\to\RR$ 满足任意固定 $y\in Y,f,g$ 在任意 $[a,b]\subset[a,\omega)$ 上可积.
+
+    若以下两组条件之一成立：
+
+    \begin{itemize}
+        \item \begin{enumerate}
+            \item 存在 $M>0$ 使得
+$$
+\forall b\in[a,\omega),\forall y\in Y,\abs{\int_a^bf(x,y)\dd x}\le M
+$$
+
+            \item $g$ 对 $\forall y\in Y$ 关于 $x$ 单调，且
+$$
+g(x,y)\underset{x\to\omega}{\rightrightarrows}0
+$$
+        \end{enumerate}
+
+        \item \begin{enumerate}
+            \item $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛.
+            
+            \item $g$ 对 $\forall y\in Y$ 关于 $x$ 单调且存在 $M>0$ 使得
+$$
+\abs{g(x,y)}\le M,\forall(x,y)\in[a,\omega)\times Y
+$$
+        \end{enumerate}
+    \end{itemize}
+
+    则 $\displaystyle\int_a^\omega f(x,y)g(x,y)\dd x$ 在 $Y$ 上一致收敛.
+\end{property}
+\begin{proof}
+    对 $\forall a\le b<b'<\omega$，由第二积分中值定理有
+$$
+\exists\xi\in[b,b'],\int_b^{b'}f(x,y)g(x,y)\dd x=g(b,y)\int_b^\xi f(x,y)\dd x+g(b',y)\int_\xi^{b'}f(x,y)\dd x
+$$
+
+    结合条件以及 Cauchy 准则即证.
+\end{proof}
+
+\begin{example}
+    $\displaystyle\int_1^\infty\frac{\sin x}{x^\alpha}$ 仅在 $\alpha>0$ 时收敛.
+
+    其在 $\alpha=0$ 时发散. 从而其在 $\alpha>0$ 时不一致收敛.
+
+    由 Abel-Dirichlet 判别法知其在 $\alpha\ge\alpha_0>0$ 上一致收敛.
+\end{example}
+
+\begin{example}
+    $\displaystyle\int_0^\infty\frac{\sin x}{x}e^{-xy}$ 在 $y\ge 0$ 上一致收敛.
+\end{example}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 可以验证，以上的结论对向量值函数也成立（即将到达域换成任何一个 Banach 空间）. 当然，在使用 Abel-Dirichlet 判别法时，$g$ 必须为实值函数.
+        
+        \item 以上仅讨论了积分上界为奇点的情形，即 $b=\omega$.
+        
+        同理可以得到 $a=\omega$ 情形的所有性质. 进一步，若 $a,b$ 均为奇点，则任取 $c\in(\omega_1,\omega_2)$，可将积分写成
+$$
+\int_{\omega_1}^{\omega_2}f(x,y)\dd x=\int_{\omega_1}^cf(x,y)\dd x+\int_c^{\omega_2}f(x,y)\dd x
+$$
+
+        此时定义积分一致收敛为以上的两个积分均一致收敛.
+
+        从而上面的讨论可以给出相应的所有性质. 此时也容易验证：一致收敛性不依赖于 $c$ 的选取.
+    \end{enumerate}
+\end{hint}
+
+\mysubsection{广义积分与极限交换次序；广义积分关于参数的连续性}
+
+\begin{property}
+    设 $f:[a,\omega)\times Y\to\RR$ 满足对 $\forall y\in Y,\displaystyle\int_a^\omega f(x,y)\dd x$ 收敛.
+
+    设 $\mathcal{B}$ 为 $B$ 的一个基. 若
+
+    \begin{enumerate}
+        \item 对 $\forall b\in[a,\omega)$ 有：在 $[a,b]$ 上
+$$
+f(x,y)\underset{\mathcal{B}}{\rightrightarrows}{\varphi(x)}
+$$
+
+        \item $\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛.
+    \end{enumerate}
+
+    则 $\varphi$ 在 $[a,\omega)$ 上广义可积且
+$$
+\int_a^\omega\varphi(x)\dd x=\int_a^\omega\lim_{\mathcal{B}}f(x,y)\dd x=\lim{\mathcal{B}}\int_a^\omega f(x,y)\dd x
+$$
+\end{property}
+\begin{proof}
+    令 $F(y)\triangleq\displaystyle\int_a^\omega f(x,y)\dd x,F_b(y)\triangleq\int_a^bf(x,y)\dd x$.
+
+    则由 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛知 $F_b(y)\underset{b\to\omega-}{\rightrightarrows} F(y)$.
+
+    由 $f(x,y)\underset{\mathcal{B}}{\rightrightarrows}\varphi(x)$ 知 $F_b(y)\triangleq\int_a^bf(x,y)\dd x\xrightarrow[\mathcal{B}]{}\int_a^b\varphi(x)\dd x$.
+
+    从而由定理 \ref{sl} 有交换图
+    
+    \begin{center}
+        \begin{tikzcd}[column sep={3.5cm,between origins},row sep={3.5cm,between origins}]
+            F_b(y) \dar["\mathcal{B}"] \rar["b\to\omega-",transform canvas={yshift=0.45ex}] \rar[transform canvas={yshift=-0.45ex}] & F(y) \dar["\mathcal{B}"]\\
+            \displaystyle\int_a^b\varphi(x)\dd x \rar["b\to\omega-"] & \displaystyle\int_a^\omega\varphi(x)\dd x
+        \end{tikzcd}
+    \end{center}
+
+    从而 $\displaystyle\lim_{b\to\omega}\int_a^b\varphi(x)\dd x$ 存在，即 $\varphi$ 在 $[a,\omega)$ 上广义可积.
+
+    且 $\displaystyle\lim_{\mathcal{B}}\int_a^\omega f(x,y)\dd x$ 存在，且二者相等. 从而
+$$
+\int_a^\omega\varphi(x)\dd x=\lim_{\mathcal{B}}\int_a^\omega f(x,y)\dd x
+$$
+\end{proof}
