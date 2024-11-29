@@ -27,7 +27,7 @@
     设 $\set{f_t:X\to\RR|t\in T}$ 是一族函数. 若
 
     \begin{enumerate}
-        \item\label{slcon1} $f_t\underset{\mathcal{B}_T}{\rightrightarrows}f:X\to\RR$.
+        \item\label{slcon1} $f_t\xrightrightarrows[\mathcal{B}_T]{}f:X\to\RR$.
         
         \item\label{slcon2} $\forall t\in T,\lim\limits_{\mathcal{B}_X}f_t(x)=A_t$
     \end{enumerate}
@@ -61,7 +61,7 @@ $$
     \begin{enumerate}
         \item $\lim\limits_{\mathcal{B}_T}A_t$ 存在
         
-        任取 $\eps>0$，由 $f_t\underset{\mathcal{B}_T}{\rightrightarrows}f$ 知
+        任取 $\eps>0$，由 $f_t\xrightrightarrows[\mathcal{B}_T]{}f$ 知
 $$
 \exists B_t\in\mathcal{B}_T,\forall t\in B_T,\forall x\in X,\abs{f_t(x)-f(x)}<\eps
 $$
@@ -122,7 +122,7 @@ $$
     若以下两个条件成立：
 
     \begin{enumerate}
-        \item $f_t\underset{\mathcal{B}}{\rightrightarrows}{f}$
+        \item $f_t\xrightrightarrows[\mathcal{B}]{}{f}$
         
         \item 对任意 $t\in T$ 均有 $f_t$ 在 $x_0\in X$ 处连续.
     \end{enumerate}
@@ -335,7 +335,7 @@ $$
     设 $f_t:[a,b]\to\RR,t\in T$ 是一族函数. 设 $\mathcal{B}_T$ 是 $T$ 的一个基. 若
 
     \begin{enumerate}
-        \item $f_t\underset{\mathcal{B}_T}{\rightrightarrows}f$
+        \item $f_t\xrightrightarrows[\mathcal{B}_T]{}f$
         
         \item $\forall t\in T,f_t\in\mathcal{R}[a,b]$
     \end{enumerate}
@@ -359,7 +359,7 @@ $$
 F_t(P,\xi)\triangleq\sigma(f_t,P,\xi)=\sum_{j=1}^nf_t(\xi_j)\Delta_j
 $$
 
-    由 $f_t\underset{\mathcal{B}_T}{\rightrightarrows}f$ 知 $F_t\underset{\mathcal{B}_T}{\rightrightarrows}F$. 其中 $F(P,\xi)\triangleq\sigma(f,P,\xi)$.
+    由 $f_t\xrightrightarrows[\mathcal{B}_T]{}f$ 知 $F_t\xrightrightarrows[\mathcal{B}_T]{}F$. 其中 $F(P,\xi)\triangleq\sigma(f,P,\xi)$.
 
     由 $f_t\in\mathcal{R}[a,b]$ 知
 $$
@@ -409,7 +409,7 @@ $$
 
 接下来，我们讨论可微函数列在取完极限之后保持可微性的条件.
 
-\begin{theorem}
+\begin{theorem}\label{limd}
     设 $X\subset\RR^n$ 为有界凸集. 设 $f_t:X\to\RR,t\in T$ 是一族函数. 设 $\mathcal{B}$ 是 $T$ 的一个基.
 
     若以下三个条件成立
@@ -417,22 +417,22 @@ $$
     \begin{enumerate}
         \item $\forall t\in T,f_t$ 均在 $X$ 上可导.
         
-        \item $f_t'\underset{\mathcal{B}}{\rightrightarrows}\varphi:X\to\RR$.
+        \item $f_t'\xrightrightarrows[\mathcal{B}]{}\varphi:X\to\RR$.
         
         \item $\exists x_0\in X,\lim\limits_{\mathcal{B}}f_t(x_0)$ 存在.
     \end{enumerate}
 
-    则 $f_t\underset{\mathcal{B}}{\rightrightarrows}{f}$ 且 $f$ 在 $X$ 上可导，$f'=\varphi$.
+    则 $f_t\xrightrightarrows[\mathcal{B}]{}{f}$ 且 $f$ 在 $X$ 上可导，$f'=\varphi$.
 \end{theorem}
 \begin{proof}
-    先证 $f_t\underset{\mathcal{B}}{\rightrightarrows}f$. 为此我们验证 Cauchy 准则：
+    先证 $f_t\xrightrightarrows[\mathcal{B}]{}f$. 为此我们验证 Cauchy 准则：
 
     任取 $x\in X,t_1,t_2\in T$. 由有限增量定理
 $$
 \abs{f_{t_1}(x)-f_{t_2}(x)-(f_{t_1}(x_0)-f_{t_2}(x_0))}\le\sup_{\xi\in[x_0,x]}\norm{f_{t_1}'(\xi)-f_{t_2}'(\xi)}\abs{x-x_0}
 $$
 
-    由 $f_t'\underset{\mathcal{B}}{\rightrightarrows}\varphi$ 以及 $\lim\limits_{\mathcal{B}}f_t(x_0)$ 存在知
+    由 $f_t'\xrightrightarrows[\mathcal{B}]{}\varphi$ 以及 $\lim\limits_{\mathcal{B}}f_t(x_0)$ 存在知
 $$
 \forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in K,\norm{f_{t_1}'(x)-f_{t_2}'(x)}<\eps,\abs{f_{t_1}(x_0)-f_{t_2}(x_0)}<\eps
 $$
@@ -444,7 +444,7 @@ $$
 
     由 Cauchy 准则知 $\set{f_t}$ 在 $\mathcal{B}$ 下一致收敛.
 
-    记 $f_t\underset{\mathcal{B}}{\rightrightarrows}f$. 下证 $f$ 在 $X$ 上可微且 $f'=\varphi$.
+    记 $f_t\xrightrightarrows[\mathcal{B}]{}f$. 下证 $f$ 在 $X$ 上可微且 $f'=\varphi$.
 
     为此我们需证：若 $x\in X,x+h\in X$ 有
 $$
@@ -461,7 +461,7 @@ $$
 \lim_{h\to 0}F_t(h)=0
 $$
 
-    另一方面，我们来验证 $F_t(h)\underset{\mathcal{B}}{\rightrightarrows}F(h)$.
+    另一方面，我们来验证 $F_t(h)\xrightrightarrows[\mathcal{B}]{}F(h)$.
 
     首先显然有 $F_t(h)\xrightarrow[\mathcal{B}]{}F(h)$.
 
@@ -475,7 +475,7 @@ $$
 \end{aligned}
 $$
 
-    由 $f_t'\underset{\mathcal{B}}{\rightrightarrows}\varphi$ 知
+    由 $f_t'\xrightrightarrows[\mathcal{B}]{}\varphi$ 知
 $$
 \forall\eps>0,\exists B\in\mathcal{B},\forall t_1,t_2\in B,\forall x\in X,\norm{f_{t_1}'(x)-f_{t_2}'(x)}<\eps
 $$
@@ -485,7 +485,7 @@ $$
 \abs{F_{t_1}(h)-F_{t_2}(h)}<\frac{(\eps+\eps)\abs{h}}{\abs{h}}=2\eps
 $$
 
-    即 $\set{F_t}$ 在 $\mathcal{B}$ 下一致收敛. 从而 $F_t\underset{\mathcal{B}}{\rightrightarrows}F$.
+    即 $\set{F_t}$ 在 $\mathcal{B}$ 下一致收敛. 从而 $F_t\xrightrightarrows[\mathcal{B}]{}F$.
 
     现在由定理 \ref{sl} 知 $\lim\limits_{h\to 0}F(h)$ 与 $\lim\limits_{\mathcal{B}}\lim\limits_{h\to 0}F_t(h)$ 均存在且二者相等.
 

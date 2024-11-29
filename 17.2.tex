@@ -50,7 +50,7 @@ $$
 
         则 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $E$ 上一致收敛当且仅当
 $$
-F_b(y)\underset{b\to\omega-}{\rightrightarrows}F(y)
+F_b(y)\xrightrightarrows[b\to\omega-]{}F(y)
 $$
 
         当且仅当
@@ -177,7 +177,7 @@ $$
 
             \item $g$ 对 $\forall y\in Y$ 关于 $x$ 单调，且
 $$
-g(x,y)\underset{x\to\omega}{\rightrightarrows}0
+g(x,y)\xrightrightarrows[x\to\omega]{}0
 $$
         \end{enumerate}
 
@@ -203,7 +203,7 @@ $$
 \end{proof}
 
 \begin{example}
-    $\displaystyle\int_1^\infty\frac{\sin x}{x^\alpha}$ 仅在 $\alpha>0$ 时收敛.
+    $\displaystyle\int_1^\infty\frac{\sin x}{x^\alpha}\dd x$ 仅在 $\alpha>0$ 时收敛.
 
     其在 $\alpha=0$ 时发散. 从而其在 $\alpha>0$ 时不一致收敛.
 
@@ -211,7 +211,7 @@ $$
 \end{example}
 
 \begin{example}
-    $\displaystyle\int_0^\infty\frac{\sin x}{x}e^{-xy}$ 在 $y\ge 0$ 上一致收敛.
+    $\displaystyle\int_0^\infty\frac{\sin x}{x}e^{-xy}\dd x$ 在 $y\ge 0$ 上一致收敛.
 \end{example}
 
 \begin{hint}
@@ -241,10 +241,10 @@ $$
     \begin{enumerate}
         \item 对 $\forall b\in[a,\omega)$ 有：在 $[a,b]$ 上
 $$
-f(x,y)\underset{\mathcal{B}}{\rightrightarrows}{\varphi(x)}
+f(x,y)\xrightrightarrows[\mathcal{B}]{}{\varphi(x)}
 $$
 
-        \item $\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛.
+        \item $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛.
     \end{enumerate}
 
     则 $\varphi$ 在 $[a,\omega)$ 上广义可积且
@@ -255,9 +255,9 @@ $$
 \begin{proof}
     令 $F(y)\triangleq\displaystyle\int_a^\omega f(x,y)\dd x,F_b(y)\triangleq\int_a^bf(x,y)\dd x$.
 
-    则由 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛知 $F_b(y)\underset{b\to\omega-}{\rightrightarrows} F(y)$.
+    则由 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛知 $F_b(y)\xrightrightarrows[b\to\omega-]{} F(y)$.
 
-    由 $f(x,y)\underset{\mathcal{B}}{\rightrightarrows}\varphi(x)$ 知 $F_b(y)\triangleq\int_a^bf(x,y)\dd x\xrightarrow[\mathcal{B}]{}\int_a^b\varphi(x)\dd x$.
+    由 $f(x,y)\xrightrightarrows[\mathcal{B}]{}\varphi(x)$ 知 $F_b(y)\triangleq\displaystyle\int_a^bf(x,y)\dd x\xrightarrow[\mathcal{B}]{}\int_a^b\varphi(x)\dd x$.
 
     从而由定理 \ref{sl} 有交换图
     
@@ -275,3 +275,258 @@ $$
 \int_a^\omega\varphi(x)\dd x=\lim_{\mathcal{B}}\int_a^\omega f(x,y)\dd x
 $$
 \end{proof}
+
+\begin{hint}
+    需要指出的是：仅有第一个条件不能保证结论成立（在正常含参积分情形，第一个条件已经足够）. 这可以从以下的反例中推出：
+\end{hint}
+
+\begin{example}
+    定义 $f:(0,\infty)\times(0,\infty)\to\RR$ 为
+$$
+f(x,y)=\begin{cases}
+    \dfrac{1}{y} & 0\le x\le y\\
+    0 & x>y
+\end{cases}
+$$
+
+    \begin{center}
+        \begin{tikzpicture}[scale=2]
+            \draw[->] (0,0)--(2,0) node [right] {$x$};
+            \draw[->] (0,0)--(0,2) node [right] {$y$};
+            \draw[-] (0,0)--(1.8,1.8) node [right] {$y=x$};
+            \draw[-] (1,1)--(0,1) node [left] {$y$};
+            \draw[-,red] (1,1)--(2,1);
+            \node at (0.5,1) [above] {$\frac{1}{y}$};
+            \node[red] at (1.5,1) [above] {$0$};
+        \end{tikzpicture}
+    \end{center}
+
+    则易见：$\displaystyle\int_0^\infty f(x,y)\dd x=\int_0^y\frac{1}{y}\dd x=1$ 收敛. 且 $f(x,y)\xrightrightarrows[y\to+\infty]{}0$.
+
+    但 $\displaystyle\int_0^\infty 0\dd x=0\ne\lim_{y\to\infty}\int_0^\infty f(x,y)\dd x=1$.
+
+    注意到 $\displaystyle\int_0^\infty f(x,y)\dd x$ 在 $y>0$ 上不一致收敛：
+
+    任取 $B>0$，取 $y=2B$. 则
+$$
+\int_B^\infty f(x,2B)=\int_B^{2B}\frac{1}{2B}\dd x=\frac{1}{2}\not\to 0
+$$
+\end{example}
+
+作为上一性质以及 Dini 定理的推论，我们有
+
+\begin{inference}
+    设 $Y\subset\RR,f:[a,\omega)\times Y\to\RR_+$，且 $\forall y\in Y$ 有 $f(x,y)$ 关于 $x$ 连续. 若
+
+    \begin{enumerate}
+        \item $f(x,y)$ 关于 $y$ 单增，且 $f(x,y)\to\varphi(x),y\to y^*=\sup Y$.
+            
+        \item $\varphi(x)$ 在 $[a,\omega)$ 上连续.
+            
+        \item $\displaystyle\int_a^\omega\varphi(x)\dd x$ 收敛.
+    \end{enumerate}
+
+    则 $\forall y\in Y$ 有 $\displaystyle\int_a^\omega f(x,y)\dd x$ 收敛且 $\displaystyle\lim_{y\to y^*}\int_a^\omega f(x,y)\dd x=\int_a^\omega\varphi(x)\dd x$.
+\end{inference}
+\begin{proof}
+    由 Weierstrass 判别法知 $\displaystyle\int_a^\omega f(x,y)\dd x$ 一致收敛.
+
+    由 Dini 定理知对 $\forall b\in[a,\omega)$ 在 $[a,b]$ 上有 $f(x,y)\rightrightarrows\varphi(x)$.
+
+    从而由上一性质，结论成立.
+\end{proof}
+
+\begin{example}
+    $f_n(x)=f(x,n)=n(1-x^\frac{1}{n}),x\ge 0$.
+
+    已知 $f_n(x)$ 单增且 $f_n(x)\to\ln\dfrac{1}{x}$.
+
+    且 $\ln\dfrac{1}{x}$ 在 $x>0$ 上连续，$\displaystyle\int_0^1\ln\frac{1}{x}\dd x<+\infty$.
+
+    从而由推论知
+$$
+\lim_{n\to\infty}\int_0^1n(1-x^\frac{1}{n})\dd x=\int_0^1\ln\frac{1}{x}\dd x
+$$
+\end{example}
+
+接下来我们研究广义积分关于参数的连续性.
+
+\begin{property}
+    设 $f:[a,\omega)\times [c,d]\to\RR$ 连续.
+
+    且 $F(y)\triangleq\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $[c,d]$ 上一致收敛.
+    
+    则 $F$ 在 $[c,d]$ 上连续.
+\end{property}
+\begin{proof}
+    令 $F_b(y)=\displaystyle\int_a^b f(x,y)\dd x$，则已知 $F_b\in C[c,d]$.
+
+    由条件知在 $[c,d]$ 上 $F_b\rightrightarrows F$.
+
+    从而 $F\in C[c,d]$.
+\end{proof}
+
+\begin{example}
+    $F(y)=\displaystyle\int_0^\infty\frac{\sin x}{x}e^{-xy}\dd x$ 在 $\RR_+$ 上一致收敛.
+
+    则 $F$ 在 $[0,+\infty)$ 上连续. 特别的，$\displaystyle\lim_{y\to 0+}F(y)=\int_0^\infty\frac{\sin x}{x}\dd x$.
+\end{example}
+
+\mysubsection{含参广义积分关于参数求导}
+
+\begin{property}
+    记 $R=[a,\omega)\times [c,d]$. 设 $f:R\to\RR$ 满足
+
+    \begin{enumerate}
+        \item $f\in C(R),f_y'(x,y)$ 存在且 $f_y'\in C(R)$.
+        
+        \item $\Phi(y)\triangleq\displaystyle\int_a^\omega f_y'(x,y)\dd x$ 在 $[c,d]$ 上一致收敛.
+        
+        \item $\exists y_0\in[c,d]$ 使得 $\displaystyle\int_a^\omega f(x,y_0)\dd x$ 收敛.
+    \end{enumerate}
+
+    则 $F(y)\triangleq\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $[c,d]$ 上一致收敛，且 $F\in C^{(1)}[c,d]$，且
+$$
+F'(y)=\int_a^\omega f_y'(x,y)\dd x=\Phi(y)
+$$
+\end{property}
+\begin{proof}
+    对 $\forall b\in [a,\omega)$ 令 $F_b(y)\triangleq\displaystyle\int_a^b f(x,y)\dd x$.
+
+    则由第一节的性质知：$F_b\in C^{(1)}[c,d]$ 且
+$$
+F_b'(y)=\int_a^b\pard{f}{y}(x,y)\dd x
+$$
+
+    记为 $\Phi_b(y)$.
+
+    由 $\Phi(y)$ 在 $[c,d]$ 上一致收敛知在 $[c,d]$ 上 $F_b'(y)=\Phi_b(y)\xrightrightarrows[b\to\omega]{}\Phi(y)$.
+
+    由 $\displaystyle\int_a^\omega f(x,y_0)\dd x$ 收敛知 $F_b(y_0)\xrightarrow[b\to\omega]{}F(y_0)$.
+
+    由性质 \ref{limd} 知在 $[c,d]$ 上 $F_b(y)\rightrightarrows F(y)$ 且 $F$ 在 $[c,d]$ 上可导，$F'(y)=\Phi(y)$.
+
+    特别的 $\Phi\in C[c,d]\implies F\in C^{(1)}[c,d]$.
+\end{proof}
+
+\begin{example}
+    设 $\alpha>0$，则 $\displaystyle\int_0^\infty$ 在 $y\ge y_0>0$ 上一致收敛.
+
+    令 $F(y)\triangleq\displaystyle\int_0^\infty e^{-xy}\dd x$.
+
+    则我们我们有 $F\in C^\infty(0,\infty)$ 且
+$$
+F^{(n)}(y)=(-1)^n\int_0^\infty x^ne^{-xy}\dd x
+$$
+
+    注意到 $F(y)=\dfrac{1}{y}$. 从而 $F^{(n)}(y)=(-1)^n\dfrac{n!}{y^{n+1}}$.
+
+    由此可得
+$$
+\int_0^\infty x^ne^{-x}\dd x=n!
+$$
+
+    实际上这就是 $\Gamma$ 函数的定义
+$$
+\Gamma(\alpha)=\int_0^\infty x^{\alpha-1}e^{-x}\dd x
+$$
+\end{example}
+
+\begin{example}
+    计算 $\displaystyle\int_0^\infty\frac{\sin x}{x}\dd x$.
+
+    定义 $F(y)\triangleq\displaystyle\int_0^\infty\frac{\sin x}{x}e^{-xy}\dd x$. 则 $F'(y)=-\displaystyle\int_0^\infty \sin x e^{-xy}\dd x$.
+
+    直接计算得 $F'(y)=\dfrac{1}{y^2+1}\implies F(y)=-\arctan y+c$.
+
+    令 $y\to\infty$ 得 $F(y)\to 0$. 从而 $c=\dfrac{\pi}{2},F(y)=-\arctan y+\dfrac{\pi}{2}$.
+
+    故 $F(0)=\dfrac{\pi}{2}=\displaystyle\int_0^\infty\frac{\sin x}{x}\dd x$.
+\end{example}
+
+\mysubsection{关于含参积分的参数积分}
+
+\begin{property}
+    设 $f:[a,\omega)\times [c,d]\to\RR$ 连续.
+
+    且 $F(y)=\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $[c,d]$ 上一致收敛.
+
+    则 $F$ 在 $[c,d]$ 上可积，且
+$$
+\int_c^d\int_a^\omega f(x,y)\dd x\dd y=\int_c^dF(y)\dd y=\int_a^\omega\int_c^d f(x,y)\dd y\dd x
+$$
+\end{property}
+\begin{proof}
+    令 $F_b(y)=\displaystyle\int_a^bf(x,y)\dd x$. 则 $F_b\in C[c,d]$ 且 $F_b\rightrightarrows F$.
+
+    则 $F\in C[c,d]$，从而可积，且
+$$
+\begin{aligned}
+    \int_c^dF(y)\dd y&=\lim_{b\to\omega}\int_c^d F_b(y)\dd y=\lim_{b\to\omega}\int_c^d\left(\int_a^b f(x,y)\dd x\right)\dd y\\
+    &=\lim_{b\to\omega}\int_a^b\left(\int_c^df(x,y)\dd y\right)\dd x=\int_a^\omega\int_c^d f(x,y)\dd y\dd x
+\end{aligned}
+$$
+\end{proof}
+
+\begin{hint}
+    一般来说若仅有一致收敛的假设，结论有可能不对. 这可以从以下的反例中推出.
+\end{hint}
+
+\begin{example}
+    $f:[0,+\infty)\times [0,1]\to\RR,f(x,y)\triangleq(2-xy)xye^{-xy}$.
+
+    此时有
+$$
+\int_0^1\int_0^\infty f(x,y)\dd x\dd y=0\ne\int_0^\infty\int_0^1f(x,y)\dd y\dd x=1
+$$
+\end{example}
+
+在函数非负时，我们有如下的性质
+
+\begin{property}
+    设 $f:[a,\omega)\times [c,d]\to\RR$ 满足
+
+    \begin{enumerate}
+        \item $f$ 连续.
+        
+        \item $f\ge 0$.
+        
+        \item $F(y)=\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $[c,d]$ 上连续.
+    \end{enumerate}
+
+    则 $\displaystyle\int_c^dF(y)\dd y=\int_a^\omega\int_c^d f(x,y)\dd y\dd x$.
+\end{property}
+\begin{proof}
+    这是 Dini 定理的推论. 我们仅需验证上一定理的条件，即 $F(y)$ 在 $[c,d]$ 上一致收敛. 但由 $f\ge 0$ 知 $F_b(y)$ 单调递增且
+$$
+F_b(y)\to F(y)\implies F_b(y)\rightrightarrows F(y)
+$$
+\end{proof}
+
+\begin{hint}
+    回到上一个例子，此时 $F(y)=\displaystyle\int_0^\infty (2-xy)xy e^{-xy}\dd x=0$ 连续.
+
+    但此时 $f$ 不是非负（或非正）函数，从而导致了交换积分次序后积分值不相等.
+\end{hint}
+
+最后，我们再来证明一个关于 $x,y$ 均是广义积分时交换积分次序的充分条件.
+
+\begin{property}
+    设 $f:[a,\omega)\times[c,\widetilde{\omega})$ 连续. 且
+
+    \begin{enumerate}
+        \item $F(y)\triangleq\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $\forall[c,d]\subset[c,\widetilde{\omega})$ 上一致收敛.
+        
+        $G(x)\triangleq\displaystyle\int_c^{\widetilde{\omega}} f(x,y)\dd y$ 在 $\forall[a,b]\subset[a,\omega)$ 上一致收敛.
+
+        \item 如下两个积分至少有一个存在
+$$
+\int_c^{\widetilde{\omega}}\int_a^\omega\abs{f(x,y)}\dd x\dd y,\qquad\int_a^\omega\int_c^{\widetilde{\omega}}\abs{f(x,y)}\dd y\dd x
+$$
+    \end{enumerate}
+
+    则以下两个累次积分均存在且相等
+$$
+\int_c^{\widetilde{\omega}}\int_a^\omega f(x,y)\dd x\dd y=\int_a^\omega\int_c^{\widetilde{\omega}}f(x,y)\dd y\dd x
+$$
+\end{property}

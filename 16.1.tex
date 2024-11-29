@@ -241,7 +241,7 @@ $$
 \forall\eps>0,\exists B\in\mathcal{B},\forall t\in B,\forall x\in E,\abs{f_t(x)-f(x)}<\eps
 $$
 
-    记为（在 $E$ 上）$f_t\underset{\mathcal{B}}{\rightrightarrows}f$.
+    记为（在 $E$ 上）$f_t\xrightrightarrows[\mathcal{B}]{}f$.
 \end{definition}
 
 作为对照，我们可以导出逐点收敛与一致收敛的形式定义：
@@ -249,7 +249,7 @@ $$
 $$
 \begin{aligned}
     &f_t\xrightarrow[\mathcal{B}]{}f\iff\forall\eps>0,\forall x\in E,\exists B\in\mathcal{B},\forall t\in B,\abs{f_t(x)-f(x)}<\eps\\
-    &f_t\underset{\mathcal{B}}{\rightrightarrows}f\iff\forall\eps>0,\exists B\in\mathcal{B},\forall x\in E,\forall t\in B,\abs{f_t(x)-f(x)}<\eps\\
+    &f_t\xrightrightarrows[\mathcal{B}]{}f\iff\forall\eps>0,\exists B\in\mathcal{B},\forall x\in E,\forall t\in B,\abs{f_t(x)-f(x)}<\eps\\
 \end{aligned}
 $$
 
@@ -263,13 +263,13 @@ $$
 $$
 \begin{aligned}
     &f_t\xrightarrow[\mathcal{B}]{}f\iff\forall x\in E,\Delta_t(x)\xrightarrow[\mathcal{B}]{}0\\
-    &f_t\underset{\mathcal{B}}{\rightrightarrows}f\iff\Delta_t\xrightarrow[\mathcal{B}]{}0
+    &f_t\xrightrightarrows[\mathcal{B}]{}f\iff\Delta_t\xrightarrow[\mathcal{B}]{}0
 \end{aligned}
 $$
 
 特别的，如上的等价定义清晰地表明
 $$
-f_t\underset{\mathcal{B}}{\rightrightarrows}f\implies f_t\xrightarrow[\mathcal{B}]{}f
+f_t\xrightrightarrows[\mathcal{B}]{}f\implies f_t\xrightarrow[\mathcal{B}]{}f
 $$
 
 \begin{example}
@@ -310,7 +310,7 @@ $$
 \begin{example}
     设 $f_t:X\to\RR,t\in T$ 为一族函数，$\mathcal{B}$ 为 $T$ 的一个基.
 
-    设 $E\subset X$. 称 $f_t$ 在 $E$ 上一致收敛，如果存在 $f:E\to\RR$ 满足 $f_t\underset{\mathcal{B}}{\rightrightarrows}f$.
+    设 $E\subset X$. 称 $f_t$ 在 $E$ 上一致收敛，如果存在 $f:E\to\RR$ 满足 $f_t\xrightrightarrows[\mathcal{B}]{}f$.
 \end{example}
 
 \begin{theorem}[Cauchy]
