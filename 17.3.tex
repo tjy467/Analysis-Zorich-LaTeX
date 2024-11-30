@@ -1,0 +1,191 @@
+本节与第四节均为前面的抽象理论的应用. 本节我们研究 Euler 的 Beta 函数和 Gamma 函数. 定义如下：
+$$
+\begin{aligned}
+    &B(\alpha,\beta)\triangleq\int_0^1x^{\alpha-1}(1-x)^{\beta-1}\dd x\\
+    &\Gamma(\alpha)\triangleq\int_0^\infty x^{\alpha-1}e^{-x}\dd x
+\end{aligned}
+$$
+
+在这里，我们仅考虑 $\alpha,\beta\in\RR$. 在复分析课程中，我们将会发现它们均可以延拓到 $\mathbb{C}$ 非常大的子集上.
+
+\mysubsection{Beta 函数}
+
+\mysubsubsection{定义域}
+
+若 $\alpha\ge 1$ 且 $\beta\ge 1$，则 $B(\alpha,\beta)$ 为正常积分.
+
+当 $\alpha<1$ 时，$0$ 是积分的奇点，且 $\displaystyle\int_0^\eps x^{\alpha-1}\dd x$ 可积 $\iff\alpha>0$.
+
+当 $\beta<1$ 时，$1$ 是积分的奇点，且 $\displaystyle\int_{1-\eps}^1 x^{\beta-1}\dd x$ 可积 $\iff\beta>0$.
+
+综上 $B(\alpha,\beta)$ 的定义域为 $\set{\alpha>0,\beta>0}$.
+
+\mysubsubsection{对称性}
+
+\begin{property}
+    $B(\alpha,\beta)=B(\beta,\alpha)$
+\end{property}
+\begin{proof}
+    令 $x=1-y$.
+\end{proof}
+
+\mysubsubsection{递推性质}
+
+\begin{property}
+    若 $\alpha>1$，则 $B(\alpha,\beta)=\dfrac{\alpha-1}{\alpha+\beta-1}B(\alpha-1,\beta)$.
+
+    若 $\beta>1$，则 $B(\alpha,\beta)=\dfrac{\beta-1}{\alpha+\beta-1}B(\alpha,\beta-1)$.
+\end{property}
+\begin{proof}
+    由对称性质，只需证明第一条. 设 $\alpha>1$. 则
+$$
+\begin{aligned}
+    B(\alpha,\beta)&=\int_0^1x^{\alpha-1}(1-x)^{\beta-1}\dd x=-\frac{1}{\beta}\int_0^1x^{\alpha-1}\dd(1-x)^\beta\\
+    &=-\frac{1}{\beta}\left[x^{\alpha-1}(1-x)^\beta\biggr |_0^1-\int_0^1(1-x)^\beta(\alpha-1)x^{\alpha-2}\dd x\right]\\
+    &=\frac{\alpha-1}{\beta}\int_0^1x^{\alpha-2}(1-x)^\beta\dd x\\
+    &=\frac{\alpha-1}{\beta}\left[\int_0^1x^{\alpha-2}(1-x)^{\beta-1}\dd x-\int_0^1x^{\alpha-1}(1-x)^{\beta-1}\dd x\right]\\
+    &=\frac{\alpha-1}{\beta}[B(\alpha-1,\beta)-B(\alpha,\beta)]
+\end{aligned}
+$$
+
+    移项整理即证.
+\end{proof}
+
+\begin{inference}
+    设 $n,m\in\mathbb{N}$，则
+$$
+\begin{aligned}
+    &B(\alpha,n)=\frac{(n-1)!}{\alpha(\alpha+1)\cdots(\alpha+n-1)}\\
+    &B(m,n)=\frac{(m-1)!(n-1)!}{(m+n-1)!}
+\end{aligned}
+$$
+\end{inference}
+\begin{proof}
+    由 $B(\alpha,1)=\displaystyle\int_0^1x^{\alpha-1}\dd x=\frac{1}{\alpha}$，结合递推式即得第一条结论.
+
+    代入 $\alpha=m$ 即得第二条结论.
+\end{proof}
+
+\mysubsubsection{Beta 函数的等价定义}
+
+\begin{property}
+$$
+B(\alpha,\beta)=\int_0^\infty\frac{x^{\alpha-1}}{(1+x)^{\alpha+\beta}}\dd x
+$$
+\end{property}
+\begin{proof}
+    在 $B(\alpha,\beta)=\displaystyle\int_0^1x^{\alpha-1}(1-x)^{\beta-1}\dd x$ 中令 $y=\dfrac{x}{1-x}$ 即可.
+\end{proof}
+
+\mysubsection{Gamma 函数}
+
+\mysubsubsection{定义域}
+
+注意到 $0$ 与 $+\infty$ 均为 $\Gamma(\alpha)=\displaystyle\int_0^\infty x^{\alpha-1}e^{-x}\dd x$ 的奇点.
+
+因为 $\displaystyle\int_0^\eps x^{\alpha-1}\dd x$ 收敛 $\iff\alpha>0$，而 $\int_1^\infty x^{\alpha-1}e^{-x}\dd x$ 总收敛，故定义域为 $\set{\alpha>0}$.
+
+\begin{hint}
+    在复分析理课程中会证明：$\Gamma$ 可以延拓到 $\mathbb{C}\setminus\set{0,-1,-2,\cdots}$ 且 $\Gamma$ 在每个负整数处为一阶极点.
+\end{hint}
+
+\mysubsubsection{光滑性与导数公式}
+
+\begin{property}
+    $\Gamma$ 在 $(0,+\infty)$ 上无穷阶可导，且
+$$
+\Gamma^{(n)}(\alpha)=\int_0^\infty x^{\alpha-1}(\ln x)^ne^{-x}\dd x
+$$
+\end{property}
+\begin{proof}
+    任意固定 $n\in\mathbb{N},0<\eps<1$. 我们来证上式的右端关于 $\alpha\in\left[\eps,\dfrac{1}{\eps}\right]$ 一致收敛.
+
+    为此仅需证明：$\displaystyle\int_0^1x^{\alpha-1}(\ln x)^ne^{-x}\dd x$ 与 $\displaystyle\int_1^\infty x^{\alpha-1}(\ln x)^ne^{-x}\dd x$ 均在 $\left[\eps,\dfrac{1}{\eps}\right]$ 上一致收敛.
+
+    注意到当 $x\in[0,1],\alpha\in\left[\eps,\dfrac{1}{\eps}\right]$ 时有
+$$
+\abs{x^{\alpha-1}(\ln x)^ne^{-x}}\le x^{\eps-1}\left(\ln\frac{1}{x}\right)^n
+$$
+
+    而 $\displaystyle\int_0^1x^{\eps-1}\left(\ln\frac{1}{x}\right)^n\dd x\xlongequal{y=\ln\frac{1}{x}}\int_0^\infty y^ne^{-\eps y}\dd y<+\infty$.
+
+    从而由 Weierstrass 判别法知 $\displaystyle\int_0^1x^{\alpha-1}(\ln x)^ne^{-x}\dd x$ 一致收敛.
+
+    当 $x\in[1,+\infty),\alpha\in\left[\eps,\dfrac{1}{\eps}\right]$ 时有
+$$
+\abs{x^{\alpha-1}(\ln x)^ne^{-x}}\le x^{\frac{1}{\eps}-1+n}e^{-x}
+$$
+
+    而 $\displaystyle\int_1^\infty x^{\frac{1}{\eps}-1+n}e^{-x}\dd x<+\infty$.
+
+    从而由 Weierstrass 判别法知 $\displaystyle\int_1^\infty x^{\alpha-1}(\ln x)^ne^{-x}\dd x$ 一致收敛.
+
+    综上，$\displaystyle\int_0^\infty x^{\alpha-1}(\ln x)^ne^{-x}\dd x$ 在 $\left[\eps,\dfrac{1}{\eps}\right]$ 上一致收敛.
+
+    由 $\eps>0$ 的任意性以及 $n$ 的任意性，对 $n$ 归纳即证.
+\end{proof}
+
+\mysubsubsection{递推公式}
+
+\begin{property}
+    对 $\forall\alpha>0$ 有 $\Gamma(\alpha+1)=\alpha\Gamma(\alpha)$.
+\end{property}
+\begin{proof}
+$$
+\begin{aligned}
+    \Gamma(\alpha+1)=\int_0^\infty x^\alpha e^{-x}\dd x=-\int_0^\infty x^\alpha\dd e^{-x}=\int_0^\infty e^{-x}\dd x^\alpha=\alpha\Gamma(\alpha)
+\end{aligned}
+$$
+\end{proof}
+
+注意到 $\Gamma(1)=\displaystyle\int_0^\infty e^{-x}\dd x=1$. 从而 $\Gamma(n+1)=n!,\forall n\in\mathbb{N}$.
+
+\begin{hint}
+    正是使用该递推关系式，我们可以将 $\Gamma$ 的定义域延拓到 $\mathbb{C}\setminus\set{0,-1,-2,\cdots}$.
+\end{hint}
+
+\mysubsubsection{Euler-Gauss 公式}
+
+\begin{property}
+$$
+\begin{aligned}
+    \Gamma(\alpha)&=\lim_{n\to\infty}n^\alpha\frac{(n-1)!}{\alpha(\alpha+1)\cdots(\alpha+n-1)}\\
+    &=\lim_{n\to\infty}n^\alpha B(\alpha,n)
+\end{aligned}
+$$
+\end{property}
+\begin{proof}
+    令 $x=\ln\dfrac{1}{y}$，则
+$$
+\Gamma(\alpha)=\int_0^\infty x^{\alpha-1}e^{-x}\dd x=\int_0^1\left(\ln\frac{1}{y}\right)^{\alpha-1}\dd y
+$$
+
+    先设 $\alpha\ge 1$. 已知对 $\forall y\in(0,1]$ 有
+$$
+n(1-y^\frac{1}{n})\uparrow\ln\frac{1}{y}\implies\left[n(1-y^\frac{1}{n})\right]^\alpha-1\uparrow\left(\ln\frac{1}{y}\right)^{\alpha-1}
+$$
+
+    且 $\displaystyle\int_0^1\left(\ln\frac{1}{y}\right)^{\alpha-1}\dd y$ 收敛. 从而由推论 \ref{1722} 有
+$$
+\lim_{n\to\infty}\int_0^1\left[n(1-y^\frac{1}{n})\right]^{\alpha-1}\dd y=\int_0^1\left(\ln\frac{1}{y}\right)^{\alpha-1}\dd y=\Gamma(\alpha)
+$$
+
+    而
+$$
+\begin{aligned}
+    \int_0^1\left[n(1-y^\frac{1}{n})\right]^{\alpha-1}\dd y&=n^\alpha\int_0^1\frac{1}{n}(1-y^\frac{1}{n})^{\alpha-1}\dd y\\
+    &\xlongequal{x=y^\frac{1}{n}}n^\alpha\int_0^1(1-x)^{\alpha-1}x^{n-1}\dd x\\
+    &=n^\alpha B(\alpha,n)
+\end{aligned}
+$$
+
+    从而结论成立.
+
+    现设 $\alpha>0$. 则
+$$
+\begin{aligned}
+    \Gamma(\alpha)&=\frac{\Gamma(\alpha+1)}{\alpha}=\frac{1}{\alpha}\lim_{n\to\infty}n^{\alpha+1}B(\alpha+1,n)\\
+    &=\frac{1}{\alpha}\lim_{n\to\infty}n^{\alpha+1}\frac{\alpha}{\alpha+n}B(\alpha,n)=\lim_{n\to\infty}n^\alpha B(\alpha,n)
+\end{aligned}
+$$
+\end{proof}

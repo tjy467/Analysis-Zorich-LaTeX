@@ -101,7 +101,7 @@ $$
 \begin{inference}
     设 $f:[a,\omega)\times[c,d]\to\RR$ 连续，对 $\forall y\in(c,d)$ 有 $F(y)=\displaystyle\int_a^\omega f(x,y)\dd x$ 收敛.
 
-    若 $y=c$ 或 $d$ 有 $\int_a^\omega f(x,y)\dd x$ 发散，则 $F(y)$ 在 $(c,d)$ 上非一致收敛.
+    若 $y=c$ 或 $d$ 有 $\displaystyle\int_a^\omega f(x,y)\dd x$ 发散，则 $F(y)$ 在 $(c,d)$ 上非一致收敛.
 \end{inference}
 \begin{proof}
     我们证明其逆否命题：设 $F(y)$ 在 $(c,d)$ 上一致收敛. 则
@@ -298,6 +298,7 @@ $$
             \draw[-,red] (1,1)--(2,1);
             \node at (0.5,1) [above] {$\frac{1}{y}$};
             \node[red] at (1.5,1) [above] {$0$};
+            \node at (0,0) [below left] {$O$};
         \end{tikzpicture}
     \end{center}
 
@@ -315,7 +316,7 @@ $$
 
 作为上一性质以及 Dini 定理的推论，我们有
 
-\begin{inference}
+\begin{inference}\label{1722}
     设 $Y\subset\RR,f:[a,\omega)\times Y\to\RR_+$，且 $\forall y\in Y$ 有 $f(x,y)$ 关于 $x$ 连续. 若
 
     \begin{enumerate}
@@ -339,7 +340,7 @@ $$
 \begin{example}
     $f_n(x)=f(x,n)=n(1-x^\frac{1}{n}),x\ge 0$.
 
-    已知 $f_n(x)$ 单增且 $f_n(x)\to\ln\dfrac{1}{x}$.
+    已知 $f_n(x)\uparrow\ln\dfrac{1}{x}$.
 
     且 $\ln\dfrac{1}{x}$ 在 $x>0$ 上连续，$\displaystyle\int_0^1\ln\frac{1}{x}\dd x<+\infty$.
 
@@ -425,11 +426,6 @@ $$
 $$
 \int_0^\infty x^ne^{-x}\dd x=n!
 $$
-
-    实际上这就是 $\Gamma$ 函数的定义
-$$
-\Gamma(\alpha)=\int_0^\infty x^{\alpha-1}e^{-x}\dd x
-$$
 \end{example}
 
 \begin{example}
@@ -497,9 +493,11 @@ $$
     则 $\displaystyle\int_c^dF(y)\dd y=\int_a^\omega\int_c^d f(x,y)\dd y\dd x$.
 \end{property}
 \begin{proof}
-    这是 Dini 定理的推论. 我们仅需验证上一定理的条件，即 $F(y)$ 在 $[c,d]$ 上一致收敛. 但由 $f\ge 0$ 知 $F_b(y)$ 单调递增且
+    这是 Dini 定理的推论. 我们仅需验证上一定理的条件，即 $F(y)$ 在 $[c,d]$ 上一致收敛.
+    
+    但由 $f\ge 0$ 知
 $$
-F_b(y)\to F(y)\implies F_b(y)\rightrightarrows F(y)
+F_b(y)\uparrow F(y)\implies F_b(y)\rightrightarrows F(y)
 $$
 \end{proof}
 
@@ -530,3 +528,136 @@ $$
 \int_c^{\widetilde{\omega}}\int_a^\omega f(x,y)\dd x\dd y=\int_a^\omega\int_c^{\widetilde{\omega}}f(x,y)\dd y\dd x
 $$
 \end{property}
+\begin{proof}
+    不妨设
+$$
+\int_a^\omega\int_c^{\widetilde{\omega}}\abs{f(x,y)}\dd y\dd x<+\infty
+$$
+
+    我们希望使用第二节的性质. 为此取 $Y=[c,\widetilde{\omega}),\mathcal{B}_Y$ 为 $d\to\widetilde{\omega}$.
+
+    令 $G_d(x)\triangleq\displaystyle\int_c^d f(x,y)\dd y$. 由第一个条件知
+$$
+\forall b\in[a,\omega),\text{在 }[a,b]\text{ 上 }G_d\xrightrightarrows[d\to\widetilde{\omega}]{}G\quad
+$$
+
+    以下验证：$\displaystyle\int_a^\omega G_d(x)\dd x$ 关于 $d\in[c,\widetilde{\omega})$ 一致收敛.
+
+    令 $\widehat{G}(x)=\displaystyle\int_c^{\widetilde{\omega}}\abs{f(x,y)}\dd y$. 由条件知 $\displaystyle\int_a^\omega\widehat{G}(x)\dd x$ 收敛.
+
+    显然有 $\abs{G_d(x)}=\displaystyle\abs{\int_c^df(x,y)\dd y}\le\widehat{G}(x)$.
+
+    由 Weierstrass 判别法知 $\displaystyle\int_a^\omega G_d(x)\dd x$ 在 $[c,\widetilde{\omega})$ 上一致收敛.
+
+    从而由第二节的性质可得
+$$
+\lim_{d\to\widetilde{\omega}}\int_a^\omega G_d(x)\dd x=\int_a^\omega G(x)\dd x=\int_a^\omega\int_c^{\widetilde{\omega}}f(x,y)\dd y\dd x
+$$
+
+    另一方面，由本节第一个性质可得
+$$
+\int_a^\omega G_d(x)\dd x=\int_a^\omega\int_c^df(x,y)\dd y\dd x=\int_c^d\int_a^\omega f(x,y)\dd x\dd y
+$$
+
+    从而广义积分 $\displaystyle\lim_{d\to\widetilde{\omega}}\int_a^\omega G_d(x)\dd x=\int_c^{\widetilde{\omega}}\int_a^\omega f(x,y)\dd x\dd y$ 存在，且
+$$
+\int_c^{\widetilde{\omega}}\int_a^\omega f(x,y)\dd x\dd y=\int_a^\omega\int_c^{\widetilde{\omega}}f(x,y)\dd y\dd x
+$$
+\end{proof}
+
+\begin{hint}
+    在缺少第二个条件时，结论不一定成立. 反例如下：
+\end{hint}
+
+\begin{example}
+    设 $A>0$. 考虑 $f:[A,+\infty)^2\to\RR$
+$$
+f(x,y)=\frac{x^2-y^2}{(x^2+y^2)^2}
+$$
+
+    则直接计算可得
+$$
+\begin{aligned}
+    &\int_A^{+\infty}\int_A^{+\infty}f(x,y)\dd y\dd x=-\frac{\pi}{4}\\
+    &\int_A^{+\infty}\int_A^{+\infty}f(x,y)\dd x\dd y=\frac{\pi}{4}
+\end{aligned}
+$$
+
+    注意到对 $f$ 条件 1 成立而条件 2 不成立.
+\end{example}
+
+\begin{example}
+    作为一个正面的例子，设 $\alpha,\beta>0$.
+
+    定义 $f(x,y)=x^\alpha y^{\alpha+\beta+1}e^{-(1+x)y}$.
+
+    则我们之前已经验证了
+$$
+F(y)=\int_0^\infty f(x,y)\dd x,\qquad G(x)=\int_0^\infty f(x,y)\dd y
+$$
+
+    在 $\RR$ 上一致收敛. 另一方面
+$$
+\int_0^\infty\int_0^\infty f(x,y)\dd x\dd y=\left(\int_0^\infty e^{-y}y^{-\beta}\dd y\right)\left(\int_0^\infty(xy)^\alpha e^{-xy}\dd(xy)\right)<+\infty
+$$
+
+    故上一性质的两个条件均满足，从而
+$$
+\int_0^\infty\int_0^\infty f(x,y)\dd y\dd x=\int_0^\infty\int_0^\infty f(x,y)\dd x\dd y
+$$
+\end{example}
+
+\begin{inference}
+    设 $f:[a,\omega)\times[c,\widetilde{\omega})\to\RR$ 连续且 $f\ge 0$. 若
+
+    \begin{enumerate}
+        \item $F(y)=\displaystyle\int_a^\omega f(x,y)\dd x$ 与 $G(x)=\displaystyle\int_c^{\widetilde{\omega}} f(x,y)\dd y$ 均连续.
+        
+        \item $\displaystyle\int_c^{\widetilde{\omega}}F(y)\dd y$ 或 $\displaystyle\int_a^\omega G(x)\dd x$ 存在.
+    \end{enumerate}
+
+    则另一个也存在，且 $\displaystyle\int_c^{\widetilde{\omega}}F(y)\dd y=\int_a^\omega G(x)\dd x$.
+\end{inference}
+\begin{proof}
+    我们来验证上一性质的条件. 令
+$$
+F_b(y)=\int_a^bf(x,y)\dd x,\qquad G_d(x)=\int_c^d f(x,y)\dd y
+$$
+
+    由 $f\ge 0$ 知 $F_b(y)\uparrow F(y),G_d(x)\uparrow G(x)$.
+
+    由 $F,G$ 连续知 $\forall [c,d]\subset[c,\widetilde{\omega}),F_b(y)\rightrightarrows F(y)$ 且 $\forall[a,b]\subset[a,\omega),G_d(x)\rightrightarrows G(x)$.
+
+    从而上一性质的两个条件均成立. 即证.
+\end{proof}
+
+\begin{example}
+    计算 $\displaystyle\int_0^\infty e^{-x^2}\dd x=\frac{\sqrt{\pi}}{2}$.
+
+    令 $\Gamma\triangleq\displaystyle\int_0^\infty e^{-u^2}\dd u$. 令 $u=xy,y>0$，则
+$$
+\Gamma=y\int_0^\infty e^{-(xy)^2}\dd x,\forall y>0
+$$
+
+    进而
+$$
+\begin{aligned}
+    \Gamma^2&=\int_0^\infty Je^{-y^2}\dd y\\
+    &=\int_0^\infty\left(y\int_0^\infty e^{-(xy)^2}\dd x\right)e^{-y^2}\dd y\\
+    &=\int_0^\infty\int_0^\infty ye^{-(1+x^2)y^2}\dd x\dd y
+\end{aligned}
+$$
+
+    令 $f(x,y)\triangleq ye^{-(1+x^2)y^2}$. 令 $F(y)=\displaystyle\int_0^\infty f(x,y)\dd x,G(x)=\int_0^\infty f(x,y)\dd y$.
+
+    则 $\displaystyle\int_0^\infty F(y)\dd y=\Gamma^2<+\infty$.
+
+    另一方面，计算得到 $F(y)=e^{-y^2}\Gamma,G(x)=\dfrac{1}{2}\dfrac{1}{1+x^2}$ 在 $[0,+\infty)$ 上连续.
+
+    从而由推论知
+$$
+\Gamma^2=\int_0^\infty F(y)\dd y=\int_0^\infty G(x)\dd x=\frac{1}{2}\int_0^\infty\frac{\dd x}{1+x^2}=\frac{\pi}{4}
+$$
+
+    即证 $\displaystyle\int_0^\infty e^{-x^2}\dd x=\frac{\sqrt{\pi}}{2}$.
+\end{example}
