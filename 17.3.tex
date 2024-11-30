@@ -40,7 +40,7 @@ $$
     由对称性质，只需证明第一条. 设 $\alpha>1$. 则
 $$
 \begin{aligned}
-    B(\alpha,\beta)&=\int_0^1x^{\alpha-1}(1-x)^{\beta-1}\dd x=-\frac{1}{\beta}\int_0^1x^{\alpha-1}\dd(1-x)^\beta\\
+    B(\alpha,\beta)&=\int_0^1x^{\alpha-1}(1-x)^{\beta-1}\dd x=-\frac{1}{\beta}\int_0^1x^{\alpha-1}\dd(1-x)^\beta\dd x\\
     &=-\frac{1}{\beta}\left[x^{\alpha-1}(1-x)^\beta\biggr |_0^1-\int_0^1(1-x)^\beta(\alpha-1)x^{\alpha-2}\dd x\right]\\
     &=\frac{\alpha-1}{\beta}\int_0^1x^{\alpha-2}(1-x)^\beta\dd x\\
     &=\frac{\alpha-1}{\beta}\left[\int_0^1x^{\alpha-2}(1-x)^{\beta-1}\dd x-\int_0^1x^{\alpha-1}(1-x)^{\beta-1}\dd x\right]\\
@@ -83,7 +83,7 @@ $$
 
 注意到 $0$ 与 $+\infty$ 均为 $\Gamma(\alpha)=\displaystyle\int_0^\infty x^{\alpha-1}e^{-x}\dd x$ 的奇点.
 
-因为 $\displaystyle\int_0^\eps x^{\alpha-1}\dd x$ 收敛 $\iff\alpha>0$，而 $\int_1^\infty x^{\alpha-1}e^{-x}\dd x$ 总收敛，故定义域为 $\set{\alpha>0}$.
+因为 $\displaystyle\int_0^\eps x^{\alpha-1}\dd x$ 收敛 $\iff\alpha>0$，而 $\displaystyle\int_1^\infty x^{\alpha-1}e^{-x}\dd x$ 总收敛，故定义域为 $\set{\alpha>0}$.
 
 \begin{hint}
     在复分析理课程中会证明：$\Gamma$ 可以延拓到 $\mathbb{C}\setminus\set{0,-1,-2,\cdots}$ 且 $\Gamma$ 在每个负整数处为一阶极点.
@@ -162,7 +162,7 @@ $$
 
     先设 $\alpha\ge 1$. 已知对 $\forall y\in(0,1]$ 有
 $$
-n(1-y^\frac{1}{n})\uparrow\ln\frac{1}{y}\implies\left[n(1-y^\frac{1}{n})\right]^\alpha-1\uparrow\left(\ln\frac{1}{y}\right)^{\alpha-1}
+n(1-y^\frac{1}{n})\uparrow\ln\frac{1}{y}\implies\left[n(1-y^\frac{1}{n})\right]^{\alpha-1}\uparrow\left(\ln\frac{1}{y}\right)^{\alpha-1}
 $$
 
     且 $\displaystyle\int_0^1\left(\ln\frac{1}{y}\right)^{\alpha-1}\dd y$ 收敛. 从而由推论 \ref{1722} 有

@@ -63,7 +63,7 @@ $$
 \end{hint}
 
 \begin{example}
-    $F(y)=\displaystyle\int_1^\infty\frac{\dd x}{x^2+y^2}$ 在 $\RR$ 上一致收敛.
+    $F(y)=\displaystyle\int_1^\infty\frac{\dd x}{x^2+y^2}\dd x$ 在 $\RR$ 上一致收敛.
 \end{example}
 
 \begin{example}
@@ -120,7 +120,7 @@ $$
 \end{proof}
 
 \begin{example}
-    $F(t)=\displaystyle\int_0^\infty e^{-tx^2}$ 在 $t>0$ 时收敛.
+    $F(t)=\displaystyle\int_0^\infty e^{-tx^2}\dd x$ 在 $t>0$ 时收敛.
     
     但其在 $t=0$ 时发散，从而其在 $(0,\infty)$ 上不一致收敛.
 \end{example}
@@ -156,11 +156,11 @@ $$
 收敛，则 $\displaystyle\int_a^\omega f(x,y)\dd x$ 在 $Y$ 上一致收敛且绝对收敛.
 
 \begin{example}
-    $\displaystyle\int_0^\infty\frac{\cos\alpha x}{1+x^2}$ 对 $\alpha\in\RR$ 一致收敛.
+    $\displaystyle\int_0^\infty\frac{\cos\alpha x}{1+x^2}\dd x$ 对 $\alpha\in\RR$ 一致收敛.
 \end{example}
 
 \begin{example}
-    $\displaystyle\int_0^\infty\sin xe^{-tx^2}$ 在 $t\ge t_0>0$ 上一致收敛，但在 $t>0$ 上不一致收敛.
+    $\displaystyle\int_0^\infty\sin xe^{-tx^2}\dd x$ 在 $t\ge t_0>0$ 上一致收敛，但在 $t>0$ 上不一致收敛.
 \end{example}
 
 \begin{property}[Abel-Dirichlet 判别法]
@@ -249,7 +249,7 @@ $$
 
     则 $\varphi$ 在 $[a,\omega)$ 上广义可积且
 $$
-\int_a^\omega\varphi(x)\dd x=\int_a^\omega\lim_{\mathcal{B}}f(x,y)\dd x=\lim{\mathcal{B}}\int_a^\omega f(x,y)\dd x
+\int_a^\omega\varphi(x)\dd x=\int_a^\omega\lim_{\mathcal{B}}f(x,y)\dd x=\lim_{\mathcal{B}}\int_a^\omega f(x,y)\dd x
 $$
 \end{property}
 \begin{proof}
@@ -310,7 +310,7 @@ $$
 
     任取 $B>0$，取 $y=2B$. 则
 $$
-\int_B^\infty f(x,2B)=\int_B^{2B}\frac{1}{2B}\dd x=\frac{1}{2}\not\to 0
+\int_B^\infty f(x,2B)\dd x=\int_B^{2B}\frac{1}{2B}\dd x=\frac{1}{2}\not\to 0
 $$
 \end{example}
 
@@ -411,7 +411,7 @@ $$
 \end{proof}
 
 \begin{example}
-    设 $\alpha>0$，则 $\displaystyle\int_0^\infty$ 在 $y\ge y_0>0$ 上一致收敛.
+    设 $\alpha>0$，则 $\displaystyle\int_0^\infty x^\alpha e^{-xy}\dd x$ 在 $y\ge y_0>0$ 上一致收敛.
 
     令 $F(y)\triangleq\displaystyle\int_0^\infty e^{-xy}\dd x$.
 
