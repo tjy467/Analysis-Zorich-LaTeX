@@ -1,0 +1,248 @@
+作为含参积分的另一个重要应用，我们定义卷积并讨论其基本性质. 作为卷积的应用，我们证明可用 $C^\infty$ 光滑函数逼近连续函数.
+
+\mysubsection{概念的引入与定义}
+
+设 $f:\RR\to\RR$ 连续. 我们希望找到一列 $C^(1)$ 光滑的函数来逼近 $f$. 一个可能的做法如下：
+
+对任意 $\delta>0$，定义 $f_\delta:\RR\to\RR$ 为
+$$
+f_\delta(x)\triangleq\frac{1}{2\delta}\int_{x-\delta}^{x+\delta}f(y)\dd y
+$$
+
+首先由不定积分的性质知 $f_\delta\in C^{(1)}(\RR)$ 且
+$$
+f_\delta'(x)=\frac{1}{2\delta}(f(x+\delta)-f(x-\delta))
+$$
+
+另一方面
+$$
+\abs{f_\delta(x)-f(x)}=\abs{\frac{1}{2\delta}\int_{x-\delta}^{x+\delta}(f(y)-f(x))\dd x}=f(\xi)
+$$
+
+其中 $\xi\in(x-\delta,x+\delta)$. 从而确有
+$$
+f_\delta(x)\to f(x),\forall x\in\RR
+$$
+
+若将 $x$ 限定在紧区间 $[a,b]$ 上，由一致连续性有
+$$
+f_\delta\rightrightarrows f\quad(x\in[a,b])
+$$
+
+上面定义的 $f_\delta$ 的几何直观非常简单，即对 $f$ 作平均. 具体来讲，对每个固定的 $x$，我们将 $f$ 在 $[x-\delta,x+\delta]$ 上作平均.
+
+一个非常有用的观察如下：我们可以将如上的求平均表达成一个含参积分的形式，具体如下：
+
+定义 $\Delta_\delta:\RR\to\RR$ 为
+$$
+\Delta_\delta(x)\triangleq\begin{cases}
+    \dfrac{1}{2\delta} & x\in[-\delta,\delta]\\
+    0 & \abs{x}>\delta
+\end{cases}
+$$
+
+\begin{center}
+    \begin{tikzpicture}[xscale=3,yscale=1.5]
+        \draw[->] (-1.5,0)--(1.5,0) node [right] {$x$};
+        \draw[->] (0,-0.5)--(0,2.5) node [right] {$y$};
+        \node at (0,0) [below left] {$O$};
+        \draw[-,red] (-1,0.5)--(1,0.5) node [right] {$\Delta_1$};
+        \draw[-,dashed,red] (-1,0.5)--(-1,0) node [below] {$-1$};
+        \draw[-,dashed,red] (1,0.5)--(1,0) node [below] {$1$};
+        \draw[-,blue] (-0.5,1)--(0.5,1) node [right] {$\Delta_\frac{1}{2}$};
+        \draw[-,dashed,blue] (-0.5,1)--(-0.5,0) node [below] {$-\frac{1}{2}$};
+        \draw[-,dashed,blue] (0.5,1)--(0.5,0) node [below] {$\frac{1}{2}$};
+        \node at (0,1) [above right] {$1$};
+        \draw[-,purple] (-0.25,2)--(0.25,2) node [right] {$\Delta_\frac{1}{4}$};
+        \draw[-,dashed,purple] (-0.25,2)--(-0.25,0) node [below] {$-\frac{1}{4}$};
+        \draw[-,dashed,purple] (0.25,2)--(0.25,0) node [below] {$\frac{1}{4}$};
+    \end{tikzpicture}
+\end{center}
+
+则
+$$
+f_\delta(x)=\frac{1}{2\delta}\int_{x-\delta}^{x+\delta}f(y)\dd y=\int_\RR f(y)\Delta_\delta(x-y)\dd y
+$$
+
+称最后的积分为 $f$ 与 $\Delta_\delta$ 的卷积，记为 $f*\Delta_\delta(x)$.
+
+\begin{hint}
+    一旦有了这个想法，我们发现不一定要将 $\Delta_\delta$ 取成如上的阶梯函数的样子. 例如我们可以取 $\Delta_\delta$ 如图
+
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (-1.5,0)--(1.5,0) node [right] {$x$};
+            \draw[->] (0,-0.5)--(0,2.5) node [right] {$y$};
+            \node at (0,0) [below left] {$O$};
+            \draw[-,blue] (-1,0)--(0,2);
+            \draw[-,blue] (0,2)--(1,0);
+            \node[blue] at (1.5,2) {连续};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw[->] (-1.5,0)--(1.5,0) node [right] {$x$};
+            \draw[->] (0,-0.5)--(0,2.5) node [right] {$y$};
+            \node at (0,0) [below left] {$O$};
+            \draw[domain=-1:1,blue] plot (\x,{cos(pi*\x r)+1});
+            \node[blue,align=center] at (1.5,2) {光滑\\紧支撑};
+        \end{tikzpicture}
+        \qquad
+        \begin{tikzpicture}
+            \draw[->] (-1.5,0)--(1.5,0) node [right] {$x$};
+            \draw[->] (0,-0.5)--(0,2.5) node [right] {$y$};
+            \node at (0,0) [below left] {$O$};
+            \draw[domain=-1.5:1.5,blue] plot (\x,{2/(1+\x*\x)});
+            \node[blue,align=center] at (2.5,2) {光滑\\在 $\infty$ 处骤降};
+        \end{tikzpicture}
+    \end{center}
+
+    只要保持 $\Delta_\delta\ge 0,\displaystyle\int_\RR\Delta_\delta(x)\dd x=1$，且主要的积分值来源于 $0$ 的一个邻域. 或更数学化的说：对任意 $0$ 的邻域 $U$ 有
+$$
+\int_U\Delta_\delta(x)\dd x\to 1\quad(\delta\to 0)
+$$
+\end{hint}
+
+现在我们可以正式地给出两个函数卷积的定义了.
+
+\begin{definition}
+    设 $u,v:\RR\to\RR$. 定义 $u$ 与 $v$ 的卷积为
+$$
+u*v(x)\triangleq\int_\RR u(y)v(x-y)\dd y
+$$
+
+    若 $\forall x\in\RR$ 如上的函数 $u(y)v(x-y)$ 在 $\RR$ 上广义可积.
+\end{definition}
+
+\begin{example}
+    对上面定义的 $\Delta_\delta$ 以及 $f$ 连续，显然有 $f(y)\Delta(x-y)$ 对 $\forall x\in\RR$ 可积，从而
+$$
+f*\Delta_\delta(x)=\int_\RR f(x)\Delta_\delta(x-y)\dd y
+$$
+
+    可以定义.
+\end{example}
+
+以下，我们给出几个卷积可定义的充分条件. 这对我们的初步研究来说已经够用了. 我们首先给出几个定义.
+
+\begin{definition}
+    设 $G\subset\RR^n$ 为开集，$f:G\to\RR$. 称 $f$ 在 $G$ 上局部可积，若 $\forall x\in G$，存在 $x$ 的邻域 $U(x)\subset G$ 使得 $f$ 在 $U(x)$ 上可积.
+\end{definition}
+
+若 $G=\RR$，则 $f$ 在 $\RR$ 上局部可积 $\iff\forall [a,b]\subset\RR,f\in\mathcal{R}[a,b]$.
+
+\begin{definition}
+    定义 $f$ 的支撑为集合 $\set{x\in G|f(x)\ne 0}$ 在 $G$ 中的闭包，记为 $\mathrm{supp}(f)$.
+    
+    进一步，若 $\mathrm{supp}(f)$ 为紧集，则称 $f$ 在 $G$ 内有紧支撑.
+\end{definition}
+
+\begin{example}
+    $G=(-1,1),f:G\to\RR,f(x)=1-x^2$.
+
+    则 $\mathrm{supp}(f)=(-1,1)$. 从而 $f$ 在 $G$ 内没有紧支撑.
+\end{example}
+
+我们用 $C^{(m)}(G)$ 表示在 $G$ 上 $m$ 阶可微函数的全体.
+
+用 $C^{(m)}_0(G)$ 表示在 $G$ 上 $m$ 阶可微且有紧支撑的函数全体.
+
+在 $G=\RR$ 的情形，我们进一步简化为 $C^{(m)}$ 和 $C^{(m)}_0$.
+
+\begin{property}
+    设 $u,v:\RR\to\RR$ 均局部可积，若以下任一条件成立：
+
+    \begin{enumerate}
+        \item $\abs{u}^2$ 和 $\abs{v}^2$ 均在 $\RR$ 上可积.
+        
+        \item $\abs{u}$ 与 $\abs{v}$ 其中之一可积，而另一个有界.
+        
+        \item $u$ 或 $v$ 有紧支撑.
+    \end{enumerate}
+
+    则 $u*v$ 在 $\RR$ 上存在.
+\end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item 由 Cauchy-Schwartz 不等式有
+$$
+\forall x\in\RR,\abs{\int_\RR u(y)v(x-y)\dd y}\le\left(\int_\RR\abs{u(y)}^2\dd y\right)^\frac{1}{2}\left(\int_\RR\abs{v(x-y)}^2\dd y\right)^\frac{1}{2}
+$$
+
+        作变量替换 $y'=x-y$ 得 $\displaystyle\int_\RR\abs{v(x-y)}^2\dd y=\int_\RR\abs{v(y)}^2\dd y$
+
+        从而 $u*v(x)$ 存在且
+$$
+\forall x\in\RR,\abs{u*v(x)}\le\left(\int_\RR\abs{u(y)}^2\dd y\right)^\frac{1}{2}\left(\int_\RR\abs{v(x-y)}^2\dd y\right)^\frac{1}{2}
+$$
+
+        \item 不妨设 $\abs{u}$ 可积，$\abs{v}\le M$. 则
+$$
+\forall x\in\RR,\abs{\int_a^b u(y)v(x-y)\dd y}\le\int_a^b\abs{u(y)}\abs{v(x-y)}\dd y\le M\int_a^b\abs{u(y)}\dd y\le M\int_\RR\abs{u(y)}\dd y
+$$
+
+        从而 $u*v(x)$ 存在且
+$$
+\abs{u*v(x)}\le M\int_\RR\abs{u(x)}\dd y
+$$
+
+        \item 不妨设 $\mathrm{supp}(v)\subset[-M,M]$. 则
+$$
+\forall x\in\RR,\int_\RR u(y)v(x-y)\dd y=\int_{x-M}^{y+M}u(y)v(x-y)\dd y
+$$
+
+        由 $u$ 与 $v$ 均局部可积知 $u(y)v(x-y)$ 在 $[x-M,x+M]$ 上可积.
+
+        从而 $u*v(x)$ 存在.
+    \end{enumerate}
+\end{proof}
+
+\mysubsection{卷积的基本性质}
+
+\mysubsubsection{对称性}
+
+\begin{property}
+    设 $u,v:\RR\to\RR$ 使得 $u*v$ 存在.
+
+    则 $v*u$ 也存在，且 $u*v(x)=v*u(x)$.
+\end{property}
+\begin{proof}
+    由假设，积分 $\displaystyle\int_\RR u(y)v(x-y)\dd y$ 存在.
+
+    做变量替换 $y'=x-y$，则由广义积分的定义不难验证，$u(x-y')v(y')$ 作为 $y'$ 的函数也在 $\RR$ 上可积. 且由变量替换公式有
+$$
+\int_\RR u(x-y')v(y')\dd y'\xlongequal{y=x-y'}\int\RR u(y)v(x-y)\dd y
+$$
+
+    即 $v*u(x)=u*v(x)$.
+\end{proof}
+
+\mysubsubsection{平移不变性}
+
+设 $u:\RR\to\RR,x_0\in\RR$. 定义
+$$
+(T_{x_0}u)(x)=u(x-x_0)
+$$
+
+我们称 $T_{x_0}$ 是 $\RR$ 上函数空间上的平移算子.
+
+\begin{property}
+    设 $u,v:\RR\to\RR$ 使得 $u*v$ 存在. 则
+$$
+T_{x_0}(u*v)=(T_{x_0}u)*v=u*(T_{x_0}v)
+$$
+\end{property}
+\begin{proof}
+    由对称性，我们只需证明第二个等式.
+
+    一方面有
+$$
+T_{x_0}(u*v)(x)=u*v(x-x_0)=\int_\RR u(y)v(x-x_0-y)\dd y
+$$
+
+    另一方面有
+$$
+u*(T_{x_0}v)(x)=\int_\RR u(y)T_{x_0}v(x-y)\dd y=\int_\RR u(y)v(x-y-x_0)\dd y
+$$
+
+    故结论成立.
+\end{proof}
