@@ -246,3 +246,388 @@ $$
 
     故结论成立.
 \end{proof}
+
+\mysubsubsection{卷积的微分}
+
+从我们引入的例子可见两个函数做卷积之后函数的性质倾向于变好. 例如 $f$ 连续，$\Delta_\delta$ 为阶梯函数，但 $f*\Delta_\delta$ 为 $C^{(1)}$ 光滑.
+
+由于卷积是一种特殊的含参积分，我们可以期待：若其中一个函数有光滑性，则卷积也具有相同的光滑性.
+
+\begin{property}
+    设 $u,v:\RR\to\RR$ 满足 $u$ 连续，$v$ 为 $C^{(m)}$ 光滑，且二者之一有紧支撑.
+
+    则 $u*v$ 也为 $C^{(m)}$ 光滑. 且
+$$
+(f*g)^{(k)}=f*g^{(k)},\forall 0\le k\le m
+$$
+\end{property}
+\begin{proof}
+    任取 $x_0\in\RR$. 由 $u$ 或 $v$ 有紧支撑，可得在 $x_0$ 的邻域上存在 $M>0$ 使得
+$$
+u*v(x)=\int_{-M}^Mu(y)v(x-y)\dd y
+$$
+
+    已知 $f(x,y)\triangleq u(y)v(x-y)$ 关于 $x$ 可导且 $\displaystyle\pard{f}{x}=u(y)v'(x-y)$.
+
+    从而 $u*v(x)$ 也可导，且
+$$
+(u*v)'(x)=\int_{-M}^Mu(y)v'(x-y)\dd y=(u*v')(x)
+$$
+
+    由 $v\in C^{(m)}$ 可得
+$$
+(u*v)^{(k)}(x)=\int_{-M}^M u(y)v^{(k)}(x-y)\dd y=(u*v^{(k)})(x),\forall 0\le k\le m
+$$
+\end{proof}
+
+事实上，我们并不需要 $u$ 连续. 我们有如下的性质：
+
+\begin{property}
+    设 $u:\RR\to\RR$ 局部可积，$v\in C^{(m)}_0(\RR),0\le m\le\infty$.
+
+    则 $u*v\in C^{(m)}$ 且
+$$
+(u*v)^{(k)}=u*v^{(k)},\forall 0\le k\le m
+$$
+\end{property}
+\begin{proof}
+    任取 $x_0\in\RR$ 以及 $\delta>0$. 由 $v$ 有紧支撑知
+$$
+\exists M>0,\forall x\in[x_0-\delta,x_0+\delta],u*v(x)=\int_{-M}^M u(y)v(x-y)\dd y
+$$
+
+    令 $f(x,y)=u(y)v(x-y)$. 则 $\displaystyle\pard{f}{x}(x,y)=u(y)v'(x-y)$.
+
+    由 $v'$ 与 $v$ 有相同的支撑知
+$$
+u*v'(x)=\int_{-M}^M u(y)v'(x-y)\dd y
+$$
+
+    从而
+$$
+\begin{aligned}
+    &\abs{u*v(x)-u*v(x_0)-u*v'(x_0)(x-x_0)}\\
+    =&\abs{\int_{-M}^M u(y)(v(x-y)-v(x_0-y)-v'(x_0-y)(x-x_0))\dd y}\\
+    =&\abs{\int_M^M u(y)(v'(\xi-y)-v'(x_0-y))(x-x_0)\dd y}\qquad\xi\in[x,x_0]\\
+    \le&C\eta(\abs{x-x_0})\abs{x-x_0}2M
+\end{aligned}
+$$
+
+    其中 $C$ 为 $\abs{u}$ 在 $[-M,M]$ 上的上界，$\eta(\delta)$ 为 $v'$ 的连续模.
+
+    由 $v'$ 在 $[-M,M]$ 上连续知当 $\delta\to 0$ 时 $\eta(\delta)\to 0$.
+
+    由此可得 $u*v$ 在 $x_0$ 处可导且 $(u*v)'(x_0)=u*v'(x_0)$.
+
+    由 $x_0$ 的任意性知 $u*v\in C^{(1)}$ 且 $(u*v)'=u*v'$.
+
+    由归纳法得 $u*v\in C^{(m)}$ 且 $(u*v)^{(k)}=u*v^{(k)},\forall 0\le k\le m$.
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 若我们用 $D$ 表示 $\dfrac{\dd}{\dd x}$，则以上性质表明
+$$
+D^k(u*v)=u*D^kv
+$$
+
+        我们将其表述为求微分运算与求卷积运算可交换.
+
+        \item 注意到在上式中 $D^k$ 仅可作用于 $v$，因为我们仅对 $v$ 有光滑性的假设.
+        
+        \item 性质表明一个局部可积的函数与一个 $C_0^{(m)}$ 的函数做完卷积之后光滑性自动提升到 $C^{(m)}$. 这就是卷积的磨光性质.
+    \end{enumerate}
+\end{hint}
+
+\mysubsection{逼近单位与 Weierstrass 定理的另证}
+
+以下我们来解释如何使用卷积来逼近函数. 我们首先给出如下的重要概念：
+
+\begin{definition}
+    设 $\set{\Delta_\alpha|\alpha\in A}$ 是一族从 $\RR$ 到 $\RR$ 的函数. 设 $\mathcal{B}$ 是 $A$ 的一个基.
+
+    称 $\set{\Delta_\alpha|\alpha\in A}$ 关于 $\mathcal{B}$ 是一个逼近单位，若以下三条成立：
+
+    \begin{enumerate}
+        \item $\Delta_\alpha(x)\ge 0,\forall\alpha\in A,\forall x\in\RR$.
+        
+        \item $\displaystyle\int_\RR\Delta_\alpha(x)\dd x=1,\forall\alpha\in A$.
+        
+        \item 对任意 $0$ 的邻域 $U$ 有
+$$
+\lim_{\mathcal{B}}\int_U\Delta_\alpha(x)\dd x=1
+$$
+    \end{enumerate}
+\end{definition}
+
+\begin{hint}
+    基于前两个条件，我们可将第三个条件等价地替换成
+$$
+\lim_{\mathcal{B}}\int_{\RR\setminus U}\Delta_\alpha(x)\dd x=0
+$$
+\end{hint}
+
+\begin{example}
+    设 $\varphi:\RR\to\RR_+$ 有紧支撑且 $\displaystyle\int_\RR\varphi(x)\dd x=1$.
+
+    令 $\varphi_\alpha(x)\triangleq\dfrac{1}{\alpha}\varphi\left(\dfrac{x}{\alpha}\right)$.
+
+    则 $\set{\varphi_\alpha|\alpha>0}$ 关于 $\alpha\to 0$ 是逼近单位.
+\end{example}
+
+\begin{example}
+    $\Delta_n(x)=\begin{cases}
+        \dfrac{(1-x^2)^n}{\int_{-1}^1(1-x^2)^n\dd x} & \abs{x}\le 1\\
+        0 & \abs{x}>1
+    \end{cases}$
+
+    则 $\set{\Delta_n(x)}$ 关于 $n\to\infty$ 是逼近单位.
+\end{example}
+
+\begin{example}
+    $\Delta_n(x)=\begin{cases}
+        \dfrac{\cos^{2n}x}{\int_{-\frac{\pi}{2}}^\frac{\pi}{2}\cos^{2n}(x)\dd x} & \abs{x}\le\dfrac{\pi}{2}\\
+        0 & \abs{x}>\dfrac{\pi}{2}
+    \end{cases}$
+
+    则 $\set{\Delta_n(x)}$ 关于 $n\to\infty$ 是逼近单位.
+\end{example}
+
+\begin{example}
+    $\Delta_\alpha(x)=\begin{cases}
+        \frac{1}{2\alpha} & \abs{x}\le\alpha\\
+        0 & \abs{x}>\alpha
+    \end{cases}$
+
+    则 $\set{\Delta_\alpha|\alpha>0}$ 关于 $\alpha\to 0$ 是逼近单位.
+\end{example}
+
+\begin{hint}
+    以上两个例子中的 $\Delta_n(x)$ 均不光滑. 以下我们构造一个 $C_0^\infty$ 的例子.
+\end{hint}
+
+\begin{example}\label{appfac}
+    $G(x)=\begin{cases}
+        ae^{-\frac{1}{1-x^2}} & \abs{x}\le 1\\
+        0 & \abs{x}>1
+    \end{cases}$
+
+    其中 $a=1\Big/\displaystyle\int_{-1}^1e^{-\frac{1}{1-x^2}}\dd x$. 则 $G\in C_0^\infty(\RR)$.
+
+    \begin{center}
+        \begin{tikzpicture}[scale=2]
+            \draw[->] (-1.5,0)--(1.5,0) node [right] {$x$};
+            \draw[->] (0,-0.5)--(0,1.5) node [right] {$y$};
+            \node at (0,0) [below left] {$O$};
+            \draw[-] (-1,0.05)--(-1,-0.05) node [below] {$-1$};
+            \draw[-] (1,0.05)--(1,-0.05) node [below] {$1$};
+            \node[blue] at (0.8,0.8) {$G(x)$};
+
+            \draw[domain=-0.999:0.999,blue] plot (\x,{2.25228*exp(-1/(1-\x*\x))});
+            \draw[-,blue] (-1.5,0)--(-0.999,0);
+            \draw[-,blue] (0.999,0)--(1.5,0);
+        \end{tikzpicture}
+    \end{center}
+
+    令 $G_\alpha(x)=\dfrac{1}{\alpha}G\left(\dfrac{x}{\alpha}\right)$.
+
+    则 $\set{G_\alpha:\alpha>0}$ 关于 $\alpha\to 0$ 是逼近单位，且 $G_\alpha\in C_0^\infty,\forall\alpha>0$.
+\end{example}
+
+以下我们证明：对“好的” $f$ 有 $f*\Delta_\alpha\rightrightarrows f$.
+
+为此我们再给出一个定义：
+
+\begin{definition}
+    设 $G\subset\RR^n$ 为开集，$f:G\to\RR$ 连续.
+
+    对 $E\subset G$，称 $f$ 在 $E$ 上（相对于 $G$）一致连续，若
+$$
+\forall\eps>0,\exists\delta>0,\forall x\in E,\forall y\in G,\abs{x-y}<\delta\implies\abs{f(x)-f(y)}<\eps
+$$
+\end{definition}
+
+\begin{hint}
+    若 $E=G$，则该定义即为通常的 $f$ 在 $G$ 上一致连续.
+
+    但在 $E\subsetneqq G$ 时，该定义强于 $f$ 在 $E$ 上一致连续.
+\end{hint}
+
+\begin{property}
+    设 $E\subset\RR,f:\RR\to\RR$ 有界. 设 $\set{\Delta_\alpha|\alpha\in A}$ 关于基 $\mathcal{B}$ 是逼近单位.
+
+    若 $\forall\alpha\in A,f*\Delta_\alpha$ 存在，且 $f$ 在 $E$ 上（关于 $\RR$）一致连续，则在 $E$ 上
+$$
+f*\Delta_\alpha\xrightrightarrows[\mathcal{B}]{}f
+$$
+\end{property}
+\begin{proof}
+    任取 $\eps>0$. 由 $f$ 在 $E$ 上关于 $\RR$ 一致连续知
+$$
+\exists\delta>0,\forall x\in E,\forall y\in G,\abs{x-y}<\delta\implies\abs{f(x)-f(y)}<\eps
+$$
+
+    设 $\abs{f}$ 在 $\RR$ 上的上界为 $M$.
+
+    任取 $x\in E$ 有 $f(x)=\displaystyle\int_\RR f(x)\Delta_\alpha(x-y)\dd y$. 从而
+$$
+\begin{aligned}
+    &\abs{f(x)-f*\Delta_\alpha(x)}\\
+    =&\abs{\int_\RR(f(x)-f(y))\Delta_\alpha(x-y)\dd y}\\
+    \le&\int_{B(x,\delta)}\abs{f(x)-f(y)}\Delta_\alpha(x-y)\dd y+\int_{\RR\setminus B(x,\delta)}\abs{f(x)-f(y)}\Delta_\alpha(x-y)\dd y\\
+    \le&\eps\int_{B(x,\delta)}\Delta_\alpha(x-y)\dd y+2M\int_{\RR\setminus B(x,\delta)}\Delta_\alpha(x-y)\dd y\\
+    \le&\eps+2M\int_{\RR\setminus B(0,\delta)}\Delta_\alpha(y)\dd y
+\end{aligned}
+$$
+
+    由逼近条件的性质知
+$$
+\exists B\in\mathcal{B},\forall\alpha\in B,\int_{\RR\setminus B(0,\delta)}\Delta_\alpha(y)\dd y<\frac{\eps}{2M}
+$$
+
+    从而对 $\forall\alpha\in B$ 有
+$$
+\forall x\in E,\abs{f(x)-f*\Delta_\alpha(x)}<2\eps
+$$
+
+    即在 $E$ 上有 $f*\Delta_\alpha\xrightrightarrows[\mathcal{B}]{}f$.
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 该性质表明在 $f$ 很好，或者 $E$ 很好的时候，$f*\Delta_\alpha$ 可以在 $E$ 上一致逼近 $f$.
+        
+        \item 在 $E=\set{x_0}$ 为单点集时，该性质表明：若 $f$ 在 $x_0$ 处连续，则 $f*\Delta_\alpha(x_0)\to f(x_0)$.
+        
+        即在每个 $f$ 的连续点处，$f*\Delta(x_0)$ 会收敛到 $f(x_0)$.
+    \end{enumerate}
+\end{hint}
+
+\begin{property}
+    设 $f:\RR\to\RR$ 一致连续且有界.
+
+    则存在 $\varphi_n\in C^{\infty}(\RR)$ 使得 $\varphi_n\rightrightarrows f$.
+
+    进一步，若 $f\in C_0(\RR)$，则存在 $\varphi_n\in C_0^\infty$ 使得 $\varphi_n\rightrightarrows f$.
+\end{property}
+\begin{proof}
+    若 $f:\RR\to\RR$ 一致连续，利用之前例子 \ref{appfac} 中构造的逼近因子 $\set{\Delta_n\triangleq nG(nx)}$ 即可.
+
+    若 $f\in C_0(\RR)$，则 $f$ 一致连续且有界.
+
+    则只需证明 $\varphi_n\triangleq f*\Delta_n$ 有紧支撑. 直接由定义可得
+$$
+\mathrm{supp}(\varphi_n)=\mathrm{supp}(f*\Delta_n)\subset\mathrm{supp}(f)+\mathrm{supp}(\Delta_n)
+$$
+
+    从而 $\mathrm{supp}(\varphi_n)$ 紧.
+\end{proof}
+
+进一步，我们有
+
+\begin{inference}
+    若 $f\in C_0^{(m)}(\RR)$，则存在 $\varphi_n\in C_0^\infty(\RR)$ 使得
+$$
+\varphi_n^{(k)}\rightrightarrows f^{(k)},\forall 0\le k\le m
+$$
+\end{inference}
+\begin{proof}
+    若 $f\in C_0^{(m)}$，则 $f,f',\cdots,f^{(m)}\in C_0(\RR)$.
+
+    从而 $\varphi_n^{(k)}=(f*\Delta_n)^{(k)}=f^{(k)}*\Delta_n\rightrightarrows f^{(k)}$.
+\end{proof}
+
+作为一个应用，我们可以再次证明 Weierstrass 逼近定理.
+
+\begin{theorem}
+    多项式全体在 $C[a,b]$ 中稠密.
+\end{theorem}
+\begin{proof}
+    不妨设 $0<a<b<1$.
+
+    （这是因为我们总可以通过仿射变换 $L(x)=kx+l$ 将 $[a,b]$ 映成 $(0,1)$ 的子区间，而多项式在仿射变换下仍为多项式.）
+
+    任取 $f\in C[a,b]$. 将其延拓成 $\RR$ 上的连续函数如图
+
+    \begin{center}
+        \begin{tikzpicture}[xscale=4,yscale=2]
+            \draw[->] (-0.5,0)--(1.5,0) node [right] {$x$};
+            \draw[->] (0,-0.5)--(0,1.5) node [right] {$y$};
+            \node at (0,0) [below left] {$O$};
+            \draw[-] (1,0.1)--(1,-0.1) node [below] {$1$};
+
+            \draw[domain=0.25:0.75,blue] plot (\x,{(4*\x-1)*(4*\x-2)*(4*\x-3)+1});
+            \draw[-,dashed] (0.25,1)--(0.25,0) node [below] {$a$};
+            \draw[-,dashed] (0.75,1)--(0.75,0) node [below] {$b$};
+            \draw[-,blue] (-0.5,0)--(0,0);
+            \draw[-,blue] (0,0)--(0.25,1);
+            \draw[-,blue] (0.75,1)--(1,0);
+            \draw[-,blue] (1,0)--(1.5,0);
+            \draw[-,dashed] (0.5,0)--(0.5,1) node [above right] {$f(x)$};
+            \node at (0.5,0) [below] {$x$};
+        \end{tikzpicture}
+    \end{center}
+
+    取 $\Delta_n$ 为
+$$
+\Delta_n(x)=\begin{cases}
+    \dfrac{(1-x^2)^n}{\int_{-1}^1(1-x^2)^n\dd x} & \abs{x}\le 1\\
+    0 & \abs{x}>1
+\end{cases}
+$$
+
+    则在 $\RR$ 上有 $f*\Delta_n\rightrightarrows f$.
+
+    另一方面，若 $x\in[a,b]$，则
+$$
+\begin{aligned}
+    f*\Delta_n(x)&=\int_\RR f(y)\Delta_n(x-y)\dd y\\
+    &=\int_0^1f(y)\Delta_n(x-y)\dd y\\
+    &=\int_0^1f(y)c_n(1-(x-y)^2)^n\dd y\\
+    &=\int_0^1f(y)\sum_{j=0}^{2n}a_j(y)x^j\dd y\\
+    &=\sum_{j=0}^{2n}\left(\int_0^1 f(y)a_j(y)\dd y\right)x^j
+\end{aligned}
+$$
+
+    为多项式. 其中 $c_n$ 为系数，$a_n(y)$ 为关于 $y$ 的多项式.
+
+    记 $P_n\triangleq f*\Delta_n$ 为多项式，则在 $[a,b]$ 上有 $P_n\rightrightarrows f$.
+
+    即证多项式在 $C[a,b]$ 上稠密.
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 我们可以将 $[a,b]$ 换成任何一个紧集 $K\subset\RR$.
+        
+        \item 设 $G\subset\RR$ 为开集，$f\in C^{(m)}(G)$，则可以证明：存在多项式序列 $\set{P_n}$ 使得对任意紧集 $K\subset G$ 有
+$$
+P_n^{(k)}(x)\rightrightarrows f^{(k)}(x),0\le k\le m,x\in K
+$$
+
+        若进一步 $G$ 有界，且 $f\in C^{(m)}(\overline{G})$，则可以要求在 $\overline{G}$ 上 $P_n^{(k)}\rightrightarrows f^{(k)}$.
+
+        \item 利用类似的方法可证：三角多项式在 $C_p[0,2\pi]$ 中稠密.
+        
+        其中 $C_p[0,2\pi]=\set{f\in C[0,2\pi]|f(0)=f(2\pi)}$. 而三角多项式形如
+$$
+T_n(x)=\sum_{k=0}^n(a_k\cos kx+b_k\sin kx)
+$$
+    \end{enumerate}
+\end{hint}
+
+以上讨论的均为具有紧支撑的逼近单位. 接下来我们讨论两个非紧支撑的逼近单位，它们都有重要的应用.
+
+\begin{example}
+    $\Delta_y(x)=\dfrac{y}{\pi(x^2+y^2)},y>0$.
+\end{example}
+
+\begin{property}
+    \begin{enumerate}
+        \item $\set{\Delta_y|y>0}$ 关于 $y\to 0$ 为逼近单位.
+        
+        \item $\Delta_y$ 为调和函数. 更为确切的，$\nabla^2\Delta(x,y)=0$，其中 $\Delta(x,y)\triangleq\Delta_y(x)$.
+        
+        \item 设 $f:\RR\to\RR$ 有界连续，则 $F(x,y)\triangleq f*\Delta_y(x)$ 在上半平面调和，且 $\displaystyle\lim_{y\to 0}F(x,y)=f(x)$. 对 $x\in[a,b]$，该收敛为一致收敛.
+    \end{enumerate}
+\end{property}
