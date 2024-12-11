@@ -1,0 +1,274 @@
+一元含参积分的理论可以很方便地推广到重积分情形.
+
+以下罗列一些基本事实.
+
+\mysubsection{含参（正常）重积分}
+
+含参重积分的基本框架：
+
+设 $X\subset\RR^m$ 可测，$Y\subset\RR^n$. 设 $f:X\times Y\to\RR$ 满足
+$$
+\forall y\in Y,F(y)\triangleq\int_Xf(x,y)\dd x
+$$
+
+可积.
+
+\begin{property}
+    设 $X\subset\RR^m$ 为可测紧集，$Y\subset\RR^n$ 紧. 设 $f:X\times Y\to\RR$ 连续. 则
+$$
+F(y)\triangleq\int_Xf(x,y)\dd x
+$$
+
+    在 $Y$ 上连续.
+\end{property}
+
+\begin{property}
+    设 $X\subset\RR^m$ 可测，$Y\subset\RR^n$ 为开集. 设 $f:X\times Y\to\RR$ 连续，$\dfrac{\partial f}{\partial y}(x,y)$ 存在且连续. 则
+$$
+F(y)\triangleq\int_Xf(x,y)\dd x\in C^{(1)}(Y)
+$$
+
+    且
+$$
+\forall y\in Y,F'(y)=\int_X\pard{f}{y}(x,y)\dd x
+$$
+\end{property}
+
+\begin{property}
+    设 $X\subset\RR^m,Y\subset\RR^n$ 均为可测紧集. 设 $f:X\times Y\to\RR$ 连续. 则
+$$
+\int_Y\int_X f(x,y)\dd x\dd y=\int_X\int_Yf(x,y)\dd y\dd x
+$$
+\end{property}
+
+\mysubsection{含参广义积分}
+
+本部分与一元情形的理论平行. 我们不再重复它们，仅以两个例子来示例.
+
+\begin{example}
+    $F(\lambda)\triangleq\displaystyle\iint\limits_{\RR^2}e^{-\lambda(x^2+y^2)}\dd x\dd y$
+
+    其为含参广义二重积分，$\lambda$ 为参数. 易见 $F(\lambda)$ 的定义域为 $\set{\lambda>0}$.
+
+    对 $E\subset\set{\lambda>0}$，称 $F$ 在 $E$ 上一致收敛，若
+$$
+\forall\eps>0,\exists M>0,\forall\lambda\in E,\iint\limits_{x^2+y^2\ge M^2}e^{-\lambda(x^2+y^2)}\dd x\dd y<\eps
+$$
+
+    由极坐标变换易证：若 $\inf E>0$，则 $F$ 在 $E$ 上一致收敛.
+    
+    反之若 $0\in\overline{E}$，则 $F$ 在 $E$ 上非一致收敛.
+\end{example}
+
+\begin{example}
+    $F(y)\triangleq\displaystyle\int_{B(0,1)}\frac{\abs{x-y}}{(1-\abs{x})^\alpha}\dd x,x,y\in\RR^n$.
+
+    当 $\abs{x}\to 1$ 时 $f(x,y)\triangleq\dfrac{\abs{x-y}}{(1-\abs{x})^\alpha}\to\infty$. 所以上面的积分为广义积分.
+
+    由极坐标变换易证 $\forall y\in\RR^n,F(y)$ 收敛 $\iff\alpha<1$.
+
+    现固定 $\alpha<1$，则对 $\forall E\subset\RR^n$ 有界，$F$ 在 $E$ 上一致收敛.
+\end{example}
+
+\mysubsection{奇点随参数变化的广义积分}
+
+到目前位置，我们讨论的广义积分均有如下的特点：被积函数的奇点是固定的，不随参数而变化. 本节我们讨论奇点随参数变化的广义积分. 我们先来看一个典型的例子.
+
+\begin{example}
+    设 $X\subset\RR^3$ 可测，在 $X$ 上有电荷分布，其密度函数为 $\mu:X\to\RR$. 设 $\mu$ 在 $X$ 上有界且可积.
+
+    则由这些电荷在点 $y\in\RR^3$ 处产生的电势为（忽略常数）
+$$
+U(y)=\int_X\frac{\mu(x)\dd x}{\abs{x-y}}
+$$
+
+    容易观察到 $U$ 在 $\RR^3\setminus\overline{X}$ 上是 $C^{\infty}$ 光滑的.
+
+    但当 $y\in\overline{X}$ 时，$\dfrac{\mu(x)}{\abs{x-y}}\to\infty(x\to y)$，从而是一个广义积分，且奇点为 $y$.
+
+    从而当 $y$ 在 $X$ 中移动时，奇点也随之移动. 这是在我们之前的所有讨论中都没有出现过的. 以下我们来详细地讨论 $U$ 的定义域及其正则性.
+\end{example}
+
+\begin{property}
+    \begin{enumerate}
+        \item $U$ 的定义域为 $\RR^3$，且 $U\in C^{(1)}(\RR^3)$.
+        
+        \item $U$ 在 $\RR^3\setminus\overline{X}$ 上，$U$ 为调和函数.
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    已知 $U$ 在 $\RR^3\setminus\overline{X}$ 上可定义且 $C^\infty$ 光滑. 下证 $U$ 在 $\overline{X}$ 上可定义.
+
+    任取 $y\in\overline{X}$. 设 $M=\sup\set{\mu(x)|x\in X}$. 任取 $\eps>0$，则一方面有
+$$
+\int_{X\setminus B(y,\eps)}\frac{\abs{\mu(x)}\dd x}{\abs{x-y}}\le\frac{M}{\eps}\mu(X)
+$$
+
+    另一方面有
+$$
+\begin{aligned}
+    \int_{X\cap B(y,\eps)}\frac{\abs{\mu(x)}\dd x}{\abs{x-y}}&\le\int_{X\cap B(y,\eps)}\frac{M\dd x}{\abs{x-y}}\le\int_{B(y,\eps)}\frac{M\dd x}{\abs{x-y}}\\
+    &=\int_0^\eps\int_{S^2}\frac{M}{r}r^2\dd\sigma\dd r=4\pi\int_0^\eps Mr\dd r\\
+    &=2\pi M\eps^2
+\end{aligned}
+$$
+
+    综上，$\displaystyle\int_X\frac{\mu(x)\dd x}{\abs{x-y}}$ 在 $\overline{X}$ 上绝对收敛，从而 $U$ 的定义域为 $\RR^3$.
+
+    下证 $U$ 在 $y_0\in\overline{X}$ 处连续. 任取 $\eps>0$，设 $\abs{y-y_0}<\eps$. 则
+$$
+\begin{aligned}
+    U(y)-U(y_0)=&\int_X\mu(x)\left(\frac{1}{\abs{x-y}}-\frac{1}{\abs{x-y_0}}\right)\dd x\\
+    =&\int_{X\setminus B(y,2\eps)}\mu(x)\left(\frac{1}{\abs{x-y}}-\frac{1}{\abs{x-y_0}}\right)\dd x\\
+    &+\int_{X\cap B(y,2\eps)}\mu(x)\left(\frac{1}{\abs{x-y}}-\frac{1}{\abs{x-y_0}}\right)\dd x
+\end{aligned}
+$$
+
+    其中
+$$
+\begin{aligned}
+    &\abs{\int_{X\setminus B(y,2\eps)}\mu(x)\left(\frac{1}{\abs{x-y}}-\frac{1}{\abs{x-y_0}}\right)\dd x}\\
+    \le&\int_{X\setminus B(y,2\eps)}\frac{M\abs{\abs{x-y}-\abs{x-y_0}}}{\abs{x-y}\abs{x-y_0}}\dd x\\
+    \le&\int_{X\setminus B(y,2\eps)}\frac{M\abs{y-y_0}}{\eps^2}\dd x\\
+    \le&\frac{M\abs{y-y_0}}{\eps^2}\mu(X)
+\end{aligned}
+$$
+
+    而
+$$
+\begin{aligned}
+    &\int_{X\cap B(y,2\eps)}\mu(x)\left(\frac{1}{\abs{x-y}}-\frac{1}{\abs{x-y_0}}\right)\dd x\\
+    \le&\int_{X\cap B(y,2\eps)}M\left(\frac{1}{\abs{x-y}}+\frac{1}{\abs{x-y_0}}\right)\dd x\\
+    \le&2\pi M(2\eps)^2+2\pi M(3\eps)^2=26\pi M\eps^2
+\end{aligned}
+$$
+
+    综上有
+$$
+\abs{U(y)-U(y_0)}\le\frac{M\abs{y-y_0}}{\eps^2}\mu(X)+26\pi M\eps^2
+$$
+
+    进而
+$$
+\overline{\lim_{y\to y_0}}\abs{U(y)-U(y_0)}\le 26\pi M\eps^2
+$$
+
+    由 $\eps$ 的任意性即得 $\abs{U(y)-U(y_0)}\to 0$，即 $U$ 在 $y_0$ 处连续.
+
+    \begin{hint}
+        另证：设
+$$
+U_\eps(y)\triangleq\int_{X\setminus B(y,\eps)}\frac{\mu(x)\dd x}{\abs{x-y}}
+$$
+
+        已知 $U_\eps(x)\xrightrightarrows[\eps\to 0]{}U(y)$.
+
+        再证 $U_\eps(y)$ 连续即可.
+    \end{hint}
+
+    下证 $U\in C^{(1)}(\RR^3)$. 首先，若 $U$ 可微，形式上应有
+$$
+U(y)=\int_X\frac{\mu(x)\dd x}{\abs{x-y}}\implies\frac{\partial U}{\partial y_i}(y)\xlongequal{?}\int_X\frac{\mu(x)(x_i-y_i)\dd x}{\abs{x-y}^3},i=1,2,3
+$$
+
+    记 $g(x,y)\triangleq\dfrac{\mu(x)(x_i-y_i)}{\abs{x-y}^3}$. 则
+$$
+\abs{g(x,y)}\le\frac{\mu(x)\abs{x-y}}{\abs{x-y}^3}=\frac{M}{\abs{x-y}^2}
+$$
+
+    从而
+$$
+\int_{X\cap B(y,\eps)}\abs{g(x)}\dd x\le\int_{B(y,\eps)}\frac{M\dd x}{\abs{x-y}^2}=4\pi M\eps
+$$
+
+    进而同前可得 $V_i(x)\triangleq\displaystyle\int_X\frac{\mu(x)(x_i-y_i)}{\abs{x-y}^3}\dd x$ 在 $\RR^3$ 上可定义且连续.
+
+    下证 $\dfrac{\partial U}{\partial y_i}$ 存在且 $\dfrac{\partial U}{\partial y_i}=V_i$.
+
+    为此仅需证明：$\forall y\in\RR^3,\forall a\in\RR$ 有
+$$
+U(y+a e_i)-U(y)=\int_0^aV_i(y+te_i)\dd t
+$$
+
+    令 $\phi(y)\triangleq\dfrac{1}{\abs{x-y}}$. 则我们有
+$$
+\begin{aligned}
+    \int_0^aV_i(y+te_i)\dd t&=\int_0^a\int_X\mu(x)\pard{\phi}{y_i}(y+te_i)\dd x\dd t\\
+    &=\int_X\mu(x)\int_0^a\pard{\phi}{y_i}(y+te_i)\dd t\dd x\\
+    &=\int_X\mu(x)(\phi(y+te_i)-\phi(y))\dd x\\
+    &=U(y+ae_i)-U(y)
+\end{aligned}
+$$
+
+    这里之所以可以交换积分的次序是因为 $g(x,y+te_i)$ 在 $X\times[0,a]$ 上绝对可积，从而可以使用 Fubini 定理.
+
+    综上 $\dfrac{\partial U}{\partial y_i}=V_i\in C(\RR^3)$. 从而 $U\in C^{(1)}(\RR^3)$.
+
+    已知对 $\phi(y)=\dfrac{1}{\abs{y}},y\ne 0$ 有 $\phi$ 在 $\RR^3\setminus\set{0}$ 上光滑，且 $\Delta\phi=0$.
+
+    即 $\phi$ 在 $\RR^3\setminus\set{0}$ 上调和.
+
+    从而在区域 $\RR^3\setminus\overline{X}$ 上有
+$$
+\Delta U(y)=\int_X\mu(x)\Delta\phi(y-x)\dd x=0
+$$
+
+    即 $U$ 在 $\RR^3\setminus\overline{X}$ 上调和.
+\end{proof}
+
+最后，我们来看一个进阶的例子.
+
+\begin{example}
+    设 $S\subset\RR^3$ 为光滑二维曲面. 设 $I=[0,1]^2,\varphi:I\to S$ 为 $S$ 的参数化.
+
+    设在 $S$ 上有电荷分布，其密度函数为 $\nu:S\to\RR$ 有界连续.
+
+    则由这些电荷在点 $y\in\RR^3$ 处产生的电势为（忽略常数）
+$$
+U(y)=\int_S\frac{\nu(x)\dd\sigma}{\abs{x-y}}
+$$
+\end{example}
+
+\begin{property}
+    \begin{enumerate}
+        \item $U$ 的定义域为 $\RR^3$ 且 $U\in C(\RR^3)$.
+        
+        \item 在 $\RR^3\setminus S$ 上有 $\Delta U=0$.
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    由第一型曲面积分的定义，有
+$$
+U(y)\int_S\frac{\nu(x)\dd\sigma}{\abs{x-y}}=\int_I\frac{\nu(\varphi(t))G(t)\dd t}{\abs{\varphi(t)-y}}
+$$
+
+    其中 $G(t)=\displaystyle\sqrt{\det\varphi'(t)^T\varphi'(t)}$ 是 $I$ 上的连续函数.
+
+    从而 $g(t)\triangleq\nu(\varphi(t))G(t)$ 在 $I$ 上非负且有界连续.
+$$
+U(y)=\int_I\frac{g(t)\dd t}{\abs{\varphi(t)-y}}
+$$
+
+    若 $y\notin S$，则易见 $U$ 在 $\RR^3\setminus S$ 上 $C^\infty$ 光滑.
+
+    下设 $y\in S$. 则 $\exists t_0\in I,y=\varphi(t_0)$. 由有限增量定理有
+$$
+\exists\eps>0,\forall t\in B(t_0,\eps),\abs{\varphi(t)-y}=\abs{\varphi(t)-\varphi(t_0)}\ge\frac{\norm{\varphi'(t_0)}}{2}\abs{t-t_0}
+$$
+
+    从而
+$$
+\begin{aligned}
+    U(y)&=\int_{I\setminus B(t_0,\eps)}\frac{g(t)\dd t}{\abs{\varphi(t)-y}}+\int_{B(t_0,\eps)}\frac{g(t)\dd t}{\abs{\varphi(t)-y}}\\
+    &\le\int_{I\setminus B(t_0,\eps)}\frac{g(t)\dd t}{\abs{\varphi(t)-y}}+C'\int_{B(t_0,\eps)}\frac{\dd t}{\abs{t-t_0}}\\
+    &<+\infty
+\end{aligned}
+$$
+
+    即积分存在. 再重复上一例子的证明可知 $U$ 在 $\RR^3$ 上连续.
+
+    若 $y\in\RR^3\setminus S$，则
+$$
+\Delta U(y)=\int_S\nu(x)\Delta\frac{1}{\abs{x-y}}\dd x=0
+$$
+\end{proof}

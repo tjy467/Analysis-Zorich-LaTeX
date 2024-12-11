@@ -631,3 +631,52 @@ $$
         \item 设 $f:\RR\to\RR$ 有界连续，则 $F(x,y)\triangleq f*\Delta_y(x)$ 在上半平面调和，且 $\displaystyle\lim_{y\to 0}F(x,y)=f(x)$. 对 $x\in[a,b]$，该收敛为一致收敛.
     \end{enumerate}
 \end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item 易见 $\Delta_y\ge 0$ 且 $\displaystyle\int_\RR\Delta_y(x)\dd x=1$. 且有
+$$
+\forall\delta>0,\int_{-\delta}^\delta\Delta_y(x)\dd x=\frac{1}{\pi}\int_{-\frac{\delta}{y}}^{\frac{\delta}{y}}\frac{\dd z}{1+z^2}=\frac{\arctan z}{\pi}\Bigg|_{-\frac{\delta}{y}}^{\frac{\delta}{y}}\to 1\quad(y\to 0)
+$$
+        
+        从而 $\set{\Delta_y|y>0}$ 为逼近单位.
+
+        \item 直接计算可得.
+        
+        \item 由逼近单位性质知 $\forall[a,b]\subset\RR$ 在 $[a,b]$ 上有 $F(x,y)=f*\Delta_y\rightrightarrows f(x)$.
+        
+        由定义知
+$$
+f*\Delta_y(x)=\frac{1}{\pi}\int_\RR f(\xi)\frac{y}{(x-\xi)^2+y^2}\dd\xi
+$$
+
+        令 $\Phi(\xi,x,y)\triangleq f(\xi)\dfrac{y}{(x-\xi)^2+y^2}$.
+
+        容易验证
+$$
+f*\dfrac{\partial\Phi}{\partial x},f*\dfrac{\partial\Phi}{\partial y},f*\dfrac{\partial^2\Phi}{\partial x^2},f*\dfrac{\partial^2\Phi}{\partial y^2}
+$$
+        均可定义. 且对任意的紧集 $K\subset\mathbb{H}=\set{(x,y)|y>0}$ 均有卷积在 $K$ 上一致收敛.
+
+        从而由含参积分的可微性知 $f*\Delta_y(x)$ 在 $\mathbb{H}$ 上二阶连续可微.
+        
+        且有 $\nabla^2F(x,y)=f*\nabla^2\Delta_y(x)=0$.
+    \end{enumerate}
+\end{proof}
+
+故该卷积可以用于求解 $\mathbb{H}$ 上的 Dirichlet 问题.
+
+\begin{example}
+    $\Delta_t(x)=\dfrac{1}{2\sqrt{\pi t}}e^{-\frac{x^2}{4t}}$.
+\end{example}
+
+\begin{property}
+    \begin{enumerate}
+        \item $\set{\Delta_t|t>0}$ 关于 $t\to 0$ 为逼近单位.
+        
+        \item $\Delta_t(x)$ 满足 $\left(\dfrac{\partial}{\partial t}-\dfrac{\partial^2}{\partial x^2}\right)\Delta_t(x)=0$.
+        
+        \item 设 $f:\RR\to\RR$ 有界连续，则 $u(t,x)\triangleq f*\Delta_t(x)$ 满足 $\left(\dfrac{\partial}{\partial t}-\dfrac{\partial^2}{\partial x^2}\right)u(t,x)=0$，且 $\displaystyle\lim_{t\to 0}u(t,x)=f(x)$.
+    \end{enumerate}
+\end{property}
+
+故该卷积可以用于求解热传导方程，其中的 $\Delta_t(x)$ 称为热核.
