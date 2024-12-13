@@ -1,0 +1,357 @@
+\mysubsection{内积空间回顾}
+
+\mysubsubsection{定义与例子}
+
+\begin{definition}
+    设 $V$ 是一个复线性空间. 若 $\inner{\,\cdot\,,\,\cdot\,}:V\times V\to\mathbb{C}$ 满足
+
+    \begin{enumerate}
+        \item 共轭对称：$\inner{y,x}=\overline{\inner{x,y}}$
+        
+        \item 共轭双线性：$\inner{\lambda_1x_1+\lambda_2x_2,y}=\lambda_1\inner{x_1,y}+\lambda_2\inner{x_2,y}$
+        
+        \item 正定：$\inner{x,x}\ge 0$ 且 $\inner{x,x}=0\iff x=0$
+    \end{enumerate}
+
+    则称 $\inner{\,\cdot\,,\,\cdot\,}$ 是 $V$ 上的一个内积，称 $(V,\inner{\,\cdot\,,\,\cdot\,})$ 是一个内积空间.
+
+    定义 $\norm{x}\triangleq\sqrt{\inner{x,x}}$.
+\end{definition}
+
+\begin{property}
+    $\norm{\,\cdot\,}$ 是 $V$ 上的范数，称为由内积 $\inner{\,\cdot\,,\,\cdot\,}$ 诱导的范数.
+
+    在内积空间中，我们总取这样的范数.
+\end{property}
+
+\begin{definition}
+    称 $(V,\inner{\,\cdot\,,\,\cdot\,})$ 是 Hilbert 空间，若其作为赋范线性空间完备（Banach 空间）.
+\end{definition}
+
+\begin{example}
+    在 $\mathbb{C}^n$ 中定义
+$$
+\inner{x,y}\triangleq\sum_{j=1}^nx_j\overline{y_j}=x^T\overline{y}
+$$
+
+    则 $\mathbb{C}^n$ 成为一个 Hilbert 空间.
+\end{example}
+
+\begin{example}
+    定义集合
+$$
+l^2(\mathbb{Z})\triangleq\Set{x=(x_n)|\sum_{n\in\mathbb{Z}}\abs{x_n}^2<+\infty}
+$$
+
+    其在通常的加法和数乘下成为线性空间.
+
+    定义 $\inner{x,y}\triangleq\displaystyle\sum_{n\in\mathbb{Z}}x_n\overline{y_n}$.
+
+    则可以证明 $(l^2(\mathbb{Z}),\inner{\,\cdot\,,\,\cdot\,})$ 是一个 Hilbert 空间.
+\end{example}
+
+\begin{hint}
+    \begin{enumerate}
+        \item $l^2(\mathbb{Z})$ 是 $\mathbb{C}^n$ 的无穷维推广.
+        
+        \item 所有可分的无穷维 Hilbert 空间均与 $l^2(\mathbb{Z})$ 同构.
+    \end{enumerate}
+\end{hint}
+
+\begin{example}
+    $R_2[a,b]$
+
+    我们用 $R_2[a,b]$ 表示所有在 $[a,b]$ 上局部可积且其平方 Riemann 可积的函数全体. 即
+$$
+f\in R_2[a,b]\iff f\text{ 局部可积且 }\int_a^b\abs{f(x)}^2\dd x<+\infty
+$$
+
+    \begin{hint}
+        $f\in R_2[a,b]\implies f$ 在 $[a,b]$ 上广义可积.
+    \end{hint}
+    \begin{proof}
+        由 Cauchy-Schwartz 不等式
+$$
+\begin{aligned}
+    \int_a^b\abs{f}\cdot 1\dd x&\le\left(\int_a^b\abs{f}^2\dd x\right)^\frac{1}{2}\left(\int_a^b1\dd x\right)^\frac{1}{2}\\
+    &=\sqrt{b-a}\left(\int_a^b1\dd x\right)^\frac{1}{2}
+\end{aligned}
+$$
+
+        从而 $\abs{f}$ 可积 $\implies f$ 广义可积.
+    \end{proof}
+
+    在其上定义
+$$
+\inner{f,g}\triangleq\int_a^bf\cdot\overline{g}\dd x
+$$
+
+    则可以验证：除了正定性之外其它所有内积的性质均成立. 且
+$$
+\norm{f}=0\iff f=0\text{ 几乎处处成立}
+$$
+
+    若我们在 $R_2[a,b]$ 上引入等价关系
+$$
+f\sim g\iff f-g=0\text{ 几乎处处成立}
+$$
+
+    则 $\widetilde{R}_2[a,b]=R_2[a,b]/_\sim$ 在内积 $\inner{\widetilde{f},\widetilde{g}}\triangleq\inner{f,g},f\in\widetilde{f},g\in\widetilde{g}$ 下成为一个内积空间.
+    
+    以后我们仍简记 $\widetilde{R}_2[a,b]$ 为 $R_2[a,b]$. 但需要记住，我们实际上对付的是 $\widetilde{R}_2[a,b]$.
+\end{example}
+
+\begin{property}[Cauchy-Schwartz 不等式]
+    若 $V$ 为内积空间，则
+$$
+\abs{\inner{x,y}}\le\norm{x}\norm{y}
+$$
+\end{property}
+
+\mysubsubsection{正交性及其相关性质}
+
+\begin{definition}
+    设 $V$ 是一个内积空间. 称 $x,y\in V$ 正交（垂直），若 $\inner{x,y}=0$，记为 $x\perp y$.
+\end{definition}
+
+\begin{definition}    
+    \begin{enumerate}
+        \item 称 $\set{x_k|k\in K}\subset V$ 是一个正交组，若 $\begin{cases}
+            x_k\ne 0,\forall k\in K\\
+            x_k\perp x_l,\forall k\ne l
+        \end{cases}$
+
+        \item 称 $\set{e_i|i\in I}\subset V$ 是一个标准正交组，若 $\set{e_i|i\in I}$ 是一个正交组，且 $\norm{e_i}=1$.
+    \end{enumerate}
+\end{definition}
+
+我们有勾股定理的如下抽象版本：
+
+\begin{property}
+    若 $\set{x_1,\cdots,x_k}\subset V$ 是正交组，则
+$$
+\norm{x_1+\cdots+x_k}^2=\sum_{j=1}^k\norm{x_j}^2
+$$
+\end{property}
+
+\begin{property}
+    若 $\set{e_k|k\in K}\subset V$ 是正交组，则 $\set{e_k|k\in K}$ 线性无关（即这个组中的任意有限个向量线性无关）.
+\end{property}
+
+\begin{example}
+    在 $l^2(\mathbb{Z})$ 中，令 $e_n=(0,\cdots,0,1,0,\cdots)$，则 $\set{e_n|n\in\mathbb{Z}}$ 是 $l^2(\mathbb{Z})$ 中的一个标准正交组.
+\end{example}
+
+\begin{example}
+    $\set{e^{inx}|n\in\mathbb{Z}}$ 是 $R_2[-\pi,\pi]$ 中的正交组. 事实上
+$$
+\inner{e^{inx},e^{imx}}=\int_{-\pi}^{\pi}e^{inx}\overline{e^{imx}}\dd x=\begin{cases}
+    2\pi & n=m\\
+    0 & n\ne m
+\end{cases}
+$$
+
+    从而 $\displaystyle\Set{\frac{1}{\sqrt{2\pi}}e^{inx}|n\in\mathbb{Z}}$ 是 $R_2[-\pi,\pi]$ 中的标准正交组.
+\end{example}
+
+\begin{example}
+    $\set{1}\cup\set{\cos nx,\sin nx|n\ge 1}$ 是 $R_2[-\pi,\pi]$ 中的一个正交组. 事实上
+$$
+\begin{aligned}
+    &\int_{-\pi}^\pi\sin nx\sin mx\dd x=\begin{cases}
+        \pi & n=m\\
+        0 & n\ne m
+    \end{cases}\\
+    &\int_{-\pi}^\pi\cos nx\cos mx\dd x=\begin{cases}
+        2\pi & n=m=0\\
+        \pi & n=m\ge 1\\
+        0 & n\ne m
+    \end{cases}\\
+    &\int_{-\pi}^{\pi}\sin{nx}\cos{mx}\dd x=0\quad n\ge 1,m\ge 0
+\end{aligned}
+$$
+
+    由此知 $\displaystyle\Set{\frac{1}{\sqrt{2\pi}}}\cup\Set{\frac{1}{\sqrt{\pi}}\cos nx,\frac{1}{\sqrt{\pi}}\sin nx|n\ge 1}$ 是 $R_2[-\pi,\pi]$ 中的标准正交组.
+\end{example}
+
+\begin{hint}
+    由 Euler 公式
+$$
+\cos nx=\frac{e^{inx}+e^{-inx}}{2},\sin nx=\frac{e^{inx}-e^{-inx}}{2i}
+$$
+
+    从而上面的两个例子可以互相转换. 事实上
+$$
+\left(\frac{1}{\sqrt{\pi}}\cos nx,\frac{1}{\sqrt{\pi}}\sin nx\right)=\left(\frac{1}{\sqrt{2\pi}}e^{inx},\frac{1}{\sqrt{2\pi}}e^{-inx}\right)\begin{pmatrix}
+    \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2}i\\
+    \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2}i\\
+\end{pmatrix}
+$$
+
+    其中的变换矩阵为酉矩阵.
+\end{hint}
+
+\begin{example}
+    设 $q:[a,b]\to\RR$ 连续. 令
+$$
+V=\set{u\in C^{(2)}[a,b]|u(a)=u(b)=0}
+$$
+
+    定义 $L:V\to C[a,b]$ 为 $Lu=-\ddot{u}+qu$.
+\end{example}
+
+\begin{property}
+    \begin{enumerate}
+        \item $L$ 为对称算子，即 $\inner{Lu,v}=\inner{u,Lv}$.
+        
+        \item 若 $u\ne 0$ 满足 $Lu=\lambda u$，则 $\lambda\in\RR$. 从而 $u$ 也可以取成实函数.
+        
+        \item 若 $Lu=\lambda u,Lv=\mu v,\lambda\ne\mu$，则 $\inner{u,v}=0$，即 $u\perp v$.
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item 
+$$
+\begin{aligned}
+    \inner{Lu,v}&=\int_a^b(-\ddot{u}+qu)\overline{v}\dd x\\
+    &=\int_a^bqu\overline{v}\dd x-\int_a^b\overline{v}\dd\dot{u}\\
+    &=\int_a^bqu\overline{v}\dd x+\int_a^b\dot{u}\overline{\dot{v}}\dd x
+\end{aligned}
+$$
+
+        类似地计算得 $\inner{u,Lv}=\displaystyle\int_a^bqu\overline{v}\dd x+\int_a^b\dot{u}\overline{\dot{v}}\dd x$.
+
+        故 $\inner{Lu,v}=\inner{u,Lv}$.
+
+        \item 若 $Lu=\lambda u,u\ne 0$，则
+$$
+\lambda\inner{u,u}=\inner{Lu,u}=\inner{u,Lu}=\overline{\lambda}\inner{u,u}
+$$
+
+        故 $\lambda=\overline{\lambda}\implies\lambda\in\RR$.
+
+        \item 若 $Lu=\lambda u,Lv=\mu v,\lambda\ne\mu$，则
+$$
+\lambda\inner{u,v}=\inner{Lu,v}=\inner{u,Lv}=\mu\inner{u,v}
+$$
+
+        故 $(\lambda-\mu)\inner{u,v}=0\implies\inner{u,v}=0$.
+    \end{enumerate}
+\end{proof}
+
+作为特例，取 $q\equiv 0,[a,b]=[0,\pi]$.
+
+则 $L\sin nx=n^2\sin nx$.
+
+故 $\set{\sin nx|n\ge 1}$ 在 $R_2[0,\pi]$ 中为正交组.
+
+\mysubsubsection{Gram-Schmidt 正交化}
+
+以上，我们举了一些常见的正交组的例子. 但事实上，从任何一个线性无关组，我们均可以使用 Gram-Schmidt 正交化程序得到一个正交组（或标准正交组）.
+
+例如对 $\set{u_1,\cdots,u_n,\cdots}\subset V$ 是一个线性无关组. Gram-Schmidt 正交化过程如下：
+
+令 $v_1=u_1$.
+
+设 $v_2=u_2-\lambda_1^{(2)}u_1$. 由 $v_2\perp u_1$ 解得 $\lambda_1^{(2)}=\dfrac{\inner{u_2,v_1}}{\norm{v_1}^2}$.
+
+设 $v_3=u_3-\lambda_1^{(3)}v_1-\lambda_2^{(3)}v_2$. 由 $v_3\perp v_1,v_3\perp v_2$ 解得 $\lambda_1^{(3)}=\dfrac{\inner{u_3,v_1}}{\norm{v_1}^2},\lambda_2^{(3)}=\dfrac{\inner{u_3,v_2}}{\norm{v_2}^2}$.
+
+以此类推. 一般的，$v_n=u_n-\displaystyle\sum_{j=1}^{n-1}\frac{\inner{u_n,v_j}}{\norm{v_j}^2}v_j$.
+
+由此可得正交组 $\set{v_n|n\ge 1}$.
+
+令 $e_n=\dfrac{v_n}{\norm{v_n}}$，即得标准正交组 $\set{e_n|n\ge 1}$.
+
+作为一个示例，考虑 $R_2[-1,1]$，我们将 $\set{1,x,x^2,\cdots}$ 做 Gram-Schmidt 正交化，得：
+$$
+\varphi_0(x)=1,\quad\varphi_1(x)=x,\quad\varphi_2(x)=x^2-\frac{1}{3},\quad\varphi_3(x)=x^3-\frac{3}{5}x
+$$
+
+对于一般的 $n,\varphi_n$ 可由如下的 Legendre 多项式给出
+$$
+\varphi_n(x)=c_n\frac{\dd^n(x^2-1)^n}{\dd x^n}
+$$
+
+这里 $c_n$ 使得 $\varphi_n(x)$ 的首项系数为 $1$.
+
+\mysubsection{抽象 Fourier 系数与 Fourier 级数}
+
+在 $\RR^n$ 中任取 $n$ 个线性无关的向量 $\set{f_1,\cdots,f_n}$，它们构成 $\RR^n$ 的一组基. 从而对 $\forall x\in\RR^n$，存在唯一的 $x_1,\cdots,x_n\in\RR$ 使得 $x=x_1f_1+\cdots+x_nf_n$.
+
+为了求解 $x_1,\cdots,x_n$，我们解方程 $(f_1,\cdots,f_n)\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}=x$.
+
+若进一步设 $\set{e_1,\cdots,e_n}$ 是一个标准正交组，则其构成一个基.
+
+我们称其为标准正交基. 此时 $x=x_1e_1+\cdots+x_ne_n$.
+
+为了求解 $x_i$，仅需考虑 $\inner{x,e_i}=\inner{x_1e_1+\cdots+x_ne_n,e_i}=x_i$.
+
+我们希望将这些想法推广到无穷维欧式空间（内积空间）.
+
+我们也希望定义基以及标准正交基的概念，使得每个 $x$ 在一个标准正交基下可以展开成 $x=\sum\limits_nx_ne_n$ 的形式，且 $x_n$ 由 $\inner{x,e_n}$ 给出.
+
+为了得到这些，我们首先需要一些分析的工具来对付无穷求和.
+
+\mysubsubsection{一些分析基本形式}
+
+\begin{property}
+    设 $(V,\inner{\,\cdot\,,\,\cdot\,})$ 是一个内积空间，则
+
+    \begin{enumerate}
+        \item $\inner{\,\cdot\,,\,\cdot\,}$ 在 $V\times V$ 上连续.
+        
+        \item 设 $\sum\limits_{n=1}^\infty x_n$ 在 $V$ 中收敛，则 $\forall y\in V$ 有
+$$
+\inner{\sum_{n=1}^\infty x_n,y}=\sum_{n=1}^\infty\inner{x_n,y}
+$$
+
+        \item 设 $\set{e_n|n\ge 1}$ 是一个标准正交组，且 $\sum\limits_{n=1}^\infty x_ne_n$ 与 $\sum\limits_{n=1}^\infty y_ne_n$ 均收敛，则
+$$
+\inner{\sum_{n=1}^\infty x_ne_n,\sum_{n=1}^\infty y_ne_n}=\sum_{n=1}^\infty x_n\overline{y_n}
+$$
+
+        \item 设 $\set{x_n|n\ge 1}$ 为正交组且 $\sum\limits_{n=1}^\infty x_n$ 收敛，则
+$$
+\norm{\sum_{n=1}^\infty x_n}^2=\sum_{n=1}^\infty\norm{x_n}^2
+$$
+
+        \item 设 $\set{e_n|n\ge 1}$ 为标准正交组且 $x=\sum\limits_{n=1}^\infty x_ne_n$，则
+$$
+\norm{x}^2=\sum_{n=1}^\infty\abs{x_n}^2
+$$
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item 由 Cauchy-Schwartz 不等式有
+$$
+\abs{\inner{x,y}-\inner{x_0,y_0}}\le\norm{x}\norm{y-y_0}+\norm{x-x_0}\norm{y_0}
+$$
+
+        从而 $\inner{\,\cdot\,,\,\cdot\,}$ 在 $V\times V$ 上连续.
+
+        \item 记 $s_n=\sum\limits_{j=1}^nx_j,s=\sum\limits_{j=1}^\infty x_j$.
+        
+        则 $s_n\to s$. 从而
+$$
+\inner{s,y}=\lim_{n\to\infty}\inner{s_n,y}=\lim_{n\to\infty}\sum_{j=1}^n\inner{x_j,y}=\sum_{j=1}^\infty\inner{x_j,y}
+$$
+
+        \item 由上一条性质得
+$$
+\inner{\sum_{n=1}^\infty x_ne_n,\sum_{n=1}^\infty y_ne_n}=\sum_{n=1}^\infty\inner{x_ne_n,\sum_{n=1}^\infty y_ne_n}=\sum_{n=1}^\infty\sum_{m=1}^\infty\inner{x_ne_n,y_me_m}=\sum_{n=1}^\infty x_n\overline{y_n}
+$$
+        
+        \item 由上一条性质得
+$$
+\norm{\sum_{n=1}^\infty x_n}^2=\inner{\sum_{n=1}^\infty x_n,\sum_{n=1}^\infty x_n}=\sum_{n=1}^\infty\norm{x_n}^2
+$$
+
+        \item 令 $y_n=x_ne_n$，由上一条性质得
+$$
+\norm{x}^2=\sum_{n=1}^\infty\norm{y_n}^2=\sum_{n=1}^\infty\abs{x_n}^2
+$$
+    \end{enumerate}
+\end{proof}

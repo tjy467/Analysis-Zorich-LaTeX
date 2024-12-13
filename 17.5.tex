@@ -272,3 +272,29 @@ $$
 \Delta U(y)=\int_S\nu(x)\Delta\frac{1}{\abs{x-y}}\dd x=0
 $$
 \end{proof}
+
+\begin{hint}
+    与一维卷积的定义完全相同，对 $f,g:\RR^n\to\RR$ 可以定义它们的卷积为
+$$
+f*g(x)=\int_{\RR^n}f(y)g(x-y)\dd y
+$$
+
+    则一维理论可以平行地推广到高维. 在这个语言下
+$$
+U(y)=\int_X\frac{\mu(x)}{\abs{x-y}}\dd x=\int_{\RR^n}\psi(x)\phi(x-y)\dd x
+$$
+
+    其中 $\psi(x)=\begin{cases}
+        \mu(x) & x\in X\\
+        0 & x\notin X
+    \end{cases},\phi(x)=\dfrac{1}{\abs{x}}$.
+
+    从而 $U=\psi*\phi$.
+
+    而在第二个例子中
+$$
+U(y)=\int_S\frac{\nu(x)\dd\sigma}{\abs{x-y}}=\mu*\phi(y)
+$$
+
+    其中 $\mu$ 是一个测度.
+\end{hint}
