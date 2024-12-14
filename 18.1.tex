@@ -139,7 +139,7 @@ $$
 \end{property}
 
 \begin{example}
-    在 $l^2(\mathbb{Z})$ 中，令 $e_n=(0,\cdots,0,1,0,\cdots)$，则 $\set{e_n|n\in\mathbb{Z}}$ 是 $l^2(\mathbb{Z})$ 中的一个标准正交组.
+    在 $l^2(\mathbb{Z})$ 中，令 $e_n=(0,\cdots,0,1,0,\cdots)$，其中第 $n$ 个位置为 $1$，则 $\set{e_n|n\in\mathbb{Z}}$ 是 $l^2(\mathbb{Z})$ 中的一个标准正交组.
 \end{example}
 
 \begin{example}
@@ -294,7 +294,7 @@ $$
 
 为了得到这些，我们首先需要一些分析的工具来对付无穷求和.
 
-\mysubsubsection{一些分析基本形式}
+\mysubsubsection{一些分析基本性质}
 
 \begin{property}
     设 $(V,\inner{\,\cdot\,,\,\cdot\,})$ 是一个内积空间，则
@@ -355,3 +355,352 @@ $$
 $$
     \end{enumerate}
 \end{proof}
+
+\mysubsubsection{Fourier 系数与 Fourier 级数的定义与例子}
+
+设 $\set{f_1,\cdots,f_k}\subset\RR^n$ 是一个正交组. 设 $x\in\RR^n$，我们来计算 $x$ 在 $P=\mathrm{span}\set{f_1,\cdots,f_k}$ 上的正交投影.
+
+设该投影为 $\pi_Px=\sum\limits_{j=1}^ka_jf_j$. 则应有 $x-\pi_Px\perp P$.
+
+特别的，$\forall j,\inner{x-\pi_Px,f_j}=0\implies a_j=\dfrac{\inner{x,f_j}}{\norm{f_j}^2}$. 故
+$$
+\pi_Px=\sum_{j=1}^k\frac{\inner{x,f_j}}{\norm{f_j}^2}f_j
+$$
+
+我们称 $a_j=\dfrac{\inner{x,f_j}}{\norm{f_j}^2}$ 为 $x$ 关于 $\set{f_l}$ 的第 $j$ 个 Fourier 系数.
+
+称 $\pi_Px$ 是 $x$ 关于 $\set{f_1,\cdots,f_k}$ 的 Fourier 级数.
+
+以下我们将这个想法推广到无穷维情形.
+
+\begin{hint}
+    若 $\set{e_1,\cdots,e_n}$ 是一个标准正交组，则 Fourier 系数与 Fourier 级数均有以下更简单的表达式
+$$
+a_i=\inner{x,e_i},\qquad\pi_px=\sum_{j=1}^k\inner{x,e_j}e_j
+$$
+\end{hint}
+
+\begin{definition}
+    设 $V$ 是一个内积空间. 设 $\set{l_j|j\ge 1}$ 是一个正交组. 对 $\forall x\in V$，称
+$$
+x_j\triangleq\frac{\inner{x,l_j}}{\norm{l_j}^2}
+$$
+
+    是 $x$ 关于 $\set{l_j}$ 的第 $j$ 个 Fourier 系数.
+
+    而称形式级数
+$$
+\sum_{j=1}^\infty\frac{\inner{x,l_j}}{\norm{l_j}^2}l_j
+$$
+
+    是 $x$ 关于 $\set{l_j}$ 的 Fourier 级数，记为 $x\sim\sum\limits_{j=1}^\infty x_jl_j$.
+\end{definition}
+
+\begin{hint}
+    在 $\set{e_i|i\ge 1}$ 是一个标准正交组时，$x_i=\inner{x,e_i}$.
+
+    而 $x$ 关于 $\set{e_i}$ 的 Fourier 级数形如 $\sum\limits_{j=1}^\infty\inner{x,e_j}e_j$. 记为 $x\sim\sum\limits_{j=1}^\infty\inner{x,e_j}e_j$.
+\end{hint}
+
+\begin{example}
+    已知 $\set{e^{inx}|n\in\mathbb{Z}}$ 是 $R_2[-\pi,\pi]$ 中的正交组.
+
+    任给 $f\in R_2[-\pi,\pi]$，则 $f$ 的第 $n$ 个 Fourier 系数 $c_n(f)$ 为
+$$
+c_n(f)=\frac{\inner{f,e^{inx}}}{\norm{e^{inx}}^2}=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\dd x
+$$
+
+    $f$ 关于该正交组的 Fourier 级数为
+$$
+f\sim\sum_{n\in\mathbb{Z}}c_n(f)e^{inx}
+$$
+\end{example}
+
+\begin{example}
+    已知 $\set{1,\cos nx,\sin nx|n\ge 1}$ 是 $R_2[-\pi,\pi]$ 中的正交组.
+
+    任取 $f\in R_2[-\pi,\pi]$，则 $f$ 关于 $\sin nx$ 的 Fourier 系数为
+$$
+b_n(f)=\frac{\inner{f,\sin nx}}{\norm{\sin nx}^2}=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\sin nx\dd x\quad(n\ge 1)
+$$
+
+    $f$ 关于 $\cos nx$ 的 Fourier 系数为
+$$
+\begin{aligned}
+    &a_n(f)=\frac{\inner{f,\cos nx}}{\norm{\cos nx}^2}=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos nx\dd x\quad(n\ge 1)\\
+    &\hat{a}_0(f)=\frac{\inner{f,1}}{\norm{1}^2}=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)\dd x
+\end{aligned}
+$$
+
+    为了使表达式的形式统一，我们仍定义
+$$
+a_0(f)=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\dd x=2\hat{a}_0(f)
+$$
+
+    从而 $f$ 关于该正交组的 Fourier 级数为
+$$
+\begin{aligned}
+    f\sim&\hat{a}_0(f)+\sum_{n=1}^\infty a_n(f)\cos nx+b_n(f)\sin nx\\
+    =&\frac{a_0(f)}{2}+\sum_{n=1}^\infty a_n(f)\cos nx+b_n(f)\sin nx
+\end{aligned}
+$$
+\end{example}
+
+\begin{example}
+    令 $f(x)=x$. 则 $a_n=0$.
+$$
+b_n(f)=\frac{1}{\pi}\int_{-\pi}^{\pi}x\sin nx\dd x=(-1)^{n+1}\frac{2}{n}
+$$
+
+    故
+$$
+x\sim\sum_{k=1}^\infty (-1)^{k+1}\frac{2}{k}\sin kx
+$$
+\end{example}
+
+\mysubsubsection{几何意义与 Bessel 不等式}
+
+现在我们回到之前提到的几何意义上来.
+
+\begin{property}
+    设 $V$ 为内积空间. 设 $\set{f_1,\cdots,f_n}$ 为正交组.
+
+    则对 $\forall x\in V$ 有 $x-\pi_Px\perp P$. 其中
+$$
+\pi_Px\triangleq\sum_{j=1}^k\frac{\inner{x,f_j}}{\norm{f_j}^2}f_j,\qquad P=\mathrm{span}\set{f_1,\cdots,f_k}
+$$
+
+    即 $\pi_Px$ 是 $x$ 朝 $k$ 维子空间 $P$ 的正交投影.
+\end{property}
+\begin{property}
+    直接计算知 $\inner{x-\pi_Px,f_j}=0,\forall 1\le j\le k$.
+
+    从而 $x-\pi_Px\perp f_j,\forall 1\le j\le k\implies x-\pi_Px\perp P$.
+\end{property}
+
+\begin{hint}
+    若 $\set{e_1,\cdots,e_k}$ 为标准正交组，则
+$$
+\pi_Px=\sum_{j=1}^k\inner{x,e_j}e_j
+$$
+\end{hint}
+
+作为推论，我们得到下面的 Bessel 不等式：
+
+\begin{property}[Bessel 不等式]
+    设 $V$ 为无穷维内积空间. 设 $\set{f_n|n\ge 1}$ 为正交组，则有
+$$
+\sum_{j=1}^\infty\abs{\frac{\inner{x,f_j}}{\norm{f_j}^2}}^2\norm{f_j}^2=\sum_{j=1}^\infty\frac{\inner{x,f_j}^2}{\norm{f_j}^2}\le\norm{x}^2
+$$
+
+    若 $\set{e_n|n\ge 1}$ 为标准正交组，则有
+$$
+\sum_{j=1}^\infty\abs{\inner{x,e_j}}^2\le\norm{x}^2
+$$
+\end{property}
+\begin{proof}
+    对 $\forall n\in\mathbb{N}$ 令 $\pi_nx\triangleq\displaystyle\sum_{j=1}^n\frac{\inner{x,f_j}}{\norm{f_j}^2}f_j$. 则 $x-\pi_nx\perp\pi_nx$.
+
+    从而由勾股定理有
+$$
+\norm{x}^2=\norm{x-\pi_nx}^2+\norm{\pi_nx}^2\ge\norm{\pi_nx}^2
+$$
+
+    故 $\lim\limits_{n\to\infty}\norm{\pi_nx}^2\le\norm{x}^2$. 即 $\displaystyle\sum_{j=1}^\infty\abs{\frac{\inner{x,f_j}}{\norm{f_j}^2}}^2\norm{f_j}^2\le\norm{x}^2$.
+
+    标准正交组的情形是正交组情形的直接推论.
+\end{proof}
+
+作为推论，我们有
+
+\begin{inference}
+    设 $V$ 为 Hilbert 空间. 设 $\set{f_n|n\ge 1}$ 是一个正交组. 令 $P=\overline{\mathrm{span}\set{f_n|n\ge 1}}$.
+
+    则对 $\forall x\in V$ 有 $x_P\triangleq\displaystyle\sum_{n=1}^\infty\frac{\inner{x,f_n}}{\norm{f_n}^2}f_n$ 收敛.
+
+    且 $x-x_p\perp P$. 即 $x_P$ 是 $x$ 朝平面 $P$ 的正交投影. 特别的
+$$
+\norm{x-x_P}=\min_{y\in P}\norm{x-y}
+$$
+
+    且 $x_P$ 是使得上式成立的唯一向量.
+\end{inference}
+\begin{proof}
+    令 $s_n\triangleq\displaystyle\sum_{j=1}^n\frac{\inner{x,f_j}}{\norm{f_j}^2}f_j$.
+
+    由 Bessel 不等式知
+$$
+\norm{S_{n+k}-s_n}^2=\sum_{j=n+1}^{n+k}\frac{\abs{\inner{x,f_j}}^2}{\norm{f_j}^2}\xrightarrow{n\to\infty}0
+$$
+
+    从而 $\set{s_n}$ 为 Cauchy 列. 由 $V$ 完备知 $s_n\to x_P$.
+
+    又 $\forall j\ge 1$ 有
+$$
+\inner{x-x_P,f_j}=\inner{x,f_j}-\inner{x_P,f_j}=0
+$$
+
+    故 $x-x_P\perp\mathrm{span}\set{f_n|n\ge 1}$.
+
+    由连续性知 $x-x_P\perp P=\overline{\mathrm{span}\set{f_n|n\ge 1}}$.
+
+    现任取 $y\in P$ 且 $y\ne x_P$. 则 $x-x_P\perp y-x_P$. 从而
+$$
+\norm{x-y}^2=\norm{(x-x_P)+(x_P-y)}^2=\norm{x-x_P}^2+\norm{x_P-y}^2>\norm{x-x_P}^2
+$$
+\end{proof}
+
+作为 Bessel 不等式的示例：对 $\forall f\in R_2[-\pi,\pi]$ 我们有
+$$
+\begin{array}{c}
+    \displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n(f)}^2\le\frac{1}{2\pi}\int_{-\pi}^\pi\abs{f}^2\dd x\\
+    \displaystyle\frac{\abs{a_0(f)}^2}{2}+\sum_{k=1}^\infty\left(\abs{a_k(f)}^2+\abs{b_k(f)}^2\right)\le\frac{1}{\pi}\int_{-\pi}^\pi\abs{f}^2\dd x
+\end{array}
+$$
+
+\mysubsubsection{完备性与标准正交基}
+
+\begin{definition}
+    设 $V$ 是一个赋范线性空间. 设 $\set{x_\alpha|\alpha\in A}\subset V,E\subset V$.
+
+    称 $\set{x_\alpha|\alpha\in A}$ 关于 $E$ 完备，若 $E\subset\overline{\mathrm{span}\set{x_\alpha|\alpha\in A}}$.
+
+    等价的，$\forall x\in E,\exists\set{x_n}\subset\mathrm{span}\set{x_\alpha|\alpha\in A}$ 使得 $x_n\to x$.
+\end{definition}
+
+\begin{example}
+    在 $\RR^3$ 中，$\set{e_1,e_2}$ 关于 $\mathrm{span}\set{e_1,e_2}$ 完备，但关于 $\RR^3$ 不完备.
+\end{example}
+
+\begin{example}
+    根据 Weierstrass 定理，$\set{1,x,\cdots,x^n,\cdots}$ 在 $(C[a,b],\norm{\,\cdot\,}_\infty)$ 中关于 $C[a,b]$ 完备.
+\end{example}
+
+\begin{hint}
+    若我们在 $C[a,b]$ 上使用 2 范数
+$$
+\norm{f}_2\triangleq\left(\int_a^b\abs{f(x)}^2\dd x\right)^\frac{1}{2}
+$$
+
+    则 $\set{1,x,\cdots,x^n,\cdots}$ 在 $(C[a,b],\norm{\,\cdot\,}_2)$ 中也关于 $C[a,b]$ 完备，这是因为
+$$
+\norm{f}_2^2\le\norm{f}_\infty^2(b-a)
+$$
+\end{hint}
+
+\begin{example}
+    $\set{\cos nx,\sin nx|n\ge 1}$ 关于 $R_2[-\pi,\pi]$ 不完备.
+
+    这是因为 $d(1,P_n)\ge\norm{1}$. 其中 $P_n$ 为任何一个三角多项式 $P_n=\sum\limits_{j=1}^na_j\cos nx+b_j\sin nx$.
+
+    这是因为 $1\perp P_n$，从而 $\norm{1-P_n}^2=\norm{1}^2+\norm{P_n}^2\ge\norm{1}^2$.
+\end{example}
+
+\begin{hint}
+    我们将在第二节证明 $\set{1,\cos nx,\sin nx|n\ge 1}$ 关于 $R_2[-\pi,\pi]$ 完备.
+\end{hint}
+
+以下我们给出一个正交组完备的刻画.
+
+\begin{theorem}
+    设 $V$ 为内积空间. 设 $\set{f_n|n\ge 1}$ 是一个正交组. 设 $E\subset X$. 则下列条件等价：
+
+    \begin{enumerate}
+        \item\label{1811a} $\set{f_n|n\ge 1}$ 关于 $E$ 完备.
+        
+        \item\label{1811b} 对 $\forall x\in E$ 有 $x=\displaystyle\sum_{n\ge 1}\frac{\inner{x,f_n}}{\norm{f_n}^2}f_n$.
+        
+        \item\label{1811c} 对 $\forall x\in E$，Parsevel 等式成立
+$$
+\norm{x}^2=\sum_{n=1}^\infty\frac{\abs{x,f_n}^2}{\norm{f_n}^2}
+$$
+    \end{enumerate}
+\end{theorem}
+
+\begin{hint}
+    在 $\set{e_n|n\ge 1}$ 为标准正交组时，\ref{1811b} 与 \ref{1811c} 都有更简洁的形式：
+$$
+\begin{aligned}
+    2'. \qquad & x=\sum_{n=1}^\infty\inner{x,e_n}e_n\\
+    3'. \qquad & \norm{x}^2=\sum_{n=1}^\infty\abs{\inner{x,e_n}}^2
+\end{aligned}
+$$
+\end{hint}
+
+\begin{proof}
+    \ref{1811a} $\implies$ \ref{1811b} ：
+
+    记 $s_n=\displaystyle\sum_{j=1}^n\frac{\inner{x,f_j}}{\norm{f_j}^2}f_j$. 则 $s_n$ 为 $x$ 朝 $P_n=\mathrm{span}\set{f_1,\cdots,f_n}$ 的正交投影.
+
+    特别的，$\norm{x-s_{n+1}}\le\norm{x-s_n},\forall n\in\mathbb{N}$.
+
+    任取 $\eps>0$. 则存在 $y_n\in\mathrm{span}\set{f_n|n\ge 1}$ 使得 $\abs{x-y_n}<\eps$.
+
+    设 $y_n\in P_{k_n}\implies$ 对 $\forall k\ge k_n$ 有 $\norm{x-s_k}\le\norm{x-s_{k_n}}\le\norm{x-y_n}<\eps$.
+
+    从而 $s_n\to x$. 即 $\displaystyle\sum_{n\ge 1}\frac{\inner{x,f_n}}{\norm{f_n}^2}f_n=x$.
+
+    \ref{1811b}$\implies$\ref{1811c} ：
+
+    由推广的勾股定理有
+$$
+\norm{x}^2=\sum_{n=1}^\infty\abs{\frac{\inner{x,f_n}}{\norm{f_n}^2}f_n}^2=\sum_{n=1}^\infty\frac{\abs{\inner{x,f_n}}^2}{\norm{f_n}^2}
+$$
+
+    \ref{1811c}$\implies$\ref{1811a} ：
+
+    由 $x-s_n\perp s_n$ 知
+$$
+\norm{x-s_n}^2=\norm{x}^2-\norm{s_n}^2=\sum_{j=n+1}^\infty\frac{\abs{\inner{x,f_j}}}{\norm{f_j}^2}\to 0
+$$
+
+    这说明 $s_n\to x$，从而 $x\in\overline{\mathrm{span}\set{f_n|n\ge 1}}$.
+\end{proof}
+
+\begin{example}
+    在 $l^2(\mathbb{Z})$ 中取 $e_n=(0,\cdots,0,1,0,\cdots,0)$，其中第 $n$ 个位置为 $1$.
+
+    则 $\set{e_n|n\ge 1}$ 关于 $l^2(\mathbb{Z})$ 完备. 这是因为
+$$
+\forall x\in l^2(\mathbb{Z}),x=\sum_{n\in\mathbb{Z}}x_ne_n
+$$
+\end{example}
+
+如下的判定完备性的必要条件十分有用.
+
+\begin{property}
+    设 $V$ 是内积空间，$\set{f_n|n\ge 1}\subset V$ 线性无关.
+
+    \begin{enumerate}
+        \item 若 $\set{f_n|n\ge 1}$ 关于 $V$ 完备，则不存在非零向量使得其与所有 $f_n$ 正交.
+        
+        \item 若 $V$ 为 Hilbert 空间，则 $\set{f_n|n\ge 1}$ 关于 $V$ 完备 $\iff$ 不存在非零向量使得其与所有 $f_n$ 正交.
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item 通过对 $\set{f_n|n\ge 1}$ 作 Gram-Schmidt 正交化，不妨设 $\set{f_n|n\ge 1}$ 为标准正交组. 则由上一定理知
+$$
+\forall x\in V,x=\sum_{n=1}^\infty\inner{x,f_n}f_n
+$$
+
+        则若 $\forall n\ge 1,x\perp x_n$，必有 $x=0$.
+
+        \item “$\implies$” 由上知. 下证 “$\impliedby$”.
+        
+        仍不妨设 $\set{f_n|n\ge 1}$ 为标准正交组. 由 $V$ 完备知
+$$
+\forall x\in V,\sum_{n=1}^\infty\inner{x,f_n}f_n=x_P
+$$
+
+        收敛. 且 $x-x_P\perp\overline{\mathrm{span}\set{f_n|n\ge 1}}$.
+
+        进而 $x-x_P\perp f_n,\forall n\ge 1$. 从而由假设知 $x-x_P=0$. 即 $x=\sum\limits_{n=1}^\infty\inner{x,f_j}f_j$.
+
+        即 $\set{f_n|n\ge 1}$ 关于 $V$ 完备.
+    \end{enumerate}
+\end{proof}
+
+\begin{hint}
+    需要指出的是：为了使第二条成立，$V$ 完备性的假设必不可少.
+\end{hint}
