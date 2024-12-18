@@ -1,0 +1,266 @@
+上节中，我们研究了内积空间中向量关于一个正交组的抽象 Fourier 级数的性质. 本节我们回到具体的空间 $R_2[-\pi,\pi]$，并详尽地研究如上的问题.
+
+\mysubsection{三角级数的收敛性（平均收敛）}
+
+\mysubsubsection{形式 Fourier 级数}
+
+我们称如下的两种级数为形式三角 Fourier 级数：
+$$
+\begin{matrix}
+    \displaystyle\frac{a_0}{2}+\sum_{n\ge 1}a_n\cos nx+b_n\sin nx & \qquad\text{（三角形式）}\\
+    \displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx} & \qquad\text{（指数形式）}
+\end{matrix}
+$$
+
+我们关心如下的一些问题：
+
+\begin{enumerate}
+    \item 这些级数是否可以定义收敛性？
+    
+    \item 可以有哪些不同的收敛性？
+    
+    \item\label{isfourier} 它们是否是某个 $f\in R_2[-\pi,\pi]$ 的 Fourier 级数？
+    
+    \item 若是，这个级数是否与 $f$ 相等？
+\end{enumerate}
+
+当然为了定义收敛性，最自然的是先考虑部分和
+$$
+\begin{aligned}
+    T_n&\triangleq\frac{a_0}{2}+\sum_{k=1}^na_k\cos kx+b_k\sin kx\\
+    S_n&\triangleq\sum_{\abs{k}\le n}c_ke^{ikx}
+\end{aligned}
+$$
+
+可见 $T_n,S_n$ 均在 $\RR$ 上为 $C^\infty$ 光滑函数. 我们称它们为三角多项式. 从而我们可以考虑
+
+\begin{itemize}
+    \item $S_n$ 是否会在 $\RR$ 上逐点收敛？一致收敛？或在积分的意义下收敛？等等可能的问题.
+\end{itemize}
+
+当然在不加任何假设的情况下，以上所有的问题均可能有否定的答案.
+
+例如，我们来考虑问题 \ref{isfourier}.
+
+设 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 是某 $f\in R_2[-\pi,\pi]$ 的 Fourier 级数. 则
+$$
+c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\dd x
+$$
+
+且 Bessel 不等式成立
+$$
+\sum_{n\in\mathbb{Z}}\abs{c_n}^2\le\frac{1}{2\pi}\int_{-\pi}^{\pi}\abs{f(x)}^2\dd x<+\infty
+$$
+
+特别的，这说明 $c_n$ 在 $n\to\infty$ 时不能下降太慢.
+
+例如
+$$
+\displaystyle\sum_{k=1}^\infty\frac{\sin kx}{\sqrt{k}}=\sum_{k=1}^\infty\frac{e^{ikx}-e^{-ikx}}{\sqrt{k}i}
+$$
+
+就不是一个 $f\in R_2[-\pi,\pi]$ 的 Fourier 级数，因为 $\displaystyle\sum_{k\ne 0}\abs{c_k}^2=2\sum_{k\ge 1}\frac{1}{k}=+\infty$.
+
+Bessel 不等式告诉我们：为了使 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 是某个 $f\in R_2[-\pi,\pi]$ 的 Fourier 级数，必要条件是 $\displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n}^2<+\infty$.
+
+那么下一个自然的问题是：
+
+\begin{itemize}
+    \item 若 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 的确满足 $\displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n}^2<+\infty$，是否必然存在 $f\in R_2[-\pi,\pi]$ 使得 $S_n\to f$？
+    
+    其中 $S_n\to f$ 的含义为 $\norm{S_n-f}_2\to 0$.
+\end{itemize}
+
+答案依然是否定的. 因为此时 $S_n$ 可能没有极限（可证 $\set{S_n}$ 必为 Cauchy 列）.
+
+实际上这是因为 $R_2[-\pi,\pi]$ 不完备. 若我们将其完备化，则会得到 $L_2[-\pi,\pi]$，即 $[-\pi,\pi]$ 上所有 Lebesgue 平方可积的函数全体.
+
+此时我们有一个同构 $U$：
+$$
+\begin{aligned}
+    U:l^2(\mathbb{Z})&\to L_2[-\pi,\pi]\\
+    c=(c_n)_{n\in\mathbb{Z}}&\mapsto\sum_{n\in\mathbb{Z}}c_ne^{inx}
+\end{aligned}
+$$
+
+\mysubsubsection{三角函数的平均收敛}
+
+我们在第二节已经提到 $\set{e^{inx}|n\in\mathbb{Z}}$ 与 $\set{1;\cos nx,\sin nx|n\ge 1}$ 均在 $R_2[-\pi,\pi]$ 中完备.
+
+但为了证明这一点，我们需要首先研究级数的点态收敛. 但我们先陈述这个结论.
+
+\begin{theorem}
+    \begin{enumerate}
+        \item $\set{e^{inx}|n\in\mathbb{Z}}$ 与 $\set{1;\cos nx,\sin nx|n\ge 1}$ 均在 $R_2[-\pi,\pi]$ 中完备.
+        
+        \item 若 $f\in R_2[-\pi,\pi]$，则
+$$
+\norm{S_n(f)-f}_2\to 0,\qquad\norm{T_n(f)-f}_2\to 0
+$$
+
+        其中
+$$
+\begin{aligned}
+    &S_n(f)=\sum_{\abs{k}\le n}c_k(f)e^{ikx}\\
+    &T_n(f)=\frac{a_0(f)}{2}+\sum_{k=1}^na_k(f)\cos kx+b_k(f)\sin kx
+\end{aligned}
+$$
+
+        \item Parsevel 等式成立.
+$$
+\begin{aligned}
+    \norm{f}^2&=2\pi\sum_{n\in\mathbb{Z}}\abs{c_n(f)}^2\\
+    \norm{f}^2&=\frac{\pi}{2}\abs{a_0(f)}^2+\pi\sum_{n=1}^\infty(\abs{a_n(f)}^2+\abs{b_n(f)}^2)
+\end{aligned}
+$$
+    \end{enumerate}
+\end{theorem}
+
+\mysubsection{三角 Fourier 级数的点态收敛}
+
+\mysubsubsection{一些历史注记}
+
+定义 $R_1[-\pi,\pi]$ 为在 $[-\pi,\pi]$ 上广义可积且绝对可积的函数全体.
+
+即 $f$ 在 $[-\pi,\pi]$ 上的广义积分存在且 $\displaystyle\int_{-\pi}^{\pi}\abs{f}\dd x<+\infty$.
+
+我们在第一节已经证明
+
+\begin{property}
+    $R_2[-\pi,\pi]\subset R_1[-\pi,\pi]$.
+\end{property}
+
+对每个 $f\in R_1[-\pi,\pi]$，由 $\abs{f}$ 可积知我们也可以定义 $f$ 的 Fourier 级数
+$$
+f\sim\sum_{n\in\mathbb{Z}}c_n(f)e^{inx}
+$$
+
+其中 $c_n(f)=\displaystyle\int_{\pi}^{\pi}f(x)e^{-inx}\dd x$.
+
+一个著名的问题是：对 $\forall f\in C[-\pi,\pi]$ 满足 $f(-\pi)=f(\pi)$，是否有 $S_n(f)(x)\to f(x)$ 几乎处处成立？
+
+当时，人们已知存在 $f\in C[-\pi,\pi],f(-\pi)=f(\pi)$ 使得 $S_n(f)(x)$ 在某些点处发散.
+
+\begin{itemize}
+    \item Kolmogorov  构造了一个 $f\in L_1[-\pi,\pi]$ 使得对 $\forall x\in[-\pi,\pi],S_n(f)(x)$ 发散.
+    
+    \item Menshov 构造了一个三角级数 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 使得 $\displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n}^2<+\infty$ 且 $c_n$ 不全为 $0$，但是 $S_n(f)(x)$ 几乎处处收敛到 $0$.
+\end{itemize}
+
+Luzin 提出以下猜测；对 $\forall f\in L_2[-\pi,\pi]$ 有 $S_n(f)(x)\to f(x)$ 几乎处处成立.
+
+1966 年 Carleson 证明了如上的猜测. 由 $C[-\pi,\pi]\subset L_2[-\pi,\pi]$，最开始的问题也得到了回答.
+
+综上，Fourier 级数的收敛性一般来讲是十分困难的问题. 但以下我们讨论在一些更强的假设下级数的收敛性.
+
+\mysubsubsection{Dirichlet 核与部分和的表示}
+
+下设 $f\in R_1[-\pi,\pi]$，记其 Fourier 级数的 $n$ 个部分和为
+$$
+S_n(f)(x)\triangleq\sum_{k=-n}^nc_k(f)e^{ikx}
+$$
+
+其中 $c_k(f)=\displaystyle\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}\dd x$.
+
+将 $c_k(f)$ 的表达式代入 $S_n(f)$ 可得
+$$
+\begin{aligned}
+    S_n(f)(x)&=\sum_{k=-n}^n\frac{1}{2\pi}\int_{-\pi}^{\pi}f(y)e^{-iky}\dd y\cdot e^{ikx}\\
+    &=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(y)\sum_{k=-n}^ne^{ik(x-y)}\dd y
+\end{aligned}
+$$
+
+若令 $D_n(u)\triangleq\displaystyle\sum_{k=-n}^ne^{iku}$，则
+$$
+S_n(f)(x)=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(y)D_n(x-y)\dd y
+$$
+
+我们称 $D_n(u)$ 为第 $n$ 个 Dirichlet 核.
+
+\begin{property}
+    \begin{enumerate}
+        \item $D_n(x)=\dfrac{\sin\left(n+\frac{1}{2}\right)x}{\sin\frac{x}{2}},\forall x\in[-\pi,\pi]$
+        
+        \item $\displaystyle\frac{1}{2\pi}\int_{-\pi}^{\pi}D_n(x)\dd x=1$
+    \end{enumerate}
+\end{property}
+\begin{proof}
+    \begin{enumerate}
+        \item 由等比级数的性质直接计算可得.
+        
+        \item $\displaystyle\frac{1}{2\pi}\int_{-\pi}^{\pi}D_n(x)\dd x=\frac{1}{2\pi}\int_{-\pi}^{\pi}1\dd x=1$
+    \end{enumerate}
+\end{proof}
+
+\begin{center}
+    \begin{tikzpicture}[yscale=0.8,xscale=1.5]
+        \draw[->] (-4,0)--(4,0) node [right] {$x$};
+        \draw[->] (0,-2)--(0,6) node [right] {$y$};
+        \node at (0,0) [below left] {$O$};
+        \draw[red,samples=100,domain={0.01}:{pi}] plot(\x,{sin(\x*5/2 r)/(sin(\x/2 r))});
+        \draw[red,samples=100,domain={-pi}:{-0.01}] plot(\x,{sin(\x*5/2 r)/(sin(\x/2 r))});
+        \draw[-,red] (-0.01,5)--(0.01,5); 
+        \node at (0,5) [above right] {$5$};
+        \draw[-,dashed] ({-pi},1)--({-pi},0) node [below] {$-\pi$};
+        \draw[-,dashed] ({pi},1)--({pi},0) node [below] {$\pi$};
+        \node at ({-pi*4/5},0) [above right] {$-\frac{4\pi}{5}$};
+        \node at ({pi*4/5},0) [above left] {$\frac{4\pi}{5}$};
+        \node at ({-pi*2/5},0) [below right] {$-\frac{2\pi}{5}$};
+        \node at ({pi*2/5},0) [below left] {$\frac{2\pi}{5}$};
+        \node at (1.2,3) {$D_2(x)$};
+    \end{tikzpicture}
+\end{center}
+
+\begin{hint}
+    $D_n(x)$ 在 $[-\pi,\pi]$ 上振荡且 $\displaystyle\int_{-\pi}^{\pi}\abs{D_n(x)}\dd x\to\infty$.
+\end{hint}
+
+以下，我们将 $f$ 周期地延拓到 $\RR$，其周期为 $2\pi$.
+
+\begin{property}
+$$
+\begin{aligned}
+    S_n(f)(x)&=\frac{1}{2\pi}\int_{-\pi}^\pi f(x-y)D_n(y)\dd y\\
+    &=\frac{1}{2\pi}\int_0^\pi[f(x+y)+f(x-y)]D_n(y)\dd y
+\end{aligned}
+$$
+\end{property}
+\begin{proof}
+    作变量替换 $y'=x-y$，并使用 $f$ 与 $D_n$ 的周期性，有：
+$$
+\begin{aligned}
+    S_n(f)(x)&=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(y)D_n(x-y)\dd y\\
+    &=\frac{1}{2\pi}\int_{x-\pi}^{x+\pi}f(x-y')D_n(y')\dd y'\\
+    &=\frac{1}{2\pi}\int_{-\pi}^\pi f(x-y)D_n(y)\dd y
+\end{aligned}
+$$
+
+    再利用 $D_n(-y)=D_n(y)$ 可得
+$$
+\begin{aligned}
+    S_n(f)(x)&=\frac{1}{2\pi}\left[\int_{0}^\pi f(x-y)D_n(y)\dd y+\int_{-\pi}^0f(x-y)D_n(y)\dd y\right]\\
+    &=\frac{1}{2\pi}\int_0^\pi[f(x+y)+f(x-y)]D_n(y)\dd y
+\end{aligned}
+$$
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 记 $\mathbb{T}=\RR/_{\displaystyle 2\pi\mathbb{Z}}$.
+        
+        则每个定义在 $\RR$ 上的 $2\pi$-周期函数都可以看成是定义在 $\mathbb{T}$ 上的函数. 在此看法下
+$$
+\begin{aligned}
+    S_n(f)(x)&=\frac{1}{2\pi}\int_{-\pi}^\pi f(y)D_n(x-y)\dd y\\
+    &=\frac{1}{2\pi}\int_{\mathbb{T}}f(y)D_n(x-y)\dd y\\
+    &=\frac{1}{2\pi}f*D_n(x)
+\end{aligned}
+$$
+
+        即 $2\pi S_n(f)(x)$ 是 $f$ 与 Dirichlet 核 $D_n$ 的卷积.
+
+        \item 上述性质告诉我们，$S_n(f)(x)$ 的收敛性仅与 $f$ 在 $x$ 的一个小领域内的表现有关（至少在 $f$ 非常正则时是这样）.
+        
+        从而我们可以将上述公式认为是一个局部化的公式.
+    \end{enumerate}
+\end{hint}

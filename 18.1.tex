@@ -417,7 +417,7 @@ $$
 \end{example}
 
 \begin{example}
-    已知 $\set{1,\cos nx,\sin nx|n\ge 1}$ 是 $R_2[-\pi,\pi]$ 中的正交组.
+    已知 $\set{1;\cos nx,\sin nx|n\ge 1}$ 是 $R_2[-\pi,\pi]$ 中的正交组.
 
     任取 $f\in R_2[-\pi,\pi]$，则 $f$ 关于 $\sin nx$ 的 Fourier 系数为
 $$
@@ -597,7 +597,7 @@ $$
 \end{example}
 
 \begin{hint}
-    我们将在第二节证明 $\set{1,\cos nx,\sin nx|n\ge 1}$ 关于 $R_2[-\pi,\pi]$ 完备.
+    我们将在第二节证明 $\set{1;\cos nx,\sin nx|n\ge 1}$ 关于 $R_2[-\pi,\pi]$ 完备.
 \end{hint}
 
 以下我们给出一个正交组完备的刻画.
@@ -634,7 +634,7 @@ $$
 
     特别的，$\norm{x-s_{n+1}}\le\norm{x-s_n},\forall n\in\mathbb{N}$.
 
-    任取 $\eps>0$. 则存在 $y_n\in\mathrm{span}\set{f_n|n\ge 1}$ 使得 $\abs{x-y_n}<\eps$.
+    任取 $\eps>0$. 则存在 $y_n\in\mathrm{span}\set{f_n|n\ge 1}$ 使得 $\norm{x-y_n}<\eps$.
 
     设 $y_n\in P_{k_n}\implies$ 对 $\forall k\ge k_n$ 有 $\norm{x-s_k}\le\norm{x-s_{k_n}}\le\norm{x-y_n}<\eps$.
 
@@ -693,7 +693,7 @@ $$
 \forall x\in V,\sum_{n=1}^\infty\inner{x,f_n}f_n=x_P
 $$
 
-        收敛. 且 $x-x_P\perp\overline{\mathrm{span}\set{f_n|n\ge 1}}$.
+        收敛，且 $x-x_P\perp\overline{\mathrm{span}\set{f_n|n\ge 1}}$.
 
         进而 $x-x_P\perp f_n,\forall n\ge 1$. 从而由假设知 $x-x_P=0$. 即 $x=\sum\limits_{n=1}^\infty\inner{x,f_j}f_j$.
 
@@ -702,5 +702,66 @@ $$
 \end{proof}
 
 \begin{hint}
-    需要指出的是：为了使第二条成立，$V$ 完备性的假设必不可少.
+    需要指出的是：为了使第二条成立，$V$ 完备性的假设必不可少. 反例如下：
 \end{hint}
+
+\begin{example}
+    在 $l^2(\mathbb{N})$ 中，令 $e=\displaystyle\left(1,\frac{1}{2},\frac{1}{2^2},\cdots\right)=\sum_{n=1}^\infty\frac{e_n}{2^{n-1}}$.
+
+    令 $V=\mathrm{span}\set{e,e_2,e_3,\cdots}$.
+
+    则 $V\subset l^2(\mathbb{N})$ 为线性子空间，其在继承 $l^2(\mathbb{N})$ 中的内积后成为一个内积空间. 但 $V$ 不完备.
+
+    此时，一方面不存在 $x\ne 0,x\in V$ 使得 $x\perp e_n,\forall n\ge 2$.
+
+    另一方面 $e\notin\overline{\mathrm{span}\set{e_n|n\ge 2}}$.
+\end{example}
+
+最后，我们来定义有限维 $\RR^n$ 中自然基底的类比.
+
+\begin{definition}
+    设 $V$ 为内积空间，$\set{e_n|n\ge 1}$ 为标准正交组.
+
+    称 $\set{e_n|n\ge 1}$ 为 $V$ 的标准正交基，若 $\forall x\in V,\exists\set{x_n}\subset\mathbb{C}$ 使得
+$$
+x=\sum_{n=1}^\infty x_ne_n
+$$
+\end{definition}
+
+\begin{hint}
+    若上式成立，则必有 $x_n=\inner{x,e_n}$. 从而若 $\set{x_n}$ 存在则必唯一，且以上的级数一定是 $x$ 关于 $\set{e_n}$ 的 Fourier 级数.
+\end{hint}
+
+\begin{definition}
+    若 $\set{e_n|n\ge 1}$ 为标准正交组，则
+$$
+\set{e_n|n\ge 1}\text{ 为标准正交基}\iff\set{e_n|n\ge 1}\text{ 关于 }V\text{ 完备}
+$$
+\end{definition}
+\begin{proof}
+    由完备性的等价刻画以及以上的注即证.
+\end{proof}
+
+我们将在下一节证明：
+
+\begin{itemize}
+    \item $\displaystyle\Set{\frac{1}{\sqrt{2\pi}}e^{inx}|n\ge 1}$ 为 $R_2[-\pi,\pi]$ 的标准正交基.
+    
+    \item $\displaystyle\Set{\frac{1}{\sqrt{2\pi}};\frac{1}{\sqrt{\pi}}\sin nx,\frac{1}{\sqrt{\pi}}\cos nx|n\ge 1}$ 为 $R_2[-\pi,\pi]$ 的标准正交基.
+\end{itemize}
+
+\begin{example}
+    假定上面的结论成立，则有
+$$
+\frac{x}{\sqrt{\pi}}=\sum_{k=1}^\infty(-1)^{k+1}\frac{2}{k}\frac{\sin kx}{\sqrt{\pi}}
+$$
+
+    则 Parsevel 等式给出
+$$
+\int_{-\pi}^{\pi}\left(\frac{x}{\sqrt{\pi}}\right)^2\dd x=\sum_{k=1}^\infty\frac{4}{k^2}\implies\sum_{k=1}^\infty\frac{1}{k^2}=\frac{\pi^2}{6}
+$$
+\end{example}
+
+\begin{example}
+    $\set{e_n|n\in\mathbb{Z}}$ 为 $l^2(\mathbb{Z})$ 的标准正交基.
+\end{example}
