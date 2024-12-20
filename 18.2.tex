@@ -1,4 +1,4 @@
-上节中，我们研究了内积空间中向量关于一个正交组的抽象 Fourier 级数的性质. 本节我们回到具体的空间 $R_2[-\pi,\pi]$，并详尽地研究如上的问题.
+上节中，我们研究了内积空间中向量关于一个正交组的抽象 Fourier 级数的性质. 本节我们回到具体的空间 $\mathcal{R}_2[-\pi,\pi]$，并详尽地研究如上的问题.
 
 \mysubsection{三角级数的收敛性（平均收敛）}
 
@@ -19,7 +19,7 @@ $$
     
     \item 可以有哪些不同的收敛性？
     
-    \item\label{isfourier} 它们是否是某个 $f\in R_2[-\pi,\pi]$ 的 Fourier 级数？
+    \item\label{isfourier} 它们是否是某个 $f\in \mathcal{R}_2[-\pi,\pi]$ 的 Fourier 级数？
     
     \item 若是，这个级数是否与 $f$ 相等？
 \end{enumerate}
@@ -42,7 +42,7 @@ $$
 
 例如，我们来考虑问题 \ref{isfourier}.
 
-设 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 是某 $f\in R_2[-\pi,\pi]$ 的 Fourier 级数. 则
+设 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 是某 $f\in \mathcal{R}_2[-\pi,\pi]$ 的 Fourier 级数. 则
 $$
 c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\dd x
 $$
@@ -59,21 +59,21 @@ $$
 \displaystyle\sum_{k=1}^\infty\frac{\sin kx}{\sqrt{k}}=\sum_{k=1}^\infty\frac{e^{ikx}-e^{-ikx}}{\sqrt{k}i}
 $$
 
-就不是一个 $f\in R_2[-\pi,\pi]$ 的 Fourier 级数，因为 $\displaystyle\sum_{k\ne 0}\abs{c_k}^2=2\sum_{k\ge 1}\frac{1}{k}=+\infty$.
+就不是一个 $f\in \mathcal{R}_2[-\pi,\pi]$ 的 Fourier 级数，因为 $\displaystyle\sum_{k\ne 0}\abs{c_k}^2=2\sum_{k\ge 1}\frac{1}{k}=+\infty$.
 
-Bessel 不等式告诉我们：为了使 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 是某个 $f\in R_2[-\pi,\pi]$ 的 Fourier 级数，必要条件是 $\displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n}^2<+\infty$.
+Bessel 不等式告诉我们：为了使 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 是某个 $f\in \mathcal{R}_2[-\pi,\pi]$ 的 Fourier 级数，必要条件是 $\displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n}^2<+\infty$.
 
 那么下一个自然的问题是：
 
 \begin{itemize}
-    \item 若 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 的确满足 $\displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n}^2<+\infty$，是否必然存在 $f\in R_2[-\pi,\pi]$ 使得 $S_n\to f$？
+    \item 若 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 的确满足 $\displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n}^2<+\infty$，是否必然存在 $f\in \mathcal{R}_2[-\pi,\pi]$ 使得 $S_n\to f$？
     
     其中 $S_n\to f$ 的含义为 $\norm{S_n-f}_2\to 0$.
 \end{itemize}
 
 答案依然是否定的. 因为此时 $S_n$ 可能没有极限（可证 $\set{S_n}$ 必为 Cauchy 列）.
 
-实际上这是因为 $R_2[-\pi,\pi]$ 不完备. 若我们将其完备化，则会得到 $L_2[-\pi,\pi]$，即 $[-\pi,\pi]$ 上所有 Lebesgue 平方可积的函数全体. 则上面的命题对 $L_2[-\pi,\pi]$ 是成立的.
+实际上这是因为 $\mathcal{R}_2[-\pi,\pi]$ 不完备. 若我们将其完备化，则会得到 $L_2[-\pi,\pi]$，即 $[-\pi,\pi]$ 上所有 Lebesgue 平方可积的函数全体. 则上面的命题对 $L_2[-\pi,\pi]$ 是成立的.
 
 此时我们有一个同构 $U$：
 $$
@@ -85,15 +85,15 @@ $$
 
 \mysubsubsection{三角函数的平均收敛}
 
-我们在第二节已经提到 $\set{e^{inx}|n\in\mathbb{Z}}$ 与 $\set{1;\cos nx,\sin nx|n\ge 1}$ 均在 $R_2[-\pi,\pi]$ 中完备.
+我们在第二节已经提到 $\set{e^{inx}|n\in\mathbb{Z}}$ 与 $\set{1;\cos nx,\sin nx|n\ge 1}$ 均在 $\mathcal{R}_2[-\pi,\pi]$ 中完备.
 
 但为了证明这一点，我们需要首先研究级数的点态收敛. 但我们先陈述这个结论.
 
 \begin{theorem}
     \begin{enumerate}
-        \item $\set{e^{inx}|n\in\mathbb{Z}}$ 与 $\set{1;\cos nx,\sin nx|n\ge 1}$ 均在 $R_2[-\pi,\pi]$ 中完备.
+        \item $\set{e^{inx}|n\in\mathbb{Z}}$ 与 $\set{1;\cos nx,\sin nx|n\ge 1}$ 均在 $\mathcal{R}_2[-\pi,\pi]$ 中完备.
         
-        \item 若 $f\in R_2[-\pi,\pi]$，则
+        \item 若 $f\in \mathcal{R}_2[-\pi,\pi]$，则
 $$
 \norm{S_n(f)-f}_2\to 0,\qquad\norm{T_n(f)-f}_2\to 0
 $$
@@ -120,17 +120,17 @@ $$
 
 \mysubsubsection{一些历史注记}
 
-定义 $R_1[-\pi,\pi]$ 为在 $[-\pi,\pi]$ 上广义可积且绝对可积的函数全体.
+定义 $\mathcal{R}_1[-\pi,\pi]$ 为在 $[-\pi,\pi]$ 上广义可积且绝对可积的函数全体.
 
 即 $f$ 在 $[-\pi,\pi]$ 上的广义积分存在且 $\displaystyle\int_{-\pi}^{\pi}\abs{f}\dd x<+\infty$.
 
 我们在第一节已经证明
 
 \begin{property}
-    $R_2[-\pi,\pi]\subset R_1[-\pi,\pi]$.
+    $\mathcal{R}_2[-\pi,\pi]\subset \mathcal{R}_1[-\pi,\pi]$.
 \end{property}
 
-对每个 $f\in R_1[-\pi,\pi]$，由 $\abs{f}$ 可积知我们也可以定义 $f$ 的 Fourier 级数
+对每个 $f\in \mathcal{R}_1[-\pi,\pi]$，由 $\abs{f}$ 可积知我们也可以定义 $f$ 的 Fourier 级数
 $$
 f\sim\sum_{n\in\mathbb{Z}}c_n(f)e^{inx}
 $$
@@ -144,18 +144,20 @@ $$
 \begin{itemize}
     \item Kolmogorov  构造了一个 $f\in L_1[-\pi,\pi]$ 使得对 $\forall x\in[-\pi,\pi],S_n(f)(x)$ 发散.
     
-    \item Menshov 构造了一个三角级数 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 使得 $\displaystyle\sum_{n\in\mathbb{Z}}\abs{c_n}^2<+\infty$ 且 $c_n$ 不全为 $0$，但是 $S_n(f)(x)$ 几乎处处收敛到 $0$.
+    \item Menshov 构造了一个三角级数 $\displaystyle\sum_{n\in\mathbb{Z}}c_ne^{inx}$ 使得 $S_n(f)(x)$ 几乎处处收敛到 $0$.
 \end{itemize}
 
 Luzin 提出以下猜测；对 $\forall f\in L_2[-\pi,\pi]$ 有 $S_n(f)(x)\to f(x)$ 几乎处处成立.
 
-1966 年 Carleson 证明了如上的猜测. 由 $C[-\pi,\pi]\subset L_2[-\pi,\pi]$，最开始的问题也得到了回答.
+1966 年 Carleson 证明了如上的猜测.
+
+由 $C[-\pi,\pi]\subset L_2[-\pi,\pi]$，最开始的问题也得到了回答.
 
 综上，Fourier 级数的收敛性一般来讲是十分困难的问题. 但以下我们讨论在一些更强的假设下级数的收敛性.
 
 \mysubsubsection{Dirichlet 核与部分和的表示}
 
-下设 $f\in R_1[-\pi,\pi]$，记其 Fourier 级数的 $n$ 个部分和为
+下设 $f\in \mathcal{R}_1[-\pi,\pi]$，记其 Fourier 级数的 $n$ 个部分和为
 $$
 S_n(f)(x)\triangleq\sum_{k=-n}^nc_k(f)e^{ikx}
 $$
@@ -264,3 +266,352 @@ $$
         从而我们可以将上述公式认为是一个局部化的公式.
     \end{enumerate}
 \end{hint}
+
+\mysubsubsection{Riemann-Lebesgue 引理与局部化准则}
+
+上述的局部化公式以及我们马上要证明的 Riemann-Lebesgue 引理是研究 Fourier 级数收敛性的基本工具. 以下我们来证明 Riemann-Lebesgue 引理.
+
+\begin{lemma}[Riemann-Lebesgue]
+    设 $f:(a,b)\to\RR$ 局部可积，且 $\abs{f}$ 在 $(a,b)$ 上广义可积. 则
+$$
+\int_a^b f(x)e^{i\lambda x}\dd x\to 0,\qquad\lambda\in\RR,\lambda\to\infty
+$$
+\end{lemma}
+\begin{proof}
+    由 $\abs{f}$ 在 $(a,b)$ 上广义可积知 $f(x)e^{i\lambda x}$ 也在 $(a,b)$ 上广义可积.
+
+    任取 $\eps>0$. 则存在 $[a',b']\subset(a,b)$ 使得
+$$
+\abs{\int_a^b f(x)e^{i\lambda x}\dd x-\int_{a'}^{b'}f(x)e^{i\lambda x}\dd x}<\frac{\eps}{3}
+$$
+
+    由 $f$ 在 $[a',b']$ 上 Riemann 可积，存在 $[a',b']$ 的分划 $P=\set{x_0,x_1,\cdots,x_n}$ 使得其 Riemann 下和 $s(f,P)$ 满足
+$$
+0\le\int_{a'}^{b'}f(x)\dd x-s(f,P)<\frac{\eps}{3}
+$$
+
+    其中
+$$
+s(f,P)=\sum_{i=1}^n m_i\Delta x_i,\qquad m_i=\inf_{x\in[x_{i-1},x_i]}f(x)
+$$
+
+    令
+$$
+g(x)=\begin{cases}
+    m_1 & x\in[x_0,x_1]\\
+    m_2 & x\in[x_1,x_2]\\
+    \vdots\\
+    m_n & x\in[x_{n-1},x_n]
+\end{cases}
+$$
+
+    则
+$$
+\begin{aligned}
+    &\abs{\int_{a'}^{b'}f(x)e^{i\lambda x}\dd x-\int_{a'}^{b'}g(x)e^{i\lambda x}\dd x}\\
+    =&\abs{\sum_{j=1}^n\int_{x_{j-1}}^{x_j}(f(x)-m_j)e^{i\lambda x}\dd x}\\
+    \le&\sum_{j=1}^n\int_{x_{j-1}}^{x_j}\abs{f(x)-m_j}\dd x\\
+    =&\int_{a'}^{b'}f(x)\dd x-\sum_{j=1}^mm_j\Delta x_j<\frac{\eps}{3}
+\end{aligned}
+$$
+
+    最后我们有
+$$
+\int_{x_{j-1}}^{x_j}g(x)e^{i\lambda x}\dd x=m_j\int_{x_{j-1}}^{x_j}e^{i\lambda x}\dd x=m_j\frac{e^{i\lambda x_j}-e^{i\lambda x_{j-1}}}{i\lambda}\to 0,\qquad\lambda\to\infty
+$$
+
+    故
+$$
+\begin{aligned}
+    \abs{\int_a^bf(x)e^{i\lambda x}\dd x}&\le\frac{\eps}{3}+\frac{\eps}{3}+\abs{\int_{a'}^{b'}g(x)e^{i\lambda x}\dd x}\\
+    &\le\eps+\sum_{j=1}^n\abs{\int_{x_{j-1}}^{x_j}g(x)e^{i\lambda x}\dd x}\\
+    \implies&\overline{\lim_{\lambda\to\infty}}\abs{\int_a^b f(x)e^{i\lambda x}\dd x}\le\eps
+\end{aligned}
+$$
+
+    由 $\eps$ 的任意性知
+$$
+\lim_{\lambda\to\infty}\int_a^bf(x)e^{i\lambda x}\dd x=0
+$$
+\end{proof}
+
+作为推论，我们有
+
+\begin{inference}
+    \begin{enumerate}
+        \item 若 $f$ 定义与引理相同，则有
+$$
+\lim_{\lambda\to\infty}\int_a^bf(x)\cos\lambda x\dd x=\lim_{\lambda\to\infty}\int_a^bf(x)\sin\lambda x\dd x=0
+$$
+
+        \item 若 $f(a,b)\to\mathbb{C}$ 满足 $f$ 在 $(a,b)$ 上局部可积且 $\abs{f}$ 广义可积，则有
+$$
+\lim_{\lambda\to\infty}\int_a^b f(x)e^{i\lambda x}\dd x=0
+$$
+    \end{enumerate}
+\end{inference}
+\begin{proof}
+    对实部和虚部分别应用以上引理即可.
+\end{proof}
+
+\begin{hint}
+    \begin{enumerate}
+        \item 若已知 $f\in \mathcal{R}_2[-\pi,\pi]$，则我们由 Bessel 不等式知
+$$
+\lim_{\abs{n}\to\infty}\int_{-\pi}^{\pi}f(x)e^{inx}\dd x=0
+$$
+
+        这里我们得到的结论更强：$f$ 仅需在 $\mathcal{R}_1[-\pi,\pi]$ 中. 且我们是对 $\lambda\to\infty$ 均有极限为 $0$，而不仅仅是对 $n\to\infty$.
+
+        \item 现在我们可以将之前的“$S_n(f)(x)$ 的收敛性仅依赖于 $f$ 在 $x$ 局部的性质”这句话精确化.
+    \end{enumerate}
+\end{hint}
+
+\textbf{断言：}若 $f\in\mathcal{R}_1[-\pi,\pi]$，则对 $\forall x\in[-\pi,\pi],\forall\delta>0$ 有
+$$
+S_n(f)(x)=\frac{1}{2\pi}\int_0^{\delta}[f(x+t)+f(x-t)]D_n(t)\dd t+o(1),\qquad n\to\infty
+$$
+
+这是因为：由 $f\in\mathcal{R}_1[-\pi,\pi]$，Riemann-Lebesgue 引理的条件成立，从而当 $t\in[\delta,\pi]$ 时有
+$$
+\begin{aligned}
+    &\sin\frac{t}{2}\ge\sin\frac{\delta}{2}>0\\
+    \implies&\abs{D_n(t)}=\abs{\frac{\sin\left(n+\frac{1}{2}\right)t}{\sin\frac{t}{2}}}\le\abs{\frac{\sin\left(n+\frac{1}{2}\right)t}{\sin\frac{\delta}{2}}}\\
+    \implies&\abs{\frac{1}{2\pi}\int_\delta^\pi[f(x+t)+f(x-t)]\frac{\sin\left(n+\frac{1}{2}\right)t}{\sin\frac{t}{2}}\dd t}\\
+    \le&\frac{1}{2\pi}\frac{1}{\abs{\sin\frac{\delta}{2}}}\int_\delta^\pi[f(x+t)+f(x-t)]\sin\left(n+\frac{1}{2}\right)t\dd t\to 0,\qquad n\to\infty
+\end{aligned}
+$$
+
+由此可得
+
+\begin{inference}[局部化准则]
+    设 $f,g\in\mathcal{R}_1[-\pi,\pi]$. 设 $x_p\in[-\pi,\pi]$，若
+$$
+\exists\delta>0,f|_{(x_0-\delta,x_0+\delta)}=g|_{(x_0-\delta,x_0+\delta)}
+$$
+
+    则 $S_n(f)(x_0)$ 与 $S_n(g)(x_0)$ 同时收敛或同时发散.
+
+    当它们均收敛时，收敛值相同.
+\end{inference}
+
+\begin{hint}
+    在 $x_0$ 是端点 $-\pi$ 或 $\pi$ 时，由我们之前的约定，$f,g$ 均为以 $2\pi$ 为周期的函数. 从而此时的条件为
+$$
+f|_{[-\pi,-\pi+\delta)\cup(\pi-\delta,\pi]}=g|_{{[-\pi,-\pi+\delta)\cup(\pi-\delta,\pi]}}
+$$
+\end{hint}
+
+\mysubsubsection{Fourier 级数在某点处收敛的充分条件}
+
+本节讨论 Fourier 级数在某点出收敛的充分条件，即 Dini 条件.
+
+\begin{definition}
+    设 $x_0\in\RR,\mathring{U}$ 是 $x_0$ 的一个去心邻域.
+
+    设 $f:\mathring{U}\to\mathbb{C}$. 称 $f$ 在 $x_0$ 处满足 Dini 条件，若
+
+    \begin{enumerate}
+        \item $\displaystyle\lim_{x\to x_0+}f(x)=f(x_0+)$ 与 $\displaystyle\lim_{x\to x_0-}f(x)=f(x_0-)$ 均存在.
+        
+        \item 存在 $\delta>0$ 使得
+$$
+\int_0^{\delta}\frac{\abs{f(x_0)+t-f(x_0+)+f(x_0-t)-f(x_0-)}}{t}\dd t<+\infty
+$$
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    设 $f:\mathring{U}(x_0)\to\mathbb{C}$ 满足 Hölder 条件：
+
+    \begin{enumerate}
+        \item $f(x_0+)$ 与 $f(x_0-)$ 均存在.
+        
+        \item 存在 $\alpha\in(0,1],M>0,\delta>0$ 使得
+$$
+\abs{f(x_0+t)-f(x_0+)}\le Mt^{\alpha},\abs{f(x_0-t)-f(x_0-)}\le Mt^{\alpha},\forall 0<t\le\delta
+$$
+    \end{enumerate}
+
+    则 $f$ 在 $x_0$ 处满足 Dini 条件. 这是因为
+$$
+\int_0^{\delta}\frac{\abs{f(x_0)+t-f(x_0+)+f(x_0-t)-f(x_0-)}}{t}\dd t\le\int_0^\delta\frac{2Mt^{\alpha}}{t}\dd t=\frac{2M\delta^{\alpha}}{\alpha}<+\infty
+$$
+
+    特别的，若 $f:U(x_0)\to\mathbb{C}$ 连续且
+$$
+\exists\alpha\in(0,1],M>0,\delta<0,\forall\abs{t}\le\delta,\abs{f(x_0+t)-f(x_0)}\le M\abs{t}^\alpha
+$$
+
+    则 $f$ 在 $x_0$ 处满足 Dini 条件.
+\end{example}
+
+\begin{definition}
+    称 $f:[a,b]\to\mathbb{C}$ 分段连续，若 $\exists a=x_0<x_1<\cdots<x_n=b$ 使得 $f$ 在 $(x_{i-1},x_i)$ 上连续且 $f(x_i\pm)$ 均存在.
+
+    （对 $a$ 仅要求 $f(a+)$ 存在，对 $b$ 仅要求 $f(b-)$ 存在）
+\end{definition}
+
+\begin{definition}
+    称 $f:[a,b]\to\mathbb{C}$ 分段连续可微，若 $f$ 在除了有限个点外可导且其导函数分段连续。（在不可导处任意指定函数值）
+\end{definition}
+
+\begin{property}
+    若 $f:[a,b]\to\mathbb{C}$ 分段连续可导，则 $f$ 在 $[a,b]$ 上满足 Dini 条件.
+\end{property}
+
+\begin{example}
+    $f(x)=\mathrm{sgn}\;x$ 在 $\forall x\in\RR$ 处满足 Dini 条件.
+\end{example}
+
+\begin{example}
+    $f(x)=\abs{x}$ 分段连续可微且 $f'(x)=\mathrm{sgn}\;x$.
+\end{example}
+
+\begin{theorem}
+    设 $f:\RR\to\mathbb{C}$ 以 $2\pi$ 为周期，且 $f|_{[-\pi,\pi]}$ 局部可积且绝对可积.
+
+    若 $f$ 在 $x\in[-\pi,\pi]$ 处满足 Dini 条件，则由其 Fourier 级数在 $x$ 处收敛且
+$$
+\sum_{n\in\mathbb{Z}}c_n(f)e^{inx}=\frac{f(x+)+f(x-)}{2}
+$$
+\end{theorem}
+\begin{proof}
+    由 $\displaystyle\frac{1}{2\pi}\int_0^\pi D_n(t)\dd t=\frac{1}{2}$ 知
+$$
+\frac{f(x+)+f(x-)}{2}=\frac{1}{2\pi}\int_0^\pi[f(x+)+f(x-)]D_n(t)\dd t
+$$
+
+    所以
+$$
+\begin{aligned}
+    &S_n(f)(t)-\frac{f(x+)+f(x-)}{2}\\
+    =&\frac{1}{2\pi}\int_0^\pi[f(x+t)-f(x+)+f(x-t)-f(x-)]D_n(t)\dd t\\
+    =&\frac{1}{2\pi}\int_0^\delta\frac{f(x+t)-f(x+)+f(x-t)-f(x-)}{t}tD_n(t)\dd t \qquad & (I)\\
+    &+\frac{1}{2\pi}\int_\delta^\pi[f(x+t)-f(x+)+f(x-t)-f(x-)]D_n(t)\dd t & (II)
+\end{aligned}
+$$
+
+    注意到当 $t\in[0,\pi]$ 时 $\abs{tD_n(t)}=\dfrac{t}{\sin\frac{t}{2}}\abs{\sin\left(n+\dfrac{1}{2}\right)t}$ 有界.
+
+    从而由 $f$ 在 $x$ 处满足 Dini 条件知：$\forall\eps>0,\exists\delta>0$ 使得 $\abs{I}<\dfrac{\eps}{2}$.
+
+    现固定该 $\delta$，由 Riemann-Lebesgue 引理知
+$$
+\overline{\lim_{n\to\infty}}\abs{S_n(f)(t)-\frac{f(x+)+f(x-)}{2}}\le\frac{\eps}{2}
+$$
+
+    由 $\eps$ 的任意性知 $\displaystyle\lim_{n\to\infty}S_n(f)(t)=\frac{f(x-)+f(x+)}{2}$.
+\end{proof}
+
+\begin{hint}
+    注意到若我们仅仅改变 $f$ 在一个点处的取值，则其不会改变 $c_k(f)$，从而不会改变 $S_n(f)$ 以及 $S_n(f)(x)$ 在 $x$ 处的极限行为.
+
+    另一方面，由局部化准则以及 Dini 条件的定义，我们看到 $S_n(f)(x)$ 的极限性质事实上由 $f$ 在 $x$ 的一个小邻域内的平均积分性质所决定.
+\end{hint}
+
+\begin{example}
+    考虑 $f:(-\pi,\pi]\to\RR,f(x)=x$ 并将其周期地延拓到 $\RR$. 则我们已知
+$$
+f\sim\sum_{k=1}^\infty(-1)^{k+1}\frac{2}{k}\sin kx
+$$
+
+    又由 $f$ 在 $[-\pi,\pi]$ 上满足 Dini 条件且 $f(\pi+)=-\pi,f(\pi-)=\pi$ 可得
+$$
+\sum_{k=1}^\infty(-1)^{k+1}\frac{2}{k}\sin kx=\begin{cases}
+    x & \abs{x}<\pi\\
+    0 & \abs{x}=\pi
+\end{cases}
+$$
+
+    取 $x=\dfrac{\pi}{2}$ 得
+$$
+\sum_{n=0}^\infty\frac{(-1)^n}{m+1}=\frac{\pi}{4}
+$$
+\end{example}
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.5]
+        \draw[->] (-10,0)--(10,0) node [right] {$x$};
+        \draw[->] (0,-4)--(0,4) node [right] {$y$};
+        \node at (0,0) [below left] {$O$};
+        \draw[-] ({-pi},{-pi})--({pi},{pi});
+        \draw[-] ({pi},{-pi})--({3*pi},{pi});
+        \draw[-] ({-3*pi},{-pi})--({-pi},{pi});
+        \draw[-,dashed] ({-pi},{pi})--({-pi},{-pi});
+        \draw[-,dashed] ({pi},{pi})--({pi},{-pi});
+        \node at ({pi,0}) [above right] {$\pi$};
+        \node at ({-pi,0}) [above right] {$-\pi$};
+        \draw[-,red,dashed] ({pi/2},{pi/2})--({pi/2},0) node [below] {$\frac{\pi}{2}$};
+    \end{tikzpicture}
+\end{center}
+
+\begin{example}
+    我们来证明之前用过的一个恒等式
+$$
+\frac{\sin\pi\alpha}{\pi\alpha}=\prod_{n=1}^\infty\left(1-\frac{\alpha^2}{n^2}\right),\abs{\alpha}\le 1
+$$
+
+    当 $\abs{\alpha}=0,1$ 时结论显然成立. 下证 $0<\abs{\alpha}<1$ 的情形.
+
+    考虑以 $2\pi$ 为周期的函数 $f(x)$. 其在 $[-\pi,\pi]$ 上的限制为 $\cos\alpha x$.
+
+    \begin{center}
+        \begin{tikzpicture}[yscale=2]
+            \draw[->] (-5,0)--(5,0) node [right] {$x$};
+            \draw[->] (0,-1)--(0,1.5) node [right] {$y$};
+            \node at (0,0) [below left] {$O$};
+            \draw[domain={-pi}:{pi}] plot(\x,{cos(\x*0.7 r)});
+            \draw[domain={pi}:5] plot(\x,{cos((\x-2*pi)*0.7 r)});
+            \draw[domain=-5:{-pi}] plot(\x,{cos((\x+2*pi)*0.7 r)});
+            \draw[-,dashed] ({-pi},{cos(pi*0.7 r)})--({-pi},0) node [above] {$-\pi$};
+            \draw[-,dashed] ({pi},{cos(pi*0.7 r)})--({pi},0) node [above] {$\pi$};
+            \node at (0,1) [above right] {$1$};
+            \node at ({pi/(2*0.7)},0) [below left] {$\frac{\pi}{2\alpha}$};
+            \node at ({-pi/(2*0.7)},0) [below right] {$-\frac{\pi}{2\alpha}$};
+        \end{tikzpicture}
+    \end{center}
+
+    易见 $f(x)$ 连续且在任何点处满足 Dini 条件.
+
+    从而其 Fourier 级数在任何点处收敛到 $f(x)$. 即
+$$
+f(x)=\frac{a_0(f)}{2}+\sum_{n=1}^\infty a_n(f)\cos nx+b_n(f)\sin nx
+$$
+
+    由 $f$ 为偶函数知 $b_n(f)=0$. 计算得
+$$
+a_n(f)=\frac{1}{\pi}(-1)^n\sin\pi\alpha\frac{2\alpha}{\alpha^2-n^2},n\ge 0
+$$
+
+    令 $x=\pi$ 得
+$$
+\begin{aligned}
+    \cos\pi\alpha&=\frac{a_0(f)}{2}+\sum_{n=1}^\infty a_n(f)\cos n\pi\\
+    &=\frac{\sin\pi\alpha}{\pi\alpha}+\frac{1}{\pi}\sum_{n=1}^\infty\sin\pi\alpha\frac{2\alpha}{\alpha^2-n^2}
+\end{aligned}
+$$
+
+    则有
+$$
+\begin{aligned}
+    &\pi\frac{\cos\pi\alpha}{\sin\pi\alpha}-\frac{1}{\alpha}=\sum_{n=1}^\infty\frac{2\alpha}{\pi^2-n^2}\\
+    \implies&(\ln\sin\pi\alpha-\ln\alpha)'=\sum_{n=1}^\infty\left(\ln\left(1-\frac{\alpha^2}{n^2}\right)\right)'
+\end{aligned}
+$$
+
+    下面固定 $\beta\in(0,1)$. 注意到右边的函数项级数在 $\alpha\in[0,\beta]$ 上一致收敛. 两边关于 $\alpha$ 在 $[0,\beta]$ 上积分得
+$$
+\ln\frac{\sin\pi\alpha}{\alpha}\Bigg|_0^\beta=\sum_{n=1}^\infty\ln\left(1-\frac{\alpha^2}{n^2}\right)\Bigg|_0^\beta
+$$
+
+    故
+$$
+\ln\frac{\sin\pi\beta}{\pi\beta}=\sum_{n=1}^\infty\ln\left(1-\frac{\beta^2}{n^2}\right)
+$$
+
+    此即
+$$
+\frac{\sin\pi\beta}{\pi\beta}=\prod_{n=1}^\infty\left(1-\frac{\beta^2}{n^2}\right)
+$$
+\end{example}
